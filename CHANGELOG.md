@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.2.0 — 2026-09-02
+
+Optional WSJF cost-of-delay scoring layer.
+
+- **New `wsjf [<path-or-url>]` mode.** Bare invocation bootstraps a scoring
+  worksheet from the synthesized themes (proposed scores, one confirmation
+  round — only a confirmed sheet ever renders); a target points at existing
+  scoring (committed file, CSV, or connected sheet). The source is recorded in
+  the DIRECTION CONTRACT and inherited by every later run.
+- **Scores rank, they never place.** A `wsjf N.N` chip on scored cards,
+  within-horizon ordering by score, and a cost-of-delay strip near the top of
+  the page (anatomy grew from 14 to 15 parts). An item's horizon still comes
+  from what the sources state.
+- **Fixed-date items outrank their score** — cliff-shaped delay curves are
+  what a flat score hides.
+- **Refresh gains scoring drift classes**: stale scores, orphan rows, unscored
+  new themes; re-scoring is a human decision the drift report requests.
+- New reference: `references/wsjf.md` (worksheet format, validation, rendering).
+
 ## 1.1.0 — 2026-09-02
 
 Feedback round from real readers of a shipped roadmap.

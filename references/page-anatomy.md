@@ -22,23 +22,30 @@ Order on the page, top to bottom:
 4. **Thesis strip** — three cells, one per horizon, each a bolded one-sentence
    thesis plus two lines of plain prose. This is the executive summary.
 
-5. **The board** — streams × horizons grid. Rows are streams (2–4), columns are
+5. **Cost-of-delay strip** (only on WSJF-scored pages) — one band listing the
+   top 3–5 scored themes by WSJF across all horizons, fixed-date items first
+   with a cliff marker, each linking to its detail card; a small footer line
+   `N of M themes scored · confirmed <date>`. Renders only from a confirmed
+   scoring source (see `wsjf.md`). Scores rank, they never place — an item's
+   horizon still comes from what the sources state.
+
+6. **The board** — streams × horizons grid. Rows are streams (2–4), columns are
    the horizons. Cells hold pill links that jump to detail cards. Pill fill color =
    throughline; column = horizon; color NEVER encodes time. Above it, the
    throughline key strip (which the interaction layer turns into the filter).
 
-6. **Throughlines table** — the same items read the other way: one row per
+7. **Throughlines table** — the same items read the other way: one row per
    throughline (T1…Tn), columns are horizons, the row header carries the line's
    name and one-line arc. Call out what this view makes visible (e.g. "the line
    the customer sees has nothing in flight") in a note below. An empty cell shows
    a dashed "nothing in flight" token — absence is information.
 
-7. **Critical-path figure** — inline SVG, three horizon bands, nodes for the
+8. **Critical-path figure** — inline SVG, three horizon bands, nodes for the
    8–12 load-bearing items, labeled edges. Only edges the sources state out loud.
    Distinguish gates (dashed) from data flows (solid). One hero node (the named
    next feature) gets the accent treatment.
 
-8. **Per-horizon detail sections** — Now, Next, Later. Each: section header with
+9. **Per-horizon detail sections** — Now, Next, Later. Each: section header with
    the horizon dot + a short italic window note, a sub-paragraph, then a 2-col grid
    of cards. Card = throughline-tinted header (title + throughline code + an
    audience chip like Product/Technical/Both), a "why" paragraph (the plain-language
@@ -46,21 +53,23 @@ Order on the page, top to bottom:
    ticket refs as small mono tags. Wide cards (`span2`) for the 1–2 biggest items
    per horizon. An item whose only evidence is anecdotal (transcript, chat,
    notes — no record-tier source backs it) carries a small mono chip naming that
-   (`per transcript`, `per notes`), same register as the ticket refs.
+   (`per transcript`, `per notes`), same register as the ticket refs. On scored
+   pages a `wsjf N.N` chip joins the same register, and scored cards sort by
+   score within their horizon (unscored keep their order below).
 
-9. **Out of scope** — rows of {what, reason, decision date}. Exists so decisions
-   are not re-litigated; "each is reversible, but reopening one should start from
-   the reason it was closed."
+10. **Out of scope** — rows of {what, reason, decision date}. Exists so decisions
+    are not re-litigated; "each is reversible, but reopening one should start from
+    the reason it was closed."
 
-10. **Architecture figure** (optional) — if the project has a canonical systems
+11. **Architecture figure** (optional) — if the project has a canonical systems
     story worth recording (e.g. a canonical learning-loops model), draw it once "for the
     record" in the same SVG style, with a card per element below it.
 
-11. **Standing risks** — amber-bordered list, {mono tag, prose}. Cross-cutting
+12. **Standing risks** — amber-bordered list, {mono tag, prose}. Cross-cutting
     patterns only. Framing rule (user-set, firm): risks are *deliberate discipline
     plus a specific gap*, never negligence. Where detection worked, say so.
 
-12. **Where the sources disagree** (only when conflicts exist) — a short list of
+13. **Where the sources disagree** (only when conflicts exist) — a short list of
     {claim, what the record says, what the anecdote says, which the page went
     with}. The record-tier source decides the board; this block is where the
     other answer survives instead of being silently blended away. Omit it when
@@ -68,13 +77,13 @@ Order on the page, top to bottom:
     project this is often the page's highest-value content: the overview tells
     them nothing new, the disagreements do.
 
-13. **Footer** — sources with dates and their confirmed authority tier (record
+14. **Footer** — sources with dates and their confirmed authority tier (record
     vs anecdote); any record-tier source the page could not read, named as a
     gap; how to read the ref tags ("everything load-bearing is in the plain
     text"); a confidence note separating what the team stated from what this
     page synthesized; links to companion artifacts.
 
-14. **Fixed back-to-board button** bottom-right; the filter clear-chip stacks
+15. **Fixed back-to-board button** bottom-right; the filter clear-chip stacks
     above it when a filter is active.
 
 ## Register rules
@@ -87,3 +96,5 @@ Order on the page, top to bottom:
 - Numbers in the console and section badges must agree with each other and with
   the body; if an item sits on two throughlines, footnote the double-count where
   it shows.
+- A score chip renders only from a confirmed scoring source; the page never
+  proposes a score.

@@ -26,6 +26,7 @@ Then invoke it in any Claude Code session with `/roadmap`.
 | `/roadmap <artifact-url>` | Update an existing roadmap artifact in place |
 | `/roadmap refresh` | Drift report against the live tracker, then apply the delta |
 | `/roadmap gantt` | Dated variant, only when commitments to external parties matter |
+| `/roadmap wsjf [<source>]` | Opt in to WSJF cost-of-delay scoring: bare bootstraps a worksheet, a target reads existing scoring |
 | `/roadmap help` | Show the mode table |
 
 ## What makes it opinionated
@@ -40,13 +41,19 @@ Then invoke it in any Claude Code session with `/roadmap`.
 - **Counts before prose.** A status console with numbers re-derived from the
   finished document, verified against the live tracker and stamped.
 - **Risks framed as discipline plus a gap**, never negligence.
+- **Optional WSJF scoring.** Cost-of-delay ranking as an opt-in layer: scores
+  are proposed then human-confirmed, never invented; they rank items within a
+  horizon but never move an item between horizons; fixed-date items outrank
+  their score. Off by default, and a roadmap that never opts in never shows one.
 - **Progressive density.** The overview reads in a minute; the drill-down lives
   behind interaction, collapsed by default on heavy pages.
 
 ## Contents
 
 - `SKILL.md` is the skill itself: modes, the four phases, the decided rules.
-- `references/page-anatomy.md` is the 14-part page spine.
+- `references/page-anatomy.md` is the 15-part page spine.
+- `references/wsjf.md` is the scoring layer: worksheet format, validation,
+  rendering rules.
 - `references/interaction-layer.md` is the shipped CSS/JS with an adaptation
   contract (rename the hooks, keep the roles).
 - `references/writing-floor.md` is the prose floor: hard rules, banned phrases,

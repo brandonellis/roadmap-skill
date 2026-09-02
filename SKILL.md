@@ -1,7 +1,7 @@
 ---
 name: roadmap
 description: Build or update a "Horizons" roadmap artifact for any project — scan the repo, issue tracker, knowledge vault and markdown docs, ask only for what cannot be found, synthesize Now/Next/Later horizons with cross-cutting throughlines, and publish an interactive board (theme filter, collapsible sections, derived tooltips). Use when the user asks for a roadmap, a "horizons" page, or to refresh/update an existing roadmap artifact.
-argument-hint: "[<artifact-url> · refresh [<url>] · gantt · help] — no args creates a new roadmap"
+argument-hint: "[<artifact-url> · refresh [<url>] · gantt · wsjf [<source>] · help] — no args creates a new roadmap"
 ---
 
 # /roadmap — the Horizons roadmap builder
@@ -20,6 +20,7 @@ The pattern is proven on shipped roadmap pages; this skill generalizes it.
 | `<artifact-url>` | update | ALWAYS `action:"read"` first and adopt the remote as baseline (other sessions edit these); keep favicon and `<title>` stable; republish to the same URL. |
 | `refresh` | drift report → apply | See "Refresh is a drift report" below. |
 | `gantt` | dated variant | See "The dates rule" below; never choose this mode yourself. |
+| `wsjf [<path-or-url>]` | scoring layer | Opt in to WSJF cost-of-delay ranking: bare bootstraps a scoring worksheet from the themes; a target reads existing scoring. Recorded once, inherited by every later run. See "WSJF mode" below; never choose this mode yourself. |
 | `help` | show the modes | Print this table with one-line examples and stop — no scanning, no artifact work. Also the right response to any argument that matches no mode: show the table and ask, never guess a mode. |
 
 **Refinement preserves; redesign replaces — never split the difference.** An update
@@ -86,6 +87,38 @@ note summarizes the provenance mix (N committed / N derived / N unscheduled).
 while its refs stay open is flagged *slipped* — never silently slid right. Re-dating
 is a human decision the drift report requests; the today line is the only thing that
 moves on its own.
+
+## WSJF mode — the optional scoring layer
+
+`wsjf` layers cost-of-delay ranking onto a new or existing roadmap: WSJF =
+(business value + time criticality + risk/opportunity enablement) / job size,
+Fibonacci-scored. It is an **ordering within the board, never a placement
+authority** — an item's horizon comes from what the sources state, and a
+computed score silently moving an item between horizons would be an invented
+commitment, the same class of failure as a guessed gantt bar. Worksheet format,
+validation, and rendering specifics live in `references/wsjf.md`.
+
+- **Bare `wsjf` bootstraps.** Synthesize themes as usual, generate the scoring
+  worksheet (default `docs/roadmap-wsjf.md` in the project repo) with PROPOSED
+  scores derived from the sources, and run ONE confirmation round — the same
+  infer-then-confirm shape as source authority tiers. Only a confirmed sheet
+  ever renders; a proposal presented as a ranking is an invented number.
+- **`wsjf <path-or-url>` points at existing scoring** — a committed file, CSV,
+  or connected sheet with the worksheet's columns. Read, validate, confirm the
+  row↔theme join, then treat it as the source.
+- **The source is recorded once, in the DIRECTION CONTRACT**, and every later
+  run (update, refresh, gantt) inherits it without the argument. Running
+  `wsjf` again with a source on record reports it and offers re-point or
+  re-score. A confirmed sheet is record-tier by construction: human-stated,
+  dated, versioned.
+- **Rendering**: a mono `wsjf N.N` chip on scored cards; scored cards sort by
+  score within their horizon, unscored keep their order below (unscored is
+  information — never invent a score); the cost-of-delay strip near the top of
+  the page. **A fixed-date item outranks its score** — a cliff-shaped delay
+  curve (an audit, a contract window) is exactly what a flat score hides.
+- **Refresh gains scoring drift classes**: stale scores (evidence changed since
+  the confirmed date), orphan rows, unscored new themes. Re-scoring is a human
+  decision the drift report requests — the slipped-bar rule applied to scores.
 
 ## Phase 1 — discover sources (scan first, ask second)
 
@@ -166,9 +199,10 @@ tiers).
 Load the `artifact-design` skill before writing (and `artifact-diagramming` for
 any figure). Design for THIS project — the page anatomy in
 `references/page-anatomy.md` is the proven structure (status console → gate/posture
-band → thesis strip → board → throughlines table → critical-path figure → per-horizon
-detail cards → out-of-scope → risks → sources-disagree block when conflicts exist →
-footer), but palette, type and voice get a fresh design pass per project. Two direction rules:
+band → thesis strip → cost-of-delay strip when scored → board → throughlines table →
+critical-path figure → per-horizon detail cards → out-of-scope → risks →
+sources-disagree block when conflicts exist → footer), but palette, type and voice
+get a fresh design pass per project. Two direction rules:
 
 - **The brief wins.** A user-pinned aesthetic, palette, or reference beats every
   default in this skill and in the anatomy reference. Standing user preference
@@ -245,8 +279,10 @@ pass is the user looking at their own page.
 - **The page's DIRECTION CONTRACT comment is the durable design record** — unlike
   memory it travels with the artifact across machines and agents. Make sure it names:
   the visual world, the sources with their confirmed authority ranking (record vs
-  anecdote — update runs inherit this instead of re-asking), the verification
-  stamp, the interaction hooks (theme classes, `data-hz`, the localStorage key),
-  and standing decisions (the dates rule, framing rules the user set). An updater
+  anecdote — update runs inherit this instead of re-asking), the scoring source
+  and its confirmed date (when WSJF is active — inherited the same way), the
+  verification stamp, the interaction hooks (theme classes, `data-hz`, the
+  localStorage key), and standing decisions (the dates rule, framing rules the
+  user set). An updater
   who reads nothing else must be able to work from it.
 - Hand back the URL and a two-line summary of what changed.
