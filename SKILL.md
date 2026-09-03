@@ -1,7 +1,7 @@
 ---
 name: roadmap
 description: Build or update a "Horizons" roadmap artifact for any project — scan the repo, issue tracker, knowledge vault and markdown docs, ask only for what cannot be found, synthesize Now/Next/Later horizons with cross-cutting throughlines, and publish an interactive board (theme filter, collapsible sections, derived tooltips). Use when the user asks for a roadmap, a "horizons" page, or to refresh/update an existing roadmap artifact.
-argument-hint: "[<artifact-url> · refresh [<url>] · gantt · wsjf [<source>] · help] — no args creates a new roadmap"
+argument-hint: "[<artifact-url> · refresh [<url>] · gantt · wsjf [<source>] · grade [<baseline-url>] · help] — no args creates a new roadmap"
 ---
 
 # /roadmap — the Horizons roadmap builder
@@ -21,7 +21,7 @@ The pattern is proven on shipped roadmap pages; this skill generalizes it.
 | `refresh` | drift report → apply | See "Refresh is a drift report" below. |
 | `gantt` | dated variant | See "The dates rule" below; never choose this mode yourself. |
 | `wsjf [<path-or-url>]` | scoring layer | Opt in to WSJF cost-of-delay ranking: bare bootstraps a scoring worksheet from the themes; a target reads existing scoring. Recorded once, inherited by every later run. See "WSJF mode" below; never choose this mode yourself. |
-| `grade [<baseline-card-url>]` | fleet report card | Letter-graded, evidence-cited audit of code + infrastructure: one blind read-only auditor per component plus a cross-cutting lens, five dimensions each, twin verdict (as-written vs operational reality), new-findings section with tickets filed before publishing. Each run is a DATED RECORD — always a new artifact, never a republish; the chain of cards is the trend line. See "Grade mode" below and `references/report-card.md`. |
+| `grade [<baseline-card-url>]` | report card | Letter-graded, evidence-cited audit of code + infrastructure: one blind read-only auditor per component plus a cross-cutting lens, five dimensions each, twin verdict (as-written vs operational reality), new-findings section with tickets filed before publishing. Each run is a DATED RECORD — always a new artifact, never a republish; the chain of cards is the trend line. See "Grade mode" below and `references/report-card.md`. |
 | `help` | show the modes | Print this table with one-line examples and stop — no scanning, no artifact work. Also the right response to any argument that matches no mode: show the table and ask, never guess a mode. |
 
 **Refinement preserves; redesign replaces — never split the difference.** An update
@@ -121,11 +121,13 @@ validation, and rendering specifics live in `references/wsjf.md`.
   the confirmed date), orphan rows, unscored new themes. Re-scoring is a human
   decision the drift report requests — the slipped-bar rule applied to scores.
 
-## Grade mode — the fleet report card
+## Grade mode — the report card
 
 `grade` produces a letter-graded, evidence-cited audit of the project's code
 and infrastructure at a moment in time — run before a deploy, a quarter close,
-or after a remediation program lands. It shares the roadmap's sources and
+or after a remediation program lands. Shape-agnostic: components are
+discovered from the project's own structure (a repo, a monorepo module, the
+estate), never assumed. It shares the roadmap's sources and
 writing floor but nothing else: full methodology, auditor fan-out rules, the
 twin as-written/operational-reality verdict, and the page anatomy live in
 `references/report-card.md` — load it before running the mode. Never choose

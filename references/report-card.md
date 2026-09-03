@@ -1,11 +1,11 @@
-# Grade mode — the fleet report card
+# Grade mode — the report card
 
 A letter-graded, evidence-cited audit of a project's code and infrastructure at
-a moment in time. Proven on a five-repo multi-tenant fleet (a baseline audit,
-then a pre-deploy re-grade after its remediation program merged — provenance
-only, the client is not named here); this file generalizes that shape. The report
-card answers three questions a roadmap never does: how good is this, compared
-to when, and does anything found block the decision at hand.
+a moment in time (proven in production use — provenance only, not a
+dependency). The report card answers three questions a roadmap never does: how
+good is this, compared to when, and does anything found block the decision at
+hand. It is shape-agnostic: a single service, a monorepo, or a many-repo
+estate all grade the same way once carved into components.
 
 ## When it runs, and what it is
 
@@ -24,16 +24,21 @@ card is legitimate — "since the funding round" is a different question than
 **Every card links its predecessor in the footer**, so the chain is walkable
 from any card without the memory file.
 
-**Scale the fan-out to the component count.** Six auditors fit a five-repo
-fleet plus infrastructure; a single-repo project wants two or three (the repo,
-the estate if one exists, and always the cross-cutting lens). One auditor
-grading everything is not a panel — below two components, question whether
-the mode fits at all.
+**Components come from the project, not from this file.** A component is a
+unit someone could own and grade in isolation: a repo in a multi-repo org, a
+service or major module inside a monorepo, the infrastructure/estate, a
+mobile app beside its backend. Discover them from the project's own structure
+(workspace layout, tracker, docs) the same way Phase 1 discovers sources —
+never assume a shape. **Scale the fan-out to the component count**: a
+many-component estate wants an auditor per component; a single-service
+project wants two or three (the code, the estate if one exists, and always
+the cross-cutting lens). One auditor grading everything is not a panel —
+below two components, question whether the mode fits at all.
 
 ## The auditor fan-out
 
-One auditor agent per repo or component, plus at least one cross-cutting lens
-that no single repo owns (testing & CI is the proven one; security or data
+One auditor agent per component, plus at least one cross-cutting lens that no
+single component owns (testing & CI is the proven one; security or data
 governance fit the same slot). Rules that make the grades trustworthy:
 
 - **Read-only.** Auditors grade; they never fix. Cheap read commands (grep,
@@ -64,9 +69,9 @@ being load-bearing in a real run):
 
 ## The dimensions
 
-Default five, per repo: **Architecture · Performance & efficiency · Code
+Default five, per component: **Architecture · Performance & efficiency · Code
 quality & conventions · Testing · Security & operational readiness.** Adapt
-labels to the component (an infrastructure repo grades IaC coverage, DR,
+labels to the component (an infrastructure component grades IaC coverage, DR,
 observability instead), but keep the count near five and keep them identical
 across runs — the matrix only reads as a trend if the columns hold still.
 
@@ -85,7 +90,7 @@ One grade lies. Two tell the truth:
 
 This is the measured-vs-attested rule applied to estates: merged-but-not-
 deployed work is an **activation gap, not absence**, and it must be graded as
-both (credit in "as written", debit in "operational reality"). A fleet can
+both (credit in "as written", debit in "operational reality"). A project can
 honestly hold a B+ and a C at the same time; hiding either number is how a
 team believes its own merge history instead of its production posture.
 
@@ -105,9 +110,9 @@ a grade changing is often the entire story of a program.
 ## Page anatomy
 
 Masthead (project · occasion · date · method one-liner) → **verdict band**
-(as-written / operational / gate) → **grade board** (repos × dimensions
+(as-written / operational / gate) → **grade board** (components × dimensions
 matrix, letter chips) → **what changed since the baseline** (prose, the
-composition argument) → **per-repo verdict cards** (grade, one-paragraph
+composition argument) → **per-component verdict cards** (grade, one-paragraph
 verdict, "to next grade" burn-downs, "watch" items) → **new findings** (only
 things the project did not already know, severity-tagged, tickets filed and
 cited) → **the gate, answered** (ordered checklist when gating) → **path to
@@ -131,9 +136,9 @@ re-grade that surfaces nothing the team didn't know was run too soon.
 ## Synthesis rules
 
 - The overall letter is judgment, not arithmetic — but it must be defensible
-  against the per-repo letters, and inflation is the failure mode. If most
-  components grade B+, the fleet is B+ regardless of how good the trajectory
-  feels; put the trajectory in the prose.
+  against the per-component letters, and inflation is the failure mode. If
+  most components grade B+, the project is B+ regardless of how good the
+  trajectory feels; put the trajectory in the prose.
 - **Letter-move accounting.** A letter that moved since the baseline gets one
   sentence naming what earned or lost it — never just the new letter. A
   letter that HELD gets the composition story ("same letter, different

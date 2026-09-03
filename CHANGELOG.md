@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.3.1 — 2026-09-03
+
+Shape-agnosticism pass on grade mode.
+
+- **"Fleet" dropped from the mode's name** — a report card grades a single
+  service, a monorepo, or a many-repo estate identically once carved into
+  components.
+- **Component defined and discovered, never assumed**: a unit someone could
+  own and grade in isolation, found from the project's own structure the same
+  way Phase 1 discovers sources; fan-out scales to the discovered count.
+- Repo-shaped language (per-repo cards, repos-by-dimensions board, "the
+  fleet is B+") generalized to components throughout.
+
 ## 1.3.0 — 2026-09-03
 
 Grade mode: the fleet report card. Generalized from two real audits of a
