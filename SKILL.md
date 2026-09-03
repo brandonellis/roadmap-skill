@@ -21,6 +21,7 @@ The pattern is proven on shipped roadmap pages; this skill generalizes it.
 | `refresh` | drift report → apply | See "Refresh is a drift report" below. |
 | `gantt` | dated variant | See "The dates rule" below; never choose this mode yourself. |
 | `wsjf [<path-or-url>]` | scoring layer | Opt in to WSJF cost-of-delay ranking: bare bootstraps a scoring worksheet from the themes; a target reads existing scoring. Recorded once, inherited by every later run. See "WSJF mode" below; never choose this mode yourself. |
+| `grade [<baseline-card-url>]` | fleet report card | Letter-graded, evidence-cited audit of code + infrastructure: one blind read-only auditor per component plus a cross-cutting lens, five dimensions each, twin verdict (as-written vs operational reality), new-findings section with tickets filed before publishing. Each run is a DATED RECORD — always a new artifact, never a republish; the chain of cards is the trend line. See "Grade mode" below and `references/report-card.md`. |
 | `help` | show the modes | Print this table with one-line examples and stop — no scanning, no artifact work. Also the right response to any argument that matches no mode: show the table and ask, never guess a mode. |
 
 **Refinement preserves; redesign replaces — never split the difference.** An update
@@ -119,6 +120,27 @@ validation, and rendering specifics live in `references/wsjf.md`.
 - **Refresh gains scoring drift classes**: stale scores (evidence changed since
   the confirmed date), orphan rows, unscored new themes. Re-scoring is a human
   decision the drift report requests — the slipped-bar rule applied to scores.
+
+## Grade mode — the fleet report card
+
+`grade` produces a letter-graded, evidence-cited audit of the project's code
+and infrastructure at a moment in time — run before a deploy, a quarter close,
+or after a remediation program lands. It shares the roadmap's sources and
+writing floor but nothing else: full methodology, auditor fan-out rules, the
+twin as-written/operational-reality verdict, and the page anatomy live in
+`references/report-card.md` — load it before running the mode. Never choose
+this mode yourself.
+
+Four rules that are non-negotiable even without the reference loaded:
+- **Auditors grade blind and read-only** — they never see prior grades and
+  never fix what they find; the baseline comparison happens in synthesis.
+- **The bar is stated in every auditor prompt:** an A means showable to an
+  outside CTO without caveats.
+- **Twin verdict always:** as-written AND operational reality — merged-but-
+  not-deployed is an activation gap, credited in one and debited in the other.
+- **Every card is a dated record:** a NEW artifact per run, never a republish
+  of a prior card (the inverse of the horizons update-in-place rule). File
+  tickets for new findings before publishing so the card cites live refs.
 
 ## Phase 1 — discover sources (scan first, ask second)
 

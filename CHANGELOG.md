@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.3.0 — 2026-09-03
+
+Grade mode: the fleet report card. Generalized from two real audits of a
+five-repo multi-tenant fleet (a baseline, then a pre-deploy re-grade).
+
+- **New `grade [<baseline-card-url>]` mode.** A letter-graded, evidence-cited
+  audit of code + infrastructure: one blind, read-only auditor per component
+  plus a cross-cutting lens; five stable dimensions; every grade carries cited
+  evidence and its gaps-to-the-next-grade-up. The bar is stated in every
+  auditor prompt: an A means showable to an outside CTO without caveats.
+- **The twin verdict.** As-written AND operational reality — merged-but-not-
+  deployed is an activation gap, credited in one and debited in the other.
+  A gate answer (GO / HOLD) joins them when the run gates a decision.
+- **Every card is a dated record** — a new artifact per run, never a
+  republish; each card links its predecessor, and the chain is the trend
+  line (the deliberate inverse of the horizons update-in-place rule).
+- **Counts are grades**: shrink-only list sizes and directions report as
+  quality metrics; a debt moving from unmeasured to pinned earns explicit
+  credit even when the letter holds ("same letter, different substance").
+- **Synthesis discipline**: letter-move accounting, the outlier rule (a grade
+  that does not follow from its own evidence goes back to its auditor, never
+  silently adjusted), tickets filed for new findings before publishing, and
+  the roadmap-drift handoff (end a grade run by offering the horizons
+  refresh).
+- New reference: `references/report-card.md` (methodology, auditor prompt
+  ingredients, fan-out scaling, page anatomy).
+
 ## 1.2.0 — 2026-09-02
 
 Optional WSJF cost-of-delay scoring layer.
