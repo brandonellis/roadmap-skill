@@ -70,6 +70,11 @@ Then invoke it in any Claude Code session with `/roadmap`.
 - `references/writing-floor.md` is the prose floor: hard rules, banned phrases,
   and the tests the finished page must pass.
 
+A new reference or mode moves this list and the usage table in the same commit.
+Whether the repo matches its own contents list is the first thing a reviewer
+checks, and it is the cheapest possible way to fail: a reference the README does
+not mention reads as undocumented content, not as an oversight.
+
 ## What runs
 
 Nothing in this repo executes at install or on clone: it is Markdown, and there is

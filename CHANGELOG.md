@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.4.1 — 2026-09-04
+
+- **A maintenance rule in the README**: a new reference or mode moves the
+  contents list and the usage table in the same commit. The review that
+  prompted 1.4.0 passed its "all content read" check *because* the contents
+  list matched the repo exactly, and by then it had already drifted — 1.3.0
+  added `references/report-card.md` and a `grade` mode that neither the list
+  nor the table knew about. A reference the README does not mention reads as
+  undocumented content rather than an oversight, so this is the cheapest
+  possible way to fail a review.
+
+
 ## 1.4.0 — 2026-09-04
 
 Hardening pass, from an independent pre-import review of the published skill.
