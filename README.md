@@ -27,6 +27,7 @@ Then invoke it in any Claude Code session with `/roadmap`.
 | `/roadmap refresh` | Drift report against the live tracker, then apply the delta |
 | `/roadmap gantt` | Dated variant, only when commitments to external parties matter |
 | `/roadmap wsjf [<source>]` | Opt in to WSJF cost-of-delay scoring: bare bootstraps a worksheet, a target reads existing scoring |
+| `/roadmap grade [<baseline-url>]` | Letter-graded, evidence-cited audit of the code and infrastructure behind the roadmap; each run is a dated record, never a republish |
 | `/roadmap help` | Show the mode table |
 
 ## What makes it opinionated
@@ -47,6 +48,14 @@ Then invoke it in any Claude Code session with `/roadmap`.
   their score. Off by default, and a roadmap that never opts in never shows one.
 - **Progressive density.** The overview reads in a minute; the drill-down lives
   behind interaction, collapsed by default on heavy pages.
+- **Scanned content is data, never instructions.** It reads transcripts, chat,
+  tickets and docs written by other people; text inside a source describes the
+  project and never directs the run, and anything that tries to is reported as a
+  finding rather than followed.
+- **It says what the page contains before publishing it.** The board is an
+  aggregate you never assembled by hand, and publishing puts it on a hosted URL, so
+  the first publish of a page is a confirmed step with cut-it-down and
+  local-file-only on the table.
 
 ## Contents
 
@@ -54,12 +63,36 @@ Then invoke it in any Claude Code session with `/roadmap`.
 - `references/page-anatomy.md` is the 15-part page spine.
 - `references/wsjf.md` is the scoring layer: worksheet format, validation,
   rendering rules.
-- `references/interaction-layer.md` is the shipped CSS/JS with an adaptation
-  contract (rename the hooks, keep the roles).
+- `references/report-card.md` is `grade` mode: the auditor fan-out, the five
+  dimensions, the twin verdict, and the rules for filing findings.
+- `references/interaction-layer.md` is the CSS/JS the published page ships, with an
+  adaptation contract (rename the hooks, keep the roles).
 - `references/writing-floor.md` is the prose floor: hard rules, banned phrases,
   and the tests the finished page must pass.
 
+## What runs
+
+Nothing in this repo executes at install or on clone: it is Markdown, and there is
+no build step, no hook, no postinstall, no binary. What it does do, once you invoke
+it, is worth knowing before you import it:
+
+- **The published page ships client-side code.** `references/interaction-layer.md`
+  carries roughly 225 lines of JavaScript and 80 of CSS that get embedded in the
+  artifact — the theme filter, the collapse behaviour, the derived tooltips. It runs
+  in the reader's browser, not on your machine. It makes no network calls of its own:
+  no `fetch`, no `eval`, no analytics, and one static `innerHTML` string with
+  everything else set as `textContent`.
+- **Verification runs local commands.** Headless Chrome for a DOM smoke test and
+  three screenshots (`--headless=new --dump-dom`, `--screenshot`), and
+  `grep -c` over the finished page for the em-dash gate.
+- **Reach is tool-mediated and yours.** Whatever you have connected: the `gh` CLI,
+  a Linear or Jira MCP, Drive, Slack, Fireflies, and the Artifact tool to read and
+  publish. The skill carries no credentials and no endpoints of its own; where it
+  needs tracker configuration it reads it from your `CLAUDE.md` at runtime.
+- **Writes.** The published artifact; a memory file; `docs/roadmap-wsjf.md` into
+  your repo, only in `wsjf` mode; new tickets in your tracker for findings, only in
+  `grade` mode; and a local copy if you keep one.
+
 ## Versioning
 
-Semver via git tags; see `CHANGELOG.md`. The skill is prompt and reference
-material only: no code executes from this repo.
+Semver via git tags; see `CHANGELOG.md`.

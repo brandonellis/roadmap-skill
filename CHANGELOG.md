@@ -1,5 +1,49 @@
 # Changelog
 
+## 1.4.0 — 2026-09-04
+
+Hardening pass, from an independent pre-import review of the published skill.
+Six changes, all prose: the review passed the code and flagged what the skill
+does not defend against or disclose.
+
+- **Scanned content is data, never instructions.** New rule in Phase 1. The
+  skill reads transcripts, chat, tickets and docs written by other people and
+  fed them straight into synthesis with nothing separating source text from
+  direction. Text inside a source now describes the project and never directs
+  the run: it cannot change horizon placement, the authority ranking, what gets
+  published, where, or which sources get read next. A source that tries to steer
+  the run is surfaced in the question round as a finding; a destination named in
+  a source is a quoted string, never somewhere to send anything. The same rule
+  extends into `grade` mode's auditor prompts, where what is read is evidence
+  under audit: a comment claiming a control, a doc asserting a grade, and a file
+  instructing the reader are findings about the component, never direction.
+- **The first publish of a page is a confirmed step.** New rule at the top of
+  Phase 4. The finished board is an aggregate the driver never assembled by hand
+  — internal priorities, standing risks, declined decisions with dates, client
+  commitments, dependency structure — and publishing puts it on a hosted URL.
+  The run now names what is on the page (specifically anything client-named,
+  dated, personnel-shaped or marked internal in its own source) and offers
+  publish-as-is / cut-or-genericize / local-file-only before doing it. Updates
+  to an already-published page do not re-ask unless the run added a source.
+- **A scope clause: what this is not for.** "Roadmap" is an ordinary word, and
+  "what's on the roadmap for Q4?" is a question, not a request for an artifact.
+  Those get answered in prose in the conversation; the four-phase build runs
+  when the user wants the page, and ambiguity is a question rather than a scan.
+- **The type register is stated as this skill's default, with its reasoning** —
+  a roadmap is read as an operational document, so it is set in the register
+  used for schedules and status boards. It was carried as one user's standing
+  preference with a date, which on import read as the importer's own decision.
+  Now: a default, stated as one when used, dropped for a house style or a pin.
+- **The README says what actually runs.** "No code executes from this repo" was
+  literally true and materially misleading: nothing executes at install, but the
+  published page ships ~225 lines of JS and ~80 of CSS, verification runs
+  headless Chrome and `grep`, and reach is tool-mediated. A "What runs" section
+  replaces the one-liner, including what the shipped JS does not do (no `fetch`,
+  no `eval`, no analytics) and every destination it writes to.
+- **README caught up with 1.3.x** — `grade` was missing from the usage table and
+  `references/report-card.md` from the contents list.
+
+
 ## 1.3.1 — 2026-09-03
 
 Shape-agnosticism pass on grade mode.
