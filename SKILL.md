@@ -21,7 +21,7 @@ The pattern is proven on shipped roadmap pages; this skill generalizes it.
 | `refresh` | drift report → apply | See "Refresh is a drift report" below. |
 | `gantt` | dated variant | See "The dates rule" below; never choose this mode yourself. |
 | `wsjf [<path-or-url>]` | scoring layer | Opt in to WSJF cost-of-delay ranking: bare bootstraps a scoring worksheet from the themes; a target reads existing scoring. Recorded once, inherited by every later run. See "WSJF mode" below; never choose this mode yourself. |
-| `grade [<baseline-card-url>]` | report card | Letter-graded, evidence-cited audit of code + infrastructure: one blind read-only auditor per component plus a cross-cutting lens, five dimensions each, twin verdict (as-written vs operational reality), new-findings section with tickets filed before publishing. Each run is a DATED RECORD — always a new artifact, never a republish; the chain of cards is the trend line. See "Grade mode" below and `references/report-card.md`. |
+| `grade [<baseline-card-url>]` | report card | Letter-graded, evidence-cited audit of code + infrastructure: one blind read-only auditor per component plus the cross-cutting lenses (testing & CI, and the scale ladder: named growth rungs from the measured present to the business's targets, a holds / degrades / breaks verdict per rung with the first constraint to give, and a bought-or-built burn-down), five dimensions each, twin verdict (as-written vs operational reality), new-findings section with tickets filed before publishing. Each run is a DATED RECORD — always a new artifact, never a republish; the chain of cards is the trend line. See "Grade mode" below and `references/report-card.md`. |
 | `help` | show the modes | Print this table with one-line examples and stop — no scanning, no artifact work. Also the right response to any argument that matches no mode: show the table and ask, never guess a mode. |
 
 **What this is not for.** This skill builds an artifact; it is not the way to answer
@@ -143,9 +143,13 @@ twin as-written/operational-reality verdict, and the page anatomy live in
 `references/report-card.md` — load it before running the mode. Never choose
 this mode yourself.
 
-Four rules that are non-negotiable even without the reference loaded:
+Five rules that are non-negotiable even without the reference loaded:
 - **Auditors grade blind and read-only** — they never see prior grades and
   never fix what they find; the baseline comparison happens in synthesis.
+- **Headroom is graded, not just health:** the scale ladder runs on every
+  card — rungs in the project's own unit of growth, verdicts measured on the
+  bottom rung and multiplied, never guessed, and a bought-or-built burn-down
+  per rung with dated prices on the money items.
 - **The bar is stated in every auditor prompt:** an A means showable to an
   outside CTO without caveats.
 - **Twin verdict always:** as-written AND operational reality — merged-but-

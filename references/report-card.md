@@ -37,9 +37,11 @@ below two components, question whether the mode fits at all.
 
 ## The auditor fan-out
 
-One auditor agent per component, plus at least one cross-cutting lens that no
-single component owns (testing & CI is the proven one; security or data
-governance fit the same slot). Rules that make the grades trustworthy:
+One auditor agent per component, plus the cross-cutting lenses that no single
+component owns. Two are standing and run on every card: **testing & CI**, and
+**the scale ladder** (its own section below). Security or data governance fit
+beside them when the project warrants it. Rules that make the grades
+trustworthy:
 
 - **Read-only.** Auditors grade; they never fix. Cheap read commands (grep,
   wc, ls) are fine; running test suites or writing files is not.
@@ -72,6 +74,10 @@ being load-bearing in a real run):
    wall clock and proves nothing a green CI badge doesn't already.
 7. For estate-touching components: the as-written vs applied distinction,
    and instructions to grade both honestly.
+8. For the scale lens: the project's rungs (from memory, or the defaults
+   with a note that they are defaults), the per-unit measurement list, the
+   holds / degrades / breaks vocabulary, the bought-or-built classing, and
+   the rule that every printed number carries its date and how it was taken.
 
 ## The dimensions
 
@@ -113,13 +119,91 @@ A debt that moved from unmeasured to pinned deserves explicit credit in the
 "what changed" prose even when the letter does not move — the composition of
 a grade changing is often the entire story of a program.
 
+## The scale ladder (headroom is a grade)
+
+Every other dimension grades what the project is. The ladder grades what it
+can become without changing: the estate and the application as measured on
+the day of the run, projected onto the growth the business is actually
+pursuing. It is a standing cross-cutting lens, run on every card, never
+optional. A project that is healthy at its current size and dead at five
+times it has a finding no other lens will surface, and the day it surfaces
+on its own is the wrong day.
+
+**Rungs are named by the project, in its own unit of growth.** Accounts,
+tenants, organisations, daily active users, requests per second: whatever
+the business counts when it says "grow". The bottom rung is always the
+measured present (the real count, not the plan's). Above it sit the rungs
+the business has named; when it has named none, use roughly five-times
+steps (5×, 25×, 125×) and say the rungs are defaults. Record the rungs in
+project memory beside the panel shape so they hold still across cards. A
+ladder whose rungs move is not a trend line.
+
+**Every rung gets a verdict from a fixed vocabulary**, per constraint and
+overall:
+
+- **holds**: measured headroom covers the rung with no change.
+- **degrades**: it works, with a named symptom (p95 doubles, the nightly job
+  runs into the morning, a deploy takes an hour).
+- **breaks**: a named ceiling is reached. A connection limit, a timeout, a
+  disk's IOPS class, a memory size, a per-unit loop that no longer fits the
+  tick it runs in.
+
+A verdict without the constraint that produces it is a mood. Each rung names
+**the first thing to give** and the measurement behind it.
+
+**Measured, then multiplied. Never guessed.** The auditor takes per-unit
+measurements on the bottom rung and extrapolates: bytes of data per unit,
+requests per day per unit, queue jobs per unit, connections per app host,
+memory per worker, and the wall time of every per-unit loop (scheduled tasks
+that iterate units, per-unit migrations at deploy, per-unit backups). Growth
+is linear per unit unless the code says otherwise, and the auditor reads the
+code to find where it says otherwise: a loop over every unit inside a fixed
+tick, a connection per unit, a cron per unit. The card prints the per-unit
+numbers with their date so the next card can re-take them. A ladder built on
+numbers nobody can re-measure is not falsifiable, and a projection is only
+as honest as the measurement under it.
+
+**Singular things are listed once, with the rung at which each becomes the
+constraint.** One VM, one database host, one CI runner, one cache, one
+deployer laptop, one region: every serialization point the estate has by
+construction. Most projects are held up by two or three of these, and the
+ladder's job is to say which goes first and at what rung.
+
+**Bought or built.** For every rung that degrades or breaks, the burn-down
+names the change that turns it into *holds* and classes it: **config** (a
+setting, a flag, a disk class), **money** (a bigger tier, a managed service,
+a second host), or **engineering** (a shared session store, a connection
+pooler, a loop rewritten). Money items carry a dated list price per month,
+because that is the decision the reader is holding. Engineering items carry
+a ticket. A change that is cheap and buys a whole rung leads the list, and
+a managed service is not assumed to be faster than what it replaces: the
+card says what it buys at this rung (a backup story, a failover, headroom)
+and what it costs in latency or dollars, measured or quoted, never felt.
+
+**The lens's letter grades headroom to the next named rung, not to the
+top.** An A: the next rung holds, or every change it needs is ticketed and
+sized. A B: the next rung degrades and the fix is known. A C: the next rung
+breaks and nothing is filed. A D: the current rung is already at a ceiling.
+Grading against the top rung gives every young project an F and teaches
+nobody anything; grading against the next one is a decision the team can
+act on this quarter.
+
+Dimension labels for the lens, held stable across cards: **Data tier ·
+Compute & workers · Shared state (cache, queue, session) · Operations at N
+(deploy, migrate, back up, schedule) · Cost curve.** The cost curve is the
+monthly run-rate at each rung with the money items applied, the number that
+tells a founder whether growth pays for its own infrastructure.
+
 ## Page anatomy
 
 Masthead (project · occasion · date · method one-liner) → **verdict band**
 (as-written / operational / gate) → **grade board** (components × dimensions
 matrix, letter chips) → **what changed since the baseline** (prose, the
 composition argument) → **per-component verdict cards** (grade, one-paragraph
-verdict, "to next grade" burn-downs, "watch" items) → **new findings** (only
+verdict, "to next grade" burn-downs, "watch" items) → **the scale ladder**
+(rungs × constraints table with the verdict word in each cell, the first
+thing to give per rung, the per-unit numbers with their date, and the
+bought-or-built burn-down) → **new findings** (only
 things the project did not already know, severity-tagged, tickets filed and
 cited) → **the gate, answered** (ordered checklist when gating) → **path to
 the next letter** → methodology footer (auditor count, blind rule, bar,

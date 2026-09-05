@@ -1,5 +1,34 @@
 # Changelog
 
+## 1.5.0 — 2026-09-05
+
+The scale ladder: headroom becomes a graded lens.
+
+- **New standing cross-cutting lens in grade mode.** Every card now grades
+  what the project can become without changing, not only what it is: the
+  estate and application as measured on the day of the run, projected onto
+  the growth the business is pursuing. Runs beside testing & CI on every
+  card; never optional.
+- **Rungs in the project's own unit** (accounts, tenants, DAU, RPS). The
+  bottom rung is the measured present; above it the rungs the business has
+  named, or five-times defaults declared as defaults. Rungs are recorded in
+  project memory so they hold still across cards.
+- **A fixed verdict vocabulary per rung**: holds / degrades / breaks, each
+  naming the first constraint to give and the measurement behind it.
+- **Measured, then multiplied.** Per-unit measurements are taken on the
+  bottom rung and extrapolated linearly unless the code says otherwise (a
+  per-unit loop inside a fixed tick, a connection per unit). Printed numbers
+  carry their date so the next card can re-take them.
+- **Singular things listed once** with the rung at which each becomes the
+  constraint; **bought-or-built burn-down** (config / money / engineering)
+  with dated list prices on money items and tickets on engineering items.
+  A managed service is never assumed faster than what it replaces.
+- **The lens's letter grades headroom to the next named rung**, not to the
+  top rung. Stable dimension labels: Data tier · Compute & workers · Shared
+  state · Operations at N · Cost curve.
+- Page anatomy grows by one section (the ladder, between the component
+  cards and new findings); auditor prompt ingredient 8 added.
+
 ## 1.4.1 — 2026-09-04
 
 - **A maintenance rule in the README**: a new reference or mode moves the
@@ -54,7 +83,6 @@ does not defend against or disclose.
   no `eval`, no analytics) and every destination it writes to.
 - **README caught up with 1.3.x** — `grade` was missing from the usage table and
   `references/report-card.md` from the contents list.
-
 
 ## 1.3.1 — 2026-09-03
 
