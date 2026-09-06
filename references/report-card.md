@@ -110,6 +110,47 @@ When the run gates a decision, add the third verdict cell: the **gate answer**
 (GO / HOLD, with the sequencing cautions enumerated). A report card that
 gates nothing still ships the first two.
 
+## The exception register (a gap the team has priced and chosen)
+
+Some gaps are not defects. A team that has deliberately not bought a thing —
+a plan tier, a managed service, a second host, a staging environment — is
+making a resourcing decision, and grading it as a failure every run teaches
+the team to stop reading the card. The register is where such a gap lives so
+that it lowers no cell, without becoming a place to hide real debt.
+
+**A register entry suppresses its grade penalty only while ALL FOUR hold**,
+and the card re-tests every one of them on every run:
+
+1. **A named change with a dated price.** A ticket, and the actual list cost
+   per month or one-off, dated. "We might buy something later" is not an
+   entry.
+2. **A measurable trigger.** The condition under which the purchase becomes
+   necessary, stated as something the card can check: a load figure, a unit
+   count, a signed commitment, a second contributor. A trigger nobody can
+   evaluate is a wish.
+3. **A compensating control, VERIFIED LIVE by the card's own probe.** Not
+   asserted from a README, not inferred from a merge. This is the load-
+   bearing condition: the cell keeps its letter because the control is
+   working, and the card must have watched it work this run.
+4. **It has not lapsed.** The moment a trigger fires, the exception ends. The
+   next card grades that cell as found until the purchase lands, and says so.
+
+Fail any one and it is an ordinary finding again. Write the failing condition
+into the card, not just the letter.
+
+**Render exceptions by form, never by hue.** A dashed border, a mono label, no
+grade colour. The grade palette encodes tiers and an exception is not a tier;
+a reader who can mistake one for the other cannot read the matrix.
+
+Two failure modes to refuse outright. An exception that suppresses a
+**live exposure** is not an exception — an active data disclosure is a finding
+whatever the budget. And an exception whose compensating control is "we are
+careful" is prose, not a control; the card grades what it can verify.
+
+The honest framing for the reader: the register says *this team knows, priced
+it, and is waiting on a specific signal.* That is a different fact from a gap
+nobody has noticed, and the card is worth less when it cannot tell them apart.
+
 ## Counts are grades
 
 Shrink-only lists (file-size pins, allowlists, quarantines, suppressed-error
@@ -203,7 +244,9 @@ composition argument) → **per-component verdict cards** (grade, one-paragraph
 verdict, "to next grade" burn-downs, "watch" items) → **the scale ladder**
 (rungs × constraints table with the verdict word in each cell, the first
 thing to give per rung, the per-unit numbers with their date, and the
-bought-or-built burn-down) → **new findings** (only
+bought-or-built burn-down) → **the exception register**, where the project has
+one (each entry's price, trigger, compensating control and this run's live
+verification of it) → **new findings** (only
 things the project did not already know, severity-tagged, tickets filed and
 cited) → **the gate, answered** (ordered checklist when gating) → **path to
 the next letter** → methodology footer (auditor count, blind rule, bar,
@@ -216,7 +259,9 @@ re-grade that surfaces nothing the team didn't know was run too soon.
 
 - Hue encodes the **grade tier and nothing else** (A greens, B blues, C
   ambers, D/F red). Do not reuse the horizons throughline palette — the two
-  pages encode different things and must not look like siblings.
+  pages encode different things and must not look like siblings. Anything
+  that is not a grade — a ladder verdict, a register entry — encodes by form
+  (fill, border, weight) so it can never be read as one.
 - The readiness type register and the writing floor
   (`references/writing-floor.md`) apply in full: zero em dashes, grep-gated;
   no disguised assertions — "could not be verified this session (auth

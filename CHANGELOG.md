@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.6.0 — 2026-09-06
+
+The exception register: a gap the team has priced and chosen stops being
+graded as a failure.
+
+- **New grading rule in grade mode.** Some gaps are resourcing decisions, not
+  defects — an unbought plan tier, managed service, second host or staging
+  environment. Grading those as failures every run teaches a team to stop
+  reading the card. A register entry suppresses its cell's penalty, under
+  four conditions the card re-tests on every run.
+- **The four conditions**, all required: a named change with a **dated
+  price**; a **measurable trigger** the card can evaluate; a **compensating
+  control the card VERIFIED LIVE this run** (never asserted from a README or
+  inferred from a merge); and **not lapsed** — the exception ends the run
+  after its trigger fires, and the cell then grades as found until the
+  purchase lands. Fail any one and it is an ordinary finding again, with the
+  failing condition written into the card.
+- **Two refusals.** An exception never suppresses a **live exposure**: an
+  active disclosure is a finding whatever the budget. And a compensating
+  control of "we are careful" is prose, not a control.
+- **Rendered by form, never by hue** (dashed border, mono label, no grade
+  colour), extending the existing rule that hue encodes the grade tier and
+  nothing else — a ladder verdict and a register entry are both not-a-grade
+  and must never be readable as one.
+- Page anatomy grows by one section (the register, after the scale ladder);
+  SKILL.md's non-negotiable list goes from five rules to six.
+
 ## 1.5.0 — 2026-09-05
 
 The scale ladder: headroom becomes a graded lens.

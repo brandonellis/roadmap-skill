@@ -143,7 +143,7 @@ twin as-written/operational-reality verdict, and the page anatomy live in
 `references/report-card.md` — load it before running the mode. Never choose
 this mode yourself.
 
-Five rules that are non-negotiable even without the reference loaded:
+Six rules that are non-negotiable even without the reference loaded:
 - **Auditors grade blind and read-only** — they never see prior grades and
   never fix what they find; the baseline comparison happens in synthesis.
 - **Headroom is graded, not just health:** the scale ladder runs on every
@@ -157,6 +157,11 @@ Five rules that are non-negotiable even without the reference loaded:
 - **Every card is a dated record:** a NEW artifact per run, never a republish
   of a prior card (the inverse of the horizons update-in-place rule). File
   tickets for new findings before publishing so the card cites live refs.
+- **A priced, triggered, live-verified exception lowers no grade** — where the
+  project keeps an exception register, an entry suppresses its cell's penalty
+  only while it names a dated price, states a trigger the card can check, and
+  has a compensating control the card VERIFIED this run; it lapses the run
+  after its trigger fires. Never for a live exposure. Render by form, not hue.
 
 ## Phase 1 — discover sources (scan first, ask second)
 
