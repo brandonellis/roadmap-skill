@@ -131,11 +131,37 @@ Grades the pipeline that ships the code, not the tests inside it:
   merge can land with a red job nobody is blocked by.
 - **D/F.** The suite that gates merges does not run, or nothing gates.
 
+## The learning-loop lens (when the project runs models or agents)
+
+Dimensions: Eval coverage · Feedback capture · Loop closure · Run
+observability & cost · Output guardrails. Every fraction is over the
+discovered inventory of agents, prompts, rubrics and judges.
+
+- **A.** Every agent has an eval set that runs on change and fails the merge
+  today, on this tier, with a dated last failure. A measured fraction of
+  production runs receives a signal (human correction, outcome, reviewer,
+  judge), and every judge carries a dated agreement measurement against
+  human labels. Every declared loop is shown closed this run: signal,
+  transform, artefact changed, artefact consumed, with a dated example. Every
+  run, failed ones included, carries model, tokens, cache split and cost.
+  Every guardrail enforces on every tier.
+- **B.** Most agents have evals; they run on a cadence someone reads rather
+  than as a gate. At least one loop is shown closed with a dated example; the
+  open ones name their missing link and carry a ticket. Judges exist and one
+  is calibrated. Runs are priced. One guardrail is record-only on one tier,
+  known and ticketed.
+- **C.** Evals exist for a few agents or run by hand. Feedback is captured
+  and nothing consumes it: a write-only memory, a rubric at version 1 after a
+  year of signals. Judges are uncalibrated. Guardrails are record-only or
+  their switch is unset on every tier.
+- **D/F.** No evals; prompt changes ship on judgement alone. No run
+  tracking or cost. Guardrails absent, or coded and never switched on.
+
 ## The instrument manifest (printed in every footer)
 
 ```
 instrument: v<N>                anchors: grade-anchors <version, date adapted>
-panel:  <components> x <dimensions> + lenses: <list>
+panel:  <components> x <dimensions> + lenses: <list; learning loop present | absent: <why>>
 reach:  repositories: <list>
         cloud CLI: <which, as which principal>   tracker API: <yes | no>
         credential stores: <list>                unauthenticated probes: <yes | no>

@@ -21,7 +21,7 @@ The pattern is proven on shipped roadmap pages; this skill generalizes it.
 | `refresh` | drift report → apply | See "Refresh is a drift report" below. |
 | `gantt` | dated variant | See "The dates rule" below; never choose this mode yourself. |
 | `wsjf [<path-or-url>]` | scoring layer | Opt in to WSJF cost-of-delay ranking: bare bootstraps a scoring worksheet from the themes; a target reads existing scoring. Recorded once, inherited by every later run. See "WSJF mode" below; never choose this mode yourself. |
-| `grade [<baseline-card-url>]` | report card | Letter-graded, evidence-cited audit of code + infrastructure: one blind read-only auditor per component plus the cross-cutting lenses (testing & CI, and the scale ladder: named growth rungs from the measured present to the business's targets, a holds / degrades / breaks verdict per rung with the first constraint to give, and a bought-or-built burn-down), five dimensions each, twin verdict (as-written vs operational reality), new-findings section with tickets filed before publishing. Each run is a DATED RECORD — always a new artifact, never a republish. The measurement band leads (burn-down of the prior card's findings, the activation gap as a count, ratchets, exposures closed) and carries the trend; letters are a snapshot unless the instrument (panel, reach, anchors) held still, and every letter move is classified. See "Grade mode" below, `references/report-card.md` and `references/grade-anchors.md`. |
+| `grade [<baseline-card-url>]` | report card | Letter-graded, evidence-cited audit of code + infrastructure: one blind read-only auditor per component plus the cross-cutting lenses (testing & CI; the scale ladder: named growth rungs from the measured present to the business's targets, a holds / degrades / breaks verdict per rung with the first constraint to give, and a bought-or-built burn-down; and, where the project runs models or agents, the learning loop: can the evals fail, is production feedback captured, and is every declared loop shown closed from signal to consumed artefact), five dimensions each, twin verdict (as-written vs operational reality), new-findings section with tickets filed before publishing. Each run is a DATED RECORD — always a new artifact, never a republish. The measurement band leads (burn-down of the prior card's findings, the activation gap as a count, ratchets, exposures closed) and carries the trend; letters are a snapshot unless the instrument (panel, reach, anchors) held still, and every letter move is classified. See "Grade mode" below, `references/report-card.md` and `references/grade-anchors.md`. |
 | `help` | show the modes | Print this table with one-line examples and stop — no scanning, no artifact work. Also the right response to any argument that matches no mode: show the table and ask, never guess a mode. |
 
 **What this is not for.** This skill builds an artifact; it is not the way to answer
@@ -165,7 +165,11 @@ Eight rules that are non-negotiable even without the reference loaded:
 - **Headroom is graded, not just health:** the scale ladder runs on every
   card — rungs in the project's own unit of growth, verdicts measured on the
   bottom rung and multiplied, never guessed, and a bought-or-built burn-down
-  per rung with dated prices on the money items.
+  per rung with dated prices on the money items. Where the project runs
+  models or agents, **the learning loop** lens joins: a loop is closed only
+  when signal, transform, changed artefact AND a later run consuming it are
+  all shown this run; a memory written and never read is no loop; an eval is
+  graded on whether it can fail today, per tier.
 - **The bar is stated in every auditor prompt:** an A means showable to an
   outside CTO without caveats. The sentence is the intent; the anchors make
   it testable.

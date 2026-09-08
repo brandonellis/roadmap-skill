@@ -48,8 +48,11 @@ below two components, question whether the mode fits at all.
 
 One auditor agent per component, plus the cross-cutting lenses that no single
 component owns. Two are standing and run on every card: **testing & CI**, and
-**the scale ladder** (its own section below). Security or data governance fit
-beside them when the project warrants it. Rules that make the grades
+**the scale ladder** (its own section below). A third, **the learning loop**,
+joins whenever the project makes model calls or runs agents (its own section
+below); it is discovered from the code, never assumed, and when it does not
+run the footer says why. Security or data governance fit beside them when the
+project warrants it. Rules that make the grades
 trustworthy:
 
 - **Read-only.** Auditors grade; they never fix. Cheap read commands (grep,
@@ -100,6 +103,10 @@ being load-bearing in a real run):
 11. The output ends with the auditor's own coverage manifest (what was read,
     run, probed, re-taken, and what could not be reached) and every
     measurement re-taken, with method and date.
+12. For the learning-loop lens: the discovered inventory of agents, prompts
+    and judges; the four-link loop-closure chain and the read-back rule; the
+    instruction to grade an eval gate on whether it can fail, and a flag on
+    what it does on each tier, not what its default is.
 
 ## Two questions, two instruments
 
@@ -133,6 +140,10 @@ The first thing on the card, above any letter:
 5. **Ceilings that moved.** Any measured capacity the ladder tracks that
    changed since the baseline (an IOPS class, a connection limit, a memory
    size): old value and new.
+6. **Loops closed** (when the learning-loop lens runs). Of the loops the
+   project declares, how many this card showed closed end to end; agents
+   with an eval that can fail, as n of N; and cost per unit of output against
+   the baseline.
 
 Every item names how it was taken, so the next card re-takes it the same
 way. A measurement nobody can re-take is a letter in a number's costume. The
@@ -390,6 +401,74 @@ Compute & workers · Shared state (cache, queue, session) · Operations at N
 monthly run-rate at each rung with the money items applied, the number that
 tells a founder whether growth pays for its own infrastructure.
 
+## The learning loop (when the project runs models or agents)
+
+A project that calls a model or runs an agent has a second kind of code: the
+prompts, rubrics, judges and memories that decide what the model does, and
+the loop that is supposed to make them better. The other lenses grade the
+software around the model. This one grades whether the project can tell a good
+output from a bad one, whether it learns that from production, and whether
+what it learns changes anything. It runs whenever the auditor finds a model
+call site or an agent definition; a project with none states that in the
+footer and the lens is absent, not F. Adding the lens to a chain that lacked
+it is a panel change and follows the quarantine rule.
+
+**Inventory first, like components.** The auditor discovers every agent,
+prompt, rubric, judge and learning store from the code and the database, and
+counts them. Every measurement below is a fraction of that inventory, so a
+new agent shipped without an eval lowers the fraction on the next card
+without anyone deciding to look for it.
+
+**A loop is closed only when all four links are shown, this run:**
+
+1. **Signal.** Where the judgement of an output comes from: a human
+   correction, an outcome recorded later, a reviewer layer, a judge model.
+   Named, with the fraction of production runs that receive one.
+2. **Transform.** What turns signals into a change: a calibration job, a
+   distillation step, a person with a ticket. Named, with its last run date.
+3. **Artefact changed.** The thing that is different afterwards: a prompt
+   version, a rubric version, a config row, a memory row. Cited, with a
+   dated example since the baseline.
+4. **Artefact consumed.** A later run demonstrably read the changed
+   artefact. A memory that is written and never read is a write-only loop
+   and grades as no loop; a rubric at version 1 on every tenant after a year
+   of signals is a loop that has never fired. This link is the one most
+   projects cannot show, and it is the one that matters.
+
+A loop missing any link is **open**. The card counts closed loops over
+declared loops and prints the missing link for each open one; that count
+enters the measurement band.
+
+**An eval is graded on whether it can fail.** An eval set that runs by hand,
+runs on a cadence with nobody reading it, or gates a merge behind a flag that
+is unset on every tier is a suite that cannot go red. Grade the gate as
+found: does a worse prompt fail the build today, on this tier, and when did
+it last do so. Dark gates (exit 0 without evaluating) are findings, the same
+as in the testing & CI lens.
+
+**A judge is measured against humans or it is asserted.** A model grading
+another model's output needs its own agreement measurement against human
+labels, dated, with the sample size. A judge with none is a second opinion
+of unknown quality, and every downstream number it produces inherits that.
+
+**Guardrails are graded as deployed, per tier, not as coded.** Screeners,
+forbidden-claim checks, structured-output validation, hard-gate enforcement:
+each has a switch, and the auditor reads the switch's polarity and its value
+on every tier. A control in record-only mode is credited as-written and
+debited in operational reality, like any other activation gap, and it joins
+the activation-gap count.
+
+**Runs are priced or they are not observable.** Every model call carries its
+model, tokens, cache split and cost, and failed runs are recorded with
+theirs; a run that fails and leaves no cost is spend that cannot be seen.
+Model changes since the baseline (a default moved, a pin added, a price
+changed) are listed, because a letter that moved with the model is a code
+move and the card must be able to say so.
+
+Dimension labels for the lens, held stable across cards: **Eval coverage ·
+Feedback capture · Loop closure · Run observability & cost · Output
+guardrails.** Anchors are in `references/grade-anchors.md`.
+
 ## Page anatomy
 
 Masthead (project · occasion · date · method one-liner) → **measurement
@@ -404,7 +483,9 @@ move classified, restated baselines named as such) → **per-component verdict c
 verdict, "to next grade" burn-downs, "watch" items) → **the scale ladder**
 (rungs × constraints table with the verdict word in each cell, the first
 thing to give per rung, the per-unit numbers with their date, and the
-bought-or-built burn-down) → **the exception register**, where the project has
+bought-or-built burn-down) → **the learning loop**, when the project runs
+models or agents (the inventory counts, one row per declared loop with its
+four links and the missing one named, the eval gates as found per tier) → **the exception register**, where the project has
 one (each entry's price, trigger, compensating control and this run's live
 verification of it) → **new findings** (only
 things the project did not already know, severity-tagged, tickets filed and

@@ -1,5 +1,39 @@
 # Changelog
 
+## 1.8.0 — 2026-09-08
+
+The learning loop: a conditional third lens for projects that run models or
+agents.
+
+- **Runs when the auditor finds a model call site or an agent definition**,
+  discovered from the code like components are; absent otherwise, with the
+  reason in the footer. Adding it to a chain that lacked it is a panel change
+  and follows the quarantine rule.
+- **Inventory first.** Agents, prompts, rubrics, judges and learning stores
+  are counted, and every measurement is a fraction of that count, so a new
+  agent shipped without an eval lowers the fraction on the next card
+  unprompted.
+- **A loop is closed only when four links are shown this run**: signal (with
+  the fraction of production runs that receive one), transform (with its last
+  run date), artefact changed (cited, dated example since the baseline), and
+  artefact consumed by a later run. A memory written and never read is a
+  write-only loop and grades as no loop. Closed over declared enters the
+  measurement band, with the missing link named for each open one.
+- **An eval is graded on whether it can fail**: today, on this tier, with the
+  date it last did. Dark gates are findings, as in the testing & CI lens.
+- **A judge is measured against humans or it is asserted**: dated agreement
+  measurement with sample size, or its numbers inherit unknown quality.
+- **Guardrails graded as deployed, per tier**: switch polarity and value read
+  on every tier; record-only is an activation gap and joins that count.
+- **Runs priced or not observable**: model, tokens, cache split and cost on
+  every run including failed ones; model changes since the baseline listed so
+  a letter that moved with the model can be called a code move.
+- Stable labels: Eval coverage · Feedback capture · Loop closure · Run
+  observability & cost · Output guardrails. Anchors added to
+  `references/grade-anchors.md`; prompt ingredient 12; measurement band item
+  6; page anatomy gains the section after the ladder; instrument manifest
+  records the lens as present or absent.
+
 ## 1.7.0 — 2026-09-08
 
 Two questions, two instruments: the burn-down becomes the headline, letters
