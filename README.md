@@ -27,7 +27,7 @@ Then invoke it in any Claude Code session with `/roadmap`.
 | `/roadmap refresh` | Drift report against the live tracker, then apply the delta |
 | `/roadmap gantt` | Dated variant, only when commitments to external parties matter |
 | `/roadmap wsjf [<source>]` | Opt in to WSJF cost-of-delay scoring: bare bootstraps a worksheet, a target reads existing scoring |
-| `/roadmap grade [<baseline-url>]` | Letter-graded, evidence-cited audit of the code and infrastructure behind the roadmap, with a scale ladder that grades headroom at the project's named growth rungs; each run is a dated record, never a republish |
+| `/roadmap grade [<baseline-url>]` | Letter-graded, evidence-cited audit of the code and infrastructure behind the roadmap. Leads with a burn-down of the prior card's findings and other measurements; letters are a snapshot unless the instrument held still. Includes a scale ladder that grades headroom at the project's named growth rungs; each run is a dated record, never a republish |
 | `/roadmap help` | Show the mode table |
 
 ## What makes it opinionated
@@ -64,8 +64,12 @@ Then invoke it in any Claude Code session with `/roadmap`.
 - `references/wsjf.md` is the scoring layer: worksheet format, validation,
   rendering rules.
 - `references/report-card.md` is `grade` mode: the auditor fan-out, the five
-  dimensions, the twin verdict, the scale ladder, and the rules for filing
-  findings.
+  dimensions, the twin verdict, the measurement band, the versioned
+  instrument, the letter-move classes, the scale ladder, the exception
+  register, and the rules for filing findings.
+- `references/grade-anchors.md` is the calibration sheet `grade` carries into
+  every auditor prompt: letter anchors per dimension, plus the instrument
+  and coverage manifest templates.
 - `references/interaction-layer.md` is the CSS/JS the published page ships, with an
   adaptation contract (rename the hooks, keep the roles).
 - `references/writing-floor.md` is the prose floor: hard rules, banned phrases,

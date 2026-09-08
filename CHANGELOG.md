@@ -1,5 +1,59 @@
 # Changelog
 
+## 1.7.0 — 2026-09-08
+
+Two questions, two instruments: the burn-down becomes the headline, letters
+become a snapshot unless the instrument held still, and the blind rule stops
+destroying calibration.
+
+Prompted by a critique of a six-card chain whose letters had moved for
+reasons that were not the code: a lens added mid-chain dragged the overall
+below cards never measured on it; reach widened on every run and one letter
+fall was filed as "partly methodology" in a footnote; the blind rule left
+seven fresh agents per run sharing one sentence of rubric, so an unchanged
+component moved four letters in a day; and synthesis lowered a grade on an
+unchanged system because the panel's information improved. Meanwhile the
+counts (ratchet sizes, closed exposures, a raised IOPS ceiling) all pointed
+the same way and needed no interpretation.
+
+- **The measurement band leads the card.** Above any letter: the burn-down
+  (how many of the baseline's findings this run VERIFIED closed, with ticket
+  status alone reported as "claimed"), live exposures closed, the activation
+  gap as a single count of declared-but-unapplied things, every ratchet's
+  size and direction, and ceilings that moved. Each names how it was taken so
+  the next card re-takes it. These answer "did it improve"; the letters
+  answer "how good is this"; the card no longer fuses the two.
+- **The instrument is versioned and frozen for three cards.** Panel, reach
+  and anchors are printed in the footer as an instrument manifest. A card is
+  comparable to its baseline only when all three match; otherwise its letters
+  are a snapshot, shown without arrows, and the card names what changed.
+  Widening reach is a decision declared before the run, never something
+  noticed in synthesis; "partly methodology" is split and the methodology
+  part leaves the trend.
+- **A new lens or dimension is quarantined from the overall** on the card
+  where it first appears (marked "first measured"), and when panels differ
+  the card prints two overalls, labelled.
+- **Blind to the grades, never to the standard.** New
+  `references/grade-anchors.md`: letter anchors per dimension that make the
+  bar sentence testable by reading, adapted once per project and carried
+  verbatim into every auditor prompt. Every auditor also ends with a
+  **coverage manifest** (paths read, commands run, probes made, measurements
+  re-taken, what was not reached), and the next card hands it to that
+  component's auditor as minimum coverage. No letters, no findings: it
+  anchors where the auditor looks, not what it concludes.
+- **Every letter move is classified**: code, activation, information,
+  instrument. Only the first two carry arrows. An information move (the
+  system did not change; the card looked harder) RESTATES the baseline in
+  prose and memory and never records a rise or a fall. Unclassifiable moves
+  default to information: a false arrow costs more than a missing one.
+- Ladder: switching between extrapolating from the baseline's numbers and
+  deriving them afresh is an instrument change, and its letter is a snapshot.
+- Auditor prompt ingredients 9 to 11 (calibration sheet, baseline coverage
+  manifest, own manifest in the output); page anatomy gains the measurement
+  band and grows the footer; SKILL.md's non-negotiable list goes from six
+  rules to eight; README contents list and usage table updated in the same
+  commit.
+
 ## 1.6.0 — 2026-09-06
 
 The exception register: a gap the team has priced and chosen stops being
