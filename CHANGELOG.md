@@ -9,7 +9,7 @@
   fixed operational A+ acceptance checks. Keep as-written and deployed reality
   separate; missing evidence is Incomplete. New risks and regressions stay visible.
 - Add `score` as an explicit alias of `grade`, distinct from WSJF prioritization.
-- Share one artifact across Overview, NNL, Timeline, Scorecard and History views,
+- Share one artifact across Progress, Roadmap and Evidence views,
   with stable item IDs, per-view freshness and keyboard-accessible, deep-linkable
   tabs. Preserve old records rather than creating a fresh grade universe each run.
 - Strengthen NNL design around outcomes, current commitments, entry conditions,
@@ -20,6 +20,12 @@
 - Extend filters across item representations, remove the five-throughline limit,
   restore explicit expanded collapse preferences, reveal nested deep links, and
   expose full content in print and no-JavaScript views.
+- Add a reusable progress-first shell with separate code/staging/production
+  assessment datasets, explicit audited refs and per-service runtime identity.
+  Keep legacy blended operational ratings in history, not environment grades.
+- Place NNL and opt-in Timeline formats under Roadmap, with shared search and
+  throughline filters. Collapse original reports under Evidence. Preserve
+  unknown counts, original sources and verification dates on layout-only rebuilds.
 
 These rules govern subsequent invocations. Existing published artifacts and
 assessment contracts are not silently overwritten or regraded by this update.

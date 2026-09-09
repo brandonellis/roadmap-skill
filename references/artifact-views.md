@@ -13,11 +13,15 @@ shell; bounded verification. The shell's code is for building, not source scanni
 
 | View | Reader's question | Content owner |
 |---|---|---|
-| Overview | What changed, what matters, what decision is needed? | Shared summary of verified state |
-| Now / Next / Later | What are we doing, preparing and exploring? | Roadmap synthesis |
-| Timeline | What is committed when, and what slipped? | Explicit `gantt` mode |
-| Scorecard | How far from our original baseline to operational A+? | `grade` or its `score` alias |
-| Evidence & History | What supports this, and what did earlier runs say? | Sources, decisions, immutable assessments |
+| Progress | What improved from the original baseline, and what blocks A+? | `grade` or its `score` alias |
+| Roadmap | What are we doing, preparing and exploring? | NNL synthesis, with opt-in Timeline format |
+| Evidence | What supports this, and what did earlier runs say? | Sources, decisions, immutable assessments |
+
+Use `progress-layout.md` for the combined artifact composition and reusable
+assets. Code quality, staging operations and production operations are separate
+assessment scopes within Progress, not additional primary tabs. NNL and the
+explicitly requested Timeline are formats within Roadmap. Collapse complete
+historical reports within Evidence; do not make them the current operating view.
 
 Only include views with actual content. A grade-only artifact does not fabricate
 a roadmap; a roadmap-only artifact does not imply it has been audited. One view
@@ -34,7 +38,7 @@ roadmap slice, show both verification dates and offer refresh. Never restamp
 unchanged views as freshly verified. Old single-page artifacts can adopt the
 shell without renaming existing anchor IDs or discarding their content.
 
-## Shared model, not five separate interpretations
+## Shared model, not separate interpretations
 
 Maintain one publish-safe model per artifact revision. It may be a local JSON
 file used to generate static HTML; dynamic rendering is not required. Minimum:
@@ -99,19 +103,21 @@ document in source order.
 
 Use the following once per artifact. Substitute the available views; the two
 panels here illustrate the contract, not required placeholder content. Include
-the CSS/JS inline in the final self-contained artifact, **before** the existing
-`interaction-layer.md` script. Leave every panel visible in source markup.
+the CSS/JS inline in the final self-contained artifact, **before** the chosen
+interaction script. Use `assets/progress-shell.js` for the progress-first shell
+or `interaction-layer.md` for a legacy roadmap, never both. Leave every panel
+visible in source markup.
 
 ```html
 <nav class="view-tabs" aria-label="Roadmap views">
-  <a id="tab-overview" href="#view-overview">Overview</a>
-  <a id="tab-roadmap" href="#view-roadmap">Now / Next / Later</a>
+  <a id="tab-overview" href="#view-overview">Progress</a>
+  <a id="tab-roadmap" href="#view-roadmap">Roadmap</a>
 </nav>
 <section id="view-overview" data-view="overview" aria-labelledby="tab-overview">
-  <h2>Overview</h2>
+  <h2>Progress</h2>
 </section>
 <section id="view-roadmap" data-view="roadmap" aria-labelledby="tab-roadmap">
-  <h2>Now / Next / Later</h2>
+  <h2>Roadmap</h2>
 </section>
 ```
 
@@ -245,8 +251,9 @@ Use the same built artifact for all checks. Assert more than "the script ran":
 - A throughline filter survives a tab switch and affects timeline rows too.
   Clear restores all items. Repeated representations do not inflate counts.
   Overall grades and the original denominator never change with the filter.
-- Collapse preferences survive reload, including explicitly expanded defaults;
-  denied storage still works. A link reveals both the panel and its detail.
+- If collapse preferences are persisted, they survive reload, including
+  explicitly expanded defaults. Denied storage still works. A link reveals
+  both the panel and its detail.
 - JavaScript disabled and print both expose complete readable content. Print
   does not preserve a hidden subset. No duplicate IDs, runtime exceptions,
   body-level horizontal overflow, inaccessible labels or contrast loss.

@@ -3,7 +3,7 @@
 A [Claude Code](https://claude.com/claude-code) skill that builds and maintains a
 single-page roadmap artifact for any project: scan the repo, issue tracker, and
 notes; ask one round of questions only for what cannot be found; synthesize
-Now / Next / Later horizons with cross-cutting throughlines; publish an
+Now / Next / Later horizons with cross-cutting throughlines; publish a
 shared artifact with view tabs, a throughline filter, collapsible sections and
 derived tooltips. A fixed initial assessment baseline makes every later grade
 part of the same evidence-backed path to operational A+, not a new score set.
@@ -29,16 +29,20 @@ Then invoke it in any Claude Code session with `/roadmap`.
 | `/roadmap refresh` | Drift report against the live tracker, then apply the delta |
 | `/roadmap gantt` | Add or update the Timeline view with sourced commitments, explicit scenarios and an unscheduled shelf |
 | `/roadmap wsjf [<source>]` | Opt in to WSJF cost-of-delay scoring: bare bootstraps a worksheet, a target reads existing scoring |
-| `/roadmap grade [<baseline-url>]` | Audit against the established initial baseline, append an immutable dated assessment, and update Scorecard and History in the same artifact |
+| `/roadmap grade [<baseline-url>]` | Audit against the established initial baseline, append an immutable dated assessment, and update Progress and Evidence in the same artifact |
 | `/roadmap score [<baseline-url>]` | Alias of `grade`, with the same baseline and ledger; not WSJF priority scoring |
 | `/roadmap help` | Show the mode table |
 
 ## What makes it opinionated
 
-- **One artifact, view-based tabs.** Overview, Now / Next / Later, Timeline,
-  Scorecard, Evidence & History appear only when populated. Skill names are
+- **One artifact, three clear views.** Progress, Roadmap and Evidence appear
+  only when populated. NNL and opt-in Timeline are roadmap formats. Skill names are
   provenance, not navigation. All views share item IDs and filters, while
   retaining their own verification dates. Separate audiences stay separate.
+- **Know what was assessed.** Code, staging and production have distinct
+  assessment datasets. Show the audited branch and commit independently of
+  per-service runtime revisions. Legacy blended letters stay in history;
+  missing evidence says not assessed, never inherits another scope's grade.
 - **One original assessment baseline.** Criteria, findings and A+ checks stay
   fixed until an explicitly approved rebaseline. Initial, previous and current
   assessments remain distinct. New findings and regressions are visible without
@@ -78,6 +82,12 @@ Then invoke it in any Claude Code session with `/roadmap`.
 - `SKILL.md` is the skill itself: modes, the four phases, the decided rules.
 - `references/artifact-views.md` is the shared-model/view contract, copy-ready
   accessible tabs, responsive/print behavior and interaction verification.
+- `references/progress-layout.md` is the progress-first composition, scope and
+  provenance rules, reusable asset hooks and browser acceptance checks.
+- `assets/progress-shell.css` and `assets/progress-shell.js` implement the
+  responsive comparison layout, scope and format selectors, shared roadmap
+  filters, deep-link reveal and printable archived evidence. Inline them in
+  generated artifacts with the tab controller from `artifact-views.md`.
 - `references/page-anatomy.md` is the content spine and the outcome-led NNL
   design: active commitments, entry conditions, options and movement history.
 - `references/gantt.md` is the timeline design, date provenance, baseline vs
@@ -107,16 +117,17 @@ not mention reads as undocumented content, not as an oversight.
 
 ## What runs
 
-Nothing in this repo executes at install or on clone: it is Markdown, and there is
-no build step, no hook, no postinstall, no binary. What it does do, once you invoke
-it, is worth knowing before you import it:
+Nothing in this repo executes at install or on clone: it contains Markdown and
+browser assets, with no build step, hook, postinstall or binary. Here is what
+invoking the skill can do:
 
-- **The published page ships client-side code.** `references/artifact-views.md`
-  and `references/interaction-layer.md` carry inline JavaScript and CSS for the
+- **The published page ships client-side code.** `references/artifact-views.md`,
+  `assets/progress-shell.*` and the alternative `references/interaction-layer.md`
+  carry JavaScript and CSS for the
   tabs, shared filter, collapse behavior and derived tooltips. It runs
   in the reader's browser, not on your machine. It makes no network calls of its own:
-  no `fetch`, no `eval`, no analytics, and one static `innerHTML` string with
-  everything else set as `textContent`.
+  no `fetch`, no `eval`, no analytics. The new shell uses text-only DOM updates;
+  the legacy interaction layer also uses one static `innerHTML` string.
 - **Verification runs local commands.** Headless Chrome for a DOM smoke test and
   three screenshots (`--headless=new --dump-dom`, `--screenshot`), and
   `grep -c` over the finished page for the em-dash gate.
@@ -142,7 +153,8 @@ to History. No old artifact is automatically migrated merely by pulling this rep
 ## Validation
 
 The copy-ready scripts are browser code, so syntax checks alone are insufficient.
-Use the bounded scenario checks in `artifact-views.md` and `baseline-ledger.md`:
+Use the bounded scenario checks in `artifact-views.md`, `progress-layout.md` and
+`baseline-ledger.md`:
 keyboard/deep-link/filter/print behavior, unchanged-evidence grading, reopening,
 missing access, scope changes and explicit rebaseline. The repo does not install
 a test framework. Claude Code's existing `argument-hint` frontmatter is intentional;

@@ -130,6 +130,31 @@ approval record. Keep the original entry and full history accessible. Comparison
 across incompatible contracts say `Not comparable`; no joining the charts with
 an improvement arrow. New access does not erase the original program.
 
+## Assessment scope and revision identity
+
+Key results by scope: `code`, then each named runtime environment such as
+`staging` and `production`. Each has its own original/current assessment IDs,
+cells, coverage, evidence windows and overall. A selector changes the dataset,
+not the label over a shared letter. An approved cross-environment roll-up may
+exist separately, but never substitutes for environment-specific results.
+
+Freeze `sourceCodeRefs[]` at audit time: repository, explicit branch/ref, full
+resolved commit and observedAt. The current checkout and default branch are not
+evidence of what an earlier auditor read. Record `runtimeRefs[]` independently:
+environment, service, revision, image digest, resolved commit, observedAt and
+verification status. Missing values are null with a reason. Preserve mixed
+service revisions rather than choosing one as the environment version. An HTTP
+200 or green CI alone does not verify the deployed commit.
+
+Older blended operational ratings belong in `legacyCombined`, with their
+original source and observation date. Do not migrate them into staging or
+production cells. Render missing pairs as `Not separately assessed` or
+`Not reassessed`; render unpopulated finding counts as `Not reconciled`, not 0.
+Keep these presentation mappings outside immutable historical assessment
+records. Do not append a fresh assessment merely to record a layout rebuild.
+Retain any legacy revision fields in existing records; richer manifests belong
+in new assessments or separately attributed import metadata.
+
 ## Persist before publishing
 
 Use a machine-readable ledger, not prose memory alone. Default local home is
@@ -155,7 +180,10 @@ findings[]:
   id, criterionIds[], firstSeenAssessmentId, severity, blocking, sourceRefs[]
 assessments[]:
   id, baselineId, previousAssessmentId, observedAt, instrumentVersion
-  scopeCoverage, revisionsByEnvironment, observations[], findingStates[]
+  scopeCoverage, sourceCodeRefs[], runtimeRefs[], observations[], findingStates[]
+  resultsByScope: code, <each runtime environment>
+    originalAssessmentId, currentAssessmentId, cells[], coverage, overall
+  legacyCombined: originalSourceRef, observedAt, asReportedResults
   asWrittenCells[], operationalCells[], overalls, movementClasses[]
   baselineResolvedIds[], newOpenFindingIds[], activationGapIds[], exposureIds[]
   sourceRefs[], correctionNotes[], contentHash

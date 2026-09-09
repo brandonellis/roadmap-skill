@@ -13,7 +13,10 @@ as small tags, an explicit out-of-scope section, and a standing-risk register.
 The pattern is proven on shipped roadmap pages; this skill generalizes it.
 One canonical artifact can contain several views of the same project. Read
 `references/artifact-views.md` before building any mode: views are navigation,
-skill names are provenance. A permanent initial baseline and immutable dated
+skill names are provenance. For a combined assessment and roadmap, also read
+`references/progress-layout.md`: Progress, Roadmap and Evidence are the primary
+views; code/staging/production are assessment scopes, not interchangeable grades.
+A permanent initial baseline and immutable dated
 assessments show progress toward an evidence-earned operational A+ without
 resetting the goalposts on each run.
 
@@ -26,7 +29,7 @@ resetting the goalposts on each run.
 | `refresh` | drift report → apply | See "Refresh is a drift report" below. |
 | `gantt` | timeline view | Add or update Timeline in the canonical artifact; standalone export only on request. See "The dates rule" below; never choose this mode yourself. |
 | `wsjf [<path-or-url>]` | scoring layer | Opt in to WSJF cost-of-delay ranking: bare bootstraps a scoring worksheet from the themes; a target reads existing scoring. Recorded once, inherited by every later run. See "WSJF mode" below; never choose this mode yourself. |
-| `grade [<baseline-card-url>]` | baseline assessment | Audit code and live operations against the established initial baseline. Append a dated assessment, update Scorecard and Evidence & History in the same hub, and show initial/current/target A+ with fixed criteria and verified progress. An explicit URL selects a lineage, not a reset. See "Grade mode" and its references. |
+| `grade [<baseline-card-url>]` | baseline assessment | Audit explicit code refs and each runtime environment against the established initial baseline. Append a dated assessment, update Progress and Evidence in the same hub, and show initial/current/target A+ with fixed criteria and verified progress. An explicit URL selects a lineage, not a reset. See "Grade mode" and its references. |
 | `score [<baseline-card-url>]` | alias of grade | Same maturity assessment, baseline and ledger as `grade`; never WSJF. Requests for cost-of-delay or priority ranking use `wsjf`. Clarify ambiguous scoring requests before scanning. |
 | `help` | show the modes | Print this table with one-line examples and stop — no scanning, no artifact work. Also the right response to any argument that matches no mode: show the table and ask, never guess a mode. |
 
@@ -151,7 +154,7 @@ Eight rules that are non-negotiable even without the reference loaded:
 - **Twin verdict always:** as-written AND operational reality — merged-but-
   not-deployed is an activation gap, credited in one and debited in the other.
 - **Every assessment is immutable, not every URL.** Append a dated ledger entry,
-  then update Scorecard and Evidence & History in the canonical hub without
+  then update Progress and Evidence in the canonical hub without
   deleting earlier records. New snapshot URLs are optional exports. Operational
   A+ requires the fixed acceptance checks, live proof and no blocking gaps;
   unknown evidence is Incomplete, never a carried-forward pass. File tickets
@@ -308,8 +311,11 @@ Non-negotiables regardless of skin:
   by me", and any record-tier source the page could not read, named as a gap.
 - Light + dark themes per the Artifact theming contract; self-contained page.
 
-First compose the view shell from `references/artifact-views.md`, then add the
-**interaction layer** from `references/interaction-layer.md`:
+For combined artifacts use `references/progress-layout.md` and the reusable
+`assets/progress-shell.css` / `assets/progress-shell.js`, with the tab controller
+from `references/artifact-views.md`. For legacy roadmap-only layouts, compose
+that tab shell with `references/interaction-layer.md` instead. Never load both
+filter controllers. The legacy interaction layer supplies:
 throughline filter (the color key is the control, with a fixed clear-chip),
 collapsible sections with count badges (localStorage, try/catch), and tooltips
 derived at load from the detail cards so they cannot drift from the content.

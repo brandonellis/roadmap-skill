@@ -19,7 +19,7 @@ components.
 Run it before a consequential moment: a deploy, a funding conversation, a
 quarter close, or right after a remediation program lands. Each run produces an
 **immutable dated assessment inside a living artifact**. Append the observation
-to the ledger, then update Scorecard and Evidence & History at the canonical URL.
+to the ledger, then update Progress and Evidence at the canonical URL.
 Earlier records remain readable at stable anchors; separate dated exports are
 optional, not a new grading universe on every run.
 
@@ -246,9 +246,16 @@ publishing when authorized; otherwise label the proposed tickets as drafts).
 
 One grade lies. Two tell the truth:
 
-1. **As written** — the code and configuration on the default branch.
+1. **As written** — the code and configuration at an explicitly recorded branch
+   or ref, frozen to the full commit the auditor actually read for each repo.
 2. **Operational reality** — what is actually deployed, applied, installed,
-   and able to page a human today.
+   and able to page a human at the recorded observation time, assessed separately
+   for each environment. Capture every service's revision and resolved commit;
+   a code-audit SHA is not a deployed-version claim.
+
+Use `baseline-ledger.md`'s scope-keyed contract. Never present a blended legacy
+operational result as a staging or production grade. If the original evidence
+does not separate them, keep the old rating in Evidence and say so in Progress.
 
 This is the measured-vs-attested rule applied to estates: merged-but-not-
 deployed work is an **activation gap, not absence**, and it must be graded as
@@ -460,9 +467,11 @@ guardrails.** Anchors are in `references/grade-anchors.md`.
 
 ## Page anatomy
 
-Use the shared shell in `artifact-views.md`. Overview carries the measurement
-band and a concise verdict. Scorecard carries the matrix and proof remaining.
-Evidence & History carries sources, method, coverage and immutable observations.
+Use `progress-layout.md` and the shared shell in `artifact-views.md`. Progress
+carries the scope selector, source identity, original/latest/target comparison,
+measurement strip, component matrix and proof remaining. Roadmap owns NNL and
+opt-in Timeline formats. Evidence carries sources, method, coverage and
+collapsed immutable observations. A layout-only rebuild does not regrade.
 Preserve stable finding links and show initial, previous and current identities.
 In a standalone export, the same sections read in this order:
 

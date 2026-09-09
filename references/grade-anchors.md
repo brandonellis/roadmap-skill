@@ -171,6 +171,10 @@ discovered inventory of agents, prompts, rubrics and judges.
 instrument: v<N>                anchors: grade-anchors <version, date adapted>
 original baseline: <id>         active baseline: <id>
 assessment: <id>                previous assessment: <id | initial>
+scope: <code | named environment>  separate scope results: <IDs | not assessed>
+code read: <per repository: branch/ref, full commit, observedAt>
+runtime: <per environment/service: revision, image digest, commit, observedAt>
+missing or mixed runtime evidence: <details | none, with measurement>
 roll-up: <frozen policy>         A+ acceptance: <criterion IDs>
 ledger: <durable location>      evidence windows: <per criterion/method>
 panel:  <components> x <dimensions> + lenses: <list; learning loop present | absent: <why>>

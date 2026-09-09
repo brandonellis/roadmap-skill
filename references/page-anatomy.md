@@ -3,11 +3,13 @@
 Proven on shipped roadmap pages (Sep 2026). This is the structural spine;
 palette/type/voice get a fresh design pass per project.
 
-Use `artifact-views.md` for the shared shell and navigation. This is the content
-spine, not a requirement to force all fifteen sections into a single long scroll.
-Overview gets the summary and decision. Now / Next / Later gets the board and
-details. Evidence & History gets decisions, sources and audit records. Timeline
-and Scorecard appear only when their modes have actually run.
+Use `artifact-views.md` for navigation and `progress-layout.md` for a combined
+assessment/roadmap artifact. This is the content spine, not a requirement to
+force all fifteen sections into a single long scroll. Progress gets the scoped
+assessment and next proof. Roadmap gets NNL and the opt-in Timeline format.
+Evidence gets decisions, sources and collapsed audit records. Unavailable
+domains are omitted. In a combined artifact, the compact masthead and comparison
+row in `progress-layout.md` take precedence over the roadmap-only masthead below.
 
 Order within the content spine:
 
