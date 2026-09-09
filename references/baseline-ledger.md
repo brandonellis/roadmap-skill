@@ -60,6 +60,20 @@ the original burn-down denominator or disappear to protect the trend. Show:
 - `A+ criteria verified: 18 of 24`, a different denominator from findings.
 
 Zero baseline findings renders `No initial findings`, not `100% complete`.
+
+Counts must lead to the actual findings. Every cohort mark links to its stable
+finding ID, and each fixed/partial/open count opens that exact set. Show the
+ticket reference and title, verified work, unmet original requirements, source
+evidence, and separate tracker/deployment status. A partial label needs both a
+verified original requirement and a specifically identified unmet one. Do not
+make a closed parent partial because of a newly discovered follow-up. Unknown
+verification stays unknown, not an assertion that no implementation work exists.
+
+`scripts/render-cohort-findings.mjs` validates and renders that breakdown with
+`assets/cohort-findings.css` and the shared shell. Keep the full register collapsed
+until requested, with short partial-reason previews near the visual. Run
+`checkCohortFindings(page)` from `scripts/check-cohort-findings.mjs` against the
+artifact; tests must click counts and marks, not just inspect their colors.
 Canceled, duplicate, accepted-risk and ticket-Done are not verified closures.
 Deduplicate once with an explicit mapping; never count a finding twice because
 it appears in two views, multiple tickets or two throughlines.

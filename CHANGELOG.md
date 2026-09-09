@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- Make cohort counts and individual marks open exact ticket records. Partial
+  findings show verified work and unmet original acceptance, with separate
+  tracker and tier status. Keep the detailed register secondary and test its
+  actual count/cell navigation, not merely its colors.
+
+- Restore the colored theme key as shared filter controls, including inline
+  board/Gantt tags, synchronized selection, search-aware unique counts and clear.
+  Add model tests and a browser check that clicks the real visual controls rather
+  than only exercising the legacy dropdown. Keep global grades unfiltered.
+
 - Add an executable whole-tier assessment engine with approved-contract hashes,
   cumulative criteria, separate environment verdicts, evidence freshness and
   deployment identity checks. New findings cannot enlarge the initial cohort.

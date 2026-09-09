@@ -12,6 +12,17 @@ activity evidence, not the headline. `executable-grading.md` provides reusable
 renderers and comparison rules. An unavailable previous finding-state snapshot
 must say so; use latest verified wins, not a fabricated since-last-run delta.
 
+Theme colors are controls as well as a legend. Preserve clickable colored theme
+buttons and linked item tags across board and Gantt views. See `artifact-views.md`
+for the shared state and browser regression check; simplifying the layout must
+not turn those controls into static labels.
+
+Do not show anonymous open/partial counts. Each count reveals the ticket IDs and
+titles; each partial finding explains what is verified and which original
+acceptance remains. Place brief reasons beside the cohort visual and keep the
+full requirement/evidence breakdown one click away. Tracker Done and verified
+closure can disagree; label the discrepancy rather than hiding the work.
+
 ## Inherit the original brief
 
 Audience, purpose, disclosure boundary, desired decision, horizon, visual

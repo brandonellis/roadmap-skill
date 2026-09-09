@@ -1,0 +1,38 @@
+.rm-cohort-legend a { text-underline-offset: 4px; }
+.rm-partial-preview { display: grid; gap: 12px; list-style: none; margin: 18px 0 0; padding: 0; font-size: 13px; }
+.rm-partial-preview li { display: grid; grid-template-columns: 70px 1fr; gap: 10px; }
+.rm-partial-preview span { color: var(--rm-muted); }
+.rm-cohort-register { margin-top: 32px; padding-block: 20px; border-block: 1px solid var(--rm-rule); }
+.rm-cohort-register > summary { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: baseline; cursor: pointer; font-weight: 600; }
+.rm-cohort-register > summary > span:last-child { margin-left: auto; color: var(--rm-muted); font-weight: 400; font-size: 13px; }
+.rm-cohort-register > summary::before, .rm-finding-record > summary::before { content: ""; width: 0; height: 0; border-block: 5px solid transparent; border-left: 7px solid currentColor; flex: 0 0 auto; }
+.rm-cohort-register[open] > summary::before, .rm-finding-record[open] > summary::before { transform: rotate(90deg); }
+.rm-cohort-register > summary::-webkit-details-marker, .rm-finding-record > summary::-webkit-details-marker { display: none; }
+.rm-cohort-register > summary:focus-visible, .rm-finding-record > summary:focus-visible { outline: 2px solid var(--rm-ink); outline-offset: 5px; }
+.rm-cohort-register > .rm-description { margin-top: 20px; }
+.rm-finding-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.roadmap-shell .rm-finding-filters button { min-height: 44px; font-size: 13px; }
+.roadmap-shell .rm-finding-filters [aria-pressed="true"] { background: var(--rm-soft); color: var(--rm-ink); border-color: var(--rm-ink); font-weight: 600; }
+.rm-finding-record { padding-block: 18px; border-top: 1px solid var(--rm-rule); }
+.rm-finding-record > summary { display: grid; grid-template-columns: 12px 88px minmax(0, 1fr) 100px; gap: 16px; min-height: 44px; align-items: baseline; cursor: pointer; }
+.rm-finding-identity { font-weight: 600; font-variant-numeric: tabular-nums; text-decoration: underline; text-underline-offset: 4px; }
+.rm-finding-state { color: var(--rm-muted); font-size: 13px; text-align: right; }
+.roadmap-shell .rm-finding-reason { margin-top: 18px; font-weight: 600; max-width: 75ch; }
+.roadmap-shell .rm-tracker-title, .roadmap-shell .rm-finding-meta, .roadmap-shell .rm-finding-runtime { margin-top: 12px; color: var(--rm-muted); font-size: 13px; }
+.roadmap-shell .rm-status-discrepancy { margin-top: 16px; font-size: 14px; font-weight: 600; }
+.rm-finding-work { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 24px; }
+.rm-finding-work h4 { font-size: 14px; }
+.rm-finding-work p { font-size: 14px; margin-top: 8px; }
+.rm-acceptance-steps { display: grid; gap: 10px; padding: 0; margin: 24px 0; list-style: none; font-size: 14px; }
+.rm-acceptance-steps li { display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 16px; }
+.rm-step-state { font-size: 12px; font-weight: 600; color: var(--rm-muted); }
+.rm-step-state.is-verified { color: var(--rm-success); }
+@media (max-width: 720px) {
+  .rm-finding-record > summary { grid-template-columns: 12px 1fr auto; gap: 8px 16px; }
+  .rm-finding-record > summary > span:nth-child(2) { grid-row: 2; grid-column: 2 / -1; }
+  .rm-finding-work { grid-template-columns: 1fr; gap: 20px; }
+  .rm-acceptance-steps li { grid-template-columns: 84px minmax(0, 1fr); gap: 10px; }
+}
+@media print {
+  .roadmap-shell [data-finding-id][hidden] { display: block !important; }
+}

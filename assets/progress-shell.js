@@ -1,5 +1,30 @@
 (function () {
   "use strict";
+  function selectRoadmapItems(records, query, throughline) {
+    var itemsById = new Map();
+    records.forEach(function (record) {
+      var item = itemsById.get(record.id) || { text: [], throughlines: new Set() };
+      item.text.push(record.text || "");
+      (record.throughlines || []).filter(Boolean).forEach(function (value) { item.throughlines.add(value); });
+      itemsById.set(record.id, item);
+    });
+    var normalized = query.trim().toLocaleLowerCase();
+    var matches = [];
+    var counts = Object.create(null);
+    counts[""] = 0;
+    itemsById.forEach(function (item, id) {
+      item.throughlines.forEach(function (value) { if (!(value in counts)) counts[value] = 0; });
+      if (normalized && !item.text.join(" ").toLocaleLowerCase().includes(normalized)) return;
+      counts[""] += 1;
+      item.throughlines.forEach(function (value) { counts[value] += 1; });
+      if (!throughline || item.throughlines.has(throughline)) matches.push(id);
+    });
+    return { total: itemsById.size, matchingIds: matches, counts: counts };
+  }
+  if (typeof module === "object" && module.exports) {
+    module.exports = { selectRoadmapItems: selectRoadmapItems };
+    return;
+  }
   var shell = document.querySelector(".roadmap-shell");
   if (!shell) return;
   var choices = [];
@@ -29,43 +54,90 @@
   choose("[data-roadmap-format-select]", "[data-roadmap-format]", "data-roadmap-format");
 
   var search = shell.querySelector("[data-roadmap-search]");
-  var theme = shell.querySelector("[data-roadmap-theme]");
-  var clear = shell.querySelector("[data-roadmap-clear]");
+  var themes = Array.from(shell.querySelectorAll("[data-roadmap-theme]"));
+  var throughline = themes.length ? themes[0].value : "";
+  var clear = Array.from(shell.querySelectorAll("[data-roadmap-clear]"));
   var items = Array.from(shell.querySelectorAll("[data-roadmap-item]")).filter(function (item) {
     return !item.closest('[data-view="history"]');
   });
-  var allIds = new Set(items.map(function (item) { return item.getAttribute("data-roadmap-item"); }));
+  var records = items.map(function (item) {
+    return { id: item.getAttribute("data-roadmap-item"), text: item.getAttribute("data-search-text"), throughlines: (item.getAttribute("data-throughlines") || "").split(/\s+/) };
+  });
 
   function applyFilter() {
-    var query = search ? search.value.trim().toLocaleLowerCase() : "";
-    var throughline = theme ? theme.value : "";
-    var matches = new Set();
+    var query = search ? search.value : "";
+    var selection = selectRoadmapItems(records, query, throughline);
+    var matches = new Set(selection.matchingIds);
     items.forEach(function (item) {
-      var themes = (item.getAttribute("data-throughlines") || "").split(/\s+/);
-      var text = (item.getAttribute("data-search-text") || "").toLocaleLowerCase();
-      var hit = (!query || text.includes(query)) && (!throughline || themes.includes(throughline));
-      item.hidden = !hit;
-      if (hit) matches.add(item.getAttribute("data-roadmap-item"));
+      item.hidden = !matches.has(item.getAttribute("data-roadmap-item"));
+    });
+    shell.setAttribute("data-active-throughline", throughline);
+    themes.forEach(function (control) { control.value = throughline; });
+    shell.querySelectorAll("[data-roadmap-theme-choice]").forEach(function (control) {
+      var value = control.getAttribute("data-roadmap-theme-choice");
+      var count = selection.counts[value] || 0;
+      control.setAttribute("aria-pressed", String(value === throughline));
+      control.setAttribute("aria-label", control.getAttribute("data-theme-label") + ": " + count + " matching roadmap items");
+      var badge = control.querySelector("[data-theme-choice-count]");
+      if (badge) badge.textContent = count;
     });
     shell.querySelectorAll("[data-roadmap-count]").forEach(function (element) {
-      element.textContent = "Showing " + matches.size + " of " + allIds.size + " themes";
+      element.textContent = "Showing " + matches.size + " of " + selection.total + " roadmap items";
     });
     shell.querySelectorAll("[data-roadmap-list]").forEach(function (list) {
       var empty = list.querySelector("[data-filter-empty]");
       if (empty) empty.hidden = !!list.querySelector("[data-roadmap-item]:not([hidden])");
     });
-    if (clear) clear.disabled = !query && !throughline;
+    clear.forEach(function (control) { control.disabled = !query.trim() && !throughline; });
   }
 
   function clearFilter() {
     if (search) search.value = "";
-    if (theme) theme.value = "";
+    throughline = "";
     applyFilter();
   }
   if (search) search.addEventListener("input", applyFilter);
-  if (theme) theme.addEventListener("change", applyFilter);
-  if (clear) clear.addEventListener("click", clearFilter);
+  themes.forEach(function (control) {
+    control.addEventListener("change", function () { throughline = control.value; applyFilter(); });
+  });
+  clear.forEach(function (control) { control.addEventListener("click", clearFilter); });
+  shell.addEventListener("click", function (event) {
+    var control = event.target.closest("[data-roadmap-theme-choice]");
+    if (!control) return;
+    var value = control.getAttribute("data-roadmap-theme-choice");
+    throughline = throughline === value ? "" : value;
+    applyFilter();
+  });
   applyFilter();
+
+  var findingRegisters = Array.from(shell.querySelectorAll("[data-finding-register]"));
+  function selectFindingFilter(register, value) {
+    if (!["all", "remaining", "fixed", "partial", "open", "unknown"].includes(value)) return;
+    var findingRows = Array.from(register.querySelectorAll("[data-finding-id]"));
+    var shown = 0;
+    findingRows.forEach(function (row) {
+      var status = row.getAttribute("data-finding-status");
+      var matches = value === "all" || (value === "remaining" ? status !== "fixed" : status === value);
+      row.hidden = !matches;
+      if (matches) shown += 1;
+    });
+    register.setAttribute("data-active-finding-filter", value);
+    register.querySelectorAll("[data-finding-filter]").forEach(function (control) {
+      control.setAttribute("aria-pressed", String(control.getAttribute("data-finding-filter") === value));
+    });
+    register.querySelectorAll("[data-finding-count]").forEach(function (count) {
+      count.textContent = "Showing " + shown + " of " + findingRows.length + " original findings";
+    });
+  }
+  findingRegisters.forEach(function (register) { selectFindingFilter(register, register.getAttribute("data-finding-default-filter") || "all"); });
+  shell.addEventListener("click", function (event) {
+    var control = event.target.closest("[data-finding-filter]");
+    if (control) selectFindingFilter(control.closest("[data-finding-register]"), control.getAttribute("data-finding-filter"));
+    var shortcut = event.target.closest("[data-finding-filter-target]");
+    if (!shortcut || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    var register = document.getElementById(shortcut.getAttribute("href").slice(1));
+    if (register && register.hasAttribute("data-finding-register")) selectFindingFilter(register, shortcut.getAttribute("data-finding-filter-target"));
+  });
 
   function reveal(target) {
     if (!target) return;
@@ -76,6 +148,8 @@
     });
     var item = target.closest("[data-roadmap-item]");
     if (item && item.hidden) clearFilter();
+    var finding = target.closest("[data-finding-id]");
+    if (finding && finding.hidden) selectFindingFilter(finding.closest("[data-finding-register]"), "all");
     var detail = target.closest("details");
     while (detail) {
       detail.open = true;
@@ -161,5 +235,6 @@
     openBeforePrint = null;
   });
   shell.querySelectorAll("[data-enhance-control]").forEach(function (control) { control.hidden = false; });
+  shell.querySelectorAll("[data-theme-filter-fallback]").forEach(function (fallback) { fallback.hidden = true; });
   shell.querySelectorAll(".rm-plain-navigation").forEach(function (navigation) { navigation.hidden = true; });
 })();

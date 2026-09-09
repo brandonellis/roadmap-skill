@@ -77,6 +77,21 @@ state across view changes. Throughline is the default filter; add owner, horizon
 or status only when the source data makes them useful. Unknown is an explicit
 option, not an invented owner. Do not ship unimplemented filter controls.
 
+Keep the visual theme key interactive. Use `scripts/render-theme-filters.mjs`
+with `assets/theme-filters.css` and `assets/progress-shell.js`: the colored theme
+buttons, inline item tags and Gantt tags share `data-roadmap-theme-choice` and
+one selection. Clicking the active theme clears it; another theme replaces it.
+Search intersects that selection. Counts use unique item IDs, never duplicate
+representations. A legacy dropdown may coexist, but cannot replace an existing
+clickable theme key with an inert color legend. Place the shared controls outside
+the primary panels and preserve the no-JavaScript labels.
+
+In the artifact's browser checks, call `checkThemeFilters(page)` from
+`scripts/check-theme-filters.mjs`. It exercises the actual colored controls and
+item tags in both directions, switches NNL/Gantt and primary views, tests keyboard
+activation and clearing, and checks that the ledger never changes. A test that
+only selects a dropdown does not cover this interaction.
+
 Show `Showing n of N items` for a filtered selection; empty results include a
 clear action. The initial finding denominator and the overall operational grade
 are **unfiltered scope facts**. Filtering to the best component must not turn the
