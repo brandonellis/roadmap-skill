@@ -49,6 +49,7 @@
 .rm-gantt-status { grid-column: 1; font-size: 11px; line-height: 1.3; color: var(--rm-muted); }
 .roadmap-shell .rm-gantt-track { min-height: 66px; background-size: calc(100% / var(--month-count, 12)) 100%; }
 .roadmap-shell .rm-gantt-bar { top: 11px; height: 44px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.roadmap-shell .rm-gantt-unscheduled { display: inline-flex; align-items: center; min-height: 44px; margin: 11px 12px; padding: 0 10px; background: var(--rm-panel); color: var(--rm-muted); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
 @media print {
   .roadmap-shell .rm-gantt-region { max-height: none; overflow: visible; }
   .roadmap-shell .rm-gantt { min-width: 0; }

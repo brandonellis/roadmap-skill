@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Persist approved horizon changes across regeneration. Reprioritized work with
+  no new dates can appear in its current Gantt group as explicitly unscheduled,
+  without inheriting an obsolete scenario or inventing a delivery commitment.
+
 - Restore compact Gantt rows with a quarter/month axis, original schedule
   geometry and source-versus-scenario styling. Keep completion labels distinct
   from schedule bars and move detailed acceptance into linked drill-downs.

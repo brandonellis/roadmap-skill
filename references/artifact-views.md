@@ -67,6 +67,13 @@ explicit source-stated versus scenario bars. Pass the original starts/durations;
 current completion labels do not fill or resize schedule bars. Keep long ticket
 explanations in the canonical details, not under every row label.
 
+A user-approved horizon change overrides the old planning snapshot in every
+roadmap representation. Persist that decision outside the historical evidence
+so regeneration cannot move the item back. Priority is not a promised date:
+without replacement dates, use `windowType: "unscheduled"`, null start/duration
+and an explicit dates-not-set label in the new Gantt group. Keep the old window
+in history, not as the current item's schedule. Grades and completion are unchanged.
+
 Maintain one publish-safe model per artifact revision. It may be a local JSON
 file used to generate static HTML; dynamic rendering is not required. Minimum:
 

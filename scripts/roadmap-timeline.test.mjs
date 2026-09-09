@@ -32,3 +32,15 @@ test('timeline escapes text and rejects calendar mismatch', () => {
   model.quarters[0].months = 4;
   assert.throws(() => renderRoadmapTimeline(model), /calendar/);
 });
+
+test('reprioritized unscheduled work stays linked without inventing a date bar', () => {
+  const model = fixture();
+  Object.assign(model.groups[0].items[0], { windowType: 'unscheduled', start: null, duration: null, windowLabel: 'Now · dates not set', sourceNote: 'User raised the priority; no dates supplied' });
+  const html = renderRoadmapTimeline(model);
+  assert.match(html, /rm-gantt-unscheduled/);
+  assert.match(html, /Now · dates not set/);
+  assert.match(html, /href="#delivery"/);
+  assert.doesNotMatch(html, /class="rm-gantt-bar|--start:|--duration:/);
+  model.groups[0].items[0].start = 0;
+  assert.throws(() => renderRoadmapTimeline(model), /cannot carry a dated window/);
+});
