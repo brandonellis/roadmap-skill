@@ -61,7 +61,7 @@ export async function checkRoadmapNavigation(page) {
   await page.locator(`.rm-theme-filterbar [data-roadmap-theme-choice="${theme}"]`).click();
   await page.locator('[data-roadmap-search]').fill(query);
   await page.locator('.rm-gantt-region').evaluate(region => region.scrollTo(120, 90));
-  await roundTrip('.rm-gantt-row:visible .rm-gantt-label > a', 'Gantt', true);
+  await roundTrip('.rm-gantt-row:visible a[href]', 'Gantt', true);
   await reset();
   await page.locator('[data-roadmap-format-select]').selectOption('nnl');
   await page.locator('.rm-matrix-scroll').evaluate(region => region.scrollTo(100, 0));

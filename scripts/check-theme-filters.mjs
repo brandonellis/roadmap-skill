@@ -52,7 +52,7 @@ export async function checkThemeFilters(page) {
   const siblingStates = await page.locator(`[data-roadmap-theme-choice="${chosenTheme}"]`).evaluateAll(elements => elements.map(element => element.getAttribute('aria-pressed')));
   assert(siblingStates.every(state => state === 'true'));
   await page.locator('[data-roadmap-format-select]').selectOption('timeline');
-  const ganttTag = page.locator(`.rm-gantt-row [data-roadmap-theme-choice="${chosenTheme}"]:visible`).first();
+  const ganttTag = page.locator(`.rm-gantt [data-roadmap-theme-choice="${chosenTheme}"]:visible`).first();
   await ganttTag.click();
   assert.equal(await shell.getAttribute('data-active-throughline'), '');
   passed.push('Board tags, Gantt tags and the theme bar cross-filter and toggle each other');

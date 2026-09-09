@@ -62,16 +62,28 @@ computed critical path. Do not drop either visual during grading or regeneration
 
 Preserve a clear Gantt as a time-scaled chart, not a list of status paragraphs.
 `scripts/render-roadmap-timeline.mjs` with `assets/roadmap-structure.css` supplies
-compact rows, a sticky quarter/month axis, short linked theme controls and
-explicit source-stated versus scenario bars. Pass the original starts/durations;
-current completion labels do not fill or resize schedule bars. Keep long ticket
-explanations in the canonical details, not under every row label.
+theme lanes down the left and one continuous quarter/month axis across the top.
+Each colored bar contains its initiative title and concise current progress,
+not a repeated quarter label with the useful content stranded in a second column.
+Theme-lane headings are clickable filters. Non-overlapping windows can share a
+track; overlapping work stacks inside the same lane. Pass original starts and
+durations unchanged: packing is layout, not rescheduling. Source-stated and
+scenario borders retain their distinct meanings, never completion percentages.
+
+The renderer accepts the existing `groups[].items` planning input and an optional
+ordered `themes` list. It groups by each item's primary `themeId`. Keep all
+`throughlineIds` for cross-filtering; a multi-theme initiative appears once and
+names its additional themes within the bar. Empty lanes/tracks collapse under
+filters without changing unique counts. Show unknown progress explicitly and
+keep full titles readable rather than clipping them to make narrow bars look tidy.
+Long ticket explanations stay in the canonical details, with return navigation.
 
 A user-approved horizon change overrides the old planning snapshot in every
 roadmap representation. Persist that decision outside the historical evidence
 so regeneration cannot move the item back. Priority is not a promised date:
 without replacement dates, use `windowType: "unscheduled"`, null start/duration
-and an explicit dates-not-set label in the new Gantt group. Keep the old window
+and an explicit priority/dates-not-set label on the theme lane's undated shelf.
+This shelf has no calendar grid or positioned date bar. Keep the old window
 in history, not as the current item's schedule. Grades and completion are unchanged.
 
 Maintain one publish-safe model per artifact revision. It may be a local JSON

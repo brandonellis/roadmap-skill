@@ -57,6 +57,9 @@ Then invoke it in any Claude Code session with `/roadmap`.
 - **Existing visuals survive updates.** A Gantt is recovered and retained with
   its original assumptions, not replaced by an unscheduled table simply because
   a newer NNL source lacks dates.
+- **The timeline carries the story.** Themes label the left-hand lanes; initiative
+  titles and current progress live inside the bars. Non-overlapping work shares
+  tracks without moving dates. Undated priorities stay visibly unscheduled.
 
 - **One artifact, three clear views.** Progress, Roadmap and Evidence appear
   only when populated. NNL and opt-in Timeline are roadmap formats. Skill names are

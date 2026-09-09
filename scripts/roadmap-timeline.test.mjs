@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { renderRoadmapTimeline } from './render-roadmap-timeline.mjs';
+import { renderRoadmapTimeline, packTimelineTracks } from './render-roadmap-timeline.mjs';
 
 const fixture = () => ({
   months: ['Jan', 'Feb', 'Mar'], quarters: [{ label: 'Q1', months: 3 }],
@@ -43,4 +43,62 @@ test('reprioritized unscheduled work stays linked without inventing a date bar',
   assert.doesNotMatch(html, /class="rm-gantt-bar|--start:|--duration:/);
   model.groups[0].items[0].start = 0;
   assert.throws(() => renderRoadmapTimeline(model), /cannot carry a dated window/);
+});
+
+test('theme lanes replace repeated horizon groups and put titles and progress inside bars', () => {
+  const model = fixture();
+  model.groups.push({ name: 'Next', items: [{ ...model.groups[0].items[0], id: 'access', title: 'Access controls', start: 2, duration: 1 }] });
+  const html = renderRoadmapTimeline(model);
+  assert.equal((html.match(/data-roadmap-lane="t1"/g) || []).length, 1);
+  assert.equal((html.match(/data-roadmap-track>/g) || []).length, 1);
+  assert.match(html, /<strong>Theme<\/strong>/);
+  assert.match(html, /<a[^>]+class="rm-gantt-bar[^>]*><strong class="rm-gantt-title">Reliable delivery<\/strong><span class="rm-gantt-status">2\/3 cited tickets Done/);
+  assert.doesNotMatch(html, /rm-gantt-group|rm-gantt-label/);
+});
+
+test('track packing shares free calendar space without shifting any source window', () => {
+  const items = [
+    { id: 'later', start: 3, duration: 3 },
+    { id: 'long', start: 0, duration: 3 },
+    { id: 'overlap', start: 1.5, duration: 1.5 },
+    { id: 'unknown', windowType: 'unscheduled', start: null, duration: null },
+  ];
+  const original = structuredClone(items);
+  assert.deepEqual(packTimelineTracks(items).map(track => track.map(item => item.id)), [['long', 'later'], ['overlap']]);
+  assert.deepEqual(items, original);
+});
+
+test('multi-theme work has one primary lane but retains every membership', () => {
+  const model = fixture();
+  model.themes = [{ id: 't2', name: 'Data' }, { id: 't1', name: 'Trust' }];
+  model.groups[0].items[0].throughlineIds = ['t1', 't2'];
+  const html = renderRoadmapTimeline(model);
+  assert.equal((html.match(/data-roadmap-item="delivery"/g) || []).length, 1);
+  assert.match(html, /data-throughlines="t1 t2"/);
+  assert.match(html, /Also: Data/);
+  assert.doesNotMatch(html, /data-roadmap-lane="t2"/);
+  model.groups[0].items[0].throughlineIds = ['t1', 'missing'];
+  assert.throws(() => renderRoadmapTimeline(model), /known themes/);
+});
+
+test('theme order is explicit and missing titles or conflicting theme names are rejected', () => {
+  const model = fixture();
+  model.themes = [{ id: 't2', name: 'Data' }, { id: 't1', name: 'Trust' }];
+  model.groups[0].items.push({ ...model.groups[0].items[0], id: 'data', themeId: 't2', themeName: 'Data' });
+  const html = renderRoadmapTimeline(model);
+  assert(html.indexOf('data-roadmap-lane="t2"') < html.indexOf('data-roadmap-lane="t1"'));
+  model.groups[0].items[0].title = '';
+  assert.throws(() => renderRoadmapTimeline(model), /titles/);
+  model.groups[0].items[0].title = 'Delivery';
+  model.groups[0].items[0].themeName = 'Something different';
+  assert.throws(() => renderRoadmapTimeline(model), /names must agree/);
+});
+
+test('an all-undated lane has no calendar track or fake starting position', () => {
+  const model = fixture();
+  Object.assign(model.groups[0].items[0], { windowType: 'unscheduled', start: null, duration: null, windowLabel: 'Now priority · dates not set' });
+  const html = renderRoadmapTimeline(model);
+  assert.match(html, /rm-gantt-undated/);
+  assert.match(html, /Now priority · dates not set/);
+  assert.doesNotMatch(html, /class="rm-gantt-track"|--start:/);
 });

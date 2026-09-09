@@ -31,7 +31,7 @@ dates stay missing. A due date is a milestone, not an invented duration bar.
   label, only after the user explicitly approves showing that scenario. It is
   not an operational forecast or a commitment. Never infer Now = this quarter,
   Next = next quarter, or Later = six months from now automatically.
-- **Unscheduled:** labelled shelf below the chart, with next decision or missing
+- **Unscheduled:** labelled shelf below the theme's dated tracks, with next decision or missing
   input. This is the default when dates are absent, not a defect to disguise.
 
 Use one confirmation round for missing windows and conflicting sources. An
@@ -45,12 +45,18 @@ Show scheduling coverage: `6 committed / 2 proposed / 4 unscheduled`.
 - Use a real shared time scale with month ticks and quarter headers. Zoom changes
   presentation only, never dates, precision or the planning horizon. Label the
   timezone/reference date used by the Today line.
-- Keep item names and real owners in a sticky label column. Horizontal scrolling
-  belongs to a named, keyboard-focusable chart region, never the page body.
+- For stakeholder roadmaps, keep **theme names** in a sticky left-hand column.
+  Put initiative titles and concise progress inside their colored date windows;
+  include real owners when supplied. Do not repeat the quarter as each bar's
+  main label when the axis already says it. Horizontal scrolling belongs to a
+  named, keyboard-focusable chart region, never the page body.
   On narrow screens offer a readable schedule table with the same IDs and dates;
   do not shrink an eight-month chart to illegible bars.
-- Group by stream or actual owner. Row height, whitespace between groups and
-  aligned milestone labels provide the hierarchy. Throughline hue stays stable
+- Group stakeholder schedules by primary theme. Non-overlapping initiatives
+  may share a track; overlapping windows stack without moving their dates.
+  Multi-theme work appears once but retains all filter memberships. A separately
+  requested execution schedule can group by stream or actual owner instead.
+  Preserve the approved grouping on regeneration. Throughline hue stays stable
   across the board and timeline. Status and provenance use words and shapes.
 - Render an original committed window as a thin baseline track beneath the
   current one when dates change. State the approved change and source. Never

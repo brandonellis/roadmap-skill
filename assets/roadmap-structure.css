@@ -50,13 +50,42 @@
 .roadmap-shell .rm-gantt-track { min-height: 66px; background-size: calc(100% / var(--month-count, 12)) 100%; }
 .roadmap-shell .rm-gantt-bar { top: 11px; height: 44px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .roadmap-shell .rm-gantt-unscheduled { display: inline-flex; align-items: center; min-height: 44px; margin: 11px 12px; padding: 0 10px; background: var(--rm-panel); color: var(--rm-muted); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+.roadmap-shell .rm-gantt-theme-lanes { --rm-lane-width: 200px; min-width: 1120px; }
+.roadmap-shell .rm-gantt-theme-lanes :is(.rm-gantt-axis, .rm-gantt-lane) { display: grid; grid-template-columns: var(--rm-lane-width) minmax(0, 1fr); }
+.rm-gantt-lane { border-bottom: 1px solid var(--rm-rule); }
+.rm-gantt-lane-label { position: sticky; left: 0; z-index: 2; min-width: 0; padding: 20px 16px; background: var(--theme-soft); color: var(--theme); border-right: 1px solid var(--theme); }
+.rm-gantt-lane-label > div { position: sticky; top: 100px; }
+.roadmap-shell .rm-gantt-lane-label h3 { margin: 0; color: inherit; font: 600 25px/1.1 "Barlow Condensed", sans-serif; text-transform: uppercase; overflow-wrap: anywhere; }
+.roadmap-shell .rm-gantt-lane-label button { display: block; width: 100%; min-height: 44px; padding: 0; border: 0; border-radius: 0; background: transparent; color: inherit; font: inherit; text-align: left; text-transform: inherit; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.roadmap-shell .rm-gantt-lane-label button[aria-pressed="true"] { outline: 2px solid currentColor; outline-offset: 5px; }
+.roadmap-shell .rm-gantt-lane-label p { margin-top: 12px; font-size: 13px; color: inherit; }
+.rm-gantt-lane-body { min-width: 0; }
+.roadmap-shell .rm-gantt-theme-lanes .rm-gantt-track { display: grid; grid-template-columns: minmax(0, 1fr); min-height: 0; border-bottom: 1px solid var(--rm-rule); }
+.roadmap-shell .rm-gantt-theme-lanes .rm-gantt-row { display: grid; grid-template-columns: minmax(0, 1fr); grid-area: 1 / 1; min-width: 0; min-height: 0; border: 0; pointer-events: none; }
+.roadmap-shell .rm-gantt-theme-lanes .rm-gantt-bar { position: static; left: auto; top: auto; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 5px; box-sizing: border-box; width: var(--duration); height: auto; min-height: 90px; margin: 8px 0 8px var(--start); padding: 10px; background: var(--theme-soft); white-space: normal; overflow: visible; text-overflow: clip; pointer-events: auto; }
+.rm-gantt-theme-lanes .rm-gantt-title { font-size: 15px; font-weight: 600; line-height: 1.25; overflow-wrap: anywhere; }
+.rm-gantt-theme-lanes .rm-gantt-status { font-size: 12px; font-weight: 400; line-height: 1.4; color: var(--theme); overflow-wrap: anywhere; }
+.rm-gantt-secondary, .rm-gantt-window-note { font-size: 12px; font-weight: 400; line-height: 1.4; color: var(--theme); }
+.rm-gantt-theme-lanes .rm-gantt-bar.is-scenario { border-style: dashed; }
+.rm-gantt-undated { padding: 16px; background: var(--rm-panel); border-top: 1px dashed var(--rm-rule); }
+.roadmap-shell .rm-gantt-undated > p { margin-bottom: 10px; color: var(--rm-muted); font-size: 13px; }
+.rm-gantt-undated-items { display: flex; flex-wrap: wrap; gap: 12px; }
+.roadmap-shell .rm-gantt-undated-items .rm-gantt-row { flex: 0 1 340px; grid-area: auto; }
+.roadmap-shell .rm-gantt-theme-lanes .rm-gantt-unscheduled { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; min-height: 90px; margin: 0; padding: 12px; border: 1px solid var(--theme); background: var(--theme-soft); color: var(--theme); text-decoration: none; pointer-events: auto; }
+.rm-gantt-theme-lanes :is(a, button):focus-visible { outline: 2px solid var(--theme, var(--rm-ink)); outline-offset: 3px; }
 @media print {
+  .roadmap-shell .rm-gantt-theme-lanes { --rm-lane-width: 140px; min-width: 0; }
+  .roadmap-shell :is([data-roadmap-lane], [data-roadmap-track])[hidden] { display: grid !important; }
+  .rm-gantt-lane-label, .rm-gantt-lane-label > div { position: static; }
   .roadmap-shell .rm-gantt-region { max-height: none; overflow: visible; }
   .roadmap-shell .rm-gantt { min-width: 0; }
   .roadmap-shell .rm-gantt-axis, .roadmap-shell .rm-gantt-label { position: static; }
   .roadmap-shell .rm-gantt-axis, .roadmap-shell .rm-gantt-row { grid-template-columns: 180px minmax(0, 1fr); }
 }
 @media (max-width: 720px) {
+  .roadmap-shell .rm-gantt-theme-lanes { --rm-lane-width: 132px; }
+  .rm-gantt-lane-label { padding: 16px 10px; }
+  .roadmap-shell .rm-gantt-lane-label h3 { font-size: 21px; }
   .roadmap-shell .rm-gantt-axis, .roadmap-shell .rm-gantt-row { grid-template-columns: 176px minmax(0, 1fr); }
   .roadmap-shell .rm-gantt-label { padding-left: 10px; }
   .roadmap-shell .rm-gantt-label > a { font-size: 13px; }

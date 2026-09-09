@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Compose stakeholder Gantts as theme lanes under one continuous calendar, with
+  initiative titles and progress inside the bars instead of repeated quarters.
+  Pack non-overlapping windows without changing dates, retain cross-theme
+  membership and filters, and separate undated priorities from calendar tracks.
+
 - Clarify stakeholder Progress with separate outcome, fixed-cohort, throughput
   and dated readiness layers. Add validated finding/delivery renderers; keep
   assessment-reference counts in supporting detail without changing any grade.

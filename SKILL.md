@@ -35,6 +35,10 @@ Initiative drill-downs preserve the originating chart, filters, scroll and focus
 with a visible return link. The reusable contracts are in `references/progress-layout.md`
 and `references/artifact-views.md`; apply them to regenerated artifacts, not one-off skins.
 
+For stakeholder Gantts, use theme lanes and one continuous calendar. Put initiative
+titles and current progress inside the bars, not repeated quarter labels. Keep
+source dates intact, and put undated priorities on a clearly separate shelf.
+
 ## Modes (from args)
 
 | Args | Mode | What it does |
