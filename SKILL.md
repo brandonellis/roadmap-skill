@@ -30,6 +30,11 @@ the system's direction and demonstrated progress to the audience established
 at creation. Inherit that audience and brief; never re-ask or silently select
 a new audience on update. Lead with visuals and wins, link to technical evidence.
 
+Keep delivery counts, fixed-cohort findings and dated readiness grades distinct.
+Initiative drill-downs preserve the originating chart, filters, scroll and focus,
+with a visible return link. The reusable contracts are in `references/progress-layout.md`
+and `references/artifact-views.md`; apply them to regenerated artifacts, not one-off skins.
+
 ## Modes (from args)
 
 | Args | Mode | What it does |

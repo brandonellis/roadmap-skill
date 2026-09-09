@@ -163,19 +163,114 @@
     try { return document.getElementById(decodeURIComponent(location.hash.slice(1))); }
     catch (error) { return null; }
   }
-  reveal(hashTarget());
-  shell.addEventListener("click", function (event) {
-    if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    var anchor = event.target.closest('a[href^="#"]');
-    if (!anchor) return;
-    try { reveal(document.getElementById(decodeURIComponent(anchor.getAttribute("href").slice(1)))); }
-    catch (error) {}
-  });
-  window.addEventListener("hashchange", function () {
+  var origins = new Map();
+  var originSequence = 0;
+  var navigationSequence = 0;
+  function navigationState() {
+    return history.state && history.state.roadmapNavigation;
+  }
+  function updateReturnLinks(state) {
+    var origin = state && origins.get(state.key);
+    roadmap.querySelectorAll('[data-roadmap-return]').forEach(function (anchor) {
+      anchor.textContent = origin ? origin.label : 'Back to roadmap';
+      anchor.setAttribute('href', origin ? origin.fallbackHref : '#roadmap-nnl');
+    });
+  }
+  function focusTarget(target) {
+    var focus = target.matches('details') ? target.querySelector('summary') : target;
+    if (!focus.hasAttribute('tabindex') && !focus.matches('a, button, input, select, summary')) focus.tabIndex = -1;
+    focus.focus({ preventScroll: true });
+    target.scrollIntoView({ block: 'start' });
+  }
+  function captureOrigin(anchor, target) {
+    var view = anchor.closest('[data-view]');
+    var labelled = anchor.closest('[data-roadmap-origin-label]');
+    var format = anchor.closest('[data-roadmap-format]');
+    var label = labelled ? labelled.getAttribute('data-roadmap-origin-label') : format ? format.getAttribute('data-roadmap-format') === 'timeline' ? 'Gantt' : 'Now / Next / Later' : '';
+    var tab = view && document.getElementById(view.getAttribute('aria-labelledby'));
+    var ancestors = [];
+    var detail = target.closest('details');
+    while (detail) {
+      ancestors.push({ element: detail, open: detail.open });
+      detail = detail.parentElement && detail.parentElement.closest('details');
+    }
+    return {
+      url: location.href, anchor: anchor, view: view || roadmap,
+      fallbackHref: '#' + (format ? format.id : (view || roadmap).id),
+      label: 'Back to ' + (label || (tab && tab.textContent.trim()) || 'roadmap'),
+      query: search ? search.value : '', throughline: throughline,
+      left: window.scrollX, top: window.scrollY, details: ancestors,
+      choices: choices.map(function (choice) {
+        var selected = choice.panels.find(function (panel) { return !panel.hidden; });
+        return { choice: choice, value: selected && selected.getAttribute(choice.attribute) };
+      }),
+      scrolls: Array.from(roadmap.querySelectorAll('[data-roadmap-scroll], .rm-gantt-region, .rm-matrix-scroll, .fig-scroll')).map(function (region) {
+        return { element: region, left: region.scrollLeft, top: region.scrollTop };
+      })
+    };
+  }
+  function restoreOrigin(origin) {
+    if (window.roadmapViews) window.roadmapViews.reveal(origin.view);
+    origin.choices.forEach(function (entry) { entry.choice.select(entry.value); });
+    if (search) search.value = origin.query;
+    throughline = origin.throughline;
+    applyFilter();
+    origin.details.forEach(function (entry) { entry.element.open = entry.open; });
+    origin.anchor.focus({ preventScroll: true });
+    origin.scrolls.forEach(function (entry) { entry.element.scrollTo(entry.left, entry.top); });
+    window.scrollTo(origin.left, origin.top);
+  }
+  function followLocation() {
+    var sequence = ++navigationSequence;
+    var requestedUrl = location.href;
+    var state = navigationState();
+    var origin = state && state.kind === 'origin' && origins.get(state.key);
+    if (origin && origin.url !== location.href) origin = null;
     var target = hashTarget();
-    reveal(target);
-    if (target) requestAnimationFrame(function () { target.scrollIntoView({ block: "start" }); });
+    updateReturnLinks(state && state.kind === 'detail' ? state : null);
+    if (origin) restoreOrigin(origin);
+    else reveal(target);
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        if (sequence !== navigationSequence || requestedUrl !== location.href) return;
+        if (origin) restoreOrigin(origin);
+        else if (target) focusTarget(target);
+      });
+    });
+  }
+  if (hashTarget()) followLocation();
+  shell.addEventListener("click", function (event) {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    var returnLink = event.target.closest('[data-roadmap-return]');
+    var state = navigationState();
+    if (returnLink && state && state.kind === 'detail' && origins.has(state.key)) {
+      event.preventDefault();
+      history.go(-state.depth);
+      return;
+    }
+    var anchor = event.target.closest('a[href^="#"]');
+    if (!anchor || anchor.hasAttribute('download') || (anchor.getAttribute('target') && anchor.getAttribute('target') !== '_self')) return;
+    var target;
+    try { target = document.getElementById(decodeURIComponent(anchor.getAttribute('href').slice(1))); }
+    catch (error) { return; }
+    if (!target) return;
+    if (target.hasAttribute('data-roadmap-detail')) {
+      var continued = state && state.kind === 'detail' && origins.has(state.key) && anchor.closest('[data-roadmap-detail]');
+      var key = continued ? state.key : ++originSequence;
+      if (!continued) origins.set(key, captureOrigin(anchor, target));
+      try {
+        if (!continued) history.replaceState(Object.assign({}, history.state, { roadmapNavigation: { kind: 'origin', key: key } }), '', location.href);
+        history.pushState({ roadmapNavigation: { kind: 'detail', key: key, depth: continued ? state.depth + 1 : 1 } }, '', anchor.getAttribute('href'));
+        event.preventDefault();
+        followLocation();
+      } catch (error) { reveal(target); }
+    } else {
+      reveal(target);
+      if (returnLink || location.hash === anchor.getAttribute('href')) requestAnimationFrame(function () { focusTarget(target); });
+    }
   });
+  window.addEventListener('popstate', followLocation);
+  window.addEventListener('hashchange', followLocation);
 
   var themeButton = shell.querySelector("[data-theme-toggle]");
   function setTheme(dark) {

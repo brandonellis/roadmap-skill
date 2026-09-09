@@ -40,7 +40,7 @@ export async function checkThemeFilters(page) {
 
   await reset();
   await page.locator('[data-roadmap-format-select]').selectOption('nnl');
-  const detail = page.locator('#roadmap-nnl details[data-roadmap-item]').filter({ has: page.locator('[data-roadmap-theme-choice]') }).first();
+  const detail = page.locator('[data-view="roadmap"] details[data-roadmap-item]').filter({ has: page.locator('[data-roadmap-theme-choice]') }).first();
   await detail.evaluate(element => {
     for (let parent = element.parentElement; parent; parent = parent.parentElement) if (parent.tagName === 'DETAILS') parent.open = true;
     element.open = true;

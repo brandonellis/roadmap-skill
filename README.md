@@ -41,6 +41,13 @@ Then invoke it in any Claude Code session with `/roadmap`.
 
 ## What makes it opinionated
 
+- **Progress has a clear reading order.** Verified outcomes lead, original
+  findings and delivered work are distinct, and dated readiness grades identify
+  their actual assessment ref. Supporting ticket-reference counts stay secondary.
+- **Drill-downs have a way back.** Initiative details retain the selected chart;
+  a visible return restores its filters, scroll and keyboard focus. Shared links
+  and no-JavaScript readers still have a plain roadmap link.
+
 - **The original audience persists.** Investor, executive and company editions
   share evidence but tell different stories. Creation captures the brief; later
   runs inherit it rather than asking again or switching to an engineering audit.

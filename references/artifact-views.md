@@ -139,6 +139,29 @@ are **unfiltered scope facts**. Filtering to the best component must not turn th
 project into an A+. A filtered grade is labelled `Selected components`, never
 `Overall`. History is immutable and is not hidden by current-item filters.
 
+## Chart-to-detail navigation
+
+The canonical initiative disclosures belong below both format panels, inside
+Roadmap, not inside NNL alone. Mark each with `data-roadmap-detail` and keep its
+existing anchor ID and filter identity. Insert `renderRoadmapReturn()` from
+`scripts/render-progress.mjs` after its summary. The native `#roadmap-nnl` link is
+the fallback for shared detail URLs and readers without JavaScript.
+
+`assets/progress-shell.js` remembers the originating chart or primary view,
+format, theme/search selection, window and chart scroll positions, and clicked
+link. The return control says **Back to Gantt**, **Back to Now / Next / Later**,
+or the originating view. Optional `data-roadmap-origin-label="Critical path"`
+names a diagram origin; `data-roadmap-scroll` includes a custom scroll region.
+Opening a detail focuses its summary; returning restores the origin and focus.
+Browser Back/Forward use the same state. Origin details live only in page memory,
+not storage or a shared URL. A reload or shared link falls back to the roadmap.
+Preserve modified-click/new-tab behavior, SVG diagram links, static/no-JS access
+and existing deep links. Never put this control between theme filters and chart.
+
+Maintainers with an existing browser can call `checkRoadmapNavigation(page)`
+from `scripts/check-roadmap-navigation.mjs`. It is optional artifact QA, not a
+browser install or test-framework requirement for people running the skill.
+
 ## Visual direction: make the decisions easy to see
 
 Keep the incumbent palette/type world. The improvement is composition and

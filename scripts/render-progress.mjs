@@ -7,6 +7,46 @@ function link(href, label) {
   return `<a href="${escapeHtml(href)}">${escapeHtml(label)}</a>`;
 }
 
+function count(value, label) {
+  if (!Number.isSafeInteger(value) || value < 0) throw new Error(`${label} must be a nonnegative integer`);
+  return value;
+}
+
+export function renderFindingProgress(cohort) {
+  const total = count(cohort.total, 'Original cohort');
+  const segments = [
+    ['fixed', 'Verified in code', cohort.verified],
+    ['partial', 'Partly resolved', cohort.partial],
+    ['open', 'Still open', cohort.open],
+    ['unknown', 'Not verified', cohort.unknown ?? 0],
+  ];
+  if (segments.reduce((sum, segment) => sum + count(segment[2], segment[1]), 0) !== total) throw new Error('Finding counts must match the original cohort');
+  if (!/^#[\w-]+$/.test(cohort.registerHref)) throw new Error('Findings need a local register anchor');
+  if (!cohort.baselineLabel || !cohort.observationLabel) throw new Error('Findings need baseline and observation labels');
+  const bars = segments.filter(segment => segment[2] > 0).map(([status, label, amount]) => `<a class="is-${status}" href="${escapeHtml(cohort.registerHref)}" data-finding-filter-target="${status}" style="flex:${amount}" aria-label="${amount} of ${total} original findings: ${label}"><strong>${amount}</strong><span>${label}</span></a>`).join('');
+  return `<p class="rm-measure-context">${escapeHtml(cohort.baselineLabel)} · ${total} original findings</p>${total ? `<div class="rm-finding-segments" role="group" aria-label="Progress against the original findings">${bars}</div>` : '<p>No original findings were recorded.</p>'}<p class="rm-measure-context">${escapeHtml(cohort.observationLabel)}. Select a segment for the exact findings and remaining work.</p>`;
+}
+
+export function renderDeliveryProgress(delivery) {
+  count(delivery.completed, 'Delivered tickets');
+  count(delivery.newlyAccounted, 'Newly accounted tickets');
+  if (delivery.newlyAccounted > delivery.completed) throw new Error('Newly accounted tickets cannot exceed the delivery count');
+  if (!delivery.windowLabel) throw new Error('Delivery needs a dated observation window');
+  const references = delivery.references;
+  let context = '';
+  if (references) {
+    count(references.done, 'Completed references');
+    count(references.total, 'Referenced tickets');
+    if (references.done > references.total) throw new Error('Completed references cannot exceed the reference set');
+    context = `<details class="rm-delivery-context"><summary>How delivered work relates to assessments</summary><p>${references.done} of ${references.total} tickets referenced across prior assessments are marked Done. This is a separate ticket set, not the original finding denominator or proof of acceptance.</p>${link(references.href, 'See the referenced ticket set')}</details>`;
+  }
+  return `<section class="rm-delivery-progress" aria-labelledby="delivered-work-heading"><h2 id="delivered-work-heading">Work delivered</h2><p class="rm-delivery-count"><strong>${delivery.completed}</strong> tickets marked Done</p><p class="rm-measure-context">${escapeHtml(delivery.windowLabel)}</p><p>${link(delivery.href, `${delivery.newlyAccounted} newly accounted for`)} since the previous reconciliation. Ticket closure records delivery, not an automatic grade increase.</p>${context}</section>`;
+}
+
+export function renderRoadmapReturn() {
+  return '<nav class="rm-detail-navigation" aria-label="Return from initiative details"><a href="#roadmap-nnl" data-roadmap-return>Back to roadmap</a></nav>';
+}
+
 export function renderOutcomeStory(story) {
   if (!story.baselineId || !story.assessmentId || !story.observedAt || !story.wins.length) throw new Error('Outcomes need baseline and observation provenance');
   const wins = story.wins.map(win => {

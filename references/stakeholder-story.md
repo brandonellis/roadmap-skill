@@ -12,6 +12,13 @@ activity evidence, not the headline. `executable-grading.md` provides reusable
 renderers and comparison rules. An unavailable previous finding-state snapshot
 must say so; use latest verified wins, not a fabricated since-last-run delta.
 
+Separate delivery volume, the fixed original finding cohort and last assessed
+readiness visually and in their labels. A referenced-ticket fraction is not
+another readiness score. Keep it in supporting detail, and put the assessment
+date/ref and any later ungraded reconciliation beside the letters. See
+`progress-layout.md` for the reusable composition. A reader should understand
+what improved without first opening an audit or decoding engineering terms.
+
 Theme colors are controls as well as a legend. Preserve clickable colored theme
 buttons and linked item tags across board and Gantt views. See `artifact-views.md`
 for the shared state and browser regression check; simplifying the layout must

@@ -33,7 +33,31 @@
 .rm-contract-policy dt { font-size: 13px; color: var(--rm-muted); }
 .rm-contract-policy dd { margin: 8px 0 0; font-weight: 600; }
 .rm-component-strip a { text-decoration: underline; text-underline-offset: 4px; }
+.rm-progress-story { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 48px; margin-block: 36px 48px; }
+.rm-progress-story h2 { font-size: clamp(26px, 3vw, 34px); margin-bottom: 12px; }
+.rm-progress-story p { max-width: 70ch; }
+.rm-measure-context { color: var(--rm-muted); font-size: 14px; line-height: 1.55; }
+.roadmap-shell .rm-outcomes > .rm-measure-context { margin-top: 20px; }
+.roadmap-shell .rm-progress-story .rm-measure-context + p { margin-top: 12px; }
+.rm-finding-segments { display: flex; margin-block: 22px 14px; gap: 3px; }
+.rm-finding-segments a { display: flex; flex-direction: column; gap: 4px; justify-content: center; min-width: 0; min-height: 96px; padding: 12px; text-decoration: none; }
+.rm-finding-segments strong { font-size: 32px; line-height: 1; font-variant-numeric: tabular-nums; }
+.rm-finding-segments span { font-size: 14px; line-height: 1.3; overflow-wrap: anywhere; text-decoration: underline; text-underline-offset: 3px; }
+.rm-finding-segments .is-fixed { background: var(--rm-t2-soft); color: var(--rm-t2); }
+.rm-finding-segments .is-partial { background: var(--rm-warn-bg); color: var(--rm-warn); }
+.rm-finding-segments .is-open, .rm-finding-segments .is-unknown { background: var(--rm-soft); color: var(--rm-ink); }
+.rm-delivery-count { margin-block: 20px 8px; }
+.rm-delivery-count strong { font-size: 32px; font-variant-numeric: tabular-nums; }
+.rm-delivery-context { margin-top: 16px; font-size: 14px; }
+.roadmap-shell .rm-assessment-context { max-width: 75ch; margin-block: 16px 24px; color: var(--rm-muted); font-size: 15px; line-height: 1.55; }
+.rm-assessment-context code { overflow-wrap: anywhere; }
+.rm-detail-navigation { margin-block: 12px; }
+.rm-detail-navigation a { display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; text-decoration: underline; text-underline-offset: 4px; }
+.rm-detail-navigation a:focus-visible, .rm-finding-segments a:focus-visible { outline: 2px solid var(--rm-ink); outline-offset: 3px; }
+[data-roadmap-detail] { scroll-margin-top: 24px; }
+[data-roadmap-detail] > summary:focus-visible { outline: 2px solid var(--rm-ink); outline-offset: 4px; }
 @media (max-width: 720px) {
+  .rm-progress-story { grid-template-columns: 1fr; gap: 28px; }
   .rm-outcome-list, .rm-contract-policy { grid-template-columns: 1fr; gap: 24px; }
   .rm-next-check > summary { grid-template-columns: 16px minmax(0, 1fr) 88px; gap: 10px; }
   .rm-next-check-preview { grid-column: 2 / -1; }
@@ -41,6 +65,7 @@
   .rm-milestone-comparison summary span { display: block; margin: 8px 0 0; }
 }
 @media print {
+  .rm-detail-navigation { display: none; }
   .rm-outcome-list { grid-template-columns: repeat(3, 1fr); }
   .rm-next-check { break-inside: avoid; }
 }

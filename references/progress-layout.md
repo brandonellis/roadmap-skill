@@ -18,6 +18,28 @@ the roadmap's visuals with full audit text.
 
 ## The approved reading order
 
+For the **stakeholder Progress tab**, make three different measures unmistakable:
+
+1. Lead with a few plain-language, source-linked outcomes. Technical mechanisms
+   belong in the linked proof. Say whether a win is verified in code or in use.
+2. Show **Original findings** as a labeled, clickable verified/partial/open bar
+   on the fixed initial denominator. Keep exact tickets and remaining acceptance
+   in its collapsed register. Show **Work delivered** as supporting throughput,
+   with its dated window. Put the separate prior-assessment ticket-reference set
+   in an explanatory disclosure, not a competing headline fraction.
+3. Show the **last assessed readiness** letters, with assessment date, scope and
+   code ref visible beside the scorecard. If a later reconciliation does not
+   issue grades, say so here, not only inside an explanation. Never date old
+   grades with the regeneration timestamp or imply they assess current runtime.
+
+`renderFindingProgress` and `renderDeliveryProgress` in `scripts/render-progress.mjs`
+provide these separate measures with `assets/progress-outcomes.css`. Counts must
+come from their declared source sets. A changed layout is not a new assessment.
+Use `.rm-progress-story` for the findings/delivery composition and
+`.rm-assessment-context` for the visible scorecard scope. Preserve existing IDs.
+
+The more detailed operational lens, when requested, follows this order:
+
 ```text
 PROJECT                          Progress | Roadmap | Evidence
 
@@ -111,6 +133,10 @@ Required hooks:
 - Roadmap representations share `data-roadmap-item`, `data-throughlines` and
   identical `data-search-text`. Give only the canonical detail its anchor ID.
   Search text is generated once per item, not independently from each view.
+- Keep canonical `[data-roadmap-detail]` disclosures inside Roadmap but **outside**
+  both `[data-roadmap-format]` panels. Chart navigation must not change the
+  selected format just to reach details. Add `renderRoadmapReturn()` to each
+  canonical disclosure. See `artifact-views.md` for origin/return behavior.
 - `[data-roadmap-search]`, `[data-roadmap-theme]` (empty means all),
   `[data-roadmap-clear]`, `[data-roadmap-count]` with `role="status"`.
   A `[data-roadmap-list]` may contain `[data-filter-empty]`, initially `hidden`.

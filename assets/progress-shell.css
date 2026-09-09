@@ -118,10 +118,10 @@
 .rm-horizon-header { padding-bottom: 16px; border-bottom: 2px solid var(--rm-ink); }
 .rm-horizon-header p { font-size: 13px; color: var(--rm-muted); margin-top: 6px; }
 .rm-item { padding: 16px 0; border-bottom: 1px solid var(--rm-rule); overflow-wrap: anywhere; }
-.rm-item summary { list-style: none; display: flex; align-items: baseline; gap: 12px; min-height: 44px; font-weight: 600; }
-.rm-item summary::-webkit-details-marker { display: none; }
-.rm-item summary::after { content: "+"; margin-left: auto; flex-shrink: 0; color: var(--rm-muted); font-weight: 400; }
-.rm-item[open] summary::after { content: "−"; }
+.rm-item > summary { list-style: none; display: flex; align-items: baseline; gap: 12px; min-height: 44px; font-weight: 600; }
+.rm-item > summary::-webkit-details-marker { display: none; }
+.rm-item > summary::after { content: "+"; margin-left: auto; flex-shrink: 0; color: var(--rm-muted); font-weight: 400; }
+.rm-item[open] > summary::after { content: "−"; }
 .rm-item .rm-item-preview { color: var(--rm-muted); font-size: 14px; margin: 4px 0 10px; }
 .rm-item-body { font-size: 14px; padding-top: 12px; }
 .rm-item-body p { margin-bottom: 12px; }

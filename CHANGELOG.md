@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Clarify stakeholder Progress with separate outcome, fixed-cohort, throughput
+  and dated readiness layers. Add validated finding/delivery renderers; keep
+  assessment-reference counts in supporting detail without changing any grade.
+- Keep initiative details shared across roadmap formats. Restore the originating
+  chart/view, filters, scroll and focus through visible return links and browser
+  history, with shared-link/no-JavaScript fallbacks and optional maintainer QA.
+
 - Persist approved horizon changes across regeneration. Reprioritized work with
   no new dates can appear in its current Gantt group as explicitly unscheduled,
   without inheriting an obsolete scenario or inventing a delivery commitment.
