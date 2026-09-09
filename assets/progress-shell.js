@@ -53,12 +53,14 @@
   choose("[data-scope-select]", "[data-assessment-scope]", "data-assessment-scope");
   choose("[data-roadmap-format-select]", "[data-roadmap-format]", "data-roadmap-format");
 
-  var search = shell.querySelector("[data-roadmap-search]");
-  var themes = Array.from(shell.querySelectorAll("[data-roadmap-theme]"));
+  var roadmap = shell.querySelector('[data-view="roadmap"]') || shell;
+  var search = roadmap.querySelector("[data-roadmap-search]");
+  var themes = Array.from(roadmap.querySelectorAll("[data-roadmap-theme]"));
   var throughline = themes.length ? themes[0].value : "";
-  var clear = Array.from(shell.querySelectorAll("[data-roadmap-clear]"));
-  var items = Array.from(shell.querySelectorAll("[data-roadmap-item]")).filter(function (item) {
-    return !item.closest('[data-view="history"]');
+  var clear = Array.from(roadmap.querySelectorAll("[data-roadmap-clear]"));
+  var items = Array.from(roadmap.querySelectorAll("[data-roadmap-item]")).filter(function (item) {
+    var view = item.closest('[data-view]');
+    return !view || view.getAttribute('data-view') === 'roadmap';
   });
   var records = items.map(function (item) {
     return { id: item.getAttribute("data-roadmap-item"), text: item.getAttribute("data-search-text"), throughlines: (item.getAttribute("data-throughlines") || "").split(/\s+/) };
@@ -73,7 +75,7 @@
     });
     shell.setAttribute("data-active-throughline", throughline);
     themes.forEach(function (control) { control.value = throughline; });
-    shell.querySelectorAll("[data-roadmap-theme-choice]").forEach(function (control) {
+    roadmap.querySelectorAll("[data-roadmap-theme-choice]").forEach(function (control) {
       var value = control.getAttribute("data-roadmap-theme-choice");
       var count = selection.counts[value] || 0;
       control.setAttribute("aria-pressed", String(value === throughline));
@@ -81,10 +83,10 @@
       var badge = control.querySelector("[data-theme-choice-count]");
       if (badge) badge.textContent = count;
     });
-    shell.querySelectorAll("[data-roadmap-count]").forEach(function (element) {
+    roadmap.querySelectorAll("[data-roadmap-count]").forEach(function (element) {
       element.textContent = "Showing " + matches.size + " of " + selection.total + " roadmap items";
     });
-    shell.querySelectorAll("[data-roadmap-list]").forEach(function (list) {
+    roadmap.querySelectorAll("[data-roadmap-list]").forEach(function (list) {
       var empty = list.querySelector("[data-filter-empty]");
       if (empty) empty.hidden = !!list.querySelector("[data-roadmap-item]:not([hidden])");
     });
@@ -103,7 +105,7 @@
   clear.forEach(function (control) { control.addEventListener("click", clearFilter); });
   shell.addEventListener("click", function (event) {
     var control = event.target.closest("[data-roadmap-theme-choice]");
-    if (!control) return;
+    if (!control || !roadmap.contains(control)) return;
     var value = control.getAttribute("data-roadmap-theme-choice");
     throughline = throughline === value ? "" : value;
     applyFilter();
@@ -166,7 +168,7 @@
     if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     var anchor = event.target.closest('a[href^="#"]');
     if (!anchor) return;
-    try { reveal(document.getElementById(decodeURIComponent(anchor.hash.slice(1)))); }
+    try { reveal(document.getElementById(decodeURIComponent(anchor.getAttribute("href").slice(1)))); }
     catch (error) {}
   });
   window.addEventListener("hashchange", function () {

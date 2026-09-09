@@ -36,24 +36,28 @@ The code below assumes these hooks — rename to taste, keep the roles:
   items carry `data-tl="t1 t3"` as well.
 - the three horizon card sections carry `data-hz`.
 - every item representation carries its stable `data-roadmap-item` ID; the
-  Evidence & History panel uses `data-view="history"` and is never item-filtered.
+  Progress and Evidence panels are never item-filtered. For a combined hub use
+  `assets/progress-shell.js`, which scopes filtering to `data-view="roadmap"`.
+  The legacy recipe below is for standalone roadmap pages, not combined hubs.
 - a root element carries `data-roadmap-id="<project-and-scope-id>"` to namespace
-  collapse preferences; `#roadmap-filter-status` outside the panels is a visible
-  `role="status"` live region for `Showing n of N items`.
+  collapse preferences; `#roadmap-filter-status` lives with the key immediately
+  above the chart, inside Roadmap, as a `role="status"` live region for counts.
 - key links are `<a class="key-link tN" href="#...">` inside a `.key` strip
   (kept as anchors for no-JS fallback; JS adds role=button + aria-pressed).
 - detail cards expose `.why`, `.chip`, `.tcode`; headings carry the ids that
   pills link to.
 - a `<button class="filterchip" id="tlChip">` with `.fc-code/.fc-label/.fc-x`
-  spans sits after the footer.
+  spans stays inside the roadmap surface, never on Progress or Evidence.
 - collapse hides `section.hz-collapsed > *:not(.hz-head)` under `@media screen`
   only, so print always shows everything; the chevron transition sits behind
   `prefers-reduced-motion: no-preference`.
 
-Always smoke-test before publishing:
+When a browser is already available, optionally smoke-test before publishing:
 `chrome --headless=new --virtual-time-budget=4000 --dump-dom file://... | grep hz-toggle`
 (the toggles + count badges are the last thing init renders, so their presence
 means the script ran without throwing).
+
+Do not require a browser install to run the skill. Record any check not performed.
 
 ## CSS (as shipped — swap the custom properties for the page's own)
 

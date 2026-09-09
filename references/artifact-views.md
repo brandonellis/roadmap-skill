@@ -51,6 +51,22 @@ shell without renaming existing anchor IDs or discarding their content.
 
 ## Shared model, not separate interpretations
 
+Preserve an established streams-by-horizons matrix as the NNL overview. Detail
+cards are its drill-down, not a substitute for its row/column structure. Use
+`scripts/render-roadmap-matrix.mjs` with `assets/roadmap-structure.css` when useful;
+its pills and theme key use the shared filter/deep-link hooks. Repeated placements
+keep one canonical item ID. Keep a source-backed dependency/critical-path diagram
+alongside it when the original artifact contains one. Preserve actual edges and
+gates; lack of scheduling inputs means a strategic dependency map, not a newly
+computed critical path. Do not drop either visual during grading or regeneration.
+
+Preserve a clear Gantt as a time-scaled chart, not a list of status paragraphs.
+`scripts/render-roadmap-timeline.mjs` with `assets/roadmap-structure.css` supplies
+compact rows, a sticky quarter/month axis, short linked theme controls and
+explicit source-stated versus scenario bars. Pass the original starts/durations;
+current completion labels do not fill or resize schedule bars. Keep long ticket
+explanations in the canonical details, not under every row label.
+
 Maintain one publish-safe model per artifact revision. It may be a local JSON
 file used to generate static HTML; dynamic rendering is not required. Minimum:
 
@@ -78,10 +94,19 @@ the anchor `id`. Do not duplicate DOM IDs to make links seem to work. Card,
 timeline row and scorecard finding links all lead to that same detail.
 
 Derive counts from unique model IDs, not rendered pills. A multi-throughline
-item still counts once. Global filters live outside panels and retain their
-state across view changes. Throughline is the default filter; add owner, horizon
+item still counts once. Roadmap filters live INSIDE the Roadmap primary panel,
+above its NNL/Gantt subviews. They retain their state when returning to Roadmap,
+but are not shown on Progress or Evidence and never filter those panels.
+Throughline is the default filter; add owner, horizon
 or status only when the source data makes them useful. Unknown is an explicit
 option, not an invented owner. Do not ship unimplemented filter controls.
+
+Put the theme controls immediately against the active chart. Headings, search,
+format selectors and summary copy go above the filters; explanations and legends
+go below the chart. No intervening section, card, heading or second theme key.
+If using a shared filter bar, omit the matrix renderer's own heading/key via
+`{ showHeading: false, showThemeKey: false }`. Progress and Evidence have neither
+roadmap theme controls nor roadmap filter effects.
 
 Keep the visual theme key interactive. Use `scripts/render-theme-filters.mjs`
 with `assets/theme-filters.css` and `assets/progress-shell.js`: the colored theme
@@ -89,8 +114,8 @@ buttons, inline item tags and Gantt tags share `data-roadmap-theme-choice` and
 one selection. Clicking the active theme clears it; another theme replaces it.
 Search intersects that selection. Counts use unique item IDs, never duplicate
 representations. A legacy dropdown may coexist, but cannot replace an existing
-clickable theme key with an inert color legend. Place the shared controls outside
-the primary panels and preserve the no-JavaScript labels.
+clickable theme key with an inert color legend. Share controls across roadmap
+formats only, inside the Roadmap primary panel. Preserve no-JavaScript labels.
 
 For maintainer regression checks or optional artifact QA with an existing
 browser-testing session, call `checkThemeFilters(page)` from
@@ -259,7 +284,7 @@ visible in source markup.
     if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     var link = event.target.closest('a[href^="#"]');
     if (!link) return;
-    try { reveal(document.getElementById(decodeURIComponent(link.hash.slice(1)))); }
+    try { reveal(document.getElementById(decodeURIComponent(link.getAttribute("href").slice(1)))); }
     catch (error) {}
   });
   window.addEventListener("hashchange", function () {

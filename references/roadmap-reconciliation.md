@@ -74,6 +74,12 @@ lists and the completed/remaining breakdown in the item's existing drill-down.
 Do not redesign the artifact merely to add a completion lane. Completed items
 remain accessible with their proof rather than disappearing from the roadmap.
 
+Inventory the actual visual structures before regeneration: stream-by-horizon
+matrix, dependency/critical-path figure, Gantt and their detail targets. Update
+their shared records without replacing a matrix with card lists or omitting the
+dependency figure. Dependency nodes may gain dated status notes; do not invent
+edges or remove a completed prerequisite merely to make the path look shorter.
+
 Preserve horizons, owners, priorities and original Gantt windows. Completion
 annotations may change without moving a bar or committing a new date. Label a
 source's actual completion date separately from the date it was observed; an

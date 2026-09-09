@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+- Restore compact Gantt rows with a quarter/month axis, original schedule
+  geometry and source-versus-scenario styling. Keep completion labels distinct
+  from schedule bars and move detailed acceptance into linked drill-downs.
+- Scope theme filters to Roadmap only. Place them immediately above the active
+  matrix or Gantt, with no intervening sections. Preserve the selection between
+  roadmap formats without showing controls or filtering Progress and Evidence.
+
+- Preserve the streams-by-horizons pill matrix and source-backed critical-path
+  diagram when regenerating. Add a reusable accessible matrix renderer with
+  shared theme filters, stable detail links and deduplicated item identities.
+  Completion notes enhance the visuals instead of replacing them with cards.
+
 - Reconcile the whole roadmap during every re-grade, rather than offering a
   separate refresh. Check linked issues, original subtasks and outcome/milestone
   completion, including work outside the audit cohort. Update board, Gantt and

@@ -10,7 +10,7 @@ export async function checkThemeFilters(page) {
   const themeIds = [...new Set(records.flatMap(record => record.throughlines).filter(Boolean))];
   assert(themeIds.length > 1, 'Exercise real cross-theme filtering, not a one-theme fixture');
   assert.equal(await buttons.count(), themeIds.length + 1);
-  assert.equal(await bar.evaluate(element => !!element.closest('[data-view]')), false);
+  assert.equal(await bar.evaluate(element => element.closest('[data-view]')?.getAttribute('data-view')), 'roadmap');
   await page.locator('#tab-roadmap').click();
   const reset = async () => {
     if (await page.locator('[data-roadmap-clear]').isEnabled()) await page.locator('[data-roadmap-clear]').click();
@@ -33,15 +33,18 @@ export async function checkThemeFilters(page) {
   await bar.locator(`[data-roadmap-theme-choice="${themeIds[0]}"]`).click();
   for (const view of ['overview', 'history', 'roadmap']) {
     await page.locator(`#tab-${view}`).click();
-    assert(await bar.isVisible());
+    assert.equal(await bar.isVisible(), view === 'roadmap');
     assert.equal(await shell.getAttribute('data-active-throughline'), themeIds[0]);
   }
-  passed.push('Theme selection and visible controls survive all primary view changes');
+  passed.push('Roadmap retains its selection while Progress and Evidence hide theme controls');
 
   await reset();
   await page.locator('[data-roadmap-format-select]').selectOption('nnl');
   const detail = page.locator('#roadmap-nnl details[data-roadmap-item]').filter({ has: page.locator('[data-roadmap-theme-choice]') }).first();
-  await detail.locator('summary').click();
+  await detail.evaluate(element => {
+    for (let parent = element.parentElement; parent; parent = parent.parentElement) if (parent.tagName === 'DETAILS') parent.open = true;
+    element.open = true;
+  });
   const tag = detail.locator('[data-roadmap-theme-choice]').first();
   const chosenTheme = await tag.getAttribute('data-roadmap-theme-choice');
   await tag.click();
@@ -49,7 +52,7 @@ export async function checkThemeFilters(page) {
   const siblingStates = await page.locator(`[data-roadmap-theme-choice="${chosenTheme}"]`).evaluateAll(elements => elements.map(element => element.getAttribute('aria-pressed')));
   assert(siblingStates.every(state => state === 'true'));
   await page.locator('[data-roadmap-format-select]').selectOption('timeline');
-  const ganttTag = page.locator(`.rm-gantt-theme-tags [data-roadmap-theme-choice="${chosenTheme}"]:visible`).first();
+  const ganttTag = page.locator(`.rm-gantt-row [data-roadmap-theme-choice="${chosenTheme}"]:visible`).first();
   await ganttTag.click();
   assert.equal(await shell.getAttribute('data-active-throughline'), '');
   passed.push('Board tags, Gantt tags and the theme bar cross-filter and toggle each other');

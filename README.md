@@ -53,8 +53,9 @@ Then invoke it in any Claude Code session with `/roadmap`.
 
 - **One artifact, three clear views.** Progress, Roadmap and Evidence appear
   only when populated. NNL and opt-in Timeline are roadmap formats. Skill names are
-  provenance, not navigation. All views share item IDs and filters, while
-  retaining their own verification dates. Separate audiences stay separate.
+  provenance, not navigation. Views share item IDs, but theme filters belong
+  only to Roadmap, directly above the active matrix or Gantt. Progress and
+  Evidence remain unfiltered. Each view retains its verification date.
 - **Know what was assessed.** Code, staging and production have distinct
   assessment datasets. Show the audited branch and commit independently of
   per-service runtime revisions. Legacy blended letters stay in history;

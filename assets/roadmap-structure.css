@@ -1,0 +1,67 @@
+.rm-structure-heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 24px; border-bottom: 3px solid var(--rm-ink); padding-bottom: 16px; margin: 28px 0 20px; }
+.rm-structure-heading h2 { font-family: "Barlow Condensed", sans-serif; font-size: clamp(32px, 4vw, 48px); text-transform: uppercase; }
+.rm-structure-heading p { color: var(--rm-muted); font-style: italic; }
+.rm-structure-heading > span { margin-left: auto; font-size: 12px; color: var(--rm-muted); }
+.rm-matrix-key { display: flex; flex-wrap: wrap; border: 1px solid var(--rm-rule); }
+.rm-matrix-key > strong { display: flex; align-items: center; padding: 12px 16px; background: var(--rm-soft); font-size: 12px; }
+.roadmap-shell .rm-matrix-theme { display: flex; align-items: center; gap: 9px; flex: 1; min-height: 48px; padding: 12px 14px; border: 0; border-radius: 0; background: var(--theme-soft); color: var(--theme); text-align: left; font-family: "Barlow Condensed", sans-serif; font-size: 18px; font-weight: 600; text-transform: uppercase; }
+.rm-matrix-theme > span { font-size: 12px; }
+.roadmap-shell .rm-matrix-theme[aria-pressed="true"] { outline: 2px solid var(--theme); outline-offset: -3px; text-decoration: underline; text-underline-offset: 4px; }
+.rm-matrix-scroll { overflow-x: auto; scrollbar-width: thin; }
+.rm-matrix { width: 100%; min-width: 820px; table-layout: fixed; border-collapse: collapse; border: 1px solid var(--rm-ink); }
+.rm-matrix th, .rm-matrix td { padding: 18px 16px; border: 1px solid var(--rm-rule); vertical-align: top; text-align: left; }
+.rm-matrix thead { background: var(--rm-ink); color: var(--rm-ground); }
+.rm-matrix thead th { padding-block: 20px; font-family: "Barlow Condensed", sans-serif; font-size: 19px; text-transform: uppercase; }
+.rm-matrix th:first-child { width: 150px; }
+.rm-matrix tbody th { background: var(--rm-soft); font-family: "Barlow Condensed", sans-serif; font-size: 23px; line-height: 1.15; text-transform: uppercase; }
+.rm-matrix-cell { display: flex; flex-wrap: wrap; align-content: flex-start; align-items: flex-start; gap: 9px; min-height: 82px; }
+.roadmap-shell .rm-matrix-pill { display: inline-flex; flex-direction: column; gap: 3px; max-width: 100%; min-height: 44px; padding: 8px 10px; border: 1px solid var(--theme); background: var(--theme-soft); color: var(--rm-ink); text-decoration: none; font-size: 15px; line-height: 1.3; }
+.rm-matrix-pill small { color: var(--theme); font-size: 11px; font-weight: 600; }
+.rm-matrix-pill:hover, .rm-matrix-pill:focus-visible { outline: 2px solid var(--theme); outline-offset: 2px; }
+.rm-matrix-empty { font-size: 13px; color: var(--rm-muted); }
+.rm-dependency-path { margin-block: 40px; --muted: var(--rm-muted); --now-bg: var(--rm-soft); --next-bg: var(--rm-soft); --later-bg: var(--rm-soft); --now: var(--rm-ink); --next: var(--rm-t5); --later: var(--rm-muted); }
+.rm-dependency-path .fig-scroll { overflow-x: auto; }
+.rm-dependency-path svg { display: block; width: 100%; min-width: 840px; height: auto; }
+.rm-dependency-path .spine { margin: 24px 0; padding: 20px; border: 1px solid var(--rm-rule); background: var(--rm-surface, var(--rm-ground)); }
+.rm-dependency-path .sv-node { fill: var(--rm-soft); stroke: var(--rm-muted); stroke-width: 1.2; }
+.rm-dependency-path .sv-node-gate { fill: var(--rm-t3-soft); stroke: var(--rm-t3); stroke-width: 1.2; stroke-dasharray: 4 3; }
+.rm-dependency-path .sv-node-hero { fill: var(--rm-t2-soft); stroke: var(--rm-t2); stroke-width: 1.8; }
+.rm-dependency-path .sv-label { font-family: "Barlow Condensed", sans-serif; font-size: 15px; font-weight: 700; fill: var(--rm-ink); text-transform: uppercase; }
+.rm-dependency-path .sv-sub { font-family: "Barlow", sans-serif; font-size: 11px; fill: var(--rm-muted); }
+.rm-dependency-path .sv-col { font-family: "Barlow Condensed", sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 1px; }
+.rm-dependency-path .sv-edge { fill: none; stroke: var(--rm-muted); stroke-width: 1.2; }
+.rm-dependency-path .sv-edge-dash { stroke-dasharray: 4 3; }
+.rm-dependency-path .sv-elabel { font-family: "Barlow", sans-serif; font-size: 10px; fill: var(--rm-muted); paint-order: stroke; stroke: var(--rm-ground); stroke-width: 4px; }
+.rm-dependency-path svg a:focus-visible { outline: 2px solid var(--rm-ink); }
+.rm-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.roadmap-shell .rm-gantt-region { overflow: auto; max-height: 820px; border: 1px solid var(--rm-ink); }
+.roadmap-shell .rm-gantt { min-width: 980px; }
+.roadmap-shell .rm-gantt-axis, .roadmap-shell .rm-gantt-row { display: grid; grid-template-columns: 280px minmax(0, 1fr); }
+.roadmap-shell .rm-gantt-axis { position: sticky; top: 0; z-index: 4; background: #181e23; color: #f2f4f5; }
+.roadmap-shell .rm-gantt-axis > strong { padding: 14px 16px; position: sticky; left: 0; background: #181e23; color: #f2f4f5; }
+.roadmap-shell .rm-gantt-calendar { display: grid; grid-template-columns: repeat(var(--month-count, 12), minmax(0, 1fr)); }
+.roadmap-shell .rm-gantt-calendar span { border: 1px solid #46505a; text-align: center; padding: 7px 0; color: inherit; background: transparent; }
+.roadmap-shell .rm-gantt-group { margin: 0; padding: 10px 16px; background: var(--rm-soft); color: var(--rm-ink); border-block: 1px solid var(--rm-rule); font: 600 19px "Barlow Condensed", sans-serif; }
+.roadmap-shell .rm-gantt-row { min-height: 66px; border-bottom: 1px solid var(--rm-rule); }
+.roadmap-shell .rm-gantt-label { display: grid; grid-template-columns: minmax(0, 1fr) 44px; align-items: center; gap: 0 8px; padding: 6px 12px 6px 16px; position: sticky; left: 0; z-index: 2; background: var(--rm-panel); }
+.roadmap-shell .rm-gantt-label > a { font-size: 15px; font-weight: 500; line-height: 1.2; min-height: 28px; text-decoration: none; }
+.roadmap-shell .rm-gantt-label .rm-theme-tag { grid-column: 2; grid-row: 1 / 3; width: 44px; min-height: 44px; padding: 0; border-radius: 0; justify-content: center; font-size: 12px; }
+.rm-gantt-status { grid-column: 1; font-size: 11px; line-height: 1.3; color: var(--rm-muted); }
+.roadmap-shell .rm-gantt-track { min-height: 66px; background-size: calc(100% / var(--month-count, 12)) 100%; }
+.roadmap-shell .rm-gantt-bar { top: 11px; height: 44px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media print {
+  .roadmap-shell .rm-gantt-region { max-height: none; overflow: visible; }
+  .roadmap-shell .rm-gantt { min-width: 0; }
+  .roadmap-shell .rm-gantt-axis, .roadmap-shell .rm-gantt-label { position: static; }
+  .roadmap-shell .rm-gantt-axis, .roadmap-shell .rm-gantt-row { grid-template-columns: 180px minmax(0, 1fr); }
+}
+@media (max-width: 720px) {
+  .roadmap-shell .rm-gantt-axis, .roadmap-shell .rm-gantt-row { grid-template-columns: 176px minmax(0, 1fr); }
+  .roadmap-shell .rm-gantt-label { padding-left: 10px; }
+  .roadmap-shell .rm-gantt-label > a { font-size: 13px; }
+  .rm-matrix-key { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rm-matrix-key > strong { grid-column: 1 / -1; }
+  .roadmap-shell .rm-matrix-theme { font-size: 16px; }
+  .rm-structure-heading > span { margin-left: 0; }
+  .rm-dependency-path .spine { padding: 12px; }
+}
