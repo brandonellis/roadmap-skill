@@ -7,6 +7,12 @@ assessment. A roadmap refresh cannot award a new letter.
 Read in order: baseline resolution; frozen contract; repeatable letters/A+;
 evidence and changes; persistence; acceptance scenarios.
 
+For the executable implementation and legacy adoption procedure, also read
+`executable-grading.md`. Use the evaluator for supported contracts, preserve old
+records with a separate history lock, and require exact contract approval before
+activating a reconstructed rubric. A policy written in Markdown alone does not
+prove that two runs will produce the same aggregate.
+
 ## Resolve the original, not just the latest
 
 1. Read the canonical artifact and its assessment ledger before auditing.

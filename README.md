@@ -1,5 +1,10 @@
 # /roadmap — the Horizons roadmap builder
 
+Executable grading, outcome-led updates and private publication checks are
+documented in [the implementation guide](references/executable-grading.md).
+Run the dependency-free regression suite with `node --test scripts/*.test.mjs`.
+Draft contracts do not award grades; legacy assessment history stays immutable.
+
 A [Claude Code](https://claude.com/claude-code) skill that builds and maintains a
 single-page roadmap artifact for any project: scan the repo, issue tracker, and
 notes; ask one round of questions only for what cannot be found; synthesize

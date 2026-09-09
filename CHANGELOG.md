@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- Add an executable whole-tier assessment engine with approved-contract hashes,
+  cumulative criteria, separate environment verdicts, evidence freshness and
+  deployment identity checks. New findings cannot enlarge the initial cohort.
+- Add append-only history locks, behavioral regression tests and an allowlisted
+  private-bundle verifier. Packaging does not claim an upload or enable sharing.
+- Lead progress with verified outcomes and expandable component next-checks;
+  retain original Gantt geometry and distinguish observations from actual dates.
+- Make legacy rubric adoption an explicit proposal and approval, never a silent
+  reinterpretation of historical letters or a replacement baseline.
+
 - Preserve the creation-time audience and purpose across every mode. Lead with
   visual progress, meaningful wins and the forward roadmap; keep audits in detail.
 - Separate all delivered work, fixed baseline-cohort tracker status and verified

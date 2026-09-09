@@ -5,6 +5,13 @@ Celebrate demonstrated progress, connect it to the system's direction and make
 the next decision clear. Evidence earns the story; it need not dominate the page.
 Read with `artifact-views.md` on every creation or update.
 
+For an existing assessment, strengthen the story before adding more charts:
+three to five verified outcomes, then original-cohort progress, then concise
+next-proof checklists behind component grades. Ticket-volume bars are supporting
+activity evidence, not the headline. `executable-grading.md` provides reusable
+renderers and comparison rules. An unavailable previous finding-state snapshot
+must say so; use latest verified wins, not a fabricated since-last-run delta.
+
 ## Inherit the original brief
 
 Audience, purpose, disclosure boundary, desired decision, horizon, visual

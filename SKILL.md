@@ -20,6 +20,11 @@ A permanent initial baseline and immutable dated
 assessments show progress toward an evidence-earned operational A+ without
 resetting the goalposts on each run.
 
+For grading implementation, contract adoption, outcome-led progress or private
+publication, read `references/executable-grading.md`. It supplies a tested,
+dependency-free evaluator, history locks, static outcome/checklist renderers and
+a private-bundle verifier. It does not turn draft criteria into approved grades.
+
 Read `references/stakeholder-story.md` on every mode. The purpose is to present
 the system's direction and demonstrated progress to the audience established
 at creation. Inherit that audience and brief; never re-ask or silently select
