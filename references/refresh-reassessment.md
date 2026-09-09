@@ -35,11 +35,13 @@ source, test execution, deployment and observed customer behavior are distinct
 evidence. Record verified, still failing and unknown checks. A newly filed
 follow-up cannot retroactively change the original acceptance.
 
-Only an approved, supported contract can issue a letter. A request to regrade
-does not approve a draft instrument. Missing mappings, approval, provenance or
-required verification become explicit blockers with the next action. Record
-verified improvements even while a letter is blocked. Do not call this a
-completed regrade or imply that an old letter was recomputed.
+Select the established method using `letter-reassessment.md`. An approved,
+supported contract can compute deterministic letters. A recovered qualitative
+method can issue fresh evidence-backed judgments without adopting a proposed
+replacement contract. A request to regrade does not approve that draft. Missing
+calibration, provenance or required verification becomes an explicit blocker.
+Record verified improvements even while a letter is blocked. Do not call an
+acceptance review a completed regrade or imply an old letter was recomputed.
 
 Evaluate all mandatory checks for any grade being reported. Reuse evidence only
 when the contract permits its age, scope, revision and observation identity.
@@ -71,5 +73,6 @@ scripts or treat previous-run counts as invariants.
 - Changed grading evidence is visible beside progress even if a letter is held.
 - No claimed improvement comes only from a ticket count or a reduced denominator.
 - Historical grades, original baseline and schedule commitments are unchanged.
-- An unavailable or unapproved grading contract cannot produce a fresh letter.
+- A draft contract cannot compute a fresh letter or veto a recovered existing
+  qualitative method. Render the actual new assessment, not a previous snapshot.
 - New operational letters require operational proof, not source-only repairs.

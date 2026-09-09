@@ -42,6 +42,11 @@ project wants two or three (the code, the estate if one exists, and always
 the cross-cutting lens). One auditor grading everything is not a panel —
 below two components, question whether the mode fits at all.
 
+Before assigning auditors, select the established method with
+`letter-reassessment.md`. A recovered original qualitative calibration stays
+in force until a replacement is adopted. Do not substitute newer anchors or
+block that method merely because a deterministic proposal awaits approval.
+
 ## The auditor fan-out
 
 One auditor agent per component, plus the cross-cutting lenses that no single

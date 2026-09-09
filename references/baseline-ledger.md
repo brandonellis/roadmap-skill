@@ -2,9 +2,10 @@
 
 Load with `report-card.md` for `grade` or `score`. This is the authority for
 baseline identity, persistence and roll-up. WSJF is prioritization, not this
-assessment. An assessed roadmap's refresh can award a new letter only through
-the same evidence and approved-contract checks as `grade`; delivery counts alone
-never award it. See `refresh-reassessment.md` for relevance and scope.
+assessment. An assessed roadmap's refresh runs the same established method and
+evidence checks as `grade`; delivery counts alone never award a letter. See
+`refresh-reassessment.md` for relevance and scope, and `letter-reassessment.md`
+to distinguish existing qualitative methods from new deterministic contracts.
 
 Read in order: baseline resolution; frozen contract; repeatable letters/A+;
 evidence and changes; persistence; acceptance scenarios.
@@ -33,6 +34,9 @@ prove that two runs will produce the same aggregate.
    Do not reverse-engineer numeric scores or fabricate missing findings.
    Describe the unmapped criteria and compare only supported measurements.
    No comparable letter trend until the user approves the reconstructed rubric.
+   This does not freeze future qualitative assessments when the original
+   calibration and scope are recoverable. Continue that method with fresh,
+   explicitly qualitative judgments while the replacement remains a draft.
 5. If the baseline cannot be read, publish only a local **uncompared draft**.
    Ask for the missing source. Never fall back to the last card or create a new
    initial baseline because credentials expired or memory was empty.

@@ -94,7 +94,9 @@ Use the assessment's evidence to evaluate mapped criteria, not ticket volume.
 A `refresh` also reassesses relevant criteria when the artifact already contains
 an assessment, following `refresh-reassessment.md`. Do not stop at tracker
 reconciliation when affected grading evidence can be checked. New letters still
-require the approved contract and complete evidence for their scope.
+require the established method and complete evidence for their scope. Follow
+`letter-reassessment.md`: a proposed replacement does not block a recovered
+qualitative method, and only an approved contract computes deterministic grades.
 
 ## Before calling the update complete
 

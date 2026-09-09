@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Run actual letter assessments, not just ticket acceptance reviews. Preserve
+  established qualitative methods while replacement rubrics await approval,
+  record fresh component judgments with a tested helper, and render the new
+  results. Preserve baseline/history, explain unchanged letters, and never infer
+  a fresh overall or operational grade from a partial source review.
+
 - Make refresh conditionally reassess relevant grading criteria on assessed
   artifacts. Reconcile completed work, reopenings and changed evidence, then
   verify affected criteria and update supported grades under the same approved

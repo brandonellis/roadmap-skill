@@ -44,8 +44,9 @@ Then invoke it in any Claude Code session with `/roadmap`.
 - **Relevant work triggers reassessment.** Refresh checks completed findings,
   reopenings and changed evidence against existing grading criteria. It verifies
   affected requirements and updates supported grades against the same baseline.
-  No relevant change means no new assessment. Missing approval or proof is shown
-  as a blocker, not disguised as an unchanged grade. Delivery-only remains an
+  Grade and score always run an assessment; refresh targets affected components.
+  Existing qualitative methods continue while replacement rubrics await approval.
+  Missing evidence is a blocker, not an unchanged grade. Delivery-only remains an
   explicit option; ungraded roadmaps do not acquire a scorecard automatically.
 
 - **Progress has a clear reading order.** Verified outcomes lead, original

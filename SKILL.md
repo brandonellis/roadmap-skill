@@ -25,6 +25,12 @@ publication, read `references/executable-grading.md`. It supplies a tested,
 dependency-free evaluator, history locks, static outcome/checklist renderers and
 a private-bundle verifier. It does not turn draft criteria into approved grades.
 
+For every grade, score or assessed refresh, also read
+`references/letter-reassessment.md`. Run the established grading method, not
+only ticket reconciliation. A proposed replacement rubric does not block a
+fresh qualitative assessment under the recovered original method. Render the
+new assessment's letters; preserve the original baseline and prior observations.
+
 Read `references/stakeholder-story.md` on every mode. The purpose is to present
 the system's direction and demonstrated progress to the audience established
 at creation. Inherit that audience and brief; never re-ask or silently select
@@ -90,8 +96,9 @@ well as individual tickets. Completion reconciliation is also part of every
 Relevant work includes completed findings, reopened issues, new blocking evidence
 and changes to a criterion's verification, not only the original finding cohort.
 Ticket closure triggers verification, never a pass or automatic letter uplift.
-Keep unchecked results dated; an unapproved contract blocks issuing letters, not
-recording verified progress. An explicit delivery-only refresh skips reassessment.
+Keep unchecked results dated. A draft cannot issue deterministic letters, but
+does not suspend an established qualitative method. An explicit delivery-only
+refresh skips reassessment.
 
 ## The dates rule (decided, do not re-litigate per run)
 

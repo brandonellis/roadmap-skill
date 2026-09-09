@@ -7,6 +7,13 @@ shape, provenance, freshness and arithmetic of observations, not whether a human
 or auditor's source interpretation is true. Audit the evidence before recording
 pass/fail. A successful validator is not an operational test.
 
+This deterministic engine is not the only valid existing grading method.
+Read `letter-reassessment.md` before choosing it. When a legacy qualitative
+method is recoverable, continue that method and record fresh auditor letters
+with `scripts/letter-reassessment.mjs`. A separate draft proposal does not block
+that reassessment. It also does not make qualitative letters deterministic or
+authorize an operational A+ claim.
+
 ## Adopt once, without rewriting legacy grades
 
 1. Preserve the original baseline, finding cohort and every dated assessment.
