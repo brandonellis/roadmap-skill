@@ -40,7 +40,8 @@ near the content; a skill filter is optional metadata, not primary navigation.
 
 Read the remote page before editing. Preserve unrelated views, title, favicon,
 user decisions and the design contract. Each mode owns only its slice of data.
-`refresh` does not regrade; `grade` does not move horizons or invent dates;
+`refresh` reassesses relevant grading criteria on assessed artifacts, following
+`refresh-reassessment.md`; `grade` does not move horizons or invent dates;
 `gantt` does not rescore priorities. `grade`/`score` does reconcile roadmap
 completion in the same revision, per `roadmap-reconciliation.md`; ownership of
 assessment data is not permission to leave completed work looking unfinished.

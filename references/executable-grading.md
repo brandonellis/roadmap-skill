@@ -63,6 +63,11 @@ filter may be passed to the evaluator as a smaller contract.
 
 ## Progress even when the letter stays still
 
+For refresh-triggered reassessment, first apply `refresh-reassessment.md`.
+Unchanged letters must distinguish an evaluated limiting criterion from a
+reassessment that is blocked or not performed. The evaluator's draft-contract
+refusal is not permission to label an old grade as newly verified.
+
 First reconcile every existing roadmap item using `roadmap-reconciliation.md`.
 `compareFindings` compares audit findings only; it does not read a tracker,
 discover completed roadmap outcomes or update Now/Next/Later and Gantt for you.

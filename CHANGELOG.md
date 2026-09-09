@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Make refresh conditionally reassess relevant grading criteria on assessed
+  artifacts. Reconcile completed work, reopenings and changed evidence, then
+  verify affected criteria and update supported grades under the same approved
+  baseline contract. Distinguish unchanged, not reassessed and blocked results;
+  preserve explicit delivery-only mode and never award letters from counts.
+
 - Add source-scoped muted completion styling across matrix, Gantt and details.
   Keep explanation links, keyboard focus and filtering active. Completed
   milestones require a visible remaining-work label and never imply that the

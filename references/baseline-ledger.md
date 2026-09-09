@@ -2,7 +2,9 @@
 
 Load with `report-card.md` for `grade` or `score`. This is the authority for
 baseline identity, persistence and roll-up. WSJF is prioritization, not this
-assessment. A roadmap refresh cannot award a new letter.
+assessment. An assessed roadmap's refresh can award a new letter only through
+the same evidence and approved-contract checks as `grade`; delivery counts alone
+never award it. See `refresh-reassessment.md` for relevance and scope.
 
 Read in order: baseline resolution; frozen contract; repeatable letters/A+;
 evidence and changes; persistence; acceptance scenarios.

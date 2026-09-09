@@ -91,7 +91,10 @@ confirmed criteria now verified; an unchanged limiting criterion; implementation
 awaiting deployment/verification; outside the frozen grading contract; or no
 confirmed mapping. A roadmap status never supplies a criterion pass by itself.
 Use the assessment's evidence to evaluate mapped criteria, not ticket volume.
-A `refresh` updates delivery observations without creating a new grade.
+A `refresh` also reassesses relevant criteria when the artifact already contains
+an assessment, following `refresh-reassessment.md`. Do not stop at tracker
+reconciliation when affected grading evidence can be checked. New letters still
+require the approved contract and complete evidence for their scope.
 
 ## Before calling the update complete
 

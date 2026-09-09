@@ -32,7 +32,7 @@ Then invoke it in any Claude Code session with `/roadmap`.
 |---|---|
 | `/roadmap` | Create a new roadmap for the current project (detects prior runs first) |
 | `/roadmap <artifact-url>` | Update an existing roadmap artifact in place |
-| `/roadmap refresh` | Drift report against the live tracker, then apply the delta |
+| `/roadmap refresh` | Reconcile delivery, regrade relevant criteria in assessed artifacts, then update the shared views |
 | `/roadmap gantt` | Add or update the Timeline view with sourced commitments, explicit scenarios and an unscheduled shelf |
 | `/roadmap wsjf [<source>]` | Opt in to WSJF cost-of-delay scoring: bare bootstraps a worksheet, a target reads existing scoring |
 | `/roadmap grade [<baseline-url>]` | Audit against the established initial baseline, reconcile roadmap completion, append an immutable assessment, and update Roadmap, Progress and Evidence together |
@@ -40,6 +40,13 @@ Then invoke it in any Claude Code session with `/roadmap`.
 | `/roadmap help` | Show the mode table |
 
 ## What makes it opinionated
+
+- **Relevant work triggers reassessment.** Refresh checks completed findings,
+  reopenings and changed evidence against existing grading criteria. It verifies
+  affected requirements and updates supported grades against the same baseline.
+  No relevant change means no new assessment. Missing approval or proof is shown
+  as a blocker, not disguised as an unchanged grade. Delivery-only remains an
+  explicit option; ungraded roadmaps do not acquire a scorecard automatically.
 
 - **Progress has a clear reading order.** Verified outcomes lead, original
   findings and delivered work are distinct, and dated readiness grades identify

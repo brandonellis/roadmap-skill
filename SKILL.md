@@ -49,7 +49,7 @@ remaining work from fully completed initiatives. Do not infer this from counts.
 |---|---|---|
 | *(none)* | create | New roadmap for the current project. **Prior-run detection first**: check memory and `Artifact action:"list"` for an existing roadmap; if one exists, offer *update it / start a parallel one / something else* rather than silently creating a sibling. |
 | `<artifact-url>` | update | ALWAYS `action:"read"` first and adopt the remote as the editing source; preserve the assessment baseline/history, favicon and `<title>`; republish to the same URL. |
-| `refresh` | drift report → apply | See "Refresh is a drift report" below. |
+| `refresh` | drift report → relevant regrade → apply | Reconcile delivery and reassess affected grading criteria when the artifact has an assessment. See "Refresh is a drift report" below. |
 | `gantt` | timeline view | Add or update Timeline in the canonical artifact; standalone export only on request. See "The dates rule" below; never choose this mode yourself. |
 | `wsjf [<path-or-url>]` | scoring layer | Opt in to WSJF cost-of-delay ranking: bare bootstraps a scoring worksheet from the themes; a target reads existing scoring. Recorded once, inherited by every later run. See "WSJF mode" below; never choose this mode yourself. |
 | `grade [<baseline-card-url>]` | baseline assessment | Audit explicit code refs and each runtime environment against the established initial baseline. Reconcile existing roadmap completion, append a dated assessment, and update Roadmap, Progress and Evidence in the same hub. Show initial/current/target A+ with fixed criteria and verified progress. An explicit URL selects a lineage, not a reset. See "Grade mode" and its references. |
@@ -77,14 +77,21 @@ mode. The user's own words always beat both the contract and this skill's defaul
 
 Never silently rewrite states. First diff the page's claims against the live tracker
 and report the delta — cited-open items that closed, cited-closed items that reopened,
-new items the page doesn't know — then apply it: states, counts, the verified-stamp
-kicker, and nothing else (no re-synthesis). Check both directions: a page calling a
+new items the page doesn't know, then apply the delivery delta without re-synthesizing
+the roadmap. For an assessed artifact, run the relevance check in
+`references/refresh-reassessment.md` and regrade affected criteria in the same run.
+Check both directions: a page calling a
 closed ticket open is stale; a page calling an open ticket done is worse, especially
 where ticket status feeds compliance evidence. The delta since the *sibling* artifact's
 stamp is often the most valuable output — surface it, don't bury it.
 Use `references/roadmap-reconciliation.md` to check whole roadmap outcomes as
 well as individual tickets. Completion reconciliation is also part of every
 `grade`/`score` update to an existing roadmap, not a separate optional refresh.
+Relevant work includes completed findings, reopened issues, new blocking evidence
+and changes to a criterion's verification, not only the original finding cohort.
+Ticket closure triggers verification, never a pass or automatic letter uplift.
+Keep unchecked results dated; an unapproved contract blocks issuing letters, not
+recording verified progress. An explicit delivery-only refresh skips reassessment.
 
 ## The dates rule (decided, do not re-litigate per run)
 
@@ -146,8 +153,9 @@ discovered from the project's own structure (a repo, a monorepo module, the
 estate), never assumed. It shares the artifact shell, sources and writing floor,
 not WSJF's prioritization semantics. Load `references/report-card.md`,
 `references/grade-anchors.md` and `references/baseline-ledger.md` before running.
-The ledger owns baseline identity, history, roll-up and A+ acceptance. Never
-choose this mode yourself.
+The ledger owns baseline identity, history, roll-up and A+ acceptance. Run it on
+explicit `grade`/`score`, or for affected criteria identified by an assessed
+artifact's refresh. Do not turn an ungraded roadmap into a graded one unasked.
 
 Nine rules that are non-negotiable even without the reference loaded:
 - **Auditors grade blind to the letters and read-only, never blind to the
