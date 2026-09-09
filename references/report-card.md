@@ -19,7 +19,8 @@ components.
 Run it before a consequential moment: a deploy, a funding conversation, a
 quarter close, or right after a remediation program lands. Each run produces an
 **immutable dated assessment inside a living artifact**. Append the observation
-to the ledger, then update Progress and Evidence at the canonical URL.
+to the ledger, then reconcile existing roadmap completion and update Roadmap,
+Progress and Evidence at the canonical URL.
 Earlier records remain readable at stable anchors; separate dated exports are
 optional, not a new grading universe on every run.
 
@@ -539,11 +540,16 @@ raise a letter merely to justify the run. Show the unchanged result and its proo
   grades are the fastest way to make the next blind run worthless.
 - Name what the auditors could not reach (expired credentials, unreachable
   estates) in the footer as first-class findings.
+- **Reconcile roadmap delivery in this run.** Before publication, follow
+  `roadmap-reconciliation.md` for all existing roadmap items and their linked
+  issues, subtasks and milestone outcomes, not only the original audit findings.
+  Update completion in Roadmap and Progress alongside the assessment. Explain
+  partials and completed work whose grade holds. Missing access leaves explicit
+  dated gaps, not a claimed refresh. Do not defer this to an optional follow-up.
 - Persist the immutable assessment and read back the published hub. Record the
   ledger location, original/active baseline IDs, assessment ID, canonical URL,
   instrument version and comparability verdict in memory, with the next natural
   re-grade trigger. Memory never replaces the durable ledger.
-- **The roadmap-drift handoff.** A grade run almost always moves roadmap
-  themes: programs complete, findings become tickets, gaps become work. End
-  the run by diffing findings against the roadmap view's claims and offering
-  refresh. Keep each view's verification date honest until that refresh occurs.
+- **Planning changes remain proposals.** Completion reconciliation does not
+  authorize new horizons, priorities, dates or scope. Surface those decisions
+  separately while applying the source-backed completion updates in this run.

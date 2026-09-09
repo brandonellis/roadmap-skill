@@ -71,9 +71,11 @@ verification stays unknown, not an assertion that no implementation work exists.
 
 `scripts/render-cohort-findings.mjs` validates and renders that breakdown with
 `assets/cohort-findings.css` and the shared shell. Keep the full register collapsed
-until requested, with short partial-reason previews near the visual. Run
-`checkCohortFindings(page)` from `scripts/check-cohort-findings.mjs` against the
-artifact; tests must click counts and marks, not just inspect their colors.
+until requested, with short partial-reason previews near the visual. When a
+browser-testing session is already available, the optional maintainer/artifact
+QA helper `checkCohortFindings(page)` in `scripts/check-cohort-findings.mjs`
+clicks counts and marks, not just their colors. It is not a prerequisite to use
+the skill; report browser checks not performed when tools are unavailable.
 Canceled, duplicate, accepted-risk and ticket-Done are not verified closures.
 Deduplicate once with an explicit mapping; never count a finding twice because
 it appears in two views, multiple tickets or two throughlines.
@@ -182,6 +184,12 @@ Retain any legacy revision fields in existing records; richer manifests belong
 in new assessments or separately attributed import metadata.
 
 ## Persist before publishing
+
+Reconcile the existing roadmap through `roadmap-reconciliation.md` before
+publishing a re-grade. Its completion observations cover all roadmap items,
+including delivered work outside the original finding cohort. Keep them in the
+shared artifact model, separate from immutable assessments and grading criteria.
+An unchanged grade must not leave the board or Gantt on stale completion data.
 
 Use a machine-readable ledger, not prose memory alone. Default local home is
 `docs/roadmap/assessment-ledger.json` in the project repo; if repo writes are not

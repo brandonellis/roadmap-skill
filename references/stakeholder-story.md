@@ -23,6 +23,12 @@ acceptance remains. Place brief reasons beside the cohort visual and keep the
 full requirement/evidence breakdown one click away. Tracker Done and verified
 closure can disagree; label the discrepancy rather than hiding the work.
 
+On every re-grade, reconcile the roadmap itself using
+`roadmap-reconciliation.md`. A count of closed audit findings or recent Done
+issues does not update roadmap outcomes. Show which roadmap items are completed,
+which have advanced and what remains, with the same states in board and Gantt.
+Credit completed work outside the grading cohort without inflating the grade.
+
 ## Inherit the original brief
 
 Audience, purpose, disclosure boundary, desired decision, horizon, visual
@@ -49,17 +55,20 @@ Hidden tabs and client-side filters are not permission boundaries. Never embed
 restricted evidence in an external edition, even collapsed. Do not republish or
 broaden sharing merely because an audience name is in the brief.
 
-## Three different kinds of progress
+## Four different kinds of progress
 
 Keep these measures distinct, labelled and source-linked:
 
 1. **Work completed:** unique tracker items currently Done within an explicit
    completion window. Use completion timestamps, not just updates; finish
    pagination and disclose exclusions. Not effort, deployment or impact.
-2. **Original findings addressed:** the fixed baseline cohort's tracker status
+2. **Roadmap outcomes completed:** current source-backed completion of the whole
+   roadmap, with original acceptance, reported completion and verified delivery
+   distinguished. Not limited to the audit cohort or recent ticket window.
+3. **Original findings addressed:** the fixed baseline cohort's tracker status
    and, separately, verified closures. A recoverable ticketed subset is labelled
    a subset, never substituted for the entire assessment inventory.
-3. **Operational readiness:** evidence against the frozen grading contract,
+4. **Operational readiness:** evidence against the frozen grading contract,
    scoped to code or a named environment. Done does not automatically raise it.
 
 A flat or unavailable grade must not erase measured delivery. Name the actual

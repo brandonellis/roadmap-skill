@@ -65,6 +65,11 @@ Show scheduling coverage: `6 committed / 2 proposed / 4 unscheduled`.
 
 ## Progress and drift
 
+Use `roadmap-reconciliation.md` on re-grades as well as refreshes. Completion
+annotations come from the same observations as the board, even when an inherited
+Gantt preserves old planning windows. Keep the planning date and completion-check
+date separate. A fresh scorecard must not leave stale ticket counts on the bars.
+
 Track actual delivery separately from ticket closure. Where refs exist, a
 progress annotation may say `7 of 10 linked tickets done`; deduplicate refs,
 map genuine completed states, and exclude canceled/duplicate refs from both

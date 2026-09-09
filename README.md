@@ -2,7 +2,8 @@
 
 Executable grading, outcome-led updates and private publication checks are
 documented in [the implementation guide](references/executable-grading.md).
-Run the dependency-free regression suite with `node --test scripts/*.test.mjs`.
+Maintainers changing executable helpers can run the dependency-free regression
+suite with `node --test scripts/*.test.mjs`; it is not a skill-use prerequisite.
 Draft contracts do not award grades; legacy assessment history stays immutable.
 
 A [Claude Code](https://claude.com/claude-code) skill that builds and maintains a
@@ -34,7 +35,7 @@ Then invoke it in any Claude Code session with `/roadmap`.
 | `/roadmap refresh` | Drift report against the live tracker, then apply the delta |
 | `/roadmap gantt` | Add or update the Timeline view with sourced commitments, explicit scenarios and an unscheduled shelf |
 | `/roadmap wsjf [<source>]` | Opt in to WSJF cost-of-delay scoring: bare bootstraps a worksheet, a target reads existing scoring |
-| `/roadmap grade [<baseline-url>]` | Audit against the established initial baseline, append an immutable dated assessment, and update Progress and Evidence in the same artifact |
+| `/roadmap grade [<baseline-url>]` | Audit against the established initial baseline, reconcile roadmap completion, append an immutable assessment, and update Roadmap, Progress and Evidence together |
 | `/roadmap score [<baseline-url>]` | Alias of `grade`, with the same baseline and ledger; not WSJF priority scoring |
 | `/roadmap help` | Show the mode table |
 
@@ -148,9 +149,10 @@ invoking the skill can do:
   in the reader's browser, not on your machine. It makes no network calls of its own:
   no `fetch`, no `eval`, no analytics. The new shell uses text-only DOM updates;
   the legacy interaction layer also uses one static `innerHTML` string.
-- **Verification runs local commands.** Headless Chrome for a DOM smoke test and
-  three screenshots (`--headless=new --dump-dom`, `--screenshot`), and
-  `grep -c` over the finished page for the em-dash gate.
+- **Verification uses available tools.** Check source IDs, links, counts, history
+  and copy with the tools already present. Browser inspection is optional when
+  a browser tool is available. No Chrome, Playwright or framework installation
+  is required to use the skill; unavailable checks are disclosed, not claimed.
 - **Reach is tool-mediated and yours.** Whatever you have connected: the `gh` CLI,
   a Linear or Jira MCP, Drive, Slack, Fireflies, and the Artifact tool to read and
   publish. The skill carries no credentials and no endpoints of its own; where it
@@ -170,11 +172,19 @@ Unrecoverable legacy evidence stays labelled unknown or originally reported;
 it is never invented to make the old grades comparable. New assessments append
 to History. No old artifact is automatically migrated merely by pulling this repo.
 
-## Validation
+Every re-grade of an existing roadmap also reconciles its completion against
+linked issues and outcome/milestone records, including work outside the audit
+finding cohort. Board, Gantt and Progress update together without moving planning
+commitments or treating Done as an automatic grade increase. See
+[roadmap reconciliation](references/roadmap-reconciliation.md).
 
-The copy-ready scripts are browser code, so syntax checks alone are insufficient.
-Use the bounded scenario checks in `artifact-views.md`, `progress-layout.md` and
-`baseline-ledger.md`:
+## Maintainer validation and optional artifact QA
+
+Maintainer regression tests protect the shared helpers. Browser-specific checks
+need an existing browser-testing session; exported helpers take a page object
+and do not provision one. These are not installation or ordinary usage steps.
+For maintainer work or artifact QA when tools are available, use the bounded
+scenario checks in `artifact-views.md`, `progress-layout.md` and `baseline-ledger.md`:
 keyboard/deep-link/filter/print behavior, unchanged-evidence grading, reopening,
 missing access, scope changes and explicit rebaseline. The repo does not install
 a test framework. Claude Code's existing `argument-hint` frontmatter is intentional;

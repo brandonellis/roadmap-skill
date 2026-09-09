@@ -39,7 +39,7 @@ a new audience on update. Lead with visuals and wins, link to technical evidence
 | `refresh` | drift report → apply | See "Refresh is a drift report" below. |
 | `gantt` | timeline view | Add or update Timeline in the canonical artifact; standalone export only on request. See "The dates rule" below; never choose this mode yourself. |
 | `wsjf [<path-or-url>]` | scoring layer | Opt in to WSJF cost-of-delay ranking: bare bootstraps a scoring worksheet from the themes; a target reads existing scoring. Recorded once, inherited by every later run. See "WSJF mode" below; never choose this mode yourself. |
-| `grade [<baseline-card-url>]` | baseline assessment | Audit explicit code refs and each runtime environment against the established initial baseline. Append a dated assessment, update Progress and Evidence in the same hub, and show initial/current/target A+ with fixed criteria and verified progress. An explicit URL selects a lineage, not a reset. See "Grade mode" and its references. |
+| `grade [<baseline-card-url>]` | baseline assessment | Audit explicit code refs and each runtime environment against the established initial baseline. Reconcile existing roadmap completion, append a dated assessment, and update Roadmap, Progress and Evidence in the same hub. Show initial/current/target A+ with fixed criteria and verified progress. An explicit URL selects a lineage, not a reset. See "Grade mode" and its references. |
 | `score [<baseline-card-url>]` | alias of grade | Same maturity assessment, baseline and ledger as `grade`; never WSJF. Requests for cost-of-delay or priority ranking use `wsjf`. Clarify ambiguous scoring requests before scanning. |
 | `help` | show the modes | Print this table with one-line examples and stop — no scanning, no artifact work. Also the right response to any argument that matches no mode: show the table and ask, never guess a mode. |
 
@@ -69,6 +69,9 @@ kicker, and nothing else (no re-synthesis). Check both directions: a page callin
 closed ticket open is stale; a page calling an open ticket done is worse, especially
 where ticket status feeds compliance evidence. The delta since the *sibling* artifact's
 stamp is often the most valuable output — surface it, don't bury it.
+Use `references/roadmap-reconciliation.md` to check whole roadmap outcomes as
+well as individual tickets. Completion reconciliation is also part of every
+`grade`/`score` update to an existing roadmap, not a separate optional refresh.
 
 ## The dates rule (decided, do not re-litigate per run)
 
@@ -133,7 +136,7 @@ not WSJF's prioritization semantics. Load `references/report-card.md`,
 The ledger owns baseline identity, history, roll-up and A+ acceptance. Never
 choose this mode yourself.
 
-Eight rules that are non-negotiable even without the reference loaded:
+Nine rules that are non-negotiable even without the reference loaded:
 - **Auditors grade blind to the letters and read-only, never blind to the
   standard** — they never see prior grades and never fix what they find, but
   every prompt carries the calibration sheet (`references/grade-anchors.md`,
@@ -164,11 +167,17 @@ Eight rules that are non-negotiable even without the reference loaded:
 - **Twin verdict always:** as-written AND operational reality — merged-but-
   not-deployed is an activation gap, credited in one and debited in the other.
 - **Every assessment is immutable, not every URL.** Append a dated ledger entry,
-  then update Progress and Evidence in the canonical hub without
+  then update Roadmap, Progress and Evidence in the canonical hub without
   deleting earlier records. New snapshot URLs are optional exports. Operational
   A+ requires the fixed acceptance checks, live proof and no blocking gaps;
   unknown evidence is Incomplete, never a carried-forward pass. File tickets
   for new findings when authorized; otherwise list draft findings explicitly.
+- **Reconcile delivery, not just audit findings.** Follow
+  `references/roadmap-reconciliation.md`: check every existing roadmap item and
+  its linked work, including completed items outside the baseline finding cohort.
+  Update completion in the board and Gantt from one observation set. Show what
+  shipped, what remains and why a grade did or did not change. Do not move
+  horizons, invent delivery dates or equate tracker Done with operational A+.
 - **A priced, triggered, live-verified exception lowers no grade** — where the
   project keeps an exception register, an entry suppresses its cell's penalty
   only while it names a dated price, states a trigger the card can check, and
@@ -331,12 +340,17 @@ throughline filter (the color key is the control, with a fixed clear-chip),
 collapsible sections with count badges (localStorage, try/catch), and tooltips
 derived at load from the detail cards so they cannot drift from the content.
 
-### Verification is bounded — one batched round, one fix batch, stop
+### Verification is capability-aware and bounded
 
-Build the page fully, then run ONE batched inspection round; open-ended self-QA
-polishing loops burn money doing worse what a human glance does better.
+Generating an artifact does not require a browser-testing framework or the
+skill's maintainer regression suite. Use browser tools only when already
+available in the session; do not install Chrome, Playwright or dependencies
+merely to run this skill. Without them, check source IDs, links, counts and
+embedded data with available tools, and disclose that browser interaction and
+visual checks were not performed. This is not a blocker to a local artifact.
 
-The round, all together (headless Chrome, wrap the content file in a doctype shell):
+When browser tools are available, build the page fully, then run ONE batched
+inspection round. With headless Chrome already available, for example:
 
 1. **DOM smoke**: `--headless=new --virtual-time-budget=4000 --dump-dom` — the
    interaction script ran iff the section toggles and count badges appear, and the
@@ -348,7 +362,7 @@ The round, all together (headless Chrome, wrap the content file in a doctype she
    Look for the classic breaks: one theme's text on the other's ground, horizontal
    body scroll, clipped tooltips/labels, a figure overflowing its container.
 
-Fix everything the round shows in ONE batch, re-run at most one confirming round,
+Fix what the round shows in ONE batch, re-run at most one confirming round,
 then publish. Anything still imperfect after that ships and is noted — the finish
 pass is the user looking at their own page.
 

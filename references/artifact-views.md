@@ -41,9 +41,12 @@ near the content; a skill filter is optional metadata, not primary navigation.
 Read the remote page before editing. Preserve unrelated views, title, favicon,
 user decisions and the design contract. Each mode owns only its slice of data.
 `refresh` does not regrade; `grade` does not move horizons or invent dates;
-`gantt` does not rescore priorities. If a new assessment contradicts an older
-roadmap slice, show both verification dates and offer refresh. Never restamp
-unchanged views as freshly verified. Old single-page artifacts can adopt the
+`gantt` does not rescore priorities. `grade`/`score` does reconcile roadmap
+completion in the same revision, per `roadmap-reconciliation.md`; ownership of
+assessment data is not permission to leave completed work looking unfinished.
+Planning changes still need their own decisions. Keep planning, completion and
+assessment verification dates separate. Never restamp unchecked views as freshly
+verified. Old single-page artifacts can adopt the
 shell without renaming existing anchor IDs or discarding their content.
 
 ## Shared model, not separate interpretations
@@ -57,12 +60,15 @@ artifactBrief: audience, purpose, desiredDecision, disclosureBoundary,
                horizon, requestedViews[], visualDirection, confirmationRefs[]
 viewProvenance[]: viewId, generatedBy, verifiedAt, sourceRevision
 items[]: id, title, outcome, streamId, throughlineIds[], horizon
-         status, owner, sourceRefs[], findingIds[], nextProof
+         status, owner, sourceRefs[], linkedIssueIds[], findingIds[], nextProof
          originalWindow, currentWindow, dateProvenance, confirmedWsjf
 sources[]: id, authority, observedAt, safeReference
 assessmentLedgerRef, originalBaselineId, currentAssessmentId
 decisions[], risks[], sourceConflicts[]
 deliveryObservations[]: observedAt, completionWindow, issueIds[], exclusions[]
+roadmapCompletionObservations[]: id, itemId, observedAt, previousObservationRef,
+  issueStates[], outcomeRefs[], reportedCompletion, verificationScope,
+  completedWork, remainingWork, gradeCriterionIds[], gradeImpactReason, gaps[]
 baselineCohorts[]: id, sourceRef, originalIds[], subsetLabel, trackerStates[]
 ```
 
@@ -86,11 +92,14 @@ representations. A legacy dropdown may coexist, but cannot replace an existing
 clickable theme key with an inert color legend. Place the shared controls outside
 the primary panels and preserve the no-JavaScript labels.
 
-In the artifact's browser checks, call `checkThemeFilters(page)` from
+For maintainer regression checks or optional artifact QA with an existing
+browser-testing session, call `checkThemeFilters(page)` from
 `scripts/check-theme-filters.mjs`. It exercises the actual colored controls and
 item tags in both directions, switches NNL/Gantt and primary views, tests keyboard
 activation and clearing, and checks that the ledger never changes. A test that
-only selects a dropdown does not cover this interaction.
+only selects a dropdown does not cover this interaction. The helper accepts an
+existing page; it neither installs nor provides a browser. Do not require it of
+skill users without that capability.
 
 Show `Showing n of N items` for a filtered selection; empty results include a
 clear action. The initial finding denominator and the overall operational grade
@@ -269,9 +278,12 @@ verify roles, selected state and keyboard behavior, not just appearance.
 The original anchors remain the no-JS fallback. Fragment links open their owning
 panel; the interaction layer then reveals filtered or collapsed detail content.
 
-## One bounded verification round
+## One bounded verification round, when browser tools are available
 
-Use the same built artifact for all checks. Assert more than "the script ran":
+Use the same built artifact for all available checks. Do not install a browser
+or testing framework to satisfy this list. Without browser access, check the
+source/model consistency and name the interaction and visual checks not run.
+When inspecting in a browser, assert more than "the script ran":
 
 - Tab order, arrows, Home/End, Enter/Space, selected state, cross-view detail
   links, initial deep links, Back/Forward and malformed hashes.

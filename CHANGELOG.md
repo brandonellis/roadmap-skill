@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- Reconcile the whole roadmap during every re-grade, rather than offering a
+  separate refresh. Check linked issues, original subtasks and outcome/milestone
+  completion, including work outside the audit cohort. Update board, Gantt and
+  Progress together; show delivered work and remaining acceptance without
+  changing baseline criteria, planning commitments or grades from ticket counts.
+- Separate maintainer regression tests from ordinary skill use. Browser QA is
+  optional when tools are already available, with no browser/framework install
+  prerequisite. Disclose unperformed checks instead of claiming verification.
+
 - Make cohort counts and individual marks open exact ticket records. Partial
   findings show verified work and unmet original acceptance, with separate
   tracker and tier status. Keep the detailed register secondary and test its

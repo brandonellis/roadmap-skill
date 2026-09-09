@@ -63,6 +63,11 @@ filter may be passed to the evaluator as a smaller contract.
 
 ## Progress even when the letter stays still
 
+First reconcile every existing roadmap item using `roadmap-reconciliation.md`.
+`compareFindings` compares audit findings only; it does not read a tracker,
+discover completed roadmap outcomes or update Now/Next/Later and Gantt for you.
+Feed the reconciled delivery observations to those views in the same revision.
+
 Use `compareFindings(initialIds, previousStatesOrNull, currentStates)` for exact
 resolved, partial, open, unknown, reopened and newly discovered ID sets. Compare
 like scopes and verification standards. If the previous assessment lacks finding
@@ -86,8 +91,14 @@ without claiming they are committed, implemented or deployed.
 
 ## Verify before publishing
 
-Run `node --test scripts/*.test.mjs`. Project artifact verification additionally
-uses a private `publication-manifest.json` with `schemaVersion: 1`, `visibility:
+Maintainers changing the shared executable helpers run
+`node --test scripts/*.test.mjs` with Node available. Skill users do not need
+to run the repository regression suite or install browser-testing dependencies
+to generate an artifact. Browser QA is optional and capability-aware; source
+and ledger checks still apply, and unavailable checks must be disclosed.
+
+For the private-bundle workflow, project artifact verification uses a private
+`publication-manifest.json` with `schemaVersion: 1`, `visibility:
 private`, `assessmentId`, `audience`, `artifactFile`, `ledgerFile`, `historyLockFile`
 and an explicit `files` array of relative `path` + SHA-256. Include linked archives
 and evidence files needed for the private artifact. Do not include the publication
