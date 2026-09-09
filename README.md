@@ -35,6 +35,16 @@ Then invoke it in any Claude Code session with `/roadmap`.
 
 ## What makes it opinionated
 
+- **The original audience persists.** Investor, executive and company editions
+  share evidence but tell different stories. Creation captures the brief; later
+  runs inherit it rather than asking again or switching to an engineering audit.
+- **Progress is visible, not just graded.** Source-linked delivery charts,
+  original-finding progress, wins and milestones lead. Tracker completion,
+  operational verification and customer impact remain distinct claims.
+- **Existing visuals survive updates.** A Gantt is recovered and retained with
+  its original assumptions, not replaced by an unscheduled table simply because
+  a newer NNL source lacks dates.
+
 - **One artifact, three clear views.** Progress, Roadmap and Evidence appear
   only when populated. NNL and opt-in Timeline are roadmap formats. Skill names are
   provenance, not navigation. All views share item IDs and filters, while
@@ -78,6 +88,11 @@ Then invoke it in any Claude Code session with `/roadmap`.
   local-file-only on the table.
 
 ## Contents
+
+- `references/stakeholder-story.md` owns audience inheritance, evidence-backed
+  progress storytelling, visual retention and safe audience-specific exports.
+- `assets/stakeholder-visuals.css` supplies delivery bars, baseline-cohort marks,
+  linked win lists and the responsive Gantt. Use with the progress shell assets.
 
 - `SKILL.md` is the skill itself: modes, the four phases, the decided rules.
 - `references/artifact-views.md` is the shared-model/view contract, copy-ready

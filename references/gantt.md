@@ -4,6 +4,21 @@ Use only when `gantt` is requested. Timeline is a view of the same artifact
 model, not a separately maintained roadmap. An explicitly requested standalone
 export uses that same model revision and links to the canonical artifact.
 
+## Preserve an existing chart
+
+An already-requested Gantt stays part of the artifact on future updates.
+Inventory and read it before deciding dates are absent. An NNL source without
+dates does not erase a companion chart's windows. Recover the chart from the
+canonical artifact, original source, saved build or creation record if necessary.
+
+Retain historical source-stated windows and horizon-derived scenarios with their
+original geometry, provenance and observation date. Restoring an existing
+scenario is not inventing a new commitment. Label it `Historical planning
+scenario`, not a current forecast; never silently promote old estimates to
+commitments. A provenance warning belongs beside the chart, not instead of it.
+If recovery fails, preserve its reference and name the gap rather than asserting
+every item was always unscheduled. Only newly undated items go on the shelf.
+
 ## Date contract
 
 Each item keeps `originalWindow`, `currentWindow`, `dateSource`, `confirmedAt`

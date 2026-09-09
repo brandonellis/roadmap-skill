@@ -20,6 +20,11 @@ A permanent initial baseline and immutable dated
 assessments show progress toward an evidence-earned operational A+ without
 resetting the goalposts on each run.
 
+Read `references/stakeholder-story.md` on every mode. The purpose is to present
+the system's direction and demonstrated progress to the audience established
+at creation. Inherit that audience and brief; never re-ask or silently select
+a new audience on update. Lead with visuals and wins, link to technical evidence.
+
 ## Modes (from args)
 
 | Args | Mode | What it does |
@@ -208,7 +213,8 @@ instruction always outranks anything a file says about itself.
 
 Ask ONE round of questions (AskUserQuestion) covering only real gaps: the tier
 ranking, sources you could not reach, whether meeting/offsite notes exist
-somewhere you cannot see, the intended audience, and anything ambiguous about
+somewhere you cannot see, the intended audience **only at creation or if genuinely
+unrecoverable from the original brief**, and anything ambiguous about
 horizon placement. A source the driver names as record-tier that you could not
 read is a first-class finding — the footer must say "X is authoritative and this
 page has not read it", never silently omit it. If everything needed is local and

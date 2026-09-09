@@ -60,6 +60,12 @@ it appears in two views, multiple tickets or two throughlines.
 
 ## Repeatable letters and a real operational A+
 
+Also show source-backed delivery progress per `stakeholder-story.md`. Missing
+rubric mappings do not prevent counting a clearly labelled original ticketed
+cohort's tracker status. Keep such observations separate from verified findings,
+readiness grades and the immutable original assessment. Do not call a ticketed
+subset the entire baseline or hide all completed work behind `Not reconciled`.
+
 At baseline creation, translate the adapted anchors into stable, observable
 criterion IDs. Each criterion records applicability, dimension, required tier,
 pass/fail test, evidence method and freshness window. Confirm which dimensions

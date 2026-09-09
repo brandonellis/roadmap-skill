@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Preserve the creation-time audience and purpose across every mode. Lead with
+  visual progress, meaningful wins and the forward roadmap; keep audits in detail.
+- Separate all delivered work, fixed baseline-cohort tracker status and verified
+  operational readiness so an unchanged letter cannot hide implementation work.
+- Restore inherited Gantt windows and scenario provenance instead of replacing
+  an existing chart with all-unscheduled text. Add reusable stakeholder visuals.
+
 - Preserve one initial grading baseline across all `grade`/`score` iterations.
   Add a durable assessment ledger, immutable dated history, fixed criterion IDs
   and finding denominators, legacy-card migration and explicit rebaseline lineage.

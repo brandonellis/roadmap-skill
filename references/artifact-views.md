@@ -9,6 +9,14 @@ Tabs are not an access control: hidden content is still published content.
 Read in order: navigation/ownership; shared model; visual direction; copy-ready
 shell; bounded verification. The shell's code is for building, not source scanning.
 
+First inherit the creation-time `artifactBrief` per `stakeholder-story.md`.
+Changing modes never changes the audience. Progress is a visual delivery story
+with a readiness lens, not a technical audit pasted into the first tab.
+For a combined stakeholder roadmap, order navigation Roadmap, Progress, Evidence
+and land on Roadmap. The board/Gantt and dated visual grade strip lead; audit
+detail remains behind explicit drill-downs. An established brief may override
+that order, and a grade-only artifact need not fabricate a roadmap.
+
 ## Navigation and ownership
 
 | View | Reader's question | Content owner |
@@ -45,6 +53,8 @@ file used to generate static HTML; dynamic rendering is not required. Minimum:
 
 ```text
 schemaVersion, projectId, artifactRevision, canonicalUrl
+artifactBrief: audience, purpose, desiredDecision, disclosureBoundary,
+               horizon, requestedViews[], visualDirection, confirmationRefs[]
 viewProvenance[]: viewId, generatedBy, verifiedAt, sourceRevision
 items[]: id, title, outcome, streamId, throughlineIds[], horizon
          status, owner, sourceRefs[], findingIds[], nextProof
@@ -52,6 +62,8 @@ items[]: id, title, outcome, streamId, throughlineIds[], horizon
 sources[]: id, authority, observedAt, safeReference
 assessmentLedgerRef, originalBaselineId, currentAssessmentId
 decisions[], risks[], sourceConflicts[]
+deliveryObservations[]: observedAt, completionWindow, issueIds[], exclusions[]
+baselineCohorts[]: id, sourceRef, originalIds[], subsetLabel, trackerStates[]
 ```
 
 Stable IDs join representations. A renamed theme keeps its ID. Every rendered

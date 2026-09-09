@@ -6,6 +6,16 @@ blocks the target, and which action would supply the next proof. Preserve the
 project's visual identity. Do not wrap complete old reports in a new tab bar and
 call that a clearer current assessment.
 
+The creation-time audience takes precedence over this operational composition.
+For a stakeholder roadmap, follow `stakeholder-story.md`: delivery chart, fixed
+baseline cohort, wins and forward plan first; use this assessment layout as a
+compact lens or evidence drill-down. Do not replace a visual progress story with
+repeated unknown-grade rows. `assets/stakeholder-visuals.css` supplies the delivery,
+cohort and Gantt components alongside the progress shell.
+Its primary landing view is Roadmap, with the visual grade strip alongside the
+board or Gantt. This operational layout is secondary, never a reason to replace
+the roadmap's visuals with full audit text.
+
 ## The approved reading order
 
 ```text
