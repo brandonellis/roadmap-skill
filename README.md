@@ -60,6 +60,9 @@ Then invoke it in any Claude Code session with `/roadmap`.
 - **The timeline carries the story.** Themes label the left-hand lanes; initiative
   titles and current progress live inside the bars. Non-overlapping work shares
   tracks without moving dates. Undated priorities stay visibly unscheduled.
+- **Completed work stays useful.** Muted items still open their explanations.
+  Completed milestones keep remaining work visible instead of claiming the
+  whole initiative is finished; completion styling never comes from counts alone.
 
 - **One artifact, three clear views.** Progress, Roadmap and Evidence appear
   only when populated. NNL and opt-in Timeline are roadmap formats. Skill names are

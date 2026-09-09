@@ -1,4 +1,5 @@
 import { escapeHtml } from './render-progress.mjs';
+import { completionPresentation } from './render-completion.mjs';
 
 export function packTimelineTracks(items) {
   const tracks = [];
@@ -37,15 +38,16 @@ export function renderRoadmapTimeline(model) {
     }
   }
   const renderItem = item => {
+      const completion = completionPresentation(item.completion);
       const throughlines = item.throughlineIds || [item.themeId];
       if (!throughlines.includes(item.themeId) || throughlines.some(id => !themes.has(id))) throw new Error('Timeline memberships need known themes including the primary theme');
-      const description = [item.title, item.statusLabel, item.windowLabel, item.windowType, item.sourceNote].filter(Boolean).join('. ');
+      const description = [item.title, completion.statusText || item.statusLabel, item.windowLabel, item.windowType, item.sourceNote].filter(Boolean).join('. ');
       const secondary = throughlines.filter(id => id !== item.themeId).map(id => themes.get(id).name);
-      const content = `<strong class="rm-gantt-title">${escapeHtml(item.title)}</strong><span class="rm-gantt-status">${escapeHtml(item.statusLabel || 'Progress not verified')}</span>${secondary.length ? `<span class="rm-gantt-secondary">Also: ${escapeHtml(secondary.join(', '))}</span>` : ''}`;
+      const content = `<strong class="rm-gantt-title">${escapeHtml(item.title)}</strong><span class="rm-gantt-status">${completion.statusHtml || escapeHtml(item.statusLabel || 'Progress not verified')}</span>${secondary.length ? `<span class="rm-gantt-secondary">Also: ${escapeHtml(secondary.join(', '))}</span>` : ''}`;
       const window = item.windowType === 'unscheduled'
         ? `<a href="#${item.id}" class="rm-gantt-unscheduled" aria-label="${escapeHtml(description)}" title="${escapeHtml(description)}">${content}<span class="rm-gantt-window-note">${escapeHtml(item.windowLabel)}</span></a>`
         : `<a href="#${item.id}" class="rm-gantt-bar${item.windowType === 'scenario' ? ' is-scenario' : ''}" style="--start:${item.start / model.months.length * 100}%;--duration:${item.duration / model.months.length * 100}%" aria-label="${escapeHtml(description)}" title="${escapeHtml(description)}">${content}</a>`;
-      return `<div class="rm-gantt-row rm-theme-${item.themeId}" data-roadmap-item="${item.id}" data-throughlines="${escapeHtml(throughlines.join(' '))}" data-search-text="${escapeHtml([description, item.searchText].filter(Boolean).join(' '))}">${window}</div>`;
+      return `<div class="rm-gantt-row rm-theme-${item.themeId}" data-roadmap-item="${item.id}"${completion.attributes} data-throughlines="${escapeHtml(throughlines.join(' '))}" data-search-text="${escapeHtml([description, item.searchText].filter(Boolean).join(' '))}">${window}</div>`;
   };
   const lanes = [...themes.values()].filter(theme => theme.items.length).map(theme => {
     const tracks = packTimelineTracks(theme.items).map(track => `<div class="rm-gantt-track" data-roadmap-track>${track.map(renderItem).join('')}</div>`).join('');

@@ -73,7 +73,17 @@
 .roadmap-shell .rm-gantt-undated-items .rm-gantt-row { flex: 0 1 340px; grid-area: auto; }
 .roadmap-shell .rm-gantt-theme-lanes .rm-gantt-unscheduled { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; min-height: 90px; margin: 0; padding: 12px; border: 1px solid var(--theme); background: var(--theme-soft); color: var(--theme); text-decoration: none; pointer-events: auto; }
 .rm-gantt-theme-lanes :is(a, button):focus-visible { outline: 2px solid var(--theme, var(--rm-ink)); outline-offset: 3px; }
+.roadmap-shell { --rm-completed-bg: #edf0f2; --rm-completed-ink: #56616b; --rm-completed-rule: #a8b2ba; --rm-completed-hover: #e2e7eb; }
+:root[data-theme="dark"] .roadmap-shell { --rm-completed-bg: #27313a; --rm-completed-ink: #c0cad3; --rm-completed-rule: #75818c; --rm-completed-hover: #303d48; }
+.roadmap-shell :is(.rm-matrix-pill, .rm-gantt-row, .rm-item)[data-completion-state] { --theme: var(--rm-completed-ink); --theme-soft: var(--rm-completed-bg); }
+.roadmap-shell :is(.rm-matrix-pill, .rm-item)[data-completion-state] { background: var(--rm-completed-bg); border-color: var(--rm-completed-rule); color: var(--rm-completed-ink); }
+.roadmap-shell .rm-gantt-row[data-completion-state] :is(.rm-gantt-bar, .rm-gantt-unscheduled) { background: var(--rm-completed-bg); border-color: var(--rm-completed-rule); }
+.rm-completion-label { font-weight: 600; }
+.rm-completion-remaining { display: block; font-weight: 400; }
+.roadmap-shell .rm-matrix-pill[data-completion-state]:hover, .roadmap-shell .rm-gantt-row[data-completion-state] a:hover { background: var(--rm-completed-hover); }
+.roadmap-shell .rm-matrix-pill[data-completion-state]:focus-visible, .roadmap-shell .rm-gantt-row[data-completion-state] a:focus-visible { outline: 2px solid var(--rm-ink); outline-offset: 3px; }
 @media print {
+  .roadmap-shell :is(.rm-matrix-pill, .rm-gantt-row, .rm-item)[data-completion-state] { --rm-completed-bg: #f1f1f1; --rm-completed-ink: #444; --rm-completed-rule: #999; }
   .roadmap-shell .rm-gantt-theme-lanes { --rm-lane-width: 140px; min-width: 0; }
   .roadmap-shell :is([data-roadmap-lane], [data-roadmap-track])[hidden] { display: grid !important; }
   .rm-gantt-lane-label, .rm-gantt-lane-label > div { position: static; }

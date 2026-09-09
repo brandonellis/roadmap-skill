@@ -153,6 +153,29 @@ project into an A+. A filtered grade is labelled `Selected components`, never
 
 ## Chart-to-detail navigation
 
+### Completed work remains accessible
+
+Use a muted neutral treatment for completed work in both the matrix and Gantt,
+not literal disabled controls. Keep real links, normal keyboard access, focus,
+theme memberships, search and return navigation. Use readable neutral tokens,
+not reduced opacity, removed hrefs, `aria-disabled` or pointer-event blocking.
+
+Both renderers accept an optional `completion` object with `state`, `label`,
+`scope` and `evidenceHref` pointing to the canonical evidence detail. State is
+`complete` only when the entire scoped initiative is evidenced complete. Use
+`milestone-complete` for a delivered part with outstanding work, and include a
+visible `remainingLabel`, such as `Follow-ups remain`. The latter must never
+look like a claim that the whole initiative is finished.
+
+`scripts/render-completion.mjs` supplies the shared validated presentation and
+`assets/roadmap-structure.css` its light/dark neutral tokens. Canonical details
+may use the same attributes. Do not infer completion from ticket counts, titles,
+an empty ticket set or a word such as `migrated`. Completion styling changes
+neither schedule geometry nor grades. Explain the muted state in the chart key
+or caption, never between the theme filters and the chart.
+
+### Return behavior
+
 The canonical initiative disclosures belong below both format panels, inside
 Roadmap, not inside NNL alone. Mark each with `data-roadmap-detail` and keep its
 existing anchor ID and filter identity. Insert `renderRoadmapReturn()` from

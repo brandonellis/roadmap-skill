@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Add source-scoped muted completion styling across matrix, Gantt and details.
+  Keep explanation links, keyboard focus and filtering active. Completed
+  milestones require a visible remaining-work label and never imply that the
+  entire initiative is finished. Ticket counts alone do not trigger the style.
+
 - Compose stakeholder Gantts as theme lanes under one continuous calendar, with
   initiative titles and progress inside the bars instead of repeated quarters.
   Pack non-overlapping windows without changing dates, retain cross-theme

@@ -30,6 +30,12 @@ acceptance remains. Place brief reasons beside the cohort visual and keep the
 full requirement/evidence breakdown one click away. Tracker Done and verified
 closure can disagree; label the discrepancy rather than hiding the work.
 
+Let completed work visually recede without disappearing. Use the shared muted
+completion treatment from `artifact-views.md`, with working explanation links.
+For a completed core milestone, retain a visible follow-ups-remain label rather
+than presenting the whole initiative as finished. Partial ticket counts alone
+do not qualify an initiative for completion styling.
+
 On every re-grade, reconcile the roadmap itself using
 `roadmap-reconciliation.md`. A count of closed audit findings or recent Done
 issues does not update roadmap outcomes. Show which roadmap items are completed,

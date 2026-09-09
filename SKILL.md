@@ -39,6 +39,10 @@ For stakeholder Gantts, use theme lanes and one continuous calendar. Put initiat
 titles and current progress inside the bars, not repeated quarter labels. Keep
 source dates intact, and put undated priorities on a clearly separate shelf.
 
+Completed work can be muted but never made non-interactive. Preserve explanation
+links, keyboard access and filters, and distinguish completed milestones with
+remaining work from fully completed initiatives. Do not infer this from counts.
+
 ## Modes (from args)
 
 | Args | Mode | What it does |
