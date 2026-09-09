@@ -1,13 +1,16 @@
 # The interaction layer — filter · collapse · derived tooltips
 
 Proven on shipped roadmap pages; adapt class names/tokens to the page's own
-design system. Three mechanics:
+design system. Load the view shell from `artifact-views.md` first. Its panel
+navigation is shared by all modes; this layer owns filter, collapse and previews.
 
-1. **Theme filter** — the color-key strip IS the control. Clicking a theme dims
-   non-matching board pills (layout preserved), hides non-matching table rows and
+1. **Theme filter** — the color-key strip IS the control. Clicking a theme hides
+   non-matching item representations, including board pills, table rows and
    detail cards, injects a "nothing on this line in this horizon" placeholder into
    emptied sections, and shows a fixed clear-chip bottom-right (the filter must be
-   clearable from anywhere on a long page). Click the active key again, or the
+   clearable from anywhere on a long page). Shared `data-roadmap-item` hooks make
+   the same selection apply to timeline rows and other item representations.
+   History and overall grades stay unfiltered. Click the active key again, or the
    chip, to clear. Filter state is NOT persisted — a returning viewer gets the
    whole page.
 2. **Collapsible sections** — every section header gets a chevron + count badge
@@ -16,10 +19,8 @@ design system. Three mechanics:
    throw). Any in-page anchor navigation auto-expands the target's section and
    clears a filter that would hide the target (a jump must always land somewhere
    visible). Dense pages ship detail sections collapsed by default: put
-   `hz-collapsed` on the section in markup, and note the shipped loader only
-   *collapses* from storage (`if (collapsedState[key])`) — it must also expand
-   when the stored value is explicitly `0`, or a viewer who expanded a
-   default-collapsed section gets it re-collapsed on every return visit.
+   `hz-collapsed` on the section in markup. The loader respects both stored `1`
+   and explicit `0`; no-JS and print always expose the full content.
 3. **Derived tooltips** — hovering/focusing a pill previews its detail card:
    theme code, audience chip, title, first sentence of the "why". Content is read
    off the card DOM at first hover and cached, so the tooltip can never drift from
@@ -31,9 +32,14 @@ design system. Three mechanics:
 ## Adaptation contract
 
 The code below assumes these hooks — rename to taste, keep the roles:
-- theme classes `t1…t5` on pills, table rows, cards, and key links; multi-theme
+- theme classes `t1…tN` on pills, table rows, cards, and key links; multi-theme
   items carry `data-tl="t1 t3"` as well.
 - the three horizon card sections carry `data-hz`.
+- every item representation carries its stable `data-roadmap-item` ID; the
+  Evidence & History panel uses `data-view="history"` and is never item-filtered.
+- a root element carries `data-roadmap-id="<project-and-scope-id>"` to namespace
+  collapse preferences; `#roadmap-filter-status` outside the panels is a visible
+  `role="status"` live region for `Showing n of N items`.
 - key links are `<a class="key-link tN" href="#...">` inside a `.key` strip
   (kept as anchors for no-JS fallback; JS adds role=button + aria-pressed).
 - detail cards expose `.why`, `.chip`, `.tcode`; headings carry the ids that
@@ -56,17 +62,19 @@ means the script ran without throwing).
 /* ============================================================
    INTERACTION LAYER: a filter that isolates one line,
    collapsible sections, and tooltips derived from the detail
-   cards. No dates anywhere: Now/Next/Later stays the only
-   time axis on this page.
+   cards. Horizon labels are not schedule commitments.
    ============================================================ */
 
 /* -- the throughline key doubles as the filter -- */
-body.tl-filtered .key a:not(.f-on) { opacity: .45; }
+body.tl-filtered .key a:not(.f-on) { text-decoration: underline; }
 .key a.f-on { outline: 2px solid var(--tc); outline-offset: -2px; opacity: 1; }
 
-body.tl-filtered .board a.pill:not(.f-hit) { opacity: .18; }
+@media screen {
+body.tl-filtered .board a.pill:not(.f-hit) { display: none; }
 body.tl-filtered .thread:not(.f-hit) { display: none; }
 body.tl-filtered section[data-hz] .grid > .card:not(.f-hit) { display: none; }
+body.tl-filtered .roadmap-filtered-out { display: none !important; }
+}
 .f-empty {
   grid-column: 1 / -1; margin: 0;
   font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -107,14 +115,17 @@ body.tl-filtered .filterchip { display: flex; }
 .hz-toggle .chev { display: inline-block; font-size: 9px; }
 @media (prefers-reduced-motion: no-preference) { .hz-toggle .chev { transition: transform .18s ease; } }
 section.hz-collapsed .hz-toggle .chev { transform: rotate(-90deg); }
-@media screen { section.hz-collapsed > *:not(.hz-head) { display: none !important; } }
+@media screen { body.roadmap-interactive section.hz-collapsed > *:not(.hz-head) { display: none !important; } }
 section.hz-collapsed { margin-bottom: 36px; }
-@media print { .hz-toggle { display: none; } }
+@media print {
+  .hz-toggle, .f-empty, #tlTip, #roadmap-filter-status { display: none !important; }
+}
 
 /* -- tooltips: content is read off the detail card at load, so it cannot drift -- */
 #tlTip {
   position: fixed; z-index: 70; display: none; pointer-events: none;
-  max-width: 360px; padding: 11px 13px 12px;
+  box-sizing: border-box; width: max-content; max-width: min(360px, calc(100vw - 16px));
+  max-height: calc(100vh - 16px); overflow: auto; padding: 11px 13px 12px;
   background: var(--console); color: #E4E9ED;
   border: 1px solid var(--console-edge); box-shadow: 0 8px 22px -10px rgba(0,0,0,.7);
 }
@@ -131,13 +142,15 @@ section.hz-collapsed { margin-bottom: 36px; }
 #tlTip .tt-why { font-size: 13px; line-height: 1.45; color: #C7CFD6; display: block; }
 ```
 
-## JS (as shipped — ES5-safe, no dependencies)
+## JS (modern browsers, no dependencies)
 
 ```js
 (function () {
   "use strict";
   var d = document;
-  var TLS = ["t1", "t2", "t3", "t4", "t5"];
+  var TLS = Array.from(new Set(Array.from(d.querySelectorAll(".key a")).flatMap(function (link) {
+    return Array.from(link.classList).concat((link.getAttribute("data-tl") || "").split(/\s+/));
+  }).filter(function (token) { return /^t\d+$/.test(token); })));
 
   function tlOf(el) {
     var hits = [];
@@ -154,6 +167,10 @@ section.hz-collapsed { margin-bottom: 36px; }
   var chip = d.getElementById("tlChip");
   var chipCode = chip ? chip.querySelector(".fc-code") : null;
   var active = null;
+  var itemElements = Array.from(d.querySelectorAll("[data-roadmap-item]")).filter(function (element) {
+    return !element.closest('[data-view="history"]');
+  });
+  function inHistory(element) { return !!element.closest('[data-view="history"]'); }
 
   function tlName(t) {
     for (var i = 0; i < keyLinks.length; i++) {
@@ -174,15 +191,16 @@ section.hz-collapsed { margin-bottom: 36px; }
       k.setAttribute("aria-pressed", on ? "true" : "false");
     });
     d.querySelectorAll("a.pill").forEach(function (p) {
-      p.classList.toggle("f-hit", !t || tlOf(p).indexOf(t) >= 0);
+      p.classList.toggle("f-hit", inHistory(p) || !t || tlOf(p).indexOf(t) >= 0);
     });
     d.querySelectorAll(".thread").forEach(function (row) {
-      row.classList.toggle("f-hit", !t || tlOf(row).indexOf(t) >= 0);
+      row.classList.toggle("f-hit", inHistory(row) || !t || tlOf(row).indexOf(t) >= 0);
     });
     d.querySelectorAll("section[data-hz] .grid > .card").forEach(function (c) {
-      c.classList.toggle("f-hit", !t || tlOf(c).indexOf(t) >= 0);
+      c.classList.toggle("f-hit", inHistory(c) || !t || tlOf(c).indexOf(t) >= 0);
     });
     d.querySelectorAll("section[data-hz]").forEach(function (sec) {
+      if (inHistory(sec)) return;
       var old = sec.querySelector(".f-empty");
       if (old) old.parentNode.removeChild(old);
       if (!t) return;
@@ -196,6 +214,17 @@ section.hz-collapsed { margin-bottom: 36px; }
         }
       }
     });
+    var allItemIds = new Set();
+    var matchingItemIds = new Set();
+    itemElements.forEach(function (element) {
+      var itemId = element.getAttribute("data-roadmap-item");
+      var matches = !t || tlOf(element).indexOf(t) >= 0;
+      allItemIds.add(itemId);
+      if (matches) matchingItemIds.add(itemId);
+      element.classList.toggle("roadmap-filtered-out", !matches);
+    });
+    var filterStatus = d.getElementById("roadmap-filter-status");
+    if (filterStatus) filterStatus.textContent = "Showing " + matchingItemIds.size + " of " + allItemIds.size + " items";
     if (t && chip && chipCode) {
       chipCode.textContent = t.toUpperCase() + " · " + tlName(t);
       var ref = null;
@@ -215,14 +244,20 @@ section.hz-collapsed { margin-bottom: 36px; }
       var mine = tlOf(k)[0];
       if (mine) applyFilter(active === mine ? null : mine);
     });
+    k.addEventListener("keydown", function (event) {
+      if (event.key === " ") { event.preventDefault(); k.click(); }
+    });
   });
   if (chip) chip.addEventListener("click", function () { applyFilter(null); });
+  applyFilter(null);
 
   /* ---------------- collapsible sections ---------------- */
-  var LS_KEY = "roadmap-collapsed-v1"; /* namespace per artifact, e.g. "<project>-roadmap-v1" */
+  var artifactRoot = d.querySelector("[data-roadmap-id]");
+  var LS_KEY = (artifactRoot ? artifactRoot.getAttribute("data-roadmap-id") : location.pathname) + ":roadmap-collapsed-v2";
   function lsGet() { try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch (e) { return {}; } }
   function lsSet(v) { try { localStorage.setItem(LS_KEY, JSON.stringify(v)); } catch (e) {} }
   var collapsedState = lsGet();
+  if (typeof collapsedState !== "object" || Array.isArray(collapsedState)) collapsedState = {};
   var COUNTS = [
     [".grid > .card", "card", "cards"],
     [".risk", "risk", "risks"],
@@ -256,7 +291,9 @@ section.hz-collapsed { margin-bottom: 36px; }
       if (!skipSave) { collapsedState[key] = on ? 1 : 0; lsSet(collapsedState); }
     }
     sec._setCollapsed = setCollapsed;
-    if (collapsedState[key]) setCollapsed(true, true);
+    if (collapsedState[key] === 1) setCollapsed(true, true);
+    else if (collapsedState[key] === 0) setCollapsed(false, true);
+    else setCollapsed(sec.classList.contains("hz-collapsed"), true);
 
     head.addEventListener("click", function (ev) {
       if (ev.target.closest && ev.target.closest("a")) return;
@@ -270,19 +307,34 @@ section.hz-collapsed { margin-bottom: 36px; }
     var el = null;
     try { el = d.getElementById(id); } catch (e) {}
     if (!el) return;
-    var sec = el.closest ? el.closest("section") : null;
-    if (sec && sec.classList.contains("hz-collapsed") && sec._setCollapsed) sec._setCollapsed(false);
+    if (window.roadmapViews) window.roadmapViews.reveal(el);
+    var section = el.closest ? el.closest("section") : null;
+    while (section) {
+      if (section.classList.contains("hz-collapsed") && section._setCollapsed) section._setCollapsed(false);
+      section = section.parentElement ? section.parentElement.closest("section") : null;
+    }
     if (active) {
       var card = el.closest ? el.closest(".card") : null;
       if (card && !card.classList.contains("f-hit")) applyFilter(null);
+      var item = el.closest ? el.closest("[data-roadmap-item]") : null;
+      if (item && item.classList.contains("roadmap-filtered-out")) applyFilter(null);
     }
   }
   d.addEventListener("click", function (ev) {
     if (ev.defaultPrevented) return;
     var a = ev.target.closest ? ev.target.closest('a[href^="#"]') : null;
-    if (a) ensureVisible(a.getAttribute("href").slice(1));
+    if (a) {
+      try { ensureVisible(decodeURIComponent(a.getAttribute("href").slice(1))); }
+      catch (error) {}
+    }
   });
-  if (location.hash) ensureVisible(location.hash.slice(1));
+  function revealHash() {
+    try { ensureVisible(decodeURIComponent(location.hash.slice(1))); }
+    catch (error) {}
+  }
+  revealHash();
+  addEventListener("hashchange", revealHash);
+  d.body.classList.add("roadmap-interactive");
 
   /* ---------------- tooltips, derived from the detail cards ---------------- */
   if (window.matchMedia && matchMedia("(hover: hover)").matches) {
@@ -355,6 +407,8 @@ section.hz-collapsed { margin-bottom: 36px; }
       p.addEventListener("blur", hideTip);
     });
     addEventListener("scroll", hideTip, true);
+    d.addEventListener("roadmap:viewchange", hideTip);
+    d.addEventListener("keydown", function (event) { if (event.key === "Escape") hideTip(); });
   }
 })();
 ```

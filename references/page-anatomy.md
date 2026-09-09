@@ -3,7 +3,13 @@
 Proven on shipped roadmap pages (Sep 2026). This is the structural spine;
 palette/type/voice get a fresh design pass per project.
 
-Order on the page, top to bottom:
+Use `artifact-views.md` for the shared shell and navigation. This is the content
+spine, not a requirement to force all fifteen sections into a single long scroll.
+Overview gets the summary and decision. Now / Next / Later gets the board and
+details. Evidence & History gets decisions, sources and audit records. Timeline
+and Scorecard appear only when their modes have actually run.
+
+Order within the content spine:
 
 1. **Masthead** — big condensed title, a mono kicker carrying the verification
    stamp (`<project> · product + technical roadmap · ticket state verified <ISO ts>`),
@@ -85,6 +91,35 @@ Order on the page, top to bottom:
 
 15. **Fixed back-to-board button** bottom-right; the filter clear-chip stacks
     above it when a filter is active.
+
+## A board worth using in a decision meeting
+
+- **Now means active commitment.** Lead each item with the customer/business
+  outcome, then status, real owner or `Owner not recorded`, and the next proof
+  of completion. Show blocked work and its unblock decision, not only ticket
+  counts. If a WIP limit is agreed, display actual WIP against it; never invent
+  capacity or a limit from the number of cards that fits on screen.
+- **Next means readying.** Each item names its entry condition: a dependency,
+  decision, evidence threshold or available capacity. A card does not move into
+  Now because it ranked well in WSJF. Missing readiness is visible.
+- **Later means options, not implied commitments.** Use quieter, shorter rows
+  with the outcome hypothesis and revisit trigger. Do not fill the column to
+  make the layout symmetrical. Explicitly distinguish source-stated placement
+  from a proposed synthesis awaiting confirmation.
+- **Make the board and detail one object.** Outcome, ID, status, owner and refs
+  come from the same model. The board is a short projection; the detail supplies
+  why, acceptance evidence and linked findings. A title change cannot strand a
+  timeline link or create a second item.
+- **Show movement honestly.** Compare current placement with the prior approved
+  roadmap revision: added, moved with approval, blocked, delivered with proof,
+  or removed with a decision. Keep that history separate from the assessment's
+  original grade baseline. Ticket Done alone is not an operational delivery.
+- **Use density to show certainty.** Give Now the most detail, Next its entry
+  conditions, Later fewer claims. On mobile stack complete horizon sections,
+  not a miniature three-column board. Preserve the same item count and filters.
+- **Empty states are useful.** `Nothing committed in this stream` differs from
+  `No items match this filter`. The latter gets Clear filters. Neither gets
+  fabricated cards, dates, owners or reassuring green indicators.
 
 ## Register rules
 

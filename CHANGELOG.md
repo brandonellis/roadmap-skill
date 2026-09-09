@@ -1,5 +1,29 @@
 # Changelog
 
+## Unreleased
+
+- Preserve one initial grading baseline across all `grade`/`score` iterations.
+  Add a durable assessment ledger, immutable dated history, fixed criterion IDs
+  and finding denominators, legacy-card migration and explicit rebaseline lineage.
+- Replace discretionary overall grades with a baseline-approved roll-up and
+  fixed operational A+ acceptance checks. Keep as-written and deployed reality
+  separate; missing evidence is Incomplete. New risks and regressions stay visible.
+- Add `score` as an explicit alias of `grade`, distinct from WSJF prioritization.
+- Share one artifact across Overview, NNL, Timeline, Scorecard and History views,
+  with stable item IDs, per-view freshness and keyboard-accessible, deep-linkable
+  tabs. Preserve old records rather than creating a fresh grade universe each run.
+- Strengthen NNL design around outcomes, current commitments, entry conditions,
+  options and approved movement. Improve timeline provenance, original/current
+  commitment tracks, milestones, unscheduled work and mobile schedule readability.
+- Remove automatic horizon-to-quarter dates and forced half-quarter snapping.
+  Proposed schedules require approval; genuine exact dates retain their precision.
+- Extend filters across item representations, remove the five-throughline limit,
+  restore explicit expanded collapse preferences, reveal nested deep links, and
+  expose full content in print and no-JavaScript views.
+
+These rules govern subsequent invocations. Existing published artifacts and
+assessment contracts are not silently overwritten or regraded by this update.
+
 ## 1.8.0 — 2026-09-08
 
 The learning loop: a conditional third lens for projects that run models or

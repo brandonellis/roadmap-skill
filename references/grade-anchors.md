@@ -13,12 +13,20 @@ blind to the grades, never to the standard".
   technology. Never change what separates one letter from the next. Record
   the adapted sheet in project memory beside the ladder rungs.
 - **Carry it verbatim into every auditor prompt.** Not a summary, not a link.
-- **Hold it still.** Changing an anchor is an instrument move: the card that
-  changes it is a snapshot, not a trend point, and says so.
+- **Hold it still.** `baseline-ledger.md` freezes criteria, scope, roll-up and
+  A+ checks until an explicitly approved rebaseline, with no run-count expiry.
+  Changed anchors create a disclosed instrument version, not a new original.
 - **A letter is earned by meeting every anchor for it.** Missing one anchor
   drops the letter, and the missed anchor is the first gap-to-next-grade
-  bullet. Plus: every anchor met and one anchor of the letter above met.
-  Minus: one anchor missed and nothing lower applies.
+  bullet. Do not improvise plus/minus marks. If used, their observable tests
+  must be confirmed in the baseline contract. Otherwise use F, D, C, B, A, A+.
+- **A+ is an acceptance tier, not a compliment.** All A anchors plus the
+  dimension's fixed A+ tests must pass. Define those tests once with the user;
+  use `baseline-ledger.md` for operational gates and the deterministic roll-up.
+  Plans, exceptions and merged-but-undeployed work cannot substitute for proof.
+- **Unknown is not a low grade or a pass.** Unavailable or stale mandatory
+  evidence makes coverage incomplete; keep the last verified grade dated and
+  separate rather than silently carrying it into the current verdict.
 - **"Watched working" means this run.** Wherever an anchor says a control was
   watched, the auditor cites the probe, log line or output it saw today. A
   README, a merge or a ticket in Done is an assertion, not a watching.
@@ -161,6 +169,10 @@ discovered inventory of agents, prompts, rubrics and judges.
 
 ```
 instrument: v<N>                anchors: grade-anchors <version, date adapted>
+original baseline: <id>         active baseline: <id>
+assessment: <id>                previous assessment: <id | initial>
+roll-up: <frozen policy>         A+ acceptance: <criterion IDs>
+ledger: <durable location>      evidence windows: <per criterion/method>
 panel:  <components> x <dimensions> + lenses: <list; learning loop present | absent: <why>>
 reach:  repositories: <list>
         cloud CLI: <which, as which principal>   tracker API: <yes | no>

@@ -1,7 +1,7 @@
 ---
 name: roadmap
-description: Build or update a "Horizons" roadmap artifact for any project — scan the repo, issue tracker, knowledge vault and markdown docs, ask only for what cannot be found, synthesize Now/Next/Later horizons with cross-cutting throughlines, and publish an interactive board (theme filter, collapsible sections, derived tooltips). Use when the user asks for a roadmap, a "horizons" page, or to refresh/update an existing roadmap artifact.
-argument-hint: "[<artifact-url> · refresh [<url>] · gantt · wsjf [<source>] · grade [<baseline-url>] · help] — no args creates a new roadmap"
+description: Build or improve a shared roadmap artifact with Now/Next/Later, an explicitly requested Gantt timeline, optional WSJF prioritization, and evidence-based grade/score assessments against a permanent initial baseline. Use for roadmap artifacts, roadmap refreshes, Gantt views, maturity scorecards, and operational A+ progress tracking. Preserve dated assessment history and use view-based tabs, shared filters and source-backed visuals.
+argument-hint: "[<artifact-url> · refresh [<url>] · gantt · wsjf [<source>] · grade [<baseline-url>] · score [<baseline-url>] · help]"
 ---
 
 # /roadmap — the Horizons roadmap builder
@@ -11,17 +11,23 @@ can scan in a minute and an engineer can drill into: counts before prose, a
 streams × horizons board, cross-cutting throughlines, detail cards with ticket refs
 as small tags, an explicit out-of-scope section, and a standing-risk register.
 The pattern is proven on shipped roadmap pages; this skill generalizes it.
+One canonical artifact can contain several views of the same project. Read
+`references/artifact-views.md` before building any mode: views are navigation,
+skill names are provenance. A permanent initial baseline and immutable dated
+assessments show progress toward an evidence-earned operational A+ without
+resetting the goalposts on each run.
 
 ## Modes (from args)
 
 | Args | Mode | What it does |
 |---|---|---|
 | *(none)* | create | New roadmap for the current project. **Prior-run detection first**: check memory and `Artifact action:"list"` for an existing roadmap; if one exists, offer *update it / start a parallel one / something else* rather than silently creating a sibling. |
-| `<artifact-url>` | update | ALWAYS `action:"read"` first and adopt the remote as baseline (other sessions edit these); keep favicon and `<title>` stable; republish to the same URL. |
+| `<artifact-url>` | update | ALWAYS `action:"read"` first and adopt the remote as the editing source; preserve the assessment baseline/history, favicon and `<title>`; republish to the same URL. |
 | `refresh` | drift report → apply | See "Refresh is a drift report" below. |
-| `gantt` | dated variant | See "The dates rule" below; never choose this mode yourself. |
+| `gantt` | timeline view | Add or update Timeline in the canonical artifact; standalone export only on request. See "The dates rule" below; never choose this mode yourself. |
 | `wsjf [<path-or-url>]` | scoring layer | Opt in to WSJF cost-of-delay ranking: bare bootstraps a scoring worksheet from the themes; a target reads existing scoring. Recorded once, inherited by every later run. See "WSJF mode" below; never choose this mode yourself. |
-| `grade [<baseline-card-url>]` | report card | Letter-graded, evidence-cited audit of code + infrastructure: one blind read-only auditor per component plus the cross-cutting lenses (testing & CI; the scale ladder: named growth rungs from the measured present to the business's targets, a holds / degrades / breaks verdict per rung with the first constraint to give, and a bought-or-built burn-down; and, where the project runs models or agents, the learning loop: can the evals fail, is production feedback captured, and is every declared loop shown closed from signal to consumed artefact), five dimensions each, twin verdict (as-written vs operational reality), new-findings section with tickets filed before publishing. Each run is a DATED RECORD — always a new artifact, never a republish. The measurement band leads (burn-down of the prior card's findings, the activation gap as a count, ratchets, exposures closed) and carries the trend; letters are a snapshot unless the instrument (panel, reach, anchors) held still, and every letter move is classified. See "Grade mode" below, `references/report-card.md` and `references/grade-anchors.md`. |
+| `grade [<baseline-card-url>]` | baseline assessment | Audit code and live operations against the established initial baseline. Append a dated assessment, update Scorecard and Evidence & History in the same hub, and show initial/current/target A+ with fixed criteria and verified progress. An explicit URL selects a lineage, not a reset. See "Grade mode" and its references. |
+| `score [<baseline-card-url>]` | alias of grade | Same maturity assessment, baseline and ledger as `grade`; never WSJF. Requests for cost-of-delay or priority ranking use `wsjf`. Clarify ambiguous scoring requests before scanning. |
 | `help` | show the modes | Print this table with one-line examples and stop — no scanning, no artifact work. Also the right response to any argument that matches no mode: show the table and ask, never guess a mode. |
 
 **What this is not for.** This skill builds an artifact; it is not the way to answer
@@ -53,51 +59,22 @@ stamp is often the most valuable output — surface it, don't bury it.
 
 ## The dates rule (decided, do not re-litigate per run)
 
-Default is **Now / Next / Later with no dates anywhere** — undated horizons are what
+Default is **Now / Next / Later with no invented schedule dates** — undated horizons are what
 keep a fast-executing team from being held to a schedule it never committed to.
 A dated gantt (month columns, team-colored bars, today line) is appropriate only
 when the user explicitly asks for one — typically when commitments to external
-parties start to matter. The Gantt mode section below is self-sufficient; its
-mechanics were ported from a client gantt (Apr '26) as presentation patterns only.
+parties start to matter. Evidence timestamps, baseline dates and decision dates
+remain visible; they are not schedule commitments.
 
 ## Gantt mode — the dated projection
 
 The gantt is a **projection of the same synthesis onto a time axis**, not a second
-roadmap: if a horizons artifact exists, reuse its theme set and refs — themes become
-rows, published as a separate cross-linked artifact (different audience: the gantt is
-for commitment conversations, the horizons page for execution). Refresh them together.
-
-**Dates are sourced, never invented.** Every bar carries a provenance grade, and the
-grades render differently — this is the "measured vs attested" distinction applied to
-schedules:
-
-1. **Committed** (solid bar): a date a human actually stated — tracker project
-   target dates and milestones, issue due dates, dated commitments in docs (an audit
-   date, a contract window), or windows the user gives in this run.
-2. **Derived** (hatched/translucent bar, labeled): only the horizon placement —
-   Now → the current quarter, Next → the next one, Later → the following half.
-   Honest as a default, visibly weaker than a commitment.
-3. **Unscheduled** (no bar): no signal at all — the row sits on a shelf below the
-   chart. A shelf row is information; a guessed bar is a fabricated commitment.
-
-All bars snap to **half-quarter boundaries** — the chart
-must never claim day- or week-level precision nobody stated. Ask ONE round: show the
-undated rows and let the user supply windows for the ones that matter or bless the
-derived defaults; if the tracker is date-poor, say so plainly — the chart gets better
-as target dates get filled in, and that gap is a finding worth reporting.
-
-Structure: month columns under quarter headers, today line, collapsible row groups
-(by stream, or tier×priority), the same filter/collapse/
-tooltip layer. Color stays the **throughline** unless real ownership data exists —
-team-colored bars only when owners are on the record; "no owner is on record" must
-never become a color. Per-row **% complete is computed, not asserted**: closed refs
-over total refs for that theme, shown only where refs exist. The footer's confidence
-note summarizes the provenance mix (N committed / N derived / N unscheduled).
-
-**Refreshing a gantt adds one drift class: the slip.** A bar whose window has passed
-while its refs stay open is flagged *slipped* — never silently slid right. Re-dating
-is a human decision the drift report requests; the today line is the only thing that
-moves on its own.
+roadmap. Load `references/gantt.md`: add Timeline to the canonical artifact using
+the same item IDs, filters and source revision. Preserve exact sourced dates;
+missing dates stay on an unscheduled shelf. Proposed windows require explicit
+approval and remain visibly different from commitments. Never convert horizons
+to quarters automatically or silently slide a slipped bar. Original commitments
+stay visible beside approved changes. Ticket closure is not delivery readiness.
 
 ## WSJF mode — the optional scoring layer
 
@@ -133,15 +110,15 @@ validation, and rendering specifics live in `references/wsjf.md`.
 
 ## Grade mode — the report card
 
-`grade` produces a letter-graded, evidence-cited audit of the project's code
+`grade` (alias `score`) produces a letter-graded, evidence-cited audit of the project's code
 and infrastructure at a moment in time — run before a deploy, a quarter close,
 or after a remediation program lands. Shape-agnostic: components are
 discovered from the project's own structure (a repo, a monorepo module, the
-estate), never assumed. It shares the roadmap's sources and
-writing floor but nothing else: full methodology, auditor fan-out rules, the
-twin as-written/operational-reality verdict, and the page anatomy live in
-`references/report-card.md` — load it before running the mode. Never choose
-this mode yourself.
+estate), never assumed. It shares the artifact shell, sources and writing floor,
+not WSJF's prioritization semantics. Load `references/report-card.md`,
+`references/grade-anchors.md` and `references/baseline-ledger.md` before running.
+The ledger owns baseline identity, history, roll-up and A+ acceptance. Never
+choose this mode yourself.
 
 Eight rules that are non-negotiable even without the reference loaded:
 - **Auditors grade blind to the letters and read-only, never blind to the
@@ -154,14 +131,12 @@ Eight rules that are non-negotiable even without the reference loaded:
   the activation gap as a count, every ratchet's size and direction. Those
   answer "did it improve"; letters answer "how good is this", and the card
   never fuses the two.
-- **The instrument is versioned and frozen for three cards.** Panel, reach
-  and anchors are printed in the footer; a card is comparable to its baseline
-  only when all three match. Otherwise the letters are a snapshot with no
-  arrows, and the card says what changed. A new lens or dimension is
-  quarantined from the overall on its first card. Every letter move is
-  classified code / activation / information / instrument, and only the first
-  two carry arrows: a grade lowered on an unchanged system because the panel
-  learned more RESTATES the baseline, it never records a fall.
+- **The original baseline persists until an approved rebaseline.** Freeze its
+  scope, criteria, anchors, finding denominator and A+ checks, with no run-count
+  expiry. Current and previous assessments are observations, not new starting
+  points. New findings and scope stay visible separately; they can block A+.
+  Information corrections are appended, never used to overwrite the original
+  letter. Classify code / activation / information / instrument movement.
 - **Headroom is graded, not just health:** the scale ladder runs on every
   card — rungs in the project's own unit of growth, verdicts measured on the
   bottom rung and multiplied, never guessed, and a bought-or-built burn-down
@@ -175,14 +150,18 @@ Eight rules that are non-negotiable even without the reference loaded:
   it testable.
 - **Twin verdict always:** as-written AND operational reality — merged-but-
   not-deployed is an activation gap, credited in one and debited in the other.
-- **Every card is a dated record:** a NEW artifact per run, never a republish
-  of a prior card (the inverse of the horizons update-in-place rule). File
-  tickets for new findings before publishing so the card cites live refs.
+- **Every assessment is immutable, not every URL.** Append a dated ledger entry,
+  then update Scorecard and Evidence & History in the canonical hub without
+  deleting earlier records. New snapshot URLs are optional exports. Operational
+  A+ requires the fixed acceptance checks, live proof and no blocking gaps;
+  unknown evidence is Incomplete, never a carried-forward pass. File tickets
+  for new findings when authorized; otherwise list draft findings explicitly.
 - **A priced, triggered, live-verified exception lowers no grade** — where the
   project keeps an exception register, an entry suppresses its cell's penalty
   only while it names a dated price, states a trigger the card can check, and
-  has a compensating control the card VERIFIED this run; it lapses the run
-  after its trigger fires. Never for a live exposure. Render by form, not hue.
+  has a compensating control the card VERIFIED this run; it lapses as soon as
+  its trigger fires. It never waives A+ checks. Never for a live exposure.
+  Render by form, not hue.
 
 ## Phase 1 — discover sources (scan first, ask second)
 
@@ -275,7 +254,10 @@ tiers).
 ## Phase 3 — build the page
 
 Load the `artifact-design` skill before writing (and `artifact-diagramming` for
-any figure). Design for THIS project — the page anatomy in
+any figure) when those helpers are available. Otherwise use this skill's own
+visual references; do not block on an unavailable helper. Without artifact
+publishing tools, produce local HTML and state that it was not hosted.
+Design for THIS project — the page anatomy in
 `references/page-anatomy.md` is the proven structure (status console → gate/posture
 band → thesis strip → cost-of-delay strip when scored → board → throughlines table →
 critical-path figure → per-horizon detail cards → out-of-scope → risks →
@@ -301,9 +283,9 @@ get a fresh design pass per project. Three direction rules:
   the expensive build, not after it. Default when nobody asks: commit to one
   direction yourself and record it in the page's DIRECTION CONTRACT comment.
 
-If a sibling roadmap artifact exists for the same project, the new page must be
-visually distinct from it — two look-alike roadmaps with different states is how a
-stale one gets trusted.
+Reuse the canonical artifact for the same project, scope and audience. Different
+views share its visual world. A deliberately separate audience or snapshot gets
+a clear scope/date label and a canonical link, not a confusing competing roadmap.
 
 Non-negotiables regardless of skin:
 
@@ -326,7 +308,8 @@ Non-negotiables regardless of skin:
   by me", and any record-tier source the page could not read, named as a gap.
 - Light + dark themes per the Artifact theming contract; self-contained page.
 
-Then add the **interaction layer** from `references/interaction-layer.md`:
+First compose the view shell from `references/artifact-views.md`, then add the
+**interaction layer** from `references/interaction-layer.md`:
 throughline filter (the color key is the control, with a fixed clear-chip),
 collapsible sections with count badges (localStorage, try/catch), and tooltips
 derived at load from the detail cards so they cannot drift from the content.
@@ -340,7 +323,8 @@ The round, all together (headless Chrome, wrap the content file in a doctype she
 
 1. **DOM smoke**: `--headless=new --virtual-time-budget=4000 --dump-dom` — the
    interaction script ran iff the section toggles and count badges appear, and the
-   badge counts must equal the status console's numbers.
+   unique-item counts must equal the status console, with repeated representations
+   deduplicated. Run the view/filter/deep-link/print checks in `artifact-views.md`.
 2. **Three screenshots** with `--screenshot=... --window-size=...`:
    desktop light (1280×2400), desktop dark — stamp `data-theme="dark"` on the shell's
    `<html>` for an exact emulation of the toggle path — and mobile (390×2400).
@@ -376,7 +360,9 @@ pass is the user looking at their own page.
   the visual world, the sources with their confirmed authority ranking (record vs
   anecdote — update runs inherit this instead of re-asking), the scoring source
   and its confirmed date (when WSJF is active — inherited the same way), the
-  verification stamp, the interaction hooks (theme classes, `data-hz`, the
+  per-view verification stamps, canonical URL, shared-model revision, available
+  views, ledger location, original/active baseline IDs and current assessment ID
+  when graded; the interaction hooks (theme classes, `data-hz`, the
   localStorage key), and standing decisions (the dates rule, framing rules the
   user set). An updater
   who reads nothing else must be able to work from it.

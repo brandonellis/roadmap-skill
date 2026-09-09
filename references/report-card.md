@@ -5,7 +5,7 @@ a moment in time (proven in production use — provenance only, not a
 dependency). The report card answers two questions a roadmap never does, and
 they need two different instruments: **how good is this** (the letters, a
 snapshot of what one panel could see on the day) and **did it improve** (the
-measurements: a burn-down of the prior card's findings, the activation gap as
+measurements: a burn-down of the original baseline's findings, the activation gap as
 a count, the ratchets, the exposures watched closing). A third question joins
 when the run gates something: does anything found block the decision at hand.
 The letters are the least stable of the three, and the card never presents
@@ -17,21 +17,18 @@ components.
 ## When it runs, and what it is
 
 Run it before a consequential moment: a deploy, a funding conversation, a
-quarter close, or right after a remediation program lands. Each run produces a
-**dated record, never a living page** — a NEW artifact every time, never a
-republish of a prior card. The chain of cards is the record the trend is read
-from, and the instrument rule below decides which parts of it are comparable;
-updating an old card in place would destroy the baseline the next run
-compares against.
-This is the opposite of the horizons page's update-in-place rule, on purpose.
+quarter close, or right after a remediation program lands. Each run produces an
+**immutable dated assessment inside a living artifact**. Append the observation
+to the ledger, then update Scorecard and Evidence & History at the canonical URL.
+Earlier records remain readable at stable anchors; separate dated exports are
+optional, not a new grading universe on every run.
 
-**Baseline resolution.** Bare `grade` finds the baseline itself: the newest
-prior card recorded in project memory, or failing that the artifact list. An
-explicit `grade <baseline-card-url>` overrides it (comparing against an older
-card is legitimate — "since the funding round" is a different question than
-"since last month"). A first run has no baseline and says so; it becomes one.
-**Every card links its predecessor in the footer**, so the chain is walkable
-from any card without the memory file.
+**Baseline resolution and persistence.** Load `baseline-ledger.md` first. Bare
+`grade` and its `score` alias resolve the established initial baseline, not the
+latest card. An explicit card URL selects that lineage, not a silent rebaseline.
+Initial, previous and current are three distinct identities. A first assessment
+becomes the initial baseline after its contract is confirmed. An inaccessible
+baseline means an uncompared draft, never a guessed replacement.
 
 **Components come from the project, not from this file.** A component is a
 unit someone could own and grade in isolation: a repo in a multi-repo org, a
@@ -151,7 +148,7 @@ letters follow, under one of two labels the comparability verdict decides:
 **trend** (arrows against the baseline are legitimate) or **snapshot** (no
 arrows; the instrument changed, and the card says how).
 
-### The instrument is versioned, and frozen for three cards
+### The instrument is versioned, and frozen until approved rebaseline
 
 The instrument is three things together, and the footer prints all three as
 the **instrument manifest** (template in `references/grade-anchors.md`):
@@ -164,28 +161,24 @@ the **instrument manifest** (template in `references/grade-anchors.md`):
   it should.
 - **The anchors**: the calibration sheet's version.
 
-A card is **comparable** to its baseline only when all three match.
-Comparable cards may show letters with arrows and speak of a rise or a fall.
-A card whose instrument differs from its baseline's is a **snapshot**: it
-shows the letters without arrows, names what changed in the instrument, and
-becomes the baseline for the next chain. It never says a letter fell.
+A card is **comparable** on a cell only when scope, required reach, anchors and
+roll-up match its baseline contract and evidence coverage is complete. Comparable
+code/activation changes may carry arrows. Information changes are labelled, not
+sold as remediation. A changed instrument is a snapshot, not a replacement
+baseline. Print original baseline ID and current instrument version separately.
 
-Once set, the instrument **holds for three consecutive cards** at minimum.
-Widening reach is legitimate and often overdue, but it is a decision taken
-before the run and written into the manifest as a new instrument version,
-never something noticed in synthesis. A run that finds it reached further
-than it declared reports that as a defect of the instrument, in the footer,
-not as a footnote on a letter. "Partly methodology" is not an accounting: a
-move that is partly methodology is split, and the methodology part leaves the
-trend (see "Every letter move is classified").
+The contract has **no run-count expiry**. Widening reach is useful, but record it
+and keep baseline-scope comparisons separate from new coverage. Unreached checks
+become unknown; they do not disappear. Unexpected reach changes are disclosed in
+the manifest. Only explicit approval creates a new baseline version, preserving
+the original and its criterion mapping under `baseline-ledger.md`.
 
-**A new lens or dimension is quarantined from the overall.** Adding a graded
-cell the baseline never measured drags the overall below cards that were
-never asked the question. On the card where a cell first appears it carries
-its own letter marked **first measured**, and the overall is computed on the
-panel the baseline also had. When the panels differ, print both overalls,
-labelled: on the baseline's panel, and on the full panel. From the next card
-the full panel is the shared one and the quarantine ends.
+**A new lens or dimension is first measured, not silently normalized away.** Show
+its findings beside the baseline-scope verdict. Do not automatically include it
+in the baseline on the next card. State current full-scope coverage separately;
+new live risks and incomplete required scope block an estate-wide A+ even when
+the old panel grades well. Grade a full expanded panel only after its criteria
+are approved, and label its different scope rather than fabricating a trend.
 
 ### Calibration: blind to the grades, never to the standard
 
@@ -221,17 +214,13 @@ four classes, and the class decides whether it enters the trend:
   rewritten. Enters the as-written trend.
 - **Activation move.** The code held and the applied state changed: a plan
   applied, a flag set, a secret mounted. Enters the operational trend.
-- **Information move.** The system did not change; the card looked at
-  something the prior card did not, or read it better. This is NEVER
-  recorded as a rise or a fall. The card **restates the baseline** ("card N
-  would have graded C- had it examined the alerting path"), writes the
-  restatement into the what-changed prose and the memory record, and shows no
-  arrow. Lowering a grade on an unchanged system because the panel's
-  information improved is a moving goalpost, and it happens in synthesis,
-  not in the auditors.
-- **Instrument move.** The panel, the reach or the anchors changed. Leaves
-  the trend and re-baselines; if the change was not declared before the run,
-  it is reported as an instrument defect.
+- **Information move.** New evidence changes what is known, not necessarily the
+  system. Update the current verdict honestly, label it `new evidence`, and
+  append a dated correction note. Preserve the original letter as reported.
+  Do not invent a counterfactual earlier grade or call discovery a regression.
+- **Instrument move.** Scope, reach or anchors changed. Leave the comparable
+  trend, disclose the change, and request approval if rebaselining is needed.
+  Never replace the baseline automatically; undeclared changes are defects.
 
 When the class cannot be told, it is an information move. A missing arrow
 costs the reader a nuance; a false arrow costs the card its reason to exist.
@@ -245,14 +234,13 @@ quality & conventions · Testing · Security & operational readiness.** Adapt
 labels to the component (an infrastructure component grades IaC coverage, DR,
 observability instead), but keep the count near five and keep them identical
 across runs — the matrix only reads as a trend if the columns hold still. A
-column that must change is an instrument move, and a column that is new is
-quarantined from the overall on its first card (see "The instrument is
-versioned").
+column that must change is an instrument move. A new column is first measured,
+separate from the original panel until an approved scope version includes it.
 
 Every dimension gets the letter, the evidence, AND **the gaps to the next
 grade up** — the burn-down list is the actionable half of the report, and it
 should name tickets where they exist (file the missing ones before
-publishing, so the card cites live refs, not intentions).
+publishing when authorized; otherwise label the proposed tickets as drafts).
 
 ## The twin verdict (the load-bearing idea)
 
@@ -411,7 +399,8 @@ output from a bad one, whether it learns that from production, and whether
 what it learns changes anything. It runs whenever the auditor finds a model
 call site or an agent definition; a project with none states that in the
 footer and the lens is absent, not F. Adding the lens to a chain that lacked
-it is a panel change and follows the quarantine rule.
+it is a scope change: mark it first measured and follow the approved-rebaseline
+rules. Its findings stay visible immediately and can block operational A+.
 
 **Inventory first, like components.** The auditor discovers every agent,
 prompt, rubric, judge and learning store from the code and the database, and
@@ -471,6 +460,12 @@ guardrails.** Anchors are in `references/grade-anchors.md`.
 
 ## Page anatomy
 
+Use the shared shell in `artifact-views.md`. Overview carries the measurement
+band and a concise verdict. Scorecard carries the matrix and proof remaining.
+Evidence & History carries sources, method, coverage and immutable observations.
+Preserve stable finding links and show initial, previous and current identities.
+In a standalone export, the same sections read in this order:
+
 Masthead (project · occasion · date · method one-liner) → **measurement
 band** (burn-down of the baseline's findings, live exposures closed, the
 activation gap as a count, ratchets, ceilings that moved; each with how it
@@ -479,7 +474,7 @@ trend or snapshot by the comparability verdict; two overalls when the panels
 differ) → **grade board** (components × dimensions matrix, letter chips;
 arrows only on a comparable card; first-measured cells marked) → **what
 changed since the baseline** (prose, the composition argument, every letter
-move classified, restated baselines named as such) → **per-component verdict cards** (grade, one-paragraph
+move classified, dated correction notes preserved) → **per-component verdict cards** (grade, one-paragraph
 verdict, "to next grade" burn-downs, "watch" items) → **the scale ladder**
 (rungs × constraints table with the verdict word in each cell, the first
 thing to give per rung, the per-unit numbers with their date, and the
@@ -495,30 +490,32 @@ baseline named, the instrument manifest and the comparability verdict, one
 coverage manifest per component, what could NOT be verified and why) →
 stamp.
 
-The "new findings" section earns the run even when the letter holds: a
-re-grade that surfaces nothing the team didn't know was run too soon.
+An unchanged assessment can be useful verification. Never invent a finding or
+raise a letter merely to justify the run. Show the unchanged result and its proof.
 
 ## Visual and prose rules
 
 - Hue encodes the **grade tier and nothing else** (A greens, B blues, C
-  ambers, D/F red). Do not reuse the horizons throughline palette — the two
-  pages encode different things and must not look like siblings. Anything
+  ambers, D/F red), locally inside labelled grade chips. The shared artifact's
+  typography and shell stay consistent; throughline colors remain on roadmap
+  items, never repurposed as grades. Anything
   that is not a grade — a ladder verdict, a register entry, a first-measured
-  cell, a restated baseline — encodes by form (fill, border, weight, a mono
+  cell, a correction note — encodes by form (fill, border, weight, a mono
   label) so it can never be read as one. Arrows appear only on a card the
   comparability verdict calls comparable.
 - The readiness type register and the writing floor
   (`references/writing-floor.md`) apply in full: zero em dashes, grep-gated;
   no disguised assertions — "could not be verified this session (auth
   expired)" is honest, "is applied" without checking is not.
-- Static page; no interaction layer needed. Both themes via tokens.
+- Use the shared view navigation, baseline/current comparison and history anchors.
+  Both themes via tokens; static/no-JS and print retain the full evidence.
 
 ## Synthesis rules
 
-- The overall letter is judgment, not arithmetic — but it must be defensible
-  against the per-component letters, and inflation is the failure mode. If
-  most components grade B+, the project is B+ regardless of how good the
-  trajectory feels; put the trajectory in the prose.
+- Use the frozen roll-up in `baseline-ledger.md`, not a fresh overall judgment
+  each run. The default is the weakest mandatory cell, separately for as-written
+  and operational verdicts. Unknown mandatory evidence makes the overall
+  Incomplete. Operational A+ must also pass the fixed live-evidence gates.
 - **Letter-move accounting.** A letter that moved since the baseline gets one
   sentence naming what earned or lost it and its class (code, activation,
   information, instrument; see "Every letter move is classified") — never
@@ -533,11 +530,11 @@ re-grade that surfaces nothing the team didn't know was run too soon.
   grades are the fastest way to make the next blind run worthless.
 - Name what the auditors could not reach (expired credentials, unreachable
   estates) in the footer as first-class findings.
-- Record the card's URL in project memory as a dated pointer next to the
-  baseline's, with the instrument version, the comparability verdict and any
-  restated baseline, and note the next natural re-grade trigger.
+- Persist the immutable assessment and read back the published hub. Record the
+  ledger location, original/active baseline IDs, assessment ID, canonical URL,
+  instrument version and comparability verdict in memory, with the next natural
+  re-grade trigger. Memory never replaces the durable ledger.
 - **The roadmap-drift handoff.** A grade run almost always moves roadmap
   themes: programs complete, findings become tickets, gaps become work. End
-  the run by diffing the card's findings against the horizons page's claims
-  and offering the refresh — the two artifacts describing different worlds
-  is the staleness failure both exist to prevent.
+  the run by diffing findings against the roadmap view's claims and offering
+  refresh. Keep each view's verification date honest until that refresh occurs.

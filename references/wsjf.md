@@ -2,6 +2,10 @@
 
 The optional cost-of-delay layer. WSJF (weighted shortest job first):
 
+This is priority ranking, not the letter-grade assessment. `/roadmap score`
+aliases `grade`; it never changes WSJF or its confirmed worksheet. WSJF is an
+overlay on roadmap/timeline views, not a competing Scorecard tab.
+
 ```
 WSJF = (business value + time criticality + risk reduction / opportunity enablement) / job size
 ```
