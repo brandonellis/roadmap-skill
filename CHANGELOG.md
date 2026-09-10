@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.10.2 - 2026-09-10
+
+- Give the grade tiles their own base layout. `stakeholder-overview.css` shipped
+  only the overrides for `.rm-grade-grid` and `.rm-grade-tile`, so
+  `renderLetterReassessment` output rendered as an inline run of links at every
+  width outside the 600px media query. Tiles are now a real grid of anchors,
+  with carried-forward and blocked letters distinguished by weight rather than
+  by hue.
+- Guard the class against returning: a new regression test fails when any class
+  that owns a layout declares it only inside a media query, and checks that a
+  tile keeps `text-decoration: none` and `min-width: 0`. 93 tests passing.
+
 ## 1.10.1 - 2026-09-10
 
 - Require refresh, grade, score and format updates to reuse the canonical

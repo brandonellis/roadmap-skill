@@ -22,9 +22,14 @@
 .roadmap-shell .rm-outcome-list h3 { font-size: 19px; margin-bottom: 5px; }
 .roadmap-shell .rm-outcome-list p { font-size: 15px; line-height: 1.5; margin-bottom: 6px; }
 .roadmap-shell .rm-outcomes > .rm-measure-context { margin-top: 16px; font-size: 13px; max-width: 75ch; }
-.roadmap-shell .rm-grade-tile { padding: 16px 10px; }
-.roadmap-shell .rm-grade-tile strong { font-size: 42px; }
-.roadmap-shell .rm-grade-tile span { font-size: 13px; }
+.roadmap-shell .rm-grade-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid var(--rm-rule); margin: 20px 0; }
+.roadmap-shell .rm-grade-tile { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; justify-content: flex-start; min-width: 0; padding: 16px 10px; color: var(--rm-ink); text-decoration: none; border-right: 1px solid var(--rm-rule); }
+.roadmap-shell .rm-grade-tile:nth-child(4n) { border-right: 0; }
+.roadmap-shell .rm-grade-tile strong { font: 600 42px/1 "Barlow Condensed", sans-serif; font-variant-numeric: tabular-nums; }
+.roadmap-shell .rm-grade-tile span { font-size: 13px; color: var(--rm-muted); overflow-wrap: anywhere; }
+.roadmap-shell .rm-grade-tile > span:first-child { color: var(--rm-ink); }
+.roadmap-shell .rm-grade-tile[data-grade-state="not-reassessed"] strong,
+.roadmap-shell .rm-grade-tile[data-grade-state="blocked"] strong { opacity: .75; }
 .rm-assessment-context { max-width: 75ch; margin-block: 14px; }
 .rm-scale-breakdown { border-block: 1px solid var(--rm-rule); padding-block: 8px; }
 .roadmap-shell .rm-scale-summary { margin-block: 16px; }
@@ -74,6 +79,8 @@
   .roadmap-shell .rm-outcomes .rm-outcome-list { grid-template-columns: 1fr; gap: 18px; }
   .roadmap-shell .rm-grade-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .roadmap-shell .rm-grade-tile { border-bottom: 1px solid var(--rm-rule); }
+  .roadmap-shell .rm-grade-tile:nth-child(4n) { border-right: 1px solid var(--rm-rule); }
+  .roadmap-shell .rm-grade-tile:nth-child(2n) { border-right: 0; }
   .roadmap-shell .rm-scale-summary { grid-template-columns: 110px minmax(0, 1fr); gap: 18px; }
   .roadmap-shell .rm-scale-summary strong { font-size: inherit; }
   .roadmap-shell .rm-scale-overall strong { font-size: 48px; }
