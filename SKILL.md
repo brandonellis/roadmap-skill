@@ -60,6 +60,12 @@ Completed work can be muted but never made non-interactive. Preserve explanation
 links, keyboard access and filters, and distinguish completed milestones with
 remaining work from fully completed initiatives. Do not infer this from counts.
 
+For reconciliation and feature-level progress, read `references/feature-rollups.md`.
+Discover work beyond original ticket lists through verified tracker relationships.
+Separate delivered milestones, completed fixes, original requirements and follow-ups;
+deduplicate feature credit and retain unmapped work. New bugs do not automatically
+reopen delivered milestones. Relevant completed work feeds the grading reassessment.
+
 ## Modes (from args)
 
 | Args | Mode | What it does |

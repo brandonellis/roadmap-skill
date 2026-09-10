@@ -1,5 +1,10 @@
 # Reconcile roadmap delivery on every re-grade
 
+Also apply `feature-rollups.md`: reconcile feature-level delivery beyond original
+citations, retain scoped milestone completion, and separate completed fixes from
+open follow-ups. Feed verified relevant work into the existing grading method,
+without changing the baseline or treating ticket counts as readiness scores.
+
 Read for `grade`/`score`, `refresh` and updates to an existing roadmap. A new
 grade with old roadmap completion is an incomplete update. Reconcile delivery
 in the same artifact revision, not an offer to run another skill afterward.

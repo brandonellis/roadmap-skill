@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Roll completed capabilities, improvements and bug fixes up beneath broad
+  features using source-backed relationships. Preserve original requirements,
+  scoped milestones and grading baselines; separate open follow-ups and mapping
+  gaps. Add deduplicated feature credit and static status-aware drill-downs.
+
 ## 1.9.0 — 2026-09-10
 
 The stakeholder release: a summary-first reading path through the artifact,
