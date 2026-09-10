@@ -30,6 +30,14 @@ test('every class that owns a layout declares it outside a media query', () => {
   }
 });
 
+test('a lens tile is marked and spans its own track', () => {
+  const lens = [...outsideMediaQueries.matchAll(/\.rm-grade-tile\[data-grade-scope="lens"\][^{}]*\{([^{}]*)\}/g)].map(match => match[1]).join(' ');
+  assert.ok(lens, 'lens tiles have no base rule, so they render as ordinary components');
+  assert.match(lens, /grid-column:\s*span/, 'a lens tile must claim its own track or it reads as the ninth component');
+  const badge = [...outsideMediaQueries.matchAll(/\.rm-grade-tile\s+small\b[^{}]*\{([^{}]*)\}/g)].map(match => match[1]).join(' ');
+  assert.ok(badge, 'the lens marker has no style, so the word "lens" reads as part of the name');
+});
+
 test('a grade tile is a real link surface, not bare text', () => {
   const tile = [...outsideMediaQueries.matchAll(/\.rm-grade-tile\b[^{}]*\{([^{}]*)\}/g)].map(match => match[1]).join(' ');
   assert.match(tile, /text-decoration:\s*none/, 'tiles are anchors and must drop the default underline');

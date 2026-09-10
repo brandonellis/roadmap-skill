@@ -37,6 +37,16 @@ Preserve standing cross-cutting lenses as well as component rows. Read
 keeps its own dated grade, five dimensions and capacity ladder. Partial component
 refreshes must not drop it; relevant capacity changes trigger its reassessment.
 
+Put every standing lens letter on the same grade strip as the components, and
+mark it. A lens grade left out of the strip is invisible at the only place a
+reader looks for letters, which is how a project's two lowest grades sat below
+the fold while the strip read as the whole picture. A lens tile therefore
+carries a `lens` marker, its own assessment date, and a link to its own
+section; the strip's note names which tiles are lenses and states that they
+grade a different question on their own scale and stay outside the baseline,
+its finding denominator and any overall letter. Adding a lens to the strip is a
+presentation change, not a panel change: it never joins an overall grade.
+
 Read `references/stakeholder-story.md` on every mode. The purpose is to present
 the system's direction and demonstrated progress to the audience established
 at creation. Inherit that audience and brief; never re-ask or silently select

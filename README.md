@@ -46,6 +46,11 @@ Then invoke it in any Claude Code session with `/roadmap`.
   reassess it; older measurements remain dated rather than becoming current
   claims. Missing a registered lens fails private-bundle verification.
 
+- **Lens letters sit on the grade strip, marked.** Every standing lens gets a
+  tile beside the components, with a `lens` marker and its own assessment date,
+  and the strip says lenses grade a different question on their own scale and
+  stay outside the baseline and any overall letter.
+
 - **Relevant work triggers reassessment.** Refresh checks completed findings,
   reopenings and changed evidence against existing grading criteria. It verifies
   affected requirements and updates supported grades against the same baseline.

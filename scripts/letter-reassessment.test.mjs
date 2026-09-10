@@ -108,3 +108,63 @@ test('baseline, method, coverage and source identity cannot silently change', ()
     assert.throws(() => recordLetterReassessment(input));
   }
 });
+
+function withLenses(result) {
+  return {
+    ...result,
+    lenses: [
+      { id: 'scalability', name: 'Scalability', grade: 'C+', observedOn: '2026-01-02', status: 'assessed', firstAssessedOn: '2026-01-01' },
+      { id: 'learning-loop', name: 'Learning loop', grade: 'C-', observedOn: '2026-01-01', status: 'reassessment-required', firstAssessedOn: '2026-01-01' },
+    ],
+  };
+}
+
+test('lens letters appear on the same strip, marked and dated on their own scale', () => {
+  const rendered = renderLetterReassessment(withLenses(recordLetterReassessment(fixture())));
+  const grid = rendered.tiles.match(/<div class="rm-grade-grid">([^]*)<\/div>/)[1];
+  assert.ok(grid.indexOf('data-lens-id="scalability"') > grid.indexOf('data-component-id="core"'), 'lens tiles follow the component panel');
+  assert.match(grid, /data-grade-scope="component"[^>]*data-component-id="core"/);
+  assert.match(grid, /data-lens-id="scalability"[^]*?<strong>C\+<\/strong>/);
+  assert.match(grid, /Scalability <small>lens<\/small>/);
+  assert.match(grid, /Assessed · Jan 2, 2026/);
+  assert.match(grid, /data-lens-id="learning-loop"[^]*?Last assessed · Jan 1, 2026/, 'a lens that was not remeasured says so on its own tile');
+  assert.match(grid, /data-lens-id="learning-loop"[^]*?data-grade-state="not-reassessed"/);
+  assert.match(rendered.lensNote, /Scalability and Learning loop/);
+  assert.match(rendered.lensNote, /outside baseline original-baseline/);
+  assert.match(rendered.lensNote, /any overall letter/);
+});
+
+test('a lens cannot enter the strip as an undated, ungraded or component-shaped row', () => {
+  const base = recordLetterReassessment(fixture());
+  const mutations = [
+    lens => { lens.grade = 'B++'; },
+    lens => { delete lens.grade; },
+    lens => { lens.observedOn = 'recently'; },
+    lens => { delete lens.observedOn; },
+    lens => { lens.status = 'graded'; },
+    lens => { lens.id = 'core'; },
+    lens => { lens.name = ''; },
+  ];
+  for (const mutate of mutations) {
+    const result = withLenses(base);
+    mutate(result.lenses[0]);
+    assert.throws(() => renderLetterReassessment(result));
+  }
+  const duplicated = withLenses(base);
+  duplicated.lenses[1] = { ...duplicated.lenses[0] };
+  assert.throws(() => renderLetterReassessment(duplicated), /listed twice/);
+});
+
+test('no lenses renders the original panel and no claim about lenses', () => {
+  const rendered = renderLetterReassessment(recordLetterReassessment(fixture()));
+  assert.equal(rendered.lensNote, '');
+  assert(!rendered.tiles.includes('data-grade-scope="lens"'));
+});
+
+test('lens names and grades are escaped like every other rendered value', () => {
+  const result = withLenses(recordLetterReassessment(fixture()));
+  result.lenses[0].name = '<script>unsafe</script>';
+  const rendered = renderLetterReassessment(result);
+  assert(!rendered.tiles.includes('<script>'));
+  assert(!rendered.lensNote.includes('<script>'));
+});

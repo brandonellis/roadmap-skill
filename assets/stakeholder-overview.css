@@ -30,6 +30,10 @@
 .roadmap-shell .rm-grade-tile > span:first-child { color: var(--rm-ink); }
 .roadmap-shell .rm-grade-tile[data-grade-state="not-reassessed"] strong,
 .roadmap-shell .rm-grade-tile[data-grade-state="blocked"] strong { opacity: .75; }
+.roadmap-shell .rm-grade-tile[data-grade-scope="lens"] { grid-column: span 2; border-top: 3px solid var(--rm-rule); }
+.roadmap-shell .rm-grade-tile[data-grade-scope="lens"]:last-child { border-right: 0; }
+.roadmap-shell .rm-grade-tile small { display: inline-block; font: 600 11px/1 "Barlow Condensed", sans-serif; text-transform: uppercase; letter-spacing: .12em; padding: 3px 6px; border: 1px solid var(--rm-rule); color: var(--rm-muted); vertical-align: middle; }
+.rm-grade-scope-note { max-width: 75ch; margin-block: 12px 20px; font-size: 13px; color: var(--rm-muted); }
 .rm-assessment-context { max-width: 75ch; margin-block: 14px; }
 .rm-scale-breakdown { border-block: 1px solid var(--rm-rule); padding-block: 8px; }
 .roadmap-shell .rm-scale-summary { margin-block: 16px; }
@@ -81,6 +85,7 @@
   .roadmap-shell .rm-grade-tile { border-bottom: 1px solid var(--rm-rule); }
   .roadmap-shell .rm-grade-tile:nth-child(4n) { border-right: 1px solid var(--rm-rule); }
   .roadmap-shell .rm-grade-tile:nth-child(2n) { border-right: 0; }
+  .roadmap-shell .rm-grade-tile[data-grade-scope="lens"] { grid-column: span 1; }
   .roadmap-shell .rm-scale-summary { grid-template-columns: 110px minmax(0, 1fr); gap: 18px; }
   .roadmap-shell .rm-scale-summary strong { font-size: inherit; }
   .roadmap-shell .rm-scale-overall strong { font-size: 48px; }

@@ -1,5 +1,28 @@
 # Changelog
 
+## 1.12.0 - 2026-09-10
+
+- Put standing lens letters on the grade strip. `renderLetterReassessment` now
+  takes `assessment.lenses` and renders a tile per lens after the component
+  panel, with a `lens` marker, its own assessment date and a link to the lens
+  section. Lens grades were rendered only in their own sections further down the
+  page, so on a real card the estate's two lowest letters were absent from the
+  one place a reader looks for letters, and the strip read as the whole picture.
+- Keep the widening visible rather than silent. Component tiles now declare
+  `data-grade-scope="component"` and lens tiles `data-grade-scope="lens"`, and
+  the renderer returns a `lensNote` naming which tiles are lenses and stating
+  that they grade a different question on their own scale and sit outside the
+  baseline, its finding denominator and any overall letter. A lens on the strip
+  is a presentation change; it still never joins an overall grade.
+- Refuse a lens that cannot be read honestly: a missing or malformed letter, a
+  missing or unparseable date, an unknown status, a duplicate, or an id that
+  collides with a component all throw rather than render. A lens whose status is
+  not `assessed` prints "Last assessed" and takes the carried-forward weight, so
+  a stale lens beside fresh component letters cannot pass as current.
+- Style and guard the tile: lens tiles claim their own grid track and carry a
+  marker badge, asserted outside any media query by `rendered-classes.test.mjs`.
+  101 tests passing.
+
 ## 1.11.0 - 2026-09-10
 
 - Load the fonts the shipped CSS names. `assets/` referenced "Barlow Condensed"
