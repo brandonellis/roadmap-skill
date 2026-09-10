@@ -22,7 +22,7 @@ test('the suite meets the minimum and every scenario is uniquely identified', ()
 
 test('each scenario is runnable: a real query, real files, and checkable expectations', () => {
   for (const scenario of scenarios) {
-    assert.deepEqual(scenario.skills, ['roadmap'], `${scenario.name}: names another skill`);
+    assert.deepEqual(scenario.skills, ['horizons'], `${scenario.name}: names another skill`);
     assert.ok(scenario.query?.trim(), `${scenario.name}: no query`);
     assert.ok(Array.isArray(scenario.files) && scenario.files.length, `${scenario.name}: no files`);
     for (const file of scenario.files) {

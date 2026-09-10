@@ -1,9 +1,9 @@
 {
   "id": "grade-card",
   "skills": [
-    "roadmap"
+    "horizons"
   ],
-  "query": "/roadmap grade",
+  "query": "/horizons grade",
   "files": [
     "fixtures/meridian/",
     "fixtures/prior-artifact.html"

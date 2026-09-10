@@ -1,4 +1,4 @@
-# /roadmap — the Horizons roadmap builder
+# /horizons — the Horizons roadmap builder
 
 Executable grading, outcome-led updates and private publication checks are
 documented in [the implementation guide](references/executable-grading.md).
@@ -21,15 +21,32 @@ can drill into every claim.
 Clone into your user-level skills directory:
 
 ```bash
-git clone https://github.com/brandonellis/roadmap-skill.git ~/.claude/skills/roadmap
+git clone https://github.com/brandonellis/horizons-skill.git ~/.claude/skills/horizons
 ```
 
-Then invoke it in any Claude Code session with `/roadmap`.
+Then invoke it in any Claude Code session with `/horizons`.
+
+### Upgrading from `/roadmap`
+
+The command was `/roadmap` through v1.14.0. Claude Code takes the skill name from
+the directory, so renaming the checkout is the upgrade:
+
+```bash
+git -C ~/.claude/skills/roadmap pull
+mv ~/.claude/skills/roadmap ~/.claude/skills/horizons
+git -C ~/.claude/skills/horizons remote set-url origin https://github.com/brandonellis/horizons-skill.git
+```
+
+The old repository URL redirects, so an existing clone keeps fetching either way.
+Nothing inside an artifact changes: pages, baselines and assessment history are
+untouched by the rename, and a page built by `/roadmap` updates under
+`/horizons` with no migration. If you script against the skill's modules, the
+path they live under moved with the directory.
 
 ### Packaging it for anywhere else
 
 The frontmatter carries one Claude-Code-only key, `argument-hint`, which supplies
-the mode list to autocomplete when you type `/roadmap`. Claude Code accepts it;
+the mode list to autocomplete when you type `/horizons`. Claude Code accepts it;
 the Agent Skills spec does not, so a claude.ai upload or `package_skill.py` run
 refuses the file with `Unexpected key(s) in SKILL.md frontmatter: argument-hint`.
 Delete that one line before packaging. Nothing else in the skill depends on it,
@@ -41,14 +58,14 @@ appears without being declared and documented here.
 
 | Invocation | What it does |
 |---|---|
-| `/roadmap` | Create a new roadmap for the current project (detects prior runs first) |
-| `/roadmap <artifact-url>` | Update an existing roadmap artifact in place |
-| `/roadmap refresh` | Reconcile delivery, regrade relevant criteria in assessed artifacts, then update the shared views |
-| `/roadmap gantt` | Add or update the Timeline view with sourced commitments, explicit scenarios and an unscheduled shelf |
-| `/roadmap wsjf [<source>]` | Opt in to WSJF cost-of-delay scoring: bare bootstraps a worksheet, a target reads existing scoring |
-| `/roadmap grade [<baseline-url>]` | Audit against the established initial baseline, reconcile roadmap completion, append an immutable assessment, and update Roadmap, Progress and Evidence together |
-| `/roadmap score [<baseline-url>]` | Alias of `grade`, with the same baseline and ledger; not WSJF priority scoring |
-| `/roadmap help` | Show the mode table |
+| `/horizons` | Create a new roadmap for the current project (detects prior runs first) |
+| `/horizons <artifact-url>` | Update an existing roadmap artifact in place |
+| `/horizons refresh` | Reconcile delivery, regrade relevant criteria in assessed artifacts, then update the shared views |
+| `/horizons gantt` | Add or update the Timeline view with sourced commitments, explicit scenarios and an unscheduled shelf |
+| `/horizons wsjf [<source>]` | Opt in to WSJF cost-of-delay scoring: bare bootstraps a worksheet, a target reads existing scoring |
+| `/horizons grade [<baseline-url>]` | Audit against the established initial baseline, reconcile roadmap completion, append an immutable assessment, and update Roadmap, Progress and Evidence together |
+| `/horizons score [<baseline-url>]` | Alias of `grade`, with the same baseline and ledger; not WSJF priority scoring |
+| `/horizons help` | Show the mode table |
 
 ## What makes it opinionated
 

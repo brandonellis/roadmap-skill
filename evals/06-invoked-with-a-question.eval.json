@@ -1,9 +1,9 @@
 {
   "id": "invoked-with-a-question",
   "skills": [
-    "roadmap"
+    "horizons"
   ],
-  "query": "/roadmap what's on the roadmap for alerting?",
+  "query": "/horizons what's on the roadmap for alerting?",
   "files": [
     "fixtures/meridian/",
     "fixtures/prior-artifact.html"

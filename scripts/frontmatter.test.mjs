@@ -16,7 +16,7 @@ const fields = Object.fromEntries([...frontmatter.matchAll(/^([\w-]+): *(.*)$/gm
 const SPEC_KEYS = ['name', 'description', 'license', 'compatibility', 'metadata', 'allowed-tools'];
 // Claude-Code-only keys this skill deliberately keeps, and what each costs.
 // Adding one is a distribution decision, so it is a visible diff here.
-const CLAUDE_CODE_ONLY = { 'argument-hint': 'mode autocomplete when the user types /roadmap' };
+const CLAUDE_CODE_ONLY = { 'argument-hint': 'mode autocomplete when the user types /horizons' };
 
 test('the frontmatter satisfies the published name and description limits', () => {
   assert.ok(source.startsWith('---\n'), 'the opening --- must be the first line or the whole file is treated as body');
@@ -42,6 +42,22 @@ test('every non-spec frontmatter key is declared, with its distribution cost wri
   for (const key of extra) {
     assert.ok(CLAUDE_CODE_ONLY[key], `${key} has no recorded reason`);
     assert.ok(readme.includes(key), `README must tell an importer that ${key} has to be removed before packaging`);
+  }
+});
+
+// Claude Code derives the skill name from the directory, so a rename that
+// misses either half leaves the command and the metadata disagreeing, and the
+// half-renamed one is the one nobody notices until a user types the old name.
+test('the skill name, the directory and the documented command all agree', () => {
+  assert.equal(fields.name, root.split('/').pop(), 'frontmatter name and directory name disagree');
+  assert.match(source, new RegExp(`^# /${fields.name} `, 'm'), 'the title does not name the command');
+  assert.ok(readme.startsWith(`# /${fields.name} `), 'README does not name the command');
+  // The upgrade section names the retired command on purpose; anywhere else,
+  // naming it offers it.
+  const withoutUpgradeNotes = text => text.replace(/### Upgrading from[\s\S]*?(?=\n## )/g, '');
+  for (const file of ['SKILL.md', 'README.md']) {
+    const text = withoutUpgradeNotes(readFileSync(join(root, file), 'utf8'));
+    assert.doesNotMatch(text, /(?<![\w/-])\/roadmap(?![\w-])/, `${file} still offers the retired /roadmap command`);
   }
 });
 

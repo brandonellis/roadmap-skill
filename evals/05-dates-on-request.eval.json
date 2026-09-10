@@ -1,9 +1,9 @@
 {
   "id": "dates-on-request",
   "skills": [
-    "roadmap"
+    "horizons"
   ],
-  "query": "/roadmap gantt",
+  "query": "/horizons gantt",
   "files": [
     "fixtures/meridian/",
     "fixtures/prior-artifact.html"

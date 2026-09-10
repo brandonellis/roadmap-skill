@@ -1,10 +1,10 @@
 ---
-name: roadmap
+name: horizons
 description: Build or improve a shared roadmap artifact with Now/Next/Later, an explicitly requested Gantt timeline, optional WSJF prioritization, and evidence-based grade/score assessments against a permanent initial baseline. Use for roadmap artifacts, roadmap refreshes, Gantt views, maturity scorecards, and operational A+ progress tracking. Preserve dated assessment history and use view-based tabs, shared filters and source-backed visuals.
 argument-hint: "[<artifact-url> · refresh [<url>] · gantt · wsjf [<source>] · grade [<baseline-url>] · score [<baseline-url>] · help]"
 ---
 
-# /roadmap — the Horizons roadmap builder
+# /horizons — the Horizons roadmap builder
 
 Produce (or update) a single-page roadmap artifact that a non-technical stakeholder
 can scan in a minute and an engineer can drill into: demonstrated progress before

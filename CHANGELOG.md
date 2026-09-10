@@ -1,5 +1,28 @@
 # Changelog
 
+## 2.0.0 - 2026-09-10
+
+**Breaking: the command is `/horizons`.** It was `/roadmap` through 1.14.0, and
+the skillset is named Horizons, so the command, the directory and the repository
+now say the same thing. Existing artifacts are unaffected: pages, baselines and
+assessment history carry no command name, and a page built by `/roadmap` updates
+under `/horizons` with no migration. To upgrade a checkout, rename the directory
+(Claude Code takes the skill name from it) and repoint the remote; the old
+repository URL redirects. `README.md` carries the three commands.
+
+- Rename the identifier only. "roadmap" appears 700 times in this repository and
+  all but 32 are the domain noun — a roadmap artifact, a roadmap item, the
+  roadmap board — which is what the skill BUILDS and is not what it is called.
+  `references/roadmap-reconciliation.md`, `assets/roadmap-structure.css`,
+  `scripts/render-roadmap-matrix.mjs` and the `rm-roadmap-*` class names keep
+  their names for the same reason.
+- Guard the two halves against drifting apart: `scripts/frontmatter.test.mjs`
+  now asserts the frontmatter name equals the directory name, that both titles
+  name that command, and that neither `SKILL.md` nor `README.md` offers the
+  retired one outside the upgrade note. A half-finished rename is the failure
+  nobody notices until a user types the old name and gets nothing.
+- The repository is now `brandonellis/horizons-skill`. 115 tests passing.
+
 ## 1.14.0 - 2026-09-10
 
 - Add the evaluation suite the published guidance asks for and this skill never
