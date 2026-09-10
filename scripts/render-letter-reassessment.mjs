@@ -36,8 +36,12 @@ function renderLensTiles(assessment, componentIds) {
     const label = `${stale ? 'Last assessed' : 'Assessed'} · ${dateLabel(lens.observedOn)}`;
     return `<a href="#${escape(lens.id)}" class="rm-grade-tile" data-grade-scope="lens" data-lens-id="${escape(lens.id)}" data-grade-state="${escape(stale ? 'not-reassessed' : 'assessed-qualitative-snapshot')}"><span>${escape(lens.name)} <small>lens</small></span><strong>${escape(lens.grade)}</strong><span>${escape(label)}</span></a>`;
   }).join('');
+  // A lens name can end in its own punctuation, so the sentence adds a full
+  // stop only when the last name does not carry one, and the wording holds for
+  // one lens or five.
   const names = lenses.map(lens => escape(lens.name));
-  const note = `The last ${names.length === 1 ? 'tile is a lens' : `${names.length} tiles are lenses`}: ${names.join(' and ')}. ${names.length === 1 ? 'It grades' : 'They grade'} a cross-cutting question on ${names.length === 1 ? 'its own scale' : 'their own scales'}, carry ${names.length === 1 ? 'its own date' : 'their own dates'}, and sit outside baseline ${escape(assessment.baselineId)}, its finding denominator and any overall letter.`;
+  const stop = /[.?!]$/.test(names.at(-1)) ? '' : '.';
+  const note = `Lens tiles on this strip: ${names.join(' · ')}${stop} Each grades a cross-cutting question on its own scale, carries its own date, and sits outside baseline ${escape(assessment.baselineId)}, its finding denominator and any overall letter.`;
   return { tiles, note };
 }
 

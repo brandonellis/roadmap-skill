@@ -129,7 +129,7 @@ test('lens letters appear on the same strip, marked and dated on their own scale
   assert.match(grid, /Assessed · Jan 2, 2026/);
   assert.match(grid, /data-lens-id="learning-loop"[^]*?Last assessed · Jan 1, 2026/, 'a lens that was not remeasured says so on its own tile');
   assert.match(grid, /data-lens-id="learning-loop"[^]*?data-grade-state="not-reassessed"/);
-  assert.match(rendered.lensNote, /Scalability and Learning loop/);
+  assert.match(rendered.lensNote, /Lens tiles on this strip: Scalability · Learning loop\. Each grades/);
   assert.match(rendered.lensNote, /outside baseline original-baseline/);
   assert.match(rendered.lensNote, /any overall letter/);
 });
@@ -159,6 +159,12 @@ test('no lenses renders the original panel and no claim about lenses', () => {
   const rendered = renderLetterReassessment(recordLetterReassessment(fixture()));
   assert.equal(rendered.lensNote, '');
   assert(!rendered.tiles.includes('data-grade-scope="lens"'));
+});
+
+test('a lens name that ends in punctuation does not gain a second full stop', () => {
+  const result = withLenses(recordLetterReassessment(fixture()));
+  result.lenses[1].name = 'Does it learn?';
+  assert.match(renderLetterReassessment(result).lensNote, /Does it learn\? Each grades/);
 });
 
 test('lens names and grades are escaped like every other rendered value', () => {

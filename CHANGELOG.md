@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.12.1 - 2026-09-10
+
+- Fix the strip note's sentence break. A lens named with a question ("Does it
+  learn?") produced "Does it learn?." and a counted preamble that read as
+  boilerplate. The note now lists lens names and adds a full stop only when the
+  last name carries none. 102 tests passing.
+
 ## 1.12.0 - 2026-09-10
 
 - Put standing lens letters on the grade strip. `renderLetterReassessment` now
