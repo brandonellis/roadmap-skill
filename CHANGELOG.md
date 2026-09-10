@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.11.0 - 2026-09-10
+
+- Load the fonts the shipped CSS names. `assets/` referenced "Barlow Condensed"
+  and "JetBrains Mono" while nothing in the skill ever loaded them, so every
+  artifact built from these assets rendered in the system UI font while claiming
+  a typographic register. Add `references/visual-identity.md` with the concrete
+  Google Fonts link, correct the false belief that the Artifact CSP blocks font
+  CDNs, and put the link in the copy-ready view shell.
+- Settle palette and type once per project instead of per run. The same project
+  was producing a different invented visual world in every session. Introduce a
+  recorded BRAND CONTRACT: inherit the project's existing tokens, theme seed or
+  brand palette, map the shell tokens onto it, and record it in the page's
+  DIRECTION CONTRACT and in memory so later runs apply it rather than redeciding.
+  Keep the grade scale semantic and separate from any brand accent.
+- Guard both with `scripts/visual-identity.test.mjs`: a webfont named by the
+  shipped CSS must have a documented way to load it, the load instruction must be
+  a real CSP-permitted link with preconnect and `display=swap`, and the brand
+  contract must name where it is recorded. 96 tests passing.
+
 ## 1.10.2 - 2026-09-10
 
 - Give the grade tiles their own base layout. `stakeholder-overview.css` shipped

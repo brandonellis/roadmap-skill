@@ -276,6 +276,13 @@ or `interaction-layer.md` for a legacy roadmap, never both. Leave every panel
 visible in source markup.
 
 ```html
+<!-- The shell CSS names families the browser does not ship. Load them, or the
+     page renders in the system UI font. See references/visual-identity.md, and
+     swap in the project's own families where it has them. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
 <nav class="view-tabs" aria-label="Roadmap views">
   <a id="tab-overview" href="#view-overview">Progress</a>
   <a id="tab-roadmap" href="#view-roadmap">Roadmap</a>

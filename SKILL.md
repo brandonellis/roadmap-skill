@@ -60,6 +60,12 @@ Completed work can be muted but never made non-interactive. Preserve explanation
 links, keyboard access and filters, and distinguish completed milestones with
 remaining work from fully completed initiatives. Do not infer this from counts.
 
+Read `references/visual-identity.md` on every mode, before writing any markup.
+The shipped `assets/` name font families a browser does not have, so a page that
+does not load them renders in the system UI font while claiming a typographic
+register. It also carries the BRAND CONTRACT: inherit the project's existing
+tokens, theme seed or brand palette instead of inventing a look per run.
+
 For reconciliation and feature-level progress, read `references/feature-rollups.md`.
 Discover work beyond original ticket lists through verified tracker relationships.
 Separate delivered milestones, completed fixes, original requirements and follow-ups;
@@ -354,9 +360,15 @@ Design for THIS project — the page anatomy in
 `references/page-anatomy.md` is the proven structure (status console → gate/posture
 band → thesis strip → cost-of-delay strip when scored → board → throughlines table →
 critical-path figure → per-horizon detail cards → out-of-scope → risks →
-sources-disagree block when conflicts exist → footer), but palette, type and voice
-get a fresh design pass per project. Three direction rules:
+sources-disagree block when conflicts exist → footer). Palette, type and voice are
+settled ONCE per project and inherited after that. Four direction rules:
 
+- **Read `references/visual-identity.md` first, every run.** It carries the two
+  rules that decide whether the page looks considered: load the fonts the CSS
+  names, because the shipped `assets/` name families a browser does not have and
+  fall back silently; and inherit the project's existing tokens, theme seed or
+  brand palette instead of inventing one. A project whose artifacts look
+  different every session is missing a recorded BRAND CONTRACT.
 - **The brief wins.** A user-pinned aesthetic, palette, or reference beats every
   default in this skill and in the anatomy reference.
 - **The default type register is "readiness"** — condensed grotesque caps display +
@@ -368,7 +380,8 @@ get a fresh design pass per project. Three direction rules:
   page is making, so they are off the table unless the user asks for them. This is
   this skill's default, not a decision on the reader's behalf: state it as a default
   when you use it, and drop it the moment the project has a house style or the user
-  pins something else.
+  pins something else. Whichever set you land on, the page must actually LOAD it;
+  a named family that never loads is the fallback font wearing its name.
 - **When the user wants to choose the look** (they say so, or a new roadmap has
   visible stakeholders and they're present to decide): draft 2–3 one-paragraph
   direction contracts (world, palette, type, one distinguishing device each) and

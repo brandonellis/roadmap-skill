@@ -1,7 +1,8 @@
 # Page anatomy — the "readiness board" roadmap pattern
 
 Proven on shipped roadmap pages (Sep 2026). This is the structural spine;
-palette/type/voice get a fresh design pass per project.
+palette/type/voice come from the project's recorded BRAND CONTRACT, or are
+settled once and recorded there. See `references/visual-identity.md`.
 
 Use `artifact-views.md` for navigation and `progress-layout.md` for a combined
 assessment/roadmap artifact. This is the content spine, not a requirement to
