@@ -17,6 +17,40 @@ and land on Roadmap. The board/Gantt and dated visual grade strip lead; audit
 detail remains behind explicit drill-downs. An established brief may override
 that order, and a grade-only artifact need not fabricate a roadmap.
 
+## Canonical workspace lifecycle
+
+Apply this workflow on every create, update, refresh, grade, score, Gantt and
+WSJF run. A new assessment is a new history record, not a new working artifact.
+
+1. Resolve the project, scope and audience from the existing brief and saved
+   artifact/workspace pointers. Read the current entry file, shared model and
+   ledger before writing. Do not select a dated export just because it is newer.
+   If multiple copies exist with no authoritative pointer, ask which to update;
+   do not guess, create another sibling or merge their histories automatically.
+2. Keep the canonical directory, entry path, URL and current-data filenames stable.
+   Append only the new evidence and immutable assessment records within that
+   workspace, using its existing history/archive layout. Update the current model
+   and render all affected views from that model. Do not recopy unchanged evidence
+   or the entire hub for each run. Preserve the initial baseline and old links.
+3. Validate the updated model and artifact before replacing the current entry
+   file. Re-read its revision first and stop to reconcile concurrent changes
+   instead of overwriting them. A failed validation must leave the last valid
+   current artifact available; keep failed output out of the current pointers.
+4. Verify the canonical artifact in place by default. Only create a separate
+   export when requested or when an approved audience, scope or permission
+   boundary needs one. Label exports with their purpose and revision, link back
+   only where permissions allow, and never change the canonical pointer to them.
+5. If authorized publication actually requires a bundle, stage it in an
+   owner-only temporary location, not a persistent dated sibling of the hub.
+   After successful publication and read-back, clean up only temporary files
+   created by this run. If publication fails, retain the staged output only when
+   needed for retry, report its path, and keep the hub authoritative. No publishing
+   access means a verified local update, not an automatic export.
+6. Finish with the same canonical path/URL and separate local/hosted status.
+   Check the preserved history and evidence links. Existing duplicate folders
+   are not cleanup authorization: inventory them and obtain permission before
+   archiving, consolidating or deleting any of them.
+
 ## Navigation and ownership
 
 | View | Reader's question | Content owner |

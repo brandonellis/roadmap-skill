@@ -66,6 +66,31 @@ Separate delivered milestones, completed fixes, original requirements and follow
 deduplicate feature credit and retain unmapped work. New bugs do not automatically
 reopen delivered milestones. Relevant completed work feeds the grading reassessment.
 
+## Required artifact ownership rules (all agents, all modes)
+
+These are execution instructions, not background reading. Apply the references
+required by the selected mode; do not treat their workflow rules as optional.
+
+- For the same project, scope and audience, update the existing canonical hub,
+  local entry file and hosted URL. A refresh, grade, score or format change must
+  not create a new working folder or full artifact copy merely because it is a
+  new run.
+- Resolve the existing hub before writing. Follow
+  `references/artifact-views.md` under **Canonical workspace lifecycle**. If
+  competing copies cannot be resolved from saved pointers, ask which is canonical.
+- Append assessment history and new evidence inside the existing workspace;
+  update current data and views there. Preserve the original baseline, prior
+  assessments and stable evidence links. Immutable history does not require
+  duplicating the whole hub.
+- Separate exports require an explicit request or an approved distinct audience,
+  scope or permission boundary. Packaging for an authorized publishing operation
+  is temporary staging, not another working roadmap. Missing publishing access
+  does not justify creating an export.
+- Before reporting completion, verify the canonical entry path/URL is unchanged,
+  history remains accessible, and any extra copy has a stated authorized purpose.
+  Report local and hosted update status separately. Do not delete or consolidate
+  existing folders without permission.
+
 ## Modes (from args)
 
 | Args | Mode | What it does |
@@ -426,9 +451,10 @@ pass is the user looking at their own page.
   unless this run pulled in a source the page did not have.
 - New artifact: pick a short distinctive `<title>` ("<Project> Horizons" works),
   one favicon, publish. Updates: pass `url`, keep title/favicon/label discipline.
-- If the user keeps a standalone local copy (e.g. on the Desktop), regenerate it in
-  the same pass — wrap the same content file in a plain doctype/head/body shell.
-- Write/update a memory file recording: artifact URL, local-copy path, favicon,
+- If the user keeps a local copy, update that same entry file and workspace in
+  the same pass. Do not create a newly dated sibling folder or export by default.
+- Write/update the existing project-local memory file recording: artifact URL,
+  canonical workspace and entry-file path, favicon,
   editorial rules the user set, and any per-project framing decisions — future
   sessions must re-read + diff the artifact before republishing.
 - **The page's DIRECTION CONTRACT comment is the durable design record** — unlike

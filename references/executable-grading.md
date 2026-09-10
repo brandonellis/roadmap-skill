@@ -109,8 +109,8 @@ to run the repository regression suite or install browser-testing dependencies
 to generate an artifact. Browser QA is optional and capability-aware; source
 and ledger checks still apply, and unavailable checks must be disclosed.
 
-For the private-bundle workflow, project artifact verification uses a private
-`publication-manifest.json` with `schemaVersion: 1`, `visibility:
+Project artifact verification runs in the canonical workspace by default, using
+a private `publication-manifest.json` with `schemaVersion: 1`, `visibility:
 private`, `assessmentId`, `audience`, `artifactFile`, `ledgerFile`, `historyLockFile`
 and an explicit `files` array of relative `path` + SHA-256. Include linked archives
 and evidence files needed for the private artifact. Do not include the publication
@@ -119,14 +119,20 @@ manifest in its own file list. Embed the same ledger in a JSON script with ID
 
 `node scripts/verify-artifact.mjs /private/path/publication-manifest.json` verifies
 file integrity, append-only history, audience and embedded/saved ledger agreement.
-Use `--private-bundle NEW_DIRECTORY` to create an allowlisted owner-only copy and
-reverify it. The destination must not exist. This is staging, not uploading.
+Do not add `--private-bundle` to ordinary refresh, grade or score runs. Use it
+only for an explicitly requested export or when an authorized publication needs
+packaging: `--private-bundle NEW_DIRECTORY` creates an allowlisted owner-only
+copy and reverifies it. The destination must not exist. For publication staging,
+choose an unused child path inside an owner-only temporary directory, not a dated
+sibling of the canonical workspace. This is staging, not uploading. Follow the
+temporary-file lifecycle in `artifact-views.md`; never make the bundle canonical.
 Re-read remote revision before actual publication; conflicts require reconcile,
 not overwrite. Advertise a hosted update only after the destination is read back.
 
-If no authenticated private destination is available, retain the stable local hub,
-prepare the private bundle and report the missing destination once. Never publish
-the private hub through a public Pages site or put its data in the skill repo.
+If no authenticated private destination is available, update and verify the stable
+local hub in place and report the missing destination once. Do not prepare another
+bundle or claim a hosted update. Never publish the private hub through a public
+Pages site or put its data in the skill repo.
 External audience exports need separately approved, allowlisted data; hiding an
 Evidence tab is not sanitization. A hash is an accidental-drift guard, not a
 signature or a guarantee that an intentionally edited manifest is trustworthy.

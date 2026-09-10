@@ -249,8 +249,10 @@ Every artifact is one current view over **immutable dated assessments**. A
 single canonical URL may be republished; previous assessments and baseline
 content must remain accessible in History at stable fragment IDs. Standalone
 immutable exports are optional snapshots, labelled with assessment ID and a
-link back to the hub. Migrate old cards by linking or preserving their content,
-not replacing them with the newest grade.
+link back to the hub where permissions allow. Keep the local hub at the same
+directory and entry path; append history and evidence within it instead of
+cloning the entire workspace per assessment. Migrate old cards by linking or
+preserving their content, not replacing them with the newest grade.
 
 ## Acceptance scenarios before shipping a grade
 

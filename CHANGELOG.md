@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.10.1 - 2026-09-10
+
+- Require refresh, grade, score and format updates to reuse the canonical
+  workspace, entry file and URL. Preserve the baseline, append history and new
+  evidence inside the hub, and verify updates before replacing the current page.
+- Remove automatic private-bundle creation when hosting is unavailable. Make
+  exports explicit and publication staging temporary; do not delete existing
+  copies without permission or treat a staged bundle as the working roadmap.
+- Mark the shared workflow rules as execution instructions for every agent and
+  add a Claude maintainer entry point importing the same `AGENTS.md` policy.
+
 ## 1.10.0 - 2026-09-10
 
 - Roll completed capabilities, improvements and bug fixes up beneath broad

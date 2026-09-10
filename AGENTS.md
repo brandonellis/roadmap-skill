@@ -3,6 +3,19 @@
 These instructions apply when changing this skill repository, not when running
 the skill against someone else's project.
 
+## Shared agent instructions
+
+Keep `SKILL.md` and its mode-required references authoritative for skill execution
+across agents. Their workflow requirements are instructions, not optional
+background reading. Keep `CLAUDE.md` as an import of this file rather than a
+separate rule set. Do not copy private project rules or assessment data here.
+
+When changing output or publication guidance, preserve the single-hub lifecycle
+in `SKILL.md` and `references/artifact-views.md`: update the canonical workspace,
+append history within it, and do not require full bundles on ordinary refreshes.
+Keep all publication examples consistent with that default. Instructions guide
+agent behavior; do not claim they constitute a technical block on other tools.
+
 ## A commit and push is not a finished release
 
 When committing and pushing skill changes, also cut the appropriate release in

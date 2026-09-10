@@ -200,7 +200,17 @@ invoking the skill can do:
 ## Updating an existing roadmap or grade chain
 
 Read the existing artifact first. Reuse its canonical URL, visual direction and
-stable links. On the first grade run after this update, resolve the original
+stable links, local workspace and entry-file path. Refresh, grade and score update
+that one working copy. Append assessment history and new evidence inside it;
+do not create dated sibling hubs or full private bundles for ordinary runs.
+Separate exports require an explicit request or an approved distinct audience,
+scope or permission boundary. Temporary publication packaging is not a new
+canonical artifact. If hosting is unavailable, verify the local update and report
+that limitation without generating another bundle. Existing duplicates are never
+deleted or consolidated automatically. See the required canonical workspace
+lifecycle in `references/artifact-views.md`.
+
+On the first grade run after this update, resolve the original
 assessment and preserve it, then confirm any missing rubric/A+ decisions once.
 Unrecoverable legacy evidence stays labelled unknown or originally reported;
 it is never invented to make the old grades comparable. New assessments append
