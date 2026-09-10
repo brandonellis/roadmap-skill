@@ -32,6 +32,10 @@ For the **stakeholder Progress tab**, make three different measures unmistakable
    issue grades, say so here, not only inside an explanation. Never date old
    grades with the regeneration timestamp or imply they assess current runtime.
 
+Keep a previously assessed scalability lens alongside the component scorecard,
+not hidden only in old reports. Its scale grade, dimension grades and dated
+capacity ladder follow `scalability.md`; the full audit stays secondary.
+
 `renderFindingProgress` and `renderDeliveryProgress` in `scripts/render-progress.mjs`
 provide these separate measures with `assets/progress-outcomes.css`. Counts must
 come from their declared source sets. A changed layout is not a new assessment.

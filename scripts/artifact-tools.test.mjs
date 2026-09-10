@@ -83,6 +83,28 @@ test('creation-time audience cannot change silently', async context => {
   await assert.rejects(verifyArtifact(data.path), /audience changed/);
 });
 
+test('a registered scale lens cannot disappear during component-only regeneration', async context => {
+  const data = await fixture(context);
+  data.ledger.assessmentLenses = [{ id: 'scalability', sourceFile: 'scale.json' }];
+  const source = JSON.stringify({ id: 'scalability', lastAssessedOn: '2026-01-01' });
+  await writeFile(join(data.root, 'scale.json'), source);
+  data.manifest.files.push({ path: 'scale.json', sha256: createHash('sha256').update(source).digest('hex') });
+  const update = async (file, content) => {
+    await writeFile(join(data.root, file), content);
+    data.manifest.files.find(entry => entry.path === file).sha256 = createHash('sha256').update(content).digest('hex');
+    await data.save();
+  };
+  await update('ledger.json', JSON.stringify(data.ledger));
+  const history = `<script type="application/json" id="roadmap-history">${JSON.stringify(data.ledger)}</script>`;
+  await update('index.html', `<html>${history}</html>`);
+  await assert.rejects(verifyArtifact(data.path), /Standing assessment lens missing/);
+  await update('index.html', `<html>${history}<section data-assessment-lens="scalability">Dated scale grade</section></html>`);
+  assert.equal((await verifyArtifact(data.path)).verifiedFiles, 4);
+  data.manifest.files = data.manifest.files.filter(file => file.path !== 'scale.json');
+  await data.save();
+  await assert.rejects(verifyArtifact(data.path), /evidence must be allowlisted/);
+});
+
 test('path traversal and symlink escapes cannot add files to a bundle', async context => {
   const data = await fixture(context);
   data.manifest.files.push({ path: '../outside', sha256: 'unused' }); await data.save();

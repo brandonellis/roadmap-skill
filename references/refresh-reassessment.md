@@ -18,6 +18,9 @@ artifact's audience, baseline, immutable history and planning decisions.
    component, scope, mapping evidence, previous observation and checks required.
    Include reopenings, changed acceptance, new blocking findings and changed
    deployed/configured state. Updated timestamps alone do not imply a fix.
+   Map shared constraints to cross-cutting lenses too. Queue, worker, data-tier,
+   retention and cost changes affect the scalability lens even when the ticket
+   was mapped to a component. Preserve that lens using `scalability.md`.
 4. No affected criteria means delivery-only changes and `No grading evidence
    changed`. An ungraded artifact stays ungraded. An explicit request to refresh
    delivery only is honored and says `Grading not reassessed`.

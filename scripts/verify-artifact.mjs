@@ -35,6 +35,14 @@ export async function verifyArtifact(manifestPath) {
   const html = await read(manifest.artifactFile);
   const embedded = html.match(/<script\b(?=[^>]*\bid="roadmap-history")(?=[^>]*\btype="application\/json")[^>]*>([\s\S]*?)<\/script>/);
   if (!embedded || canonical(JSON.parse(embedded[1])) !== canonical(ledger)) throw new Error('Visible artifact and saved ledger are different revisions');
+  const lenses = ledger.assessmentLenses ?? [];
+  if (!Array.isArray(lenses) || new Set(lenses.map(lens => lens.id)).size !== lenses.length) throw new Error('Standing assessment lenses need unique IDs');
+  for (const lens of lenses) {
+    if (typeof lens.id !== 'string' || !/^[a-z][a-z0-9-]*$/.test(lens.id)) throw new Error('Invalid standing assessment lens ID');
+    if (!manifest.files.some(file => file.path === lens.sourceFile)) throw new Error(`Standing lens evidence must be allowlisted: ${lens.id}`);
+    const section = new RegExp(`<(?:section|article)\\b[^>]*\\bdata-assessment-lens=["']${lens.id}["'][^>]*>`);
+    if (!section.test(html)) throw new Error(`Standing assessment lens missing from artifact: ${lens.id}`);
+  }
   if (ledger.presentation?.artifactBrief?.audience !== manifest.audience) throw new Error('Creation-time audience changed during publication');
   return { root, manifest, verifiedFiles: manifest.files.length };
 }

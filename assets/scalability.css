@@ -1,0 +1,30 @@
+.rm-scalability { margin-block: 40px; }
+.rm-scale-summary { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 28px; align-items: center; margin-block: 24px; }
+.rm-scale-overall { display: flex; flex-direction: column; align-items: flex-start; color: var(--rm-ink); text-decoration: none; }
+.rm-scale-overall strong { font: 700 64px/1.1 "Barlow Condensed", sans-serif; }
+.rm-scale-overall span { color: var(--rm-muted); font-size: 14px; }
+.rm-scale-summary p { max-width: 72ch; }
+.rm-scale-dimensions { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin-block: 24px; border-block: 1px solid var(--rm-rule); }
+.rm-scale-dimensions a { display: flex; flex-direction: column; gap: 6px; padding: 14px; color: var(--rm-ink); text-decoration: none; border-inline-end: 1px solid var(--rm-rule); }
+.rm-scale-dimensions a:last-child { border-inline-end: 0; }
+.rm-scale-dimensions strong { font: 700 32px/1.2 "Barlow Condensed", sans-serif; }
+.rm-scale-dimensions span { font-size: 14px; }
+.rm-scale-scroll { max-width: 100%; overflow-x: auto; }
+.rm-scale-table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 14px; }
+.rm-scale-table caption { padding-block: 12px; text-align: left; color: var(--rm-muted); }
+.rm-scale-table th, .rm-scale-table td { padding: 12px; border: 1px solid var(--rm-rule); }
+.rm-scale-table thead th { background: var(--rm-soft); }
+.rm-scale-table th[scope="row"], .rm-scale-table th:first-child { text-align: left; }
+.rm-scale-table th strong, .rm-scale-table th span, .rm-scale-table th small { display: block; }
+.rm-scale-table th strong { font-size: 22px; }
+.rm-scale-table th small { color: var(--rm-muted); font-weight: 400; }
+.rm-scale-table td { text-align: center; text-transform: capitalize; }
+.rm-scale-table [data-scale-verdict="holds"] { background: var(--rm-t2-soft); color: var(--rm-t2); }
+.rm-scale-table [data-scale-verdict="degrades"] { background: var(--rm-warn-bg); color: var(--rm-warn); }
+.rm-scale-table [data-scale-verdict="breaks"] { background: var(--rm-soft); color: var(--rm-ink); font-weight: 700; }
+.rm-scalability a:focus-visible, .rm-scale-scroll:focus-visible { outline: 2px solid var(--rm-t3); outline-offset: 3px; }
+@media (max-width: 600px) {
+  .rm-scale-summary { grid-template-columns: 1fr; gap: 16px; }
+  .rm-scale-dimensions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rm-scale-dimensions a { border-bottom: 1px solid var(--rm-rule); }
+}

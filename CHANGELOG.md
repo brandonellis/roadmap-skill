@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Preserve scalability as a standing assessment lens across partial refreshes.
+  Restore its dated grade, dimension grades and capacity ladder without changing
+  the initial baseline. Add a reusable renderer and fail bundle verification
+  when a registered lens or its evidence disappears.
+
 - Run actual letter assessments, not just ticket acceptance reviews. Preserve
   established qualitative methods while replacement rubrics await approval,
   record fresh component judgments with a tested helper, and render the new

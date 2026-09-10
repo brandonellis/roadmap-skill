@@ -33,6 +33,11 @@ component needs a complete component review with an actual letter, rationale,
 verified improvements, next-grade requirements and source citations, or an
 explicit blocker. An acceptance checklist for one ticket is not a component grade.
 
+This recorder handles the component panel, not every cross-cutting lens. Merge
+the standing lens registry into the current ledger and render those views too.
+Follow `scalability.md` for scale-specific calibration, measurements and refresh
+triggers. A component-only result must never erase a previously assessed lens.
+
 Use the returned `components` to render current letters. The optional
 `renderLetterReassessment` helper returns grade tiles and collapsed explanations
 using the existing progress CSS hooks. Never select the

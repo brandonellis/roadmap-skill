@@ -41,6 +41,11 @@ Then invoke it in any Claude Code session with `/roadmap`.
 
 ## What makes it opinionated
 
+- **Scalability stays visible.** Preserve the scale lens, its five dimension
+  grades and capacity ladder alongside component grades. Relevant refreshes
+  reassess it; older measurements remain dated rather than becoming current
+  claims. Missing a registered lens fails private-bundle verification.
+
 - **Relevant work triggers reassessment.** Refresh checks completed findings,
   reopenings and changed evidence against existing grading criteria. It verifies
   affected requirements and updates supported grades against the same baseline.

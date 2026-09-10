@@ -31,6 +31,11 @@ only ticket reconciliation. A proposed replacement rubric does not block a
 fresh qualitative assessment under the recovered original method. Render the
 new assessment's letters; preserve the original baseline and prior observations.
 
+Preserve standing cross-cutting lenses as well as component rows. Read
+`references/scalability.md` when creating or updating assessments: scalability
+keeps its own dated grade, five dimensions and capacity ladder. Partial component
+refreshes must not drop it; relevant capacity changes trigger its reassessment.
+
 Read `references/stakeholder-story.md` on every mode. The purpose is to present
 the system's direction and demonstrated progress to the audience established
 at creation. Inherit that audience and brief; never re-ask or silently select
