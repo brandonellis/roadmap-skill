@@ -1,6 +1,10 @@
 # Changelog
 
-## Unreleased
+## 1.9.0 — 2026-09-10
+
+The stakeholder release: a summary-first reading path through the artifact,
+standing assessment lenses that survive a partial refresh, and real letter
+reassessment in place of ticket-acceptance review.
 
 - Give stakeholder artifacts a summary-first reading path across Roadmap,
   Progress and Evidence. Show dated component grade movement separately from
