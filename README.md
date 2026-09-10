@@ -122,6 +122,13 @@ Then invoke it in any Claude Code session with `/roadmap`.
 
 ## Contents
 
+- `AGENTS.md` carries repository-maintenance instructions, including the required
+  release handoff. It does not change what running the skill does to a project.
+- `references/feature-rollups.md` defines source-backed feature membership,
+  completed capability work and fixes, original requirements, follow-ups and
+  deduplicated credit. `scripts/feature-rollups.mjs` and
+  `scripts/render-feature-rollups.mjs` build and render those groups with
+  `assets/feature-rollups.css`.
 - `references/stakeholder-story.md` owns audience inheritance, evidence-backed
   progress storytelling, visual retention and safe audience-specific exports.
 - `assets/stakeholder-visuals.css` supplies delivery bars, baseline-cohort marks,
@@ -219,4 +226,29 @@ generic skill validators that only accept the cross-client core may reject it.
 
 ## Versioning
 
-Semver via git tags; see `CHANGELOG.md`.
+Semver via annotated git tags and published GitHub Releases; see `CHANGELOG.md`.
+**Committing and pushing skill changes includes cutting a release**, unless the
+maintainer explicitly requests an unreleased change. A pushed commit or tag alone
+is not a completed release. Several implementation commits can ship together.
+
+1. Fetch remote branches and tags, then inspect the published releases and all
+   changes since the last released version. Preserve concurrent work.
+2. Choose the next version: patch for compatible fixes, minor for compatible new
+   capabilities, major for breaking changes. Never reuse an existing version.
+3. Run `node --test scripts/*.test.mjs` and `git diff --check`. Review the release
+   diff for private project data and update the relevant documentation.
+4. Move the shipped `Unreleased` entries into a dated version section in
+   `CHANGELOG.md`. Commit the release changes and annotate that commit with
+   `git tag -a vX.Y.Z -m "Release vX.Y.Z"`.
+5. Push the intended branch and tag without force, preferably atomically:
+   `git push --atomic origin main refs/tags/vX.Y.Z`.
+6. Publish the GitHub Release for that tag with the version's changelog notes:
+   `gh release create vX.Y.Z --verify-tag --title "vX.Y.Z" --notes-file <notes-file>`.
+   Normal stable releases must not remain drafts or prereleases.
+7. Verify the remote tag's peeled commit matches the intended release commit,
+   and the published GitHub Release points to that tag. Report the released
+   version; if publication fails, state the incomplete step rather than claiming
+   the release shipped. Resume safely instead of force-moving a published tag.
+
+This is a maintainer workflow only. Installing or running the roadmap skill
+does not create commits, tags or releases in the project being assessed.

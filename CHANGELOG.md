@@ -1,11 +1,16 @@
 # Changelog
 
-## Unreleased
+## 1.10.0 - 2026-09-10
 
 - Roll completed capabilities, improvements and bug fixes up beneath broad
   features using source-backed relationships. Preserve original requirements,
   scoped milestones and grading baselines; separate open follow-ups and mapping
   gaps. Add deduplicated feature credit and static status-aware drill-downs.
+- Require a complete maintainer release handoff: validation, a dated changelog,
+  an annotated version tag, a published GitHub Release and remote verification.
+  Keep this policy separate from ordinary skill execution in user projects.
+- Document the feature-rollup helpers and validate them with the expanded
+  dependency-free regression suite: 91 tests passing.
 
 ## 1.9.0 — 2026-09-10
 
