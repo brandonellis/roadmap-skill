@@ -129,6 +129,12 @@ filters without changing unique counts. Show unknown progress explicitly and
 keep full titles readable rather than clipping them to make narrow bars look tidy.
 Long ticket explanations stay in the canonical details, with return navigation.
 
+Where reconciliation finds an item whose cited work closed, reopened, or whose
+stated gate cleared while its horizon stayed put, that is a prompt to the driver
+naming the item and the tickets, not a row in the drift table. See SKILL.md,
+"Unresolved choices are prompts, not omissions". The horizon still does not move
+without an answer.
+
 A user-approved horizon change overrides the old planning snapshot in every
 roadmap representation. Persist that decision outside the historical evidence
 so regeneration cannot move the item back. Priority is not a promised date:

@@ -102,6 +102,9 @@ required by the selected mode; do not treat their workflow rules as optional.
   scope or permission boundary. Packaging for an authorized publishing operation
   is temporary staging, not another working roadmap. Missing publishing access
   does not justify creating an export.
+- **Uncertainty surfaces as a question, never as an omission.** Refusing to move
+  a horizon, re-score, rebaseline or grade unasked is right about the ACTION and
+  silent about the CHOICE. Prompt it. `references/unresolved-choices.md`.
 - Before reporting completion, verify the canonical entry path/URL is unchanged,
   history remains accessible, and any extra copy has a stated authorized purpose.
   Report local and hosted update status separately. Do not delete or consolidate
@@ -207,7 +210,7 @@ validation, and rendering specifics live in `references/wsjf.md`.
   curve (an audit, a contract window) is exactly what a flat score hides.
 - **Refresh gains scoring drift classes**: stale scores (evidence changed since
   the confirmed date), orphan rows, unscored new themes. Re-scoring is a human
-  decision the drift report requests — the slipped-bar rule applied to scores.
+  decision the drift report PROMPTS for, naming the rows and what moved.
 
 ## Grade mode — the report card
 
@@ -220,7 +223,8 @@ not WSJF's prioritization semantics. Load `references/report-card.md`,
 `references/grade-anchors.md` and `references/baseline-ledger.md` before running.
 The ledger owns baseline identity, history, roll-up and A+ acceptance. Run it on
 explicit `grade`/`score`, or for affected criteria identified by an assessed
-artifact's refresh. Do not turn an ungraded roadmap into a graded one unasked.
+artifact's refresh. Never grade an ungraded roadmap unasked; on an assessed one
+whose letters have not moved, prompt for it.
 
 Nine rules that are non-negotiable even without the reference loaded:
 - **Auditors grade blind to the letters and read-only, never blind to the
@@ -233,7 +237,8 @@ Nine rules that are non-negotiable even without the reference loaded:
   the activation gap as a count, every ratchet's size and direction. Those
   answer "did it improve"; letters answer "how good is this", and the card
   never fuses the two.
-- **The original baseline persists until an approved rebaseline.** Freeze its
+- **The original baseline persists until an approved rebaseline**; an instrument
+  or scope mismatch is prompted, never carried quietly. Freeze its
   scope, criteria, anchors, finding denominator and A+ checks, with no run-count
   expiry. Current and previous assessments are observations, not new starting
   points. New findings and scope stay visible separately; they can block A+.
