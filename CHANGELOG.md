@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Give stakeholder artifacts a summary-first reading path across Roadmap,
+  Progress and Evidence. Show dated component grade movement separately from
+  targets, keep scalability visible with an on-demand capacity breakdown, and
+  group evidence by reader question without losing source anchors. Add a
+  phone-readable board from the same placements and reusable hierarchy styles.
+
 - Preserve scalability as a standing assessment lens across partial refreshes.
   Restore its dated grade, dimension grades and capacity ladder without changing
   the initial baseline. Add a reusable renderer and fail bundle verification

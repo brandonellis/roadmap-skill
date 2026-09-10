@@ -52,6 +52,12 @@ shell without renaming existing anchor IDs or discarding their content.
 
 ## Shared model, not separate interpretations
 
+For phones, the matrix renderer also emits a stacked, horizon-first overview
+from the same placements. CSS exposes only one board at a time; both use the
+same canonical item IDs, filter/search hooks and explanation links. Count unique
+items, not rendered links. Preserve desktop matrix and print output, and avoid
+CSS reordering that makes keyboard order disagree with the visual reading order.
+
 Preserve an established streams-by-horizons matrix as the NNL overview. Detail
 cards are its drill-down, not a substitute for its row/column structure. Use
 `scripts/render-roadmap-matrix.mjs` with `assets/roadmap-structure.css` when useful;

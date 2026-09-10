@@ -15,6 +15,8 @@ test('restored scale grades keep their dates, all dimensions, and fixed rungs', 
   assert.match(progress, /<strong>C\+<\/strong>/);
   assert.match(progress, /January 3, 2026/);
   assert.match(progress, /Not remeasured/);
+  assert.match(progress, /<details class="rm-scale-breakdown"><summary>Capacity dimensions and growth scenarios<\/summary>/);
+  assert.doesNotMatch(progress, /<details[^>]*\bopen\b/);
   assert.match(progress, /<strong>500<\/strong>/);
   assert.doesNotMatch(progress, /<strong>525<\/strong>/);
   assert.equal((progress.match(/href="#scalability-evidence"/g) ?? []).length, 7);

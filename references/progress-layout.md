@@ -7,6 +7,8 @@ project's visual identity. Do not wrap complete old reports in a new tab bar and
 call that a clearer current assessment.
 
 The creation-time audience takes precedence over this operational composition.
+`stakeholder-hierarchy.md` defines the stakeholder reading path and disclosure
+boundaries; it takes precedence over the detailed operational composition below.
 For a stakeholder roadmap, follow `stakeholder-story.md`: delivery chart, fixed
 baseline cohort, wins and forward plan first; use this assessment layout as a
 compact lens or evidence drill-down. Do not replace a visual progress story with
@@ -22,7 +24,9 @@ For the **stakeholder Progress tab**, make three different measures unmistakable
 
 1. Lead with a few plain-language, source-linked outcomes. Technical mechanisms
    belong in the linked proof. Say whether a win is verified in code or in use.
-2. Show **Original findings** as a labeled, clickable verified/partial/open bar
+2. Make changes in the latest component review explicit before the full
+   scorecard. Distinguish changed, rechecked-but-unchanged and carried-forward
+   letters. Show **Original findings** as a labeled, clickable verified/partial/open bar
    on the fixed initial denominator. Keep exact tickets and remaining acceptance
    in its collapsed register. Show **Work delivered** as supporting throughput,
    with its dated window. Put the separate prior-assessment ticket-reference set
@@ -33,8 +37,9 @@ For the **stakeholder Progress tab**, make three different measures unmistakable
    grades with the regeneration timestamp or imply they assess current runtime.
 
 Keep a previously assessed scalability lens alongside the component scorecard,
-not hidden only in old reports. Its scale grade, dimension grades and dated
-capacity ladder follow `scalability.md`; the full audit stays secondary.
+not hidden only in old reports. Keep its dated overall grade and measurement
+status visible. Its dimension grades and full capacity ladder are a named
+disclosure within Progress, following `scalability.md`; the audit stays secondary.
 
 `renderFindingProgress` and `renderDeliveryProgress` in `scripts/render-progress.mjs`
 provide these separate measures with `assets/progress-outcomes.css`. Counts must

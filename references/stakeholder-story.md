@@ -91,9 +91,10 @@ Never invent scores, revenue, customer impact or forecasts to improve the story.
 
 ## Compose visually, explain on demand
 
-Lead with one progress statement, a source-backed delivery chart and the
-original-cohort comparison. Follow with a few meaningful wins and next milestones
-or decisions. Keep headline copy short. Methods, repeated caveats, revision
+Lead with one evidence-backed progress statement, meaningful wins and the
+forward plan. Keep delivery counts and the original-cohort comparison as
+supporting context rather than competing headline metrics. Follow
+`stakeholder-hierarchy.md` for the three-view composition. Methods, repeated caveats, revision
 tables and full audit reports belong in Evidence.
 
 For a combined roadmap, the roadmap is the primary landing view. Put its board

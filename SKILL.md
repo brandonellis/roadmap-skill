@@ -7,7 +7,8 @@ argument-hint: "[<artifact-url> · refresh [<url>] · gantt · wsjf [<source>] �
 # /roadmap — the Horizons roadmap builder
 
 Produce (or update) a single-page roadmap artifact that a non-technical stakeholder
-can scan in a minute and an engineer can drill into: counts before prose, a
+can scan in a minute and an engineer can drill into: demonstrated progress before
+supporting counts, a
 streams × horizons board, cross-cutting throughlines, detail cards with ticket refs
 as small tags, an explicit out-of-scope section, and a standing-risk register.
 The pattern is proven on shipped roadmap pages; this skill generalizes it.
@@ -40,6 +41,11 @@ Read `references/stakeholder-story.md` on every mode. The purpose is to present
 the system's direction and demonstrated progress to the audience established
 at creation. Inherit that audience and brief; never re-ask or silently select
 a new audience on update. Lead with visuals and wins, link to technical evidence.
+
+For stakeholder artifacts, use `references/stakeholder-hierarchy.md` to keep a
+short reading path through Roadmap, Progress and Evidence. Adding assessment
+detail should not add another equally prominent report section. Keep dated
+grade changes visible, preserve all lenses, and disclose full evidence on demand.
 
 Keep delivery counts, fixed-cohort findings and dated readiness grades distinct.
 Initiative drill-downs preserve the originating chart, filters, scroll and focus,

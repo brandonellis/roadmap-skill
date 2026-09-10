@@ -2,8 +2,11 @@
 
 Scalability is a standing cross-cutting assessment, not a synonym for a
 component's performance grade. An eight-component scorecard must not make a
-previously assessed ninth lens disappear. Keep its grade and capacity ladder
-visible in Progress; put the detailed measurements and evidence in Evidence.
+previously assessed ninth lens disappear. Keep its dated grade and measurement
+status visible in Progress. Retain all dimension grades and the capacity ladder
+in a clearly named disclosure there; keep full measurement evidence in Evidence.
+`render-scalability.mjs` uses this summary-first layout by default. Collapsing
+the breakdown does not remove it or change the underlying assessment.
 Do not add another primary tab or apply roadmap theme filters to this assessment.
 
 ## Restore without rewriting the baseline

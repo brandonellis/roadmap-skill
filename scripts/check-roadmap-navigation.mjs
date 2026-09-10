@@ -65,7 +65,7 @@ export async function checkRoadmapNavigation(page) {
   await reset();
   await page.locator('[data-roadmap-format-select]').selectOption('nnl');
   await page.locator('.rm-matrix-scroll').evaluate(region => region.scrollTo(100, 0));
-  await roundTrip('.rm-matrix-pill:visible', 'Now / Next / Later');
+  await roundTrip('.rm-matrix-pill:visible, .rm-mobile-pill:visible', 'Now / Next / Later');
   const diagramLink = page.locator('[data-roadmap-origin-label="Critical path"] svg a[href]').first();
   if (await diagramLink.count()) {
     await page.locator('[data-roadmap-search]').fill('not-a-matching-initiative');
@@ -73,7 +73,7 @@ export async function checkRoadmapNavigation(page) {
     passed.push('A diagram link reveals a filtered-out detail, then restores the original search');
   }
   await reset();
-  const modifiedClick = await page.locator('.rm-matrix-pill').first().evaluate(anchor => {
+  const modifiedClick = await page.locator('.rm-matrix-pill:visible, .rm-mobile-pill:visible').first().evaluate(anchor => {
     let preventedByController;
     window.addEventListener('click', event => {
       preventedByController = event.defaultPrevented;

@@ -12,7 +12,10 @@ const fixture = () => ({
 test('matrix keeps streams and horizons with one item behind repeated pills', () => {
   const html = renderRoadmapMatrix(fixture());
   assert.match(html, /1 item · 2 placements/);
-  assert.equal((html.match(/href="#platform"/g) || []).length, 2);
+  assert.equal((html.match(/href="#platform"/g) || []).length, 4);
+  assert.equal((html.match(/class="rm-matrix-pill /g) || []).length, 2);
+  assert.equal((html.match(/class="rm-mobile-pill /g) || []).length, 2);
+  assert.match(html, /data-roadmap-mobile-group><h3>Now/);
   assert.match(html, /<th scope="row">Technical/);
   assert.match(html, /<th scope="col">Next/);
   assert.match(html, /data-throughlines="trust data"/);

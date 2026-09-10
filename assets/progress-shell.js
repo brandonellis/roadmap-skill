@@ -73,7 +73,7 @@
     items.forEach(function (item) {
       item.hidden = !matches.has(item.getAttribute("data-roadmap-item"));
     });
-    roadmap.querySelectorAll('[data-roadmap-track], [data-roadmap-lane]').forEach(function (group) {
+    roadmap.querySelectorAll('[data-roadmap-track], [data-roadmap-lane], [data-roadmap-mobile-group]').forEach(function (group) {
       var members = Array.from(group.querySelectorAll('[data-roadmap-item]'));
       var visible = members.filter(function (item) { return !item.hidden; });
       group.hidden = visible.length === 0;

@@ -1,0 +1,87 @@
+.roadmap-shell .rm-roadmap-lead { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(250px, .8fr); gap: 40px; align-items: start; margin: 28px 0 24px; }
+.roadmap-shell .rm-roadmap-lead h2 { max-width: 22ch; margin: 0 0 12px; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.1; }
+.rm-roadmap-lead p { max-width: 65ch; }
+.rm-lead-review { padding-left: 24px; border-left: 1px solid var(--rm-rule); }
+.rm-lead-review > strong { display: block; margin-bottom: 10px; font-size: 16px; }
+.rm-lead-review ul { list-style: none; padding: 0; margin: 0 0 12px; }
+.rm-lead-review li { margin-block: 6px; }
+.rm-lead-review a { text-underline-offset: 3px; }
+.rm-lead-review p { font-size: 13px; color: var(--rm-muted); }
+.rm-grade-movement { list-style: none; margin: 20px 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid var(--rm-rule); }
+.rm-grade-movement li + li { border-left: 1px solid var(--rm-rule); }
+.rm-grade-movement a { display: flex; flex-direction: column; gap: 6px; padding: 18px 20px; color: var(--rm-ink); text-decoration: none; }
+.rm-grade-movement strong { font: 600 38px/1.1 "Barlow Condensed", sans-serif; font-variant-numeric: tabular-nums; }
+.rm-grade-movement a > span:last-child { color: var(--rm-muted); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+.rm-grade-movement a:hover, .rm-grade-tile:hover { background: var(--rm-soft); }
+.roadmap-shell .rm-progress-intro > h2 { font: 600 clamp(34px, 4vw, 48px)/1.1 "Barlow Condensed", sans-serif; text-transform: uppercase; margin: 28px 0 12px; }
+.rm-progress-intro > p, .rm-evidence-intro { max-width: 70ch; color: var(--rm-muted); }
+.roadmap-shell .rm-outcomes { margin-block: 28px 36px; }
+.roadmap-shell .rm-outcomes .rm-structure-heading { border-bottom: 1px solid var(--rm-rule); margin: 0 0 16px; padding-bottom: 12px; }
+.roadmap-shell .rm-outcomes .rm-structure-heading h2 { font-size: 28px; }
+.roadmap-shell .rm-outcomes .rm-outcome-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 40px; margin-block: 16px; }
+.roadmap-shell .rm-outcome-list h3 { font-size: 19px; margin-bottom: 5px; }
+.roadmap-shell .rm-outcome-list p { font-size: 15px; line-height: 1.5; margin-bottom: 6px; }
+.roadmap-shell .rm-outcomes > .rm-measure-context { margin-top: 16px; font-size: 13px; max-width: 75ch; }
+.roadmap-shell .rm-grade-tile { padding: 16px 10px; }
+.roadmap-shell .rm-grade-tile strong { font-size: 42px; }
+.roadmap-shell .rm-grade-tile span { font-size: 13px; }
+.rm-assessment-context { max-width: 75ch; margin-block: 14px; }
+.rm-scale-breakdown { border-block: 1px solid var(--rm-rule); padding-block: 8px; }
+.roadmap-shell .rm-scale-summary { margin-block: 16px; }
+.rm-scale-summary p { font-size: 15px; }
+.rm-scale-breakdown > summary { font-weight: 600; }
+.rm-next-proof { margin-block: 32px; padding-block: 20px; border-block: 1px solid var(--rm-rule); }
+.roadmap-shell .rm-next-proof h2 { margin: 0 0 12px; font: 600 28px/1.2 "Barlow Condensed", sans-serif; }
+.rm-next-proof ul { padding-left: 22px; max-width: 75ch; }
+.rm-next-proof li { margin-block: 10px; }
+.roadmap-shell .rm-progress-story { gap: 32px; margin-block: 32px; }
+.roadmap-shell .rm-finding-segments { margin-block: 14px; }
+.roadmap-shell .rm-finding-segments a { min-height: 78px; }
+.rm-baseline-context { margin-top: 12px; }
+.roadmap-shell #view-history > .rm-evidence-group { margin: 0; padding: 0; border-bottom: 1px solid var(--rm-rule); }
+.roadmap-shell .rm-evidence-group > summary { padding: 22px 0; }
+.rm-evidence-group > summary strong { font: 600 27px/1.2 "Barlow Condensed", sans-serif; }
+.rm-evidence-group > summary span { display: block; margin: 8px 0 0 18px; color: var(--rm-muted); font-size: 15px; max-width: 75ch; }
+.rm-evidence-records { padding: 0 20px 20px; }
+.rm-evidence-records > details { border-top: 1px solid var(--rm-rule); padding-block: 12px; }
+.rm-evidence-records :is(p, li, summary), #view-history :is(code, a), .rm-assessment-context code { overflow-wrap: anywhere; }
+.rm-evidence-records pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.rm-evidence-intro { margin-bottom: 24px; }
+.rm-pan-hint { display: none; font-size: 13px; color: var(--rm-muted); margin-block: 10px; }
+.roadmap-shell :is(a, button, input, select, summary):focus-visible { outline: 2px solid var(--rm-t3); outline-offset: 3px; }
+@media screen and (max-width: 600px) {
+  .roadmap-shell .rm-roadmap-lead { grid-template-columns: 1fr; gap: 14px; margin-block: 18px; }
+  .roadmap-shell .rm-roadmap-lead h2 { font-size: 32px; margin-bottom: 8px; }
+  .rm-roadmap-lead > div:first-child p { font-size: 15px; line-height: 1.45; }
+  .rm-lead-review { border: 0; padding: 0; }
+  .rm-lead-review > strong, .rm-lead-review ul { display: none; }
+  .rm-lead-review p { font-size: 14px; margin: 0; }
+  .roadmap-shell .rm-toolbar { display: grid; grid-template-columns: 1fr 1.25fr; gap: 10px; margin-block: 14px; }
+  .roadmap-shell .rm-toolbar label { min-width: 0; font-size: 13px; }
+  .roadmap-shell .rm-toolbar :is(input, select) { width: 100%; min-width: 0; height: 44px; padding: 8px; font-size: 14px; }
+  .roadmap-shell .rm-theme-filter-heading { display: flex; flex-wrap: nowrap; align-items: center; gap: 8px; padding: 4px 8px; }
+  .roadmap-shell .rm-theme-filter-heading strong { display: none; }
+  .roadmap-shell .rm-theme-filter-heading .rm-count { margin: 0; font-size: 12px; }
+  .roadmap-shell .rm-theme-filter-heading button { margin-left: auto; min-height: 44px; padding: 8px; font-size: 13px; white-space: nowrap; }
+  .roadmap-shell .rm-theme-choices { display: flex; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: thin; }
+  .roadmap-shell .rm-theme-choice { flex: 0 0 auto; min-height: 44px; padding: 10px 12px; font-size: 17px; }
+  .roadmap-shell .rm-theme-count { margin-left: 8px; }
+  .rm-grade-movement { grid-template-columns: 1fr; }
+  .rm-grade-movement li + li { border-left: 0; border-top: 1px solid var(--rm-rule); }
+  .rm-grade-movement a { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; padding: 14px 0; }
+  .rm-grade-movement a > span:last-child { grid-column: 1 / -1; }
+  .rm-grade-movement strong { font-size: 30px; }
+  .roadmap-shell .rm-outcomes .rm-outcome-list { grid-template-columns: 1fr; gap: 18px; }
+  .roadmap-shell .rm-grade-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .roadmap-shell .rm-grade-tile { border-bottom: 1px solid var(--rm-rule); }
+  .roadmap-shell .rm-scale-summary { grid-template-columns: 110px minmax(0, 1fr); gap: 18px; }
+  .roadmap-shell .rm-scale-summary strong { font-size: inherit; }
+  .roadmap-shell .rm-scale-overall strong { font-size: 48px; }
+  .rm-scale-summary p, .rm-scale-summary a, .rm-scale-overall span { font-size: 14px; }
+  .rm-evidence-records { padding-inline: 0; }
+  .rm-pan-hint { display: block; }
+}
+@media print {
+  .rm-mobile-board { display: none !important; }
+  .rm-roadmap-matrix > .rm-matrix-scroll { display: block !important; }
+}
