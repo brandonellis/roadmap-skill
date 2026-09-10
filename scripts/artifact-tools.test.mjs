@@ -58,6 +58,26 @@ test('a freshly hashed HTML file cannot hide a different embedded assessment', a
   await assert.rejects(verifyArtifact(data.path), /different revisions/);
 });
 
+test('a reassessment appends history and updates both ledger and embedded current identity', async context => {
+  const data = await fixture(context);
+  const history = await readFile(join(data.root, 'history.json'), 'utf8');
+  data.ledger.assessments.push({ id: 'second', grade: 'A-' });
+  data.ledger.currentAssessmentId = 'second';
+  data.manifest.assessmentId = 'second';
+  const update = async (file, content) => {
+    await writeFile(join(data.root, file), content);
+    data.manifest.files.find(entry => entry.path === file).sha256 = createHash('sha256').update(content).digest('hex');
+    await data.save();
+  };
+  await update('ledger.json', JSON.stringify(data.ledger));
+  await assert.rejects(verifyArtifact(data.path), /different revisions/);
+  await update('index.html', `<html><script type="application/json" id="roadmap-history">${JSON.stringify(data.ledger)}</script></html>`);
+  assert.equal((await verifyArtifact(data.path)).manifest.assessmentId, 'second');
+  assert.equal(await readFile(join(data.root, 'history.json'), 'utf8'), history);
+  assert.equal(data.ledger.originalBaselineId, 'initial');
+  assert.deepEqual(data.ledger.assessments[0], { id: 'first', grade: 'B+' });
+});
+
 test('creation-time audience cannot change silently', async context => {
   const data = await fixture(context); data.manifest.audience = 'Public investors'; await data.save();
   await assert.rejects(verifyArtifact(data.path), /audience changed/);

@@ -44,7 +44,7 @@ test('rendering uses the new assessment letter and preserves dated untouched res
   const rendered = renderLetterReassessment(result);
   assert.match(rendered.tiles, /data-component-id="core"[^]*?<strong>B<\/strong>/);
   assert.match(rendered.tiles, /Regraded · was B-/);
-  assert.match(rendered.tiles, /Last reported · 2026-01-01T12:00:00Z/);
+  assert.match(rendered.tiles, /Last reported · Jan 1, 2026/);
   assert.match(rendered.details, /Core · B- → B/);
   assert.match(rendered.details, /Prove bounded retry handling/);
   assert.match(rendered.details, /UI · Not reassessed/);

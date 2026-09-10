@@ -1,9 +1,14 @@
 import { escapeHtml as escape } from './render-progress.mjs';
 
+function dateLabel(value) {
+  if (!value || !Number.isFinite(Date.parse(value))) return 'date unavailable';
+  return new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' }).format(new Date(value));
+}
+
 export function renderLetterReassessment(assessment) {
   const tiles = assessment.components.map(component => {
     const assessed = component.status === 'assessed-qualitative-snapshot';
-    const label = assessed ? `Regraded · was ${component.previousGrade}` : `Last reported · ${component.lastObservedAt ?? 'date unavailable'}`;
+    const label = assessed ? `Regraded · was ${component.previousGrade}` : `Last reported · ${dateLabel(component.lastObservedAt)}`;
     return `<a href="#grade-${escape(component.id)}" class="rm-grade-tile" data-component-id="${escape(component.id)}" data-grade-state="${escape(component.status)}"><span>${escape(component.name)}</span><strong>${escape(assessed ? component.grade : component.lastReportedGrade)}</strong><span>${escape(label)}</span></a>`;
   }).join('');
   const details = assessment.components.map(component => {
