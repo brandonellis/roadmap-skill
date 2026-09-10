@@ -42,6 +42,13 @@ issues does not update roadmap outcomes. Show which roadmap items are completed,
 which have advanced and what remains, with the same states in board and Gantt.
 Credit completed work outside the grading cohort without inflating the grade.
 
+## Contents
+
+- Inherit the original brief
+- Four different kinds of progress
+- Compose visually, explain on demand
+- Acceptance checks
+
 ## Inherit the original brief
 
 Audience, purpose, disclosure boundary, desired decision, horizon, visual

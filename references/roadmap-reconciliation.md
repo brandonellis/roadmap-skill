@@ -10,6 +10,13 @@ grade with old roadmap completion is an incomplete update. Reconcile delivery
 in the same artifact revision, not an offer to run another skill afterward.
 A grade-only artifact with no roadmap records that fact; it does not invent one.
 
+## Contents
+
+- Read the whole roadmap, not just the audit cohort
+- Credit the work at the level the evidence supports
+- Update every representation in the same pass
+- Before calling the update complete
+
 ## Read the whole roadmap, not just the audit cohort
 
 1. Read the current canonical artifact and its previous completion observations.

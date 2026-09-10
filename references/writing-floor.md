@@ -5,6 +5,14 @@ outreach-writing discipline on 2026-09-01 — provenance only, not a dependency;
 this copy is owned by the roadmap skill and evolves independently.)
 Apply to every "why" paragraph, thesis, risk entry, figcaption, and tooltip.
 
+## Contents
+
+- Hard rules
+- The tests (run on the finished prose)
+- Sentence craft (should-fix)
+- The banned-phrase list (complete for documents)
+- Not adopted (outreach-only, no analog on a document)
+
 ## Hard rules
 
 1. **Zero em dashes.** Banned in every part of the page: prose, comments, JS

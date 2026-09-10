@@ -26,6 +26,17 @@ git clone https://github.com/brandonellis/roadmap-skill.git ~/.claude/skills/roa
 
 Then invoke it in any Claude Code session with `/roadmap`.
 
+### Packaging it for anywhere else
+
+The frontmatter carries one Claude-Code-only key, `argument-hint`, which supplies
+the mode list to autocomplete when you type `/roadmap`. Claude Code accepts it;
+the Agent Skills spec does not, so a claude.ai upload or `package_skill.py` run
+refuses the file with `Unexpected key(s) in SKILL.md frontmatter: argument-hint`.
+Delete that one line before packaging. Nothing else in the skill depends on it,
+and every mode is also named in `description`, so removing it costs autocomplete
+and no discovery. `scripts/frontmatter.test.mjs` fails if a second non-spec key
+appears without being declared and documented here.
+
 ## Usage
 
 | Invocation | What it does |

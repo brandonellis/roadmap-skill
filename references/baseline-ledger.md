@@ -16,6 +16,16 @@ records with a separate history lock, and require exact contract approval before
 activating a reconstructed rubric. A policy written in Markdown alone does not
 prove that two runs will produce the same aggregate.
 
+## Contents
+
+- Resolve the original, not just the latest
+- Freeze the contract, not the state of the world
+- Repeatable letters and a real operational A+
+- Evidence and changes, without rewriting history
+- Assessment scope and revision identity
+- Persist before publishing
+- Acceptance scenarios before shipping a grade
+
 ## Resolve the original, not just the latest
 
 1. Read the canonical artifact and its assessment ledger before auditing.

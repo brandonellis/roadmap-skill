@@ -39,7 +39,8 @@ in disclosures or Evidence, with human-readable dates on the summary.
 Group an extensive index by the questions readers bring. A useful starting
 point is progress proof, grade explanations, and baseline/planning history;
 adapt these categories to the actual material rather than creating empty ones.
-`renderEvidenceGroups` accepts groups of existing `{ id, html }` records and
+`renderEvidenceGroups` (import from `scripts/render-evidence-groups.mjs`)
+accepts groups of existing `{ id, html }` records and
 preserves each record unchanged beneath a closed, descriptive group. Its HTML
 inputs must be trusted, already-rendered records, not unescaped user content.
 Keep each record once, preserve anchor IDs, and reject uncategorized records

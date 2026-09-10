@@ -95,6 +95,11 @@ Order within the content spine:
 15. **Fixed back-to-board button** bottom-right; the filter clear-chip stacks
     above it when a filter is active.
 
+## Contents
+
+- A board worth using in a decision meeting
+- Register rules
+
 ## A board worth using in a decision meeting
 
 - **Now means active commitment.** Lead each item with the customer/business

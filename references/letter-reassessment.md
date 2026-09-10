@@ -38,9 +38,20 @@ the standing lens registry into the current ledger and render those views too.
 Follow `scalability.md` for scale-specific calibration, measurements and refresh
 triggers. A component-only result must never erase a previously assessed lens.
 
-Use the returned `components` to render current letters. The optional
-`renderLetterReassessment` helper returns grade tiles and collapsed explanations
-using the existing progress CSS hooks. Never select the
+Use the returned `components` to render current letters. Import
+`renderLetterReassessment` from `scripts/render-letter-reassessment.mjs` (a
+module, not a command); it returns grade tiles and collapsed explanations using
+the existing progress CSS hooks, styled by `assets/stakeholder-overview.css`.
+
+Pass every standing lens as `assessment.lenses` — `{ id, name, grade,
+observedOn, status, firstAssessedOn }` per lens — so lens letters appear on the
+same strip as the components rather than only in their own sections further down
+the page. Take each `name` from the lens section's own heading so a tile cannot
+label a letter differently from its evidence. The helper marks lens tiles,
+dates them separately, prints "Last assessed" for any lens whose status is not
+`assessed`, and returns `lensNote` for the sentence under the strip. It throws on
+a lens with a malformed letter, an unparseable date, an unknown status, a
+duplicate, or an id that collides with a component. Never select the
 previous assessment unconditionally or return a blanket null because a separate
 proposed contract is draft. Unreviewed components have a null current grade and
 a separately dated last-reported letter. A partial panel yields no new overall.

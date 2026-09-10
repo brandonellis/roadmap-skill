@@ -29,6 +29,12 @@ navigation is shared by all modes; this layer owns filter, collapse and previews
    pill when there is no room above; only when `(hover: hover)` matches — touch
    users tap through to the card; hide on any scroll (capture phase).
 
+## Contents
+
+- Adaptation contract
+- CSS (as shipped — swap the custom properties for the page's own)
+- JS (modern browsers, no dependencies)
+
 ## Adaptation contract
 
 The code below assumes these hooks — rename to taste, keep the roles:

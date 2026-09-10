@@ -17,6 +17,16 @@ and land on Roadmap. The board/Gantt and dated visual grade strip lead; audit
 detail remains behind explicit drill-downs. An established brief may override
 that order, and a grade-only artifact need not fabricate a roadmap.
 
+## Contents
+
+- Canonical workspace lifecycle
+- Navigation and ownership
+- Shared model, not separate interpretations
+- Chart-to-detail navigation
+- Visual direction: make the decisions easy to see
+- Copy-ready view shell
+- One bounded verification round, when browser tools are available
+
 ## Canonical workspace lifecycle
 
 Apply this workflow on every create, update, refresh, grade, score, Gantt and

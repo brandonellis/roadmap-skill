@@ -6,6 +6,17 @@ a fresh blind panel grades against the same standard the last one did. How it
 travels between cards is in `references/report-card.md`, under "Calibration:
 blind to the grades, never to the standard".
 
+## Contents
+
+- How to use it
+- The default dimensions
+- The estate component (infrastructure as code)
+- The scale lens
+- The testing & CI lens
+- The learning-loop lens (when the project runs models or agents)
+- The instrument manifest (printed in every footer)
+- The coverage manifest (one per auditor, carried on the card)
+
 ## How to use it
 
 - **Adapt once per project.** Relabel dimensions in the component's own terms

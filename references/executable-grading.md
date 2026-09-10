@@ -14,6 +14,13 @@ with `scripts/letter-reassessment.mjs`. A separate draft proposal does not block
 that reassessment. It also does not make qualitative letters deterministic or
 authorize an operational A+ claim.
 
+## Contents
+
+- Adopt once, without rewriting legacy grades
+- Contract and observation interface
+- Progress even when the letter stays still
+- Verify before publishing
+
 ## Adopt once, without rewriting legacy grades
 
 1. Preserve the original baseline, finding cohort and every dated assessment.

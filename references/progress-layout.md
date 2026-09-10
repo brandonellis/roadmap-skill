@@ -18,6 +18,14 @@ Its primary landing view is Roadmap, with the visual grade strip alongside the
 board or Gantt. This operational layout is secondary, never a reason to replace
 the roadmap's visuals with full audit text.
 
+## Contents
+
+- The approved reading order
+- Navigation is not assessment scope
+- Scope and provenance rules
+- Reusable implementation
+- One verification round, one fix batch
+
 ## The approved reading order
 
 For the **stakeholder Progress tab**, make three different measures unmistakable:

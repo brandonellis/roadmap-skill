@@ -381,6 +381,11 @@ settled ONCE per project and inherited after that. Four direction rules:
   different every session is missing a recorded BRAND CONTRACT.
 - **The brief wins.** A user-pinned aesthetic, palette, or reference beats every
   default in this skill and in the anatomy reference.
+- **`scripts/` are ES modules to IMPORT**, not commands; only
+  `node scripts/verify-artifact.mjs <manifest>` and `node --test scripts/*.test.mjs`
+  are executed. Each renderer throws on a shape it cannot render honestly, so
+  importing one is how a page inherits those refusals. References name the
+  modules their section needs.
 - **The default type register is "readiness"** — condensed grotesque caps display +
   workhorse grotesque body + mono tokens (Barlow Condensed / Barlow / JetBrains Mono
   is the proven set). The reasoning, not a taste: a roadmap is read as an operational

@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.13.0 - 2026-09-10
+
+- Give every reference over 100 lines a generated `## Contents` block. Eleven
+  files qualified and none had one, including the three largest, so a partial
+  read of a long reference could not see what it contained. The block sits under
+  the lead paragraph that says when to load the file, never above it.
+- Generate rather than hand-keep it: `scripts/build-reference-contents.mjs`
+  rewrites the blocks and `scripts/reference-contents.test.mjs` asserts each one
+  equals its file's headings in both directions, so a renamed or added section
+  reddens the build instead of leaving a table of contents that lies.
+- Name the two renderer modules nothing pointed at.
+  `scripts/render-letter-reassessment.mjs` and
+  `scripts/render-evidence-groups.mjs` were reachable only by guessing a
+  function name; a script no file names cannot be used. The letter reference now
+  also documents the `assessment.lenses` input, its per-lens shape and its
+  refusals.
+- State the calling convention once: `scripts/` are ES modules to import, and
+  the two executed commands are named. A renderer's value is the shapes it
+  refuses, which hand-written markup silently discards.
+- Add `scripts/frontmatter.test.mjs`: the published name and description limits,
+  third person, a trigger clause, every mode discoverable from metadata, and the
+  500-line body budget (494 today, six lines of headroom). It also requires every
+  non-spec frontmatter key to be declared with its cost and documented in the
+  README. `argument-hint` is that key and is kept deliberately, so the README now
+  tells an importer to delete the line before a claude.ai upload or
+  `package_skill.py` run, which refuse it by name. 109 tests passing.
+
 ## 1.12.1 - 2026-09-10
 
 - Fix the strip note's sentence break. A lens named with a question ("Does it

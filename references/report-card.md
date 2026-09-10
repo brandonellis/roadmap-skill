@@ -14,6 +14,21 @@ questions, two instruments". It is shape-agnostic: a single service, a
 monorepo, or a many-repo estate all grade the same way once carved into
 components.
 
+## Contents
+
+- When it runs, and what it is
+- The auditor fan-out
+- Two questions, two instruments
+- The dimensions
+- The twin verdict (the load-bearing idea)
+- The exception register (a gap the team has priced and chosen)
+- Counts are grades
+- The scale ladder (headroom is a grade)
+- The learning loop (when the project runs models or agents)
+- Page anatomy
+- Visual and prose rules
+- Synthesis rules
+
 ## When it runs, and what it is
 
 Run it before a consequential moment: a deploy, a funding conversation, a
