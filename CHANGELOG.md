@@ -1,5 +1,37 @@
 # Changelog
 
+## 1.14.0 - 2026-09-10
+
+- Add the evaluation suite the published guidance asks for and this skill never
+  had. Six scenarios in `evals/`: a fresh build, a refresh against drift, a
+  grade run, a timeline against a tracker with no dates, and two where the right
+  answer is prose and no artifact. Each carries two fields beyond the documented
+  shape — `gap`, what a model does WITHOUT the skill, because a scenario that
+  passes identically either way measures the model; and `must_not`, because most
+  of this skill's value is restraint.
+- Bundle a synthetic fixture rather than pointing at anyone's project:
+  `evals/fixtures/meridian/` is an invented freight-telemetry project whose two
+  planning documents disagree in the usual way, whose tracker carries no target
+  date on any open issue, and which leaves three questions explicitly undecided.
+  `evals/fixtures/prior-artifact.html` is a trimmed prior page with a direction
+  contract, a permanent baseline and one dated observation, for the modes that
+  must update rather than rebuild.
+- Guard the suite with `scripts/evals.test.mjs`: the minimum of three scenarios,
+  unique ids, fixtures that exist and are not empty, at least four expectations
+  each, a stated gap, a non-empty `must_not`, coverage of building AND updating
+  AND not building, and fixtures that stay synthetic. Expectations written on
+  words with no observable meaning ("handles it properly") are rejected.
+- Run two scenarios across Haiku 4.5, Sonnet 5 and Opus 5, recorded with their
+  date in `evals/RESULTS.md`. The scope clause holds wherever it is reached: no
+  model built or published in answer to a question. Two defects stay open —
+  Haiku did not select the skill even when it was named, and two of three models
+  did not offer to build as a next step. Four scenarios are unrun, and every one
+  that produces an artifact is among them.
+- Require the run in `AGENTS.md`: a change to a mode, a phase or a decided rule
+  needs its scenario run by hand on more than one model before release. The test
+  suite checks the scenario files; it cannot tell you the skill still passes
+  them. 114 tests passing.
+
 ## 1.13.0 - 2026-09-10
 
 - Give every reference over 100 lines a generated `## Contents` block. Eleven

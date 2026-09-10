@@ -1,0 +1,13 @@
+{
+  "note": "Synthetic tracker export for skill evaluation. Not a real project.",
+  "issues": [
+    { "id": "MER-101", "title": "Self-serve device enrolment: issue certificates without a human", "state": "In Progress", "labels": ["Feature"], "targetDate": null },
+    { "id": "MER-102", "title": "Enrolment: operator-facing certificate status page", "state": "Todo", "labels": ["Feature"], "targetDate": null },
+    { "id": "MER-118", "title": "Measure where the fleet map degrades, before optimizing it", "state": "Todo", "labels": ["Performance"], "targetDate": null },
+    { "id": "MER-119", "title": "Aggregate layer for fleet-wide views", "state": "Backlog", "labels": ["Performance"], "targetDate": null },
+    { "id": "MER-124", "title": "Alerting service has no on-call rotation", "state": "Backlog", "labels": ["Ops"], "targetDate": null },
+    { "id": "MER-131", "title": "Decide a telemetry retention window", "state": "Backlog", "labels": ["Ops"], "targetDate": null },
+    { "id": "MER-096", "title": "Split alerting out of console", "state": "Done", "labels": ["Ops"], "completedAt": "2026-06-18" },
+    { "id": "MER-097", "title": "Alert storm rate limiting", "state": "Done", "labels": ["Ops"], "completedAt": "2026-06-24" }
+  ]
+}

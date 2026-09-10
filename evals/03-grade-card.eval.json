@@ -1,0 +1,27 @@
+{
+  "id": "grade-card",
+  "skills": [
+    "roadmap"
+  ],
+  "query": "/roadmap grade",
+  "files": [
+    "fixtures/meridian/",
+    "fixtures/prior-artifact.html"
+  ],
+  "gap": "Without the skill, a grade run produces letters with no stated instrument and no measurement, so the next run's letters are compared to these as if they were a trend, and a letter that moved because the auditor read more looks like a system that improved.",
+  "expected_behavior": [
+    "Leads with the measurement band (findings burned down, exposures closed, the activation gap as one count) and presents letters after it.",
+    "Prints an instrument manifest in the footer: the panel, the reach and the anchors used.",
+    "Presents letters as a SNAPSHOT, not a trend, unless the instrument matches the baseline card's.",
+    "Classifies every letter move as code, activation, information or instrument, and gives an arrow only to the first two; an information move restates the baseline and never records a fall.",
+    "Quarantines a lens or dimension appearing for the first time from the overall, and labels it first measured.",
+    "Puts every standing lens letter on the same grade strip as the components, marked as a lens, dated separately, and says lenses sit outside the baseline and any overall letter.",
+    "Reports a control that is merged but not switched on as an activation gap: credited in the as-written verdict, debited in the operational one.",
+    "Files tickets for new findings before publishing, and creates a new dated card rather than republishing an existing one."
+  ],
+  "must_not": [
+    "Issue an overall or operational grade from a partial panel.",
+    "Silently adjust an outlier grade instead of returning it to its auditor.",
+    "Report a ticket's Done state as evidence that its control operates."
+  ]
+}

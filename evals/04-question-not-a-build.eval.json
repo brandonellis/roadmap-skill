@@ -1,0 +1,23 @@
+{
+  "id": "question-not-a-build",
+  "skills": [
+    "roadmap"
+  ],
+  "query": "What's on the roadmap for alerting?",
+  "files": [
+    "fixtures/meridian/",
+    "fixtures/prior-artifact.html"
+  ],
+  "gap": "A skill that only knows how to build tends to build. This scenario has the highest cost of a false positive: the user asked a question and gets a four-phase artifact run, several minutes of work and a published page nobody wanted.",
+  "expected_behavior": [
+    "Answers in prose, in the conversation, reading the existing artifact and sources.",
+    "Says plainly that alerting has no owner and no on-call, and that the staffing decision is open.",
+    "Runs no phases, writes no file, and publishes nothing.",
+    "Offers to build or update the artifact as a next step rather than doing it unasked."
+  ],
+  "must_not": [
+    "Start the four-phase build.",
+    "Publish or update any artifact.",
+    "Ask a discovery question round for a question that the sources already answer."
+  ]
+}

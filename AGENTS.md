@@ -29,6 +29,11 @@ Follow the release checklist in `README.md` under **Versioning**:
   the next semantic version. Never assume the local tag list is current.
 - Run `node --test scripts/*.test.mjs` and `git diff --check`. Keep project data,
   customer names, private artifacts and credentials out of this public repo.
+- A change to a mode, a phase, or a decided rule needs its scenario in `evals/`
+  run by hand before release, on more than one model. The test suite checks the
+  scenario files; it cannot tell you the skill still passes them. Record the run
+  in `evals/RESULTS.md` with the date and the model, including a run where the
+  skill never loaded, which is a finding about discovery rather than a void run.
 - Update relevant documentation and move the shipped changelog entries from
   `Unreleased` into a dated version section.
 - Commit, create an annotated `vX.Y.Z` tag on that release commit, and push the

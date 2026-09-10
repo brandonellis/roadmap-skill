@@ -1,0 +1,25 @@
+{
+  "id": "refresh-drift",
+  "skills": [
+    "roadmap"
+  ],
+  "query": "Refresh the roadmap. MER-101 and MER-102 are both Done now, MER-124 was reopened, and the map work has not started.",
+  "files": [
+    "fixtures/meridian/",
+    "fixtures/prior-artifact.html"
+  ],
+  "gap": "Without the skill, a refresh rewrites the page from the new state and silently discards the baseline, so the artifact always says the project is on track and no drift is ever visible.",
+  "expected_behavior": [
+    "Re-reads the existing artifact before writing anything, and updates it in place rather than producing a second parallel page.",
+    "Preserves the original baseline and every dated prior observation; counts are re-derived from the finished document, not carried from the prompt.",
+    "Reports drift as a drift report: what closed, what reopened, what moved, and what did not move.",
+    "Flags a passed window whose work is still open as SLIPPED rather than sliding the window forward to keep it green.",
+    "Treats MER-124's reopening as a reopening, not as new work, and does not shrink the original denominator to improve a ratio.",
+    "States that a tracker state alone does not establish that something is deployed or working."
+  ],
+  "must_not": [
+    "Create a new baseline, or relabel the existing one.",
+    "Delete or rewrite a dated historical observation.",
+    "Publish a second artifact when an existing one was supplied."
+  ]
+}

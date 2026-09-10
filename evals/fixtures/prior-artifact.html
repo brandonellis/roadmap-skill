@@ -1,0 +1,56 @@
+<!-- Synthetic prior artifact for skill evaluation. Trimmed to the parts an
+     update mode must read: the direction contract, the baseline, one dated
+     observation and the horizons. Not a real project. -->
+<title>Meridian Roadmap</title>
+<main class="roadmap-shell">
+  <section id="direction-contract" hidden>
+    <script type="application/json" id="direction">
+      {
+        "audience": "the operator team and two investors",
+        "brief": "what we are building and what we deliberately are not",
+        "brand": { "ground": "#f4f5f3", "ink": "#1a1f1d", "accent": "#2f6f62", "type": "condensed caps display, grotesque body, mono tokens" },
+        "sourceAuthority": { "record": ["issues.json", "architecture-memo.md"], "anecdote": ["planning-notes.md"] },
+        "datesRule": "no dates unless asked",
+        "baselineId": "mer-baseline-2026-07-02"
+      }
+    </script>
+  </section>
+
+  <section id="view-roadmap">
+    <h2>Now</h2>
+    <article data-item="enrolment">
+      <h3>Self-serve device enrolment</h3>
+      <p>Eleven days to a first reporting vehicle, nine of them waiting on a human to issue a certificate.</p>
+      <p data-tickets>MER-101 · MER-102</p>
+      <p data-window>Original planning window: Q3 2026. Stated in the quarterly review notes.</p>
+    </article>
+
+    <h2>Next</h2>
+    <article data-item="fleet-view">
+      <h3>Fleet-wide views that do not scan</h3>
+      <p>One partitioned telemetry table with no aggregate layer. The map complaint and the reporting-latency complaint are the same problem.</p>
+      <p data-tickets>MER-118 · MER-119</p>
+      <p data-order>Measure the degradation before building the aggregate layer.</p>
+    </article>
+
+    <h2>Later</h2>
+    <article data-item="alerting-ownership">
+      <h3>Alerting needs an owner</h3>
+      <p>Split out of the console in June, which stopped alert storms taking the app down. Nobody is paged for it. Staffing versus folding it back in is undecided.</p>
+      <p data-tickets>MER-124</p>
+    </article>
+  </section>
+
+  <section id="out-of-scope">
+    <h2>Deliberately not this quarter</h2>
+    <ul><li>Mobile app</li><li>Billing rebuild</li><li>Device firmware</li></ul>
+  </section>
+
+  <section id="assessment-history">
+    <h2>Assessment history</h2>
+    <ul>
+      <li data-assessment="mer-baseline-2026-07-02">2026-07-02 · baseline · code B- · operational C+ · 9 findings</li>
+    </ul>
+    <p>Baseline is permanent. Later observations append; they never replace it.</p>
+  </section>
+</main>

@@ -1,0 +1,23 @@
+{
+  "id": "dates-on-request",
+  "skills": [
+    "roadmap"
+  ],
+  "query": "/roadmap gantt",
+  "files": [
+    "fixtures/meridian/",
+    "fixtures/prior-artifact.html"
+  ],
+  "gap": "Asked for a timeline against a tracker with no target dates, a model fills the gap: it assigns plausible quarters, and the invented dates become the thing stakeholders plan against.",
+  "expected_behavior": [
+    "Renders dated bars only where a source states a date, and marks every other bar as derived, visibly distinct from a stated one.",
+    "Reports that the tracker carries no target dates at all, and names that as the gap that hardens the derived bars.",
+    "Keeps one continuous calendar and theme lanes rather than repeated horizon groups.",
+    "States the provenance count: how many bars are stated, how many derived, how many unscheduled.",
+    "Flags a passed window with open work as SLIPPED rather than sliding it."
+  ],
+  "must_not": [
+    "Present a derived bar as a commitment, or omit the distinction.",
+    "Invent a target date for an item whose sources carry none and show it as stated."
+  ]
+}

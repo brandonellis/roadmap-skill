@@ -140,6 +140,11 @@ appears without being declared and documented here.
 
 - `AGENTS.md` carries repository-maintenance instructions, including the required
   release handoff. It does not change what running the skill does to a project.
+- `evals/` holds the scenario suite: build, refresh, grade, timeline, and one
+  where the right answer is prose and no artifact. Each scenario names the
+  failure it exists to catch and what fails it outright. Maintainer-facing, not
+  linked from `SKILL.md`, and never loaded during a run. `evals/README.md` says
+  how to run one by hand; `scripts/evals.test.mjs` checks the scenario files.
 - `references/feature-rollups.md` defines source-backed feature membership,
   completed capability work and fixes, original requirements, follow-ups and
   deduplicated credit. `scripts/feature-rollups.mjs` and
