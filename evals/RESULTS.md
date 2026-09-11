@@ -3,6 +3,65 @@
 One section per run. A run is a date, a model, a scenario and what happened —
 never a summary that outlives the evidence.
 
+## 2026-09-11 · v2.1.1 candidate · release blocked
+
+**Not released.** The intended assessment lead, `claude-opus-5`, passed the
+complete scoped grading check. The comparison model, `claude-sonnet-5`, still
+failed mandatory checks after two corrections. Its final run rewrote the
+explicitly immutable history lock, omitted browser-test limitations from the
+handoff, and described absent runtime proof as contradicting an operating claim.
+The release remains blocked under the maintainer rule to resolve failed checks.
+
+Eight fresh Claude Code sessions: scenarios 14 and 15 on both models, then two
+rechecks of scenario 15 on both. Exact queries and synthetic fixtures are committed.
+No parent conversation, expected outcomes or follow-up user replies were supplied.
+Both models used high reasoning effort; 15-minute/$5 limits for grading and
+5-minute/$1 limits for extraction/clarification. All eight sessions completed
+within those limits. Model identifiers, timing, costs, candidate instruction
+fingerprints and individual outcomes are in
+[the candidate results JSON](2026-09-11-v2.1.1-results.json).
+
+| Scenario / pass | Opus 5 | Sonnet 5 |
+|---|---|---|
+| 14 Model-role boundary | Extracted authorized evidence, asked before dependent refresh/grading; no writes or model change. | Same boundaries held. |
+| 15 Initial full scoped run | Expected grades, canonical artifact, original history and lock preserved; limitations disclosed. | Grades and artifact integrity passed; missed browser disclosure and overstated missing runtime proof. |
+| 15 Execution-contract correction | Passed, including the corrected handoff requirements. | Skipped the required execution-contract read and repeated both reporting misses. |
+| 15 Entrypoint correction | Read the contract before evidence; passed complete grading, original-lock comparison, artifact validation and handoff checks. | Read the contract, but resealed the immutable history lock and repeated both reporting misses. **Failed.** |
+
+The grading case covers one component/dimension (invitations/testing) across code
+and production under an approved deterministic rubric and explicitly approved
+single-agent method. Both models found the expiry bug: code C, production
+incomplete/null because runtime expiry and malformed-date probes were absent.
+Original finding denominator: one; code finding open, production finding unknown.
+The same Now item stayed in place while tracker Done was separated from acceptance.
+No auditor independence, other dimensions, live runtime, browser rendering or
+hosted publication was exercised. No model/provider settings were changed.
+
+Independent verification re-evaluated the raw assessments, compared original
+baseline and prior assessment records, compared read-only inputs byte-for-byte,
+and ran the artifact verifier. The final Sonnet artifact passed its own manifest
+check **against the rewritten lock**; comparison with the retained original
+caught the mutation. The baseline and previous assessment themselves remained
+unchanged, but rewriting their independent lock was explicitly prohibited.
+Helper-test success and a model's own completion statement cannot clear that check.
+
+Harness limits: local file tools and bounded Node commands, project settings only,
+hooks disabled, no external MCP servers, and no browser/live/publication tools.
+The host also allowed some read-only shell discovery commands and rejected other
+shell commands. Sonnet attempted an out-of-workspace scratch-script write during
+a recheck; it was denied, and the script was then created inside the workspace.
+Its first run left an unreferenced scratch file after shell deletion was denied.
+These are not proofs of instruction-only containment. Raw transcripts and generated
+artifacts stayed in the isolated evaluation workspaces, outside this repository.
+
+Corrections made: preserve missing-runtime-proof semantics in prose; require
+explicit unavailable-check reporting; make the execution-contract read a
+prerequisite before project evidence and repeat the handoff requirements at the
+entrypoint's completion step. Final entrypoint reflow changed whitespace only to
+retain the existing line limit. All 115 helper/structure tests pass. Earlier
+v2.1.0 failures and scenarios outside this targeted pass are not retroactively
+cleared. Sonnet is not qualified as the sole grading lead by these results.
+
 ## 2026-09-11 · v2.1.0 release evaluation · Haiku 4.5 and Sonnet 5
 
 Ran all 13 scenarios in fresh Claude Code sessions on

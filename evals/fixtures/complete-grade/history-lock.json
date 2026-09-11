@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "originalBaselineId": "initial",
+  "originalBaselineHash": "4273e3de8412b83d92c1e7e99886e81551e9181c580ba025359a03765d722393",
+  "assessments": [
+    {
+      "id": "assessment-1",
+      "hash": "01d7c66f85ce7b5ccd5c6c1eaca56732f13c97d2b172e267b3abe223b51f2915"
+    }
+  ]
+}

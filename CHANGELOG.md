@@ -1,5 +1,24 @@
 # Changelog
 
+## Unreleased
+
+- Keep model and provider selection under the user and host's control. Define
+  reasoning-lead and supporting extraction roles without prescribing model
+  families; require evidence checks before supporting findings affect grades.
+- Require release evaluations to include the intended assessment lead and a
+  completed grading run through canonical artifact and history validation.
+  Record model/tool configuration and incomplete checks without treating
+  helper-test success or a clarification-only run as grading qualification.
+- Keep missing runtime proof distinct from observed failure in assessment prose,
+  and name unavailable checks in the final handoff as well as completed checks.
+- Add reproducible synthetic scenarios for model-role boundaries and complete
+  scoped grading, with an approved contract, runtime snapshots and a sealed
+  assessment history. Record Opus and Sonnet release evaluations separately
+  from helper-test results.
+- Release candidate 2.1.1 is blocked: Opus completed the lead-model grading
+  check, but Sonnet's comparison runs missed required reporting and the final
+  run rewrote an explicitly immutable history lock. See `evals/RESULTS.md`.
+
 ## 2.1.0 - 2026-09-11
 
 - Resolve intent, project, source data and grading scope before dependent work.

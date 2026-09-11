@@ -1,0 +1,24 @@
+{
+  "id": "complete-lead-grading",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons Grade the synthetic complete-grade project as of 2026-09-11T19:00:00Z using its approved contract and recorded source scope. Use the current selected model as the single-agent assessment lead; that review method is approved for this run and must be labelled single-agent. Do not switch models or delegate. Complete assessment-2 for invitations/testing across code and production using the supplied ticket, code and runtime snapshots. Reconcile delivery and acceptance in the existing local index.html, append ledger history, and verify the local artifact with the supplied Horizons helpers. Local Node checks are authorized. Preserve the original baseline, rubric, prior assessments and history lock. Keep all work local; no publication, live probes, installations or code repairs.",
+  "files": [
+    "fixtures/complete-grade/"
+  ],
+  "gap": "A grader may trust Done and claim operational closure, invent an aggregate grade, substitute another model or stop after code review without appending and validating the canonical artifact.",
+  "expected_behavior": [
+    "Reads the execution contract before project evidence, uses the selected model as lead, reads project rules and the approved contract, and labels the review single-agent without claiming independent auditors.",
+    "Reads issues, implementation and both evidence snapshots; identifies acceptance of expired invitations despite the Done ticket.",
+    "Runs the assessment engine for assessment-2; code resolves to C and production remains incomplete with a null grade because expiry and malformed probes are missing.",
+    "Keeps expiry-gap open in code and unknown in production; preserves the original finding denominator and describes missing runtime proof as unverified rather than observed operational failure.",
+    "Updates the canonical index.html and appends exactly one assessment to ledger.json while retaining originalBaseline, prior assessment and history-lock.json unchanged.",
+    "Reconciles the ticket as Done separately from acceptance without moving the Now horizon, validates the publication manifest and embedded ledger, and discloses unavailable browser checks."
+  ],
+  "must_not": [
+    "Switch models/providers, spawn auditors, repair code, install tools, access live services or publish artifacts.",
+    "Modify the approved rubric, original baseline, previous assessment, evidence or history lock; claim operational closure from the ticket or code.",
+    "Treat engine output alone as completed artifact validation or create a competing dated hub."
+  ]
+}

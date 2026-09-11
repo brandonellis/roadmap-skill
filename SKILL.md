@@ -8,7 +8,8 @@ argument-hint: "[<artifact-url> · refresh [<url>] · gantt · wsjf [<source>] �
 
 ## Resolve intent and scope before execution
 
-Read `references/execution-contract.md` before any build, update, refresh or grade.
+Open and read `references/execution-contract.md` before project evidence discovery for any build, update, refresh or grade.
+Apply it alongside the selected mode's required references; helper documentation does not replace this prerequisite.
 Resolve the action, project/canonical artifact, source scope and grading scope from
 the request and established decisions. If uncertainty changes what to read,
 refresh, grade, modify or publish, ask a targeted question and wait before that
@@ -33,9 +34,8 @@ One canonical artifact can contain several views of the same project. Read
 skill names are provenance. For a combined assessment and roadmap, also read
 `references/progress-layout.md`: Progress, Roadmap and Evidence are the primary
 views; code/staging/production are assessment scopes, not interchangeable grades.
-A permanent initial baseline and immutable dated
-assessments show progress toward an evidence-earned operational A+ without
-resetting the goalposts on each run.
+A permanent initial baseline and immutable dated assessments show progress toward an
+evidence-earned operational A+ without resetting the goalposts on each run.
 
 For grading implementation, contract adoption, outcome-led progress or private
 publication, read `references/executable-grading.md`. It supplies a tested,
@@ -498,6 +498,7 @@ browser tooling is disclosed; it does not waive checks available through source.
   views, ledger location, original/active baseline IDs and current assessment ID
   when graded; the interaction hooks (theme classes, `data-hz`, the
   localStorage key), and standing decisions (the dates rule, framing rules the
-  user set). An updater
-  who reads nothing else must be able to work from it.
-- Hand back the URL and a two-line summary of what changed.
+  user set). An updater who reads nothing else must be able to work from it.
+- Hand back the canonical URL or local path and a concise summary of changes,
+  checks completed and checks unavailable. Explicitly name browser interaction and visual checks when browser tools were absent.
+  Keep missing runtime proof labelled unverified; it is not evidence that a runtime failure was observed.

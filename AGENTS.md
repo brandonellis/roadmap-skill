@@ -34,6 +34,13 @@ Follow the release checklist in `README.md` under **Versioning**:
   scenario files; it cannot tell you the skill still passes them. Record the run
   in `evals/RESULTS.md` with the date and the model, including a run where the
   skill never loaded, which is a finding about discovery rather than a void run.
+- Include the intended assessment lead model in release evaluations and complete
+  a grading run on it, from source review through validated local artifact and
+  appended assessment history. Follow `evals/README.md` for required evidence
+  and run metadata. A clarification-only run, timeout or helper-test pass does
+  not satisfy this requirement. Do not infer lead fitness from tests of cheaper
+  supporting models; record incomplete or failed checks and resolve them before
+  release.
 - Update relevant documentation and move the shipped changelog entries from
   `Unreleased` into a dated version section.
 - Commit, create an annotated `vX.Y.Z` tag on that release commit, and push the

@@ -27,6 +27,14 @@ ask when action, data or grading scope is uncertain, preserve settled decisions,
 and respect applicable project instructions. A missing question tool falls back
 to conversation; a missing auditor panel cannot silently become a blind audit.
 
+Horizons preserves your selected model and provider, with no required model
+family. Where you authorize model routing, use a strong reasoning lead for
+grading and synthesis; smaller models can extract evidence for the lead to
+check. The [model-role rules](references/execution-contract.md#model-roles-and-selection)
+keep scope decisions and final grades with the lead. Models named in evaluation
+results identify tested configurations, not required runtime settings or a
+guarantee of compliance.
+
 ## Install
 
 Clone into your user-level skills directory:
@@ -277,6 +285,10 @@ Read [the behavioral results](evals/RESULTS.md) before relying on unattended
 execution. The release evaluations include unresolved model failures, including
 Haiku changing horizons during a delivery-only refresh. Passing helper tests
 does not prove an agent respects scope, clarification or artifact ownership.
+The 2.1.1 candidate is blocked: Opus passed the complete scoped grading check,
+but Sonnet's final comparison changed an immutable history lock and missed
+required reporting. A passing manifest check against a rewritten lock does not
+prove that the original lock was preserved; compare against the retained input.
 
 Maintainer regression tests protect the shared helpers. Browser-specific checks
 need an existing browser-testing session; exported helpers take a page object
@@ -301,6 +313,9 @@ is not a completed release. Several implementation commits can ship together.
    capabilities, major for breaking changes. Never reuse an existing version.
 3. Run `node --test scripts/*.test.mjs` and `git diff --check`. Review the release
    diff for private project data and update the relevant documentation.
+   Run changed behavioral scenarios on more than one model and complete the
+   [lead-model grading evaluation](evals/README.md#release-model-coverage),
+   recording outcomes and limitations before release.
 4. Move the shipped `Unreleased` entries into a dated version section in
    `CHANGELOG.md`. Commit the release changes and annotate that commit with
    `git tag -a vX.Y.Z -m "Release vX.Y.Z"`.

@@ -1,0 +1,15 @@
+{
+  "synthetic": true,
+  "observedAt": "2026-09-11T18:00:00Z",
+  "subject": {
+    "scope": "code",
+    "repository": "synthetic-meridian-invitations",
+    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "files": [
+    {
+      "path": "src/invitations.mjs",
+      "sha256": "0d7e833b8689a7ee92c33fbf5c429d13e00222b628efc50c9209a27a3d91d5d1"
+    }
+  ]
+}
