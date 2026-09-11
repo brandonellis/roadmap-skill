@@ -17,6 +17,7 @@ components.
 ## Contents
 
 - When it runs, and what it is
+- Evidence: tickets, code and runtime
 - The auditor fan-out
 - Two questions, two instruments
 - The dimensions
@@ -62,19 +63,46 @@ Before assigning auditors, select the established method with
 in force until a replacement is adopted. Do not substitute newer anchors or
 block that method merely because a deterministic proposal awaits approval.
 
+## Evidence: tickets, code and runtime
+
+Resolve grading scope using `execution-contract.md` before assigning reviewers.
+Use all applicable evidence sources within that scope:
+
+- **Issues and tickets:** original acceptance, baseline finding links, reopened
+  work, completed changes, blockers and follow-ups. Include relevant linked PRs
+  and subtasks. Status establishes reported progress, not verified closure.
+- **Code and configuration:** inspect the exact selected revision to verify
+  ticket claims and independently audit the baseline's coverage. Look for gaps
+  without tickets too; a clean backlog is not a clean implementation. Cite paths
+  and lines, and link claims back to their requirements when available.
+- **Test and runtime evidence:** inspect revision-specific test results and the
+  actual named environment's deployed identity, configuration and behavior.
+  Source code, passing tests and observed operation are separate facts. A generic
+  green CI badge does not prove a particular criterion or deployment.
+
+Read both tracker and code when the project uses them. If one is unavailable,
+name the gap and clarify whether a reduced-scope review is wanted when that is
+not already authorized. Never silently produce a full grade from one source.
+A project with no tracker can use its established requirements/finding ledger;
+do not require it to adopt a ticket system. Runtime-only unknowns do not erase
+verified code progress, but cannot earn an operational grade.
+
 ## The auditor fan-out
 
 One auditor agent per component, plus the cross-cutting lenses that no single
-component owns. Two are standing and run on every card: **testing & CI**, and
+component owns. On a full assessment two are standing: **testing & CI**, and
 **the scale ladder** (its own section below). A third, **the learning loop**,
 joins whenever the project makes model calls or runs agents (its own section
 below); it is discovered from the code, never assumed, and when it does not
 run the footer says why. Security or data governance fit beside them when the
-project warrants it. Rules that make the grades
-trustworthy:
+project warrants it. For trustworthy grades, apply the following rules.
+If independent agents are unavailable, follow the execution
+contract's capability rule; do not claim a blind panel from self-review:
 
 - **Read-only.** Auditors grade; they never fix. Cheap read commands (grep,
-  wc, ls) are fine; running test suites or writing files is not.
+  wc, ls) and existing test/CI results are appropriate. Never repair audited
+  source. Tests/probes follow `execution-contract.md` and applicable repository
+  rules; authorization must cover their side effects and cost.
 - **Blind to the letters, never to the standard.** Auditors never see prior
   grades — an anchored grader reproduces the anchor. They DO receive the
   calibration sheet and the baseline's coverage manifest for their component
@@ -105,8 +133,8 @@ being load-bearing in a real run):
 4. The output shape: letter + 3-5 cited evidence bullets + gaps-to-next-grade
    per dimension, then an overall letter with a one-paragraph justification.
 5. The bar, verbatim.
-6. The read-only rule, including "no test runs" — a suite run is an hour of
-   wall clock and proves nothing a green CI badge doesn't already.
+6. The no-repairs rule, applicable project instructions, allowed checks and
+   their side-effect limits. Inspect existing evidence before proposing new runs.
 7. For estate-touching components: the as-written vs applied distinction,
    and instructions to grade both honestly.
 8. For the scale lens: the project's rungs (from memory, or the defaults
@@ -265,7 +293,10 @@ publishing when authorized; otherwise label the proposed tickets as drafts).
 
 ## The twin verdict (the load-bearing idea)
 
-One grade lies. Two tell the truth:
+A full assessment separates two questions. This does not select scope for the
+user: a code-only or component-only request stays partial, and an explicitly
+undecided code-versus-runtime request must be clarified before evidence scanning.
+Preserve dated, unreviewed scopes without claiming fresh grades for them.
 
 1. **As written** — the code and configuration at an explicitly recorded branch
    or ref, frozen to the full commit the auditor actually read for each repo.
@@ -285,8 +316,8 @@ honestly hold a B+ and a C at the same time; hiding either number is how a
 team believes its own merge history instead of its production posture.
 
 When the run gates a decision, add the third verdict cell: the **gate answer**
-(GO / HOLD, with the sequencing cautions enumerated). A report card that
-gates nothing still ships the first two.
+(GO / HOLD, with the sequencing cautions enumerated). A full report card that
+gates nothing still ships the first two; a partial review reports only its scope.
 
 ## The exception register (a gap the team has priced and chosen)
 
@@ -344,8 +375,9 @@ measurement band's ratchet row, and the reason it leads the card.
 Every other dimension grades what the project is. The ladder grades what it
 can become without changing: the estate and the application as measured on
 the day of the run, projected onto the growth the business is actually
-pursuing. It is a standing cross-cutting lens, run on every card, never
-optional. A project that is healthy at its current size and dead at five
+pursuing. It is a standing cross-cutting lens on full cards; partial reviews
+preserve its dated observation unless reassessment is in scope. A project that
+is healthy at its current size and dead at five
 times it has a finding no other lens will surface, and the day it surfaces
 on its own is the wrong day.
 
@@ -561,7 +593,7 @@ raise a letter merely to justify the run. Show the unchanged result and its proo
 - Name what the auditors could not reach (expired credentials, unreachable
   estates) in the footer as first-class findings.
 - **Reconcile roadmap delivery in this run.** Before publication, follow
-  `roadmap-reconciliation.md` for all existing roadmap items and their linked
+  `roadmap-reconciliation.md` for all in-scope roadmap items and their linked
   issues, subtasks and milestone outcomes, not only the original audit findings.
   Update completion in Roadmap and Progress alongside the assessment. Explain
   partials and completed work whose grade holds. Missing access leaves explicit

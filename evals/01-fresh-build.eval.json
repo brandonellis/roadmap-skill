@@ -9,7 +9,7 @@
   ],
   "gap": "Without the skill, a model writes a plausible roadmap from the notes alone: it invents quarters nobody committed to, ranks by what sounds important rather than by what the sources say, and states no provenance, so a reader cannot tell a decision from a guess.",
   "expected_behavior": [
-    "Scans the fixture before asking anything: reads planning-notes.md, architecture-memo.md and issues.json, and asks at most one round of questions, only about what those sources do not answer.",
+    "Resolves the requested project before discovery, reads its planning notes, architecture memo and tracker, and batches questions about remaining gaps without capping later clarification.",
     "Produces Now / Next / Later horizons with NO dates and no Gantt, because dates were not requested; a bare quarter label copied from a source is not a schedule.",
     "Classifies each source as record or anecdote in the inventory, and does not present the planning notes as a commitment.",
     "Names the three undecided items as undecided rather than resolving them: whether alerting gets staffed or folded back in, the retention window, and where the map actually degrades.",

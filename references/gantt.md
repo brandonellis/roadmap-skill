@@ -34,7 +34,8 @@ dates stay missing. A due date is a milestone, not an invented duration bar.
 - **Unscheduled:** labelled shelf below the theme's dated tracks, with next decision or missing
   input. This is the default when dates are absent, not a defect to disguise.
 
-Use one confirmation round for missing windows and conflicting sources. An
+Batch questions about missing windows and conflicting sources, and resolve any
+later ambiguity before adding dates under `execution-contract.md`. An
 unapproved suggestion belongs in the conversation, not on the published chart.
 Show scheduling coverage: `6 committed / 2 proposed / 4 unscheduled`.
 

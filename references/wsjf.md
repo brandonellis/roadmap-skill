@@ -47,8 +47,8 @@ scale: fibonacci
 ## Bootstrap (bare `wsjf`, no source on record)
 
 Generate the table from the synthesized themes with PROPOSED component scores
-derived from the sources, `status: proposed`. Present it for ONE confirmation
-round (the same infer-then-confirm shape as source authority tiers): the driver
+derived from the sources, `status: proposed`. Batch the confirmation questions
+(clarify later uncertainty under `execution-contract.md` too): the driver
 blesses or corrects, the sheet is written `status: confirmed <ISO date>`, and
 the location is recorded in the DIRECTION CONTRACT. If the driver wants to
 score offline, leave it `proposed` — a proposed sheet renders NOTHING on the

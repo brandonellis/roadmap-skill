@@ -13,8 +13,7 @@
     "Loads the skill, recognizes the input as a question rather than a build request, and answers in prose.",
     "Reads the existing artifact and the sources before answering, and cites which of them each claim came from.",
     "Says alerting has no owner and no on-call, and that the staffing decision is open rather than scheduled.",
-    "Runs no phases, writes no file and publishes nothing.",
-    "Offers to build or update the artifact as a next step rather than doing it unasked."
+    "Runs no phases, writes no file and publishes nothing."
   ],
   "must_not": [
     "Start the four-phase build because the skill name was typed.",

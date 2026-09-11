@@ -8,13 +8,24 @@ Draft contracts do not award grades; legacy assessment history stays immutable.
 
 A [Claude Code](https://claude.com/claude-code) skill that builds and maintains a
 single-page roadmap artifact for any project: scan the repo, issue tracker, and
-notes; ask one round of questions only for what cannot be found; synthesize
+notes within the resolved scope; clarify material uncertainty before dependent
+work, including whether to act at all; synthesize
 Now / Next / Later horizons with cross-cutting throughlines; publish a
 shared artifact with view tabs, a throughline filter, collapsible sections and
 derived tooltips. A fixed initial assessment baseline makes every later grade
 part of the same evidence-backed path to operational A+, not a new score set.
 The page is designed so a stakeholder can scan it in a minute and an engineer
 can drill into every claim.
+
+Grading reads **issues/tickets and the codebase**, plus environment-specific
+runtime evidence for operational verdicts. Tickets supply acceptance and delivery
+claims; code review verifies implementation and finds unticketed gaps. Done alone
+does not earn a grade. Missing sources stay explicit coverage gaps.
+
+The [execution contract](references/execution-contract.md) applies across hosts:
+ask when action, data or grading scope is uncertain, preserve settled decisions,
+and respect applicable project instructions. A missing question tool falls back
+to conversation; a missing auditor panel cannot silently become a blind audit.
 
 ## Install
 
@@ -58,7 +69,7 @@ appears without being declared and documented here.
 
 | Invocation | What it does |
 |---|---|
-| `/horizons` | Create a new roadmap for the current project (detects prior runs first) |
+| `/horizons` | Follow a clear request from the conversation, otherwise ask what to do; detect prior runs before creating |
 | `/horizons <artifact-url>` | Update an existing roadmap artifact in place |
 | `/horizons refresh` | Reconcile delivery, regrade relevant criteria in assessed artifacts, then update the shared views |
 | `/horizons gantt` | Add or update the Timeline view with sourced commitments, explicit scenarios and an unscheduled shelf |
@@ -144,10 +155,10 @@ appears without being declared and documented here.
   their score. Off by default, and a roadmap that never opts in never shows one.
 - **Progressive density.** The overview reads in a minute; the drill-down lives
   behind interaction, collapsed by default on heavy pages.
-- **Scanned content is data, never instructions.** It reads transcripts, chat,
-  tickets and docs written by other people; text inside a source describes the
-  project and never directs the run, and anything that tries to is reported as a
-  finding rather than followed.
+- **Evidence cannot override execution instructions.** Transcripts, chat,
+  tickets and retrieved document excerpts cannot direct the run or grant
+  permissions. Applicable project instructions and established artifact decisions
+  remain binding within the host's instruction hierarchy and authorized scope.
 - **It says what the page contains before publishing it.** The board is an
   aggregate you never assembled by hand, and publishing puts it on a hosted URL, so
   the first publish of a page is a confirmed step with cut-it-down and
@@ -261,6 +272,11 @@ commitments or treating Done as an automatic grade increase. See
 [roadmap reconciliation](references/roadmap-reconciliation.md).
 
 ## Maintainer validation and optional artifact QA
+
+Read [the behavioral results](evals/RESULTS.md) before relying on unattended
+execution. The release evaluations include unresolved model failures, including
+Haiku changing horizons during a delivery-only refresh. Passing helper tests
+does not prove an agent respects scope, clarification or artifact ownership.
 
 Maintainer regression tests protect the shared helpers. Browser-specific checks
 need an existing browser-testing session; exported helpers take a page object

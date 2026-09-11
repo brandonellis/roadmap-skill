@@ -453,6 +453,8 @@ When inspecting in a browser, assert more than "the script ran":
 - Inspect desktop light, desktop dark and narrow mobile once, including the
   longest item title, unscheduled timeline, empty filter and unknown grade.
 
-One consolidated fix batch, then at most one confirmation round. If artifact
+One consolidated cosmetic fix batch, then one confirming inspection. Failed
+mandatory checks still block replacement/publication under `execution-contract.md`.
+If artifact
 tools or a browser are unavailable, return the local file and name exactly
 which checks/publishing steps could not run; never claim a hosted result.

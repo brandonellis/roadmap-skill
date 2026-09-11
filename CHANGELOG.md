@@ -1,27 +1,24 @@
 # Changelog
 
-## 2.1.0 - 2026-09-10
+## 2.1.0 - 2026-09-11
 
-- Turn the skill's four "never do this unilaterally" rules into prompts. Regrade,
-  re-score, horizon movement and rebaseline were each correct about the action
-  and silent about the choice, so a run could decline all four and record the
-  fact only in Evidence. On a real hub that read as a skill that had stopped
-  doing what was asked. `references/unresolved-choices.md` carries the decision
-  table and the bounds; SKILL.md states the rule and points at it.
-- The rule: a detected condition the run may not act on unilaterally becomes an
-  AskUserQuestion in the Phase 1 round, stating the concrete finding rather than
-  the abstract choice. The forbidden action stays forbidden without an answer.
-  What changes is that the driver is asked rather than told afterwards.
-- Bound it so it cannot become an interrogation: one round, only on a detected
-  condition, never about something the DIRECTION CONTRACT already settles, and a
-  recorded answer is inherited rather than re-asked. An unattended run holds the
-  conservative option and reports every unasked choice at the TOP of its summary,
-  not inside Evidence.
-- Point the four individual rules at it: grade mode now distinguishes an ungraded
-  roadmap from an already assessed one whose letters have stopped moving; wsjf's
-  drift classes must name the rows and what moved under them; the baseline rule
-  prompts on an instrument or scope mismatch instead of carrying it quietly;
-  artifact-views prompts when cited work closed while a horizon stayed put.
+- Resolve intent, project, source data and grading scope before dependent work.
+  Ask about material uncertainty when it appears; preserve settled decisions and
+  never treat silence as permission. Bare invocation no longer assumes creation.
+- Grade tickets and code together, with separate runtime proof for operational
+  claims. Unmapped refresh changes remain unresolved rather than unchanged.
+- Turn unresolved regrading, WSJF scoring, horizon movement, rebaseline and
+  missing-source decisions into concrete prompts instead of silent omissions.
+  Keep unanswered actions pending and reuse recorded answers within their scope.
+- Respect applicable project instructions while treating retrieved evidence as
+  data. Define capability fallbacks and keep mandatory validation blocking.
+- Align grading and Gantt evaluation expectations with canonical history and
+  authorization rules; add scenarios for uncertain scope and source coverage.
+- Clarify that twin verdicts belong to full assessments, never a reason to
+  override a partial or explicitly undecided grading request. Test the changes
+  on Haiku and Sonnet, recording observed failures and bounded-run limitations
+  in `evals/RESULTS.md`; helper-test success is not a behavioral guarantee.
+
 
 ## 2.0.0 - 2026-09-10
 

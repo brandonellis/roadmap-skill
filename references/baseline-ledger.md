@@ -39,7 +39,8 @@ prove that two runs will produce the same aggregate.
 3. Propose a baseline contract once: scope, environments, components, criterion
    IDs, anchors, roll-up, evidence freshness windows, required A+ checks and
    finding inventory. Reuse what was already agreed. Confirm missing decisions
-   in one round before calling the contract established.
+   together before calling the contract established; later material ambiguities
+   still require clarification under `execution-contract.md`.
 4. A legacy letter with no reproducible rubric stays **originally reported**.
    Do not reverse-engineer numeric scores or fabricate missing findings.
    Describe the unmapped criteria and compare only supported measurements.

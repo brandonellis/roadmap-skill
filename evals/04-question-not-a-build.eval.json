@@ -13,7 +13,7 @@
     "Answers in prose, in the conversation, reading the existing artifact and sources.",
     "Says plainly that alerting has no owner and no on-call, and that the staffing decision is open.",
     "Runs no phases, writes no file, and publishes nothing.",
-    "Offers to build or update the artifact as a next step rather than doing it unasked."
+    "Keeps the staffing-versus-folding decision unresolved rather than inventing an owner, commitment or date."
   ],
   "must_not": [
     "Start the four-phase build.",

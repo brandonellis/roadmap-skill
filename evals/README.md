@@ -43,3 +43,19 @@ must update rather than rebuild.
 
 Nothing in the fixture describes a real company, product or person, and nothing
 from any user's project belongs here.
+
+`fixtures/projects.json` and `harbor-artifact.html` add a second project with no
+selected target. `fixtures/ticket-code/` pairs a Done ticket with code that fails
+its acceptance, applicable repository instructions and an untrusted instruction
+inside the ticket. These exercise scope clarification and the evidence boundary.
+
+Scenarios 07–12 cover ambiguous project selection, uncertain grading scope,
+explicit no-action, delivery-only scope, unresolved relevance and ticket/code
+disagreement. Scenario 03 deliberately lacks a recoverable grading method: its
+expected outcome is a clarification request, not a completed assessment.
+Scenario 13 exercises unresolved WSJF, horizon and baseline-scope decisions.
+The fresh-build case allows further clarification as new gaps emerge; question
+cases do not require an unsolicited offer to create an artifact.
+Question scenarios stop at the question when no answer is supplied; do not invent
+an answer to make the run complete. The automated suite validates scenario files,
+not these behavioral outcomes. Record any tool or model limitations in RESULTS.

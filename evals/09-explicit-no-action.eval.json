@@ -1,0 +1,22 @@
+{
+  "id": "explicit-no-action",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons Do nothing to the roadmap for now. Just explain whether grading uses tickets, code, or both.",
+  "files": [
+    "fixtures/meridian/",
+    "fixtures/prior-artifact.html"
+  ],
+  "gap": "A named skill invocation can trigger artifact generation even when the user explicitly asks only for an explanation and no changes.",
+  "expected_behavior": [
+    "Answers in conversation that grading uses tickets and code, with runtime evidence for operational claims.",
+    "Explains that tickets supply requirements and reported progress while code review also checks unticketed gaps.",
+    "States that Done status alone cannot prove verified closure or operational readiness.",
+    "Leaves all project files, grades, tracker records and hosted artifacts unchanged."
+  ],
+  "must_not": [
+    "Start project discovery or grade execution for the explanatory question.",
+    "Offer a fabricated grade or publish an artifact."
+  ]
+}

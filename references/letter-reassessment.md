@@ -1,6 +1,7 @@
 # Run the assessment, not just the reconciliation
 
-`grade` and `score` perform an actual assessment on every invocation. An assessed
+After resolving intent and scope under `execution-contract.md`, `grade` and
+`score` perform an actual assessment of the requested scope. An assessed
 artifact's `refresh` also reassesses the components affected by relevant changes.
 Use the original baseline and the established grading method. Finishing tickets
 is a reason to verify requirements, not an automatic letter increase. Regressions

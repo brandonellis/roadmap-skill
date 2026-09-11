@@ -4,6 +4,9 @@ A refresh of an assessed artifact reconciles delivery and asks whether the
 changed evidence affects its grading criteria. Do this in the same run, not as
 an optional follow-up after leaving a stale scorecard in place. Preserve the
 artifact's audience, baseline, immutable history and planning decisions.
+Apply `execution-contract.md` first: clarify uncertain data or grading scope
+before the dependent work. An explicit partial request does not authorize a
+full-estate reassessment.
 
 ## Decide what needs checking
 
@@ -21,9 +24,14 @@ artifact's audience, baseline, immutable history and planning decisions.
    Map shared constraints to cross-cutting lenses too. Queue, worker, data-tier,
    retention and cost changes affect the scalability lens even when the ticket
    was mapped to a component. Preserve that lens using `scalability.md`.
-4. No affected criteria means delivery-only changes and `No grading evidence
-   changed`. An ungraded artifact stays ungraded. An explicit request to refresh
-   delivery only is honored and says `Grading not reassessed`.
+4. Classify each change as affected, verified unaffected or unresolved. Unmapped
+   changes and unread sources are unresolved, not proof of irrelevance. Resolve
+   what the selected sources establish, then ask about missing scope or mapping
+   decisions before dependent reassessment. Do not invent links or expand scope.
+5. Only complete coverage with all changes verified unaffected supports `No
+   grading evidence changed`. Otherwise name the unresolved coverage and retain
+   dated results as `Not reassessed`. An ungraded artifact stays ungraded. An
+   explicit delivery-only refresh says `Grading not reassessed`.
 
 ## Verify, then grade
 

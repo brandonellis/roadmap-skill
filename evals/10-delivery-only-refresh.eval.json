@@ -1,0 +1,23 @@
+{
+  "id": "delivery-only-refresh",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons refresh Meridian using prior-artifact.html and the supplied tracker export. Delivery status only; do not regrade or publish. Keep changes local.",
+  "files": [
+    "fixtures/meridian/",
+    "fixtures/prior-artifact.html"
+  ],
+  "gap": "Automatic assessed-refresh behavior can expand an explicit delivery-only request into a grade run or repeat questions the user already answered.",
+  "expected_behavior": [
+    "Reads the specified existing artifact and tracker and reconciles the linked delivery records.",
+    "Keeps the historical grades and dates unchanged and labels grading as not reassessed.",
+    "Updates the same local entry file with source-backed delivery status, preserving baseline history.",
+    "Honors the explicit local-only scope without asking again whether grading or publishing is wanted."
+  ],
+  "must_not": [
+    "Run a code audit or runtime probes for the delivery-only request.",
+    "Publish, create a sibling artifact or change the baseline.",
+    "Move existing horizons, add roadmap initiatives or reinterpret Backlog as a placement during a delivery-only refresh."
+  ]
+}

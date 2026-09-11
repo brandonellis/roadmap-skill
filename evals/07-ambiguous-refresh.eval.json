@@ -1,0 +1,24 @@
+{
+  "id": "ambiguous-refresh",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons refresh",
+  "files": [
+    "fixtures/meridian/",
+    "fixtures/prior-artifact.html",
+    "fixtures/projects.json",
+    "fixtures/harbor-artifact.html"
+  ],
+  "gap": "With multiple available projects, an agent may pick the current directory or the most detailed artifact and refresh the wrong project.",
+  "expected_behavior": [
+    "Asks which project and canonical artifact the user wants refreshed before scanning project evidence.",
+    "Resolves any remaining uncertainty about delivery updates versus assessment scope before dependent work.",
+    "Keeps the question pending when no answer is supplied and changes no artifact.",
+    "Uses only minimal project pointers to form the question, without scanning both projects or connected accounts."
+  ],
+  "must_not": [
+    "Choose Meridian or Harbor on the user's behalf.",
+    "Run grades, alter files or publish while the target is unresolved."
+  ]
+}

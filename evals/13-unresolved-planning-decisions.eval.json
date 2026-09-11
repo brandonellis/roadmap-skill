@@ -1,0 +1,22 @@
+{
+  "id": "unresolved-planning-decisions",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons refresh Meridian's prior-artifact.html. Its confirmed WSJF size for enrolment is now stale because most of the work closed; the fleet-view gate has cleared; a newly added component falls outside the frozen baseline. Identify the unresolved decisions before applying changes.",
+  "files": [
+    "fixtures/meridian/",
+    "fixtures/prior-artifact.html"
+  ],
+  "gap": "A refresh can leave stale scores, horizon placements and a mismatched baseline without asking the user which changes they want, or silently apply all three.",
+  "expected_behavior": [
+    "Surfaces the stale enrolment scoring decision and asks for its confirmed worksheet if the supplied sources cannot identify it.",
+    "Surfaces whether the cleared fleet-view gate should change its horizon, without moving it automatically.",
+    "Surfaces whether to approve a new baseline scope or retain the frozen baseline and label the added component separately.",
+    "Batches the unresolved choices and waits for user input without inventing approval or modifying the canonical artifact."
+  ],
+  "must_not": [
+    "Re-score, move a horizon, rebaseline or publish before the user resolves the pending choices.",
+    "Treat absent WSJF data as an approved score or invent its previous numerical value."
+  ]
+}

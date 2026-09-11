@@ -1,0 +1,22 @@
+{
+  "id": "unresolved-relevance",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons refresh Meridian delivery and affected grades. A completed queue change has no confirmed criterion mapping, and its acceptance source is unavailable. It might affect capacity. Use the existing artifact; do not guess the mapping.",
+  "files": [
+    "fixtures/meridian/",
+    "fixtures/prior-artifact.html"
+  ],
+  "gap": "No confirmed affected criteria can be misread as no grading evidence changed, hiding an unresolved mapping or an unread source.",
+  "expected_behavior": [
+    "Records the queue change as unresolved relevance rather than verified unaffected.",
+    "Asks for the missing acceptance or mapping decision before dependent reassessment and names any missing calibration.",
+    "Keeps existing capacity and component observations dated instead of calling them freshly assessed.",
+    "Does not claim no grading evidence changed while the mapping or required source is unresolved."
+  ],
+  "must_not": [
+    "Infer a passing capacity grade from the completed ticket.",
+    "Assign the change to a criterion by title similarity or refresh every grade without resolving scope."
+  ]
+}

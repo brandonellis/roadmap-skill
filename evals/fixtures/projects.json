@@ -1,0 +1,24 @@
+{
+  "note": "Synthetic workspace inventory. Neither project is selected for this request.",
+  "projects": [
+    {
+      "id": "meridian",
+      "name": "Meridian",
+      "canonicalArtifact": "prior-artifact.html",
+      "gradeScopes": [
+        "code",
+        "preview",
+        "production"
+      ]
+    },
+    {
+      "id": "harbor",
+      "name": "Harbor",
+      "canonicalArtifact": "harbor-artifact.html",
+      "gradeScopes": [
+        "code",
+        "production"
+      ]
+    }
+  ]
+}

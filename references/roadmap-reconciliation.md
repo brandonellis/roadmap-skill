@@ -9,6 +9,9 @@ Read for `grade`/`score`, `refresh` and updates to an existing roadmap. A new
 grade with old roadmap completion is an incomplete update. Reconcile delivery
 in the same artifact revision, not an offer to run another skill afterward.
 A grade-only artifact with no roadmap records that fact; it does not invent one.
+Apply `execution-contract.md` first. For an explicitly bounded request, reconcile
+the selected items and mark other items not checked; do not widen a partial
+refresh or grade to the whole roadmap without resolving scope with the user.
 
 ## Contents
 
