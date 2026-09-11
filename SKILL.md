@@ -218,24 +218,23 @@ validation, and rendering specifics live in `references/wsjf.md`.
 
 ## Grade mode — the report card
 
-`grade` (alias `score`) produces a letter-graded, evidence-cited audit of the project's code
-and infrastructure at a moment in time — run before a deploy, a quarter close,
-or after a remediation program lands. Shape-agnostic: components are
-discovered from the project's own structure (a repo, a monorepo module, the
-estate), never assumed. It shares the artifact shell, sources and writing floor,
-not WSJF's prioritization semantics. Load `references/report-card.md`,
-`references/grade-anchors.md` and `references/baseline-ledger.md` before running.
-The ledger owns baseline identity, history, roll-up and A+ acceptance. Run it on
-explicit `grade`/`score`, or for affected criteria identified by an assessed
-artifact's refresh. Never grade an ungraded roadmap unasked. Clarify uncertain
-assessment intent; an unchanged letter alone is not a reason to ask or regrade.
+`grade` (alias `score`) audits the requested code and runtime scope against the
+original baseline. Discover components from the project's structure. Load
+`references/report-card.md`, `references/grade-anchors.md` and
+`references/baseline-ledger.md`; the ledger owns history, roll-up and A+ acceptance.
+Run on explicit grade/score requests or affected criteria in an assessed refresh.
+Clarify uncertain intent; never grade an ungraded roadmap unasked. An unchanged
+letter alone is not a reason to ask or regrade. WSJF remains prioritization.
 
 Grade with **tickets plus code**, and runtime proof for operational claims.
 Tickets supply requirements and delivery changes; inspect implementation for
 those claims and independently audit the agreed code scope for unticketed gaps.
 Done is not proof. Missing sources limit coverage; clarify any scope change.
 
-Nine rules that are non-negotiable even without the reference loaded:
+Rules that apply even without the reference loaded:
+- **Preserve the disk history lock byte-for-byte.** Before writes, retain the
+  verifier's `historyLockSha256`; finish with `--history-lock-sha256 ORIGINAL_HASH`
+  and require `historyLockPreservation: "verified"`. See `executable-grading.md`.
 - **Auditors grade blind to the letters and read-only, never blind to the
   standard** — they never see prior grades and never fix what they find, but
   every prompt carries the calibration sheet (`references/grade-anchors.md`,
@@ -499,6 +498,6 @@ browser tooling is disclosed; it does not waive checks available through source.
   when graded; the interaction hooks (theme classes, `data-hz`, the
   localStorage key), and standing decisions (the dates rule, framing rules the
   user set). An updater who reads nothing else must be able to work from it.
-- Hand back the canonical URL or local path and a concise summary of changes,
-  checks completed and checks unavailable. Explicitly name browser interaction and visual checks when browser tools were absent.
-  Keep missing runtime proof labelled unverified; it is not evidence that a runtime failure was observed.
+- For graded work, use the **Result / Evidence / Verification** handoff in
+  `execution-contract.md`: separate code failures from unverified runtime claims,
+  and name browser checks not run. Other artifact work reports path/URL, changes and verification limits.

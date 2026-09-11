@@ -121,9 +121,23 @@ cost; ask about materially additional work. Do not repair the audited code.
 
 Check source coverage, data consistency, baseline/history preservation, required
 usability, and publication scope before replacing or publishing an artifact.
-In the final handoff, name the checks actually run and the unavailable checks,
-including browser interaction/visual testing when browser tools were absent.
-An engine or manifest pass does not imply those other checks were performed.
+For grading updates, retain the original history-lock hash before writes and
+verify against it afterward as described in `executable-grading.md`. Never
+rewrite an existing lock or use its new hash as the expected original value.
+
+Use these three fields in the final grading handoff, filled from this run:
+
+- **Result:** canonical local path/URL, assessment ID, review method and each
+  scope's grade or Incomplete status.
+- **Evidence:** code observations; runtime observations; runtime checks that
+  remain unverified. A code failure can contradict an implementation claim;
+  a missing runtime probe leaves an operating claim unverified. Do not collapse
+  them into "code and runtime contradict the claim" when runtime is unknown.
+- **Verification:** checks run and original-lock preservation result; browser
+  interaction/visual checks run or not run with the reason; live probes run or
+  not run with the reason; local versus hosted status. A Node, engine or manifest
+  pass does not imply a browser or runtime test. Include absent checks explicitly.
+
 Cosmetic iteration limits never waive failed mandatory checks. Preserve the last
 valid hub and current pointers when validation fails. Report a draft or blocked
 update separately from a completed one, and local status separately from hosted.

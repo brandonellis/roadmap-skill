@@ -13,7 +13,7 @@
     "Reads issues, implementation and both evidence snapshots; identifies acceptance of expired invitations despite the Done ticket.",
     "Runs the assessment engine for assessment-2; code resolves to C and production remains incomplete with a null grade because expiry and malformed probes are missing.",
     "Keeps expiry-gap open in code and unknown in production; preserves the original finding denominator and describes missing runtime proof as unverified rather than observed operational failure.",
-    "Updates the canonical index.html and appends exactly one assessment to ledger.json while retaining originalBaseline, prior assessment and history-lock.json unchanged.",
+    "Retains the original lock hash before writes and verifies against it afterward; updates canonical index.html, appends exactly one assessment and preserves originalBaseline, prior assessment and history-lock.json unchanged.",
     "Reconciles the ticket as Done separately from acceptance without moving the Now horizon, validates the publication manifest and embedded ledger, and discloses unavailable browser checks."
   ],
   "must_not": [

@@ -24,9 +24,12 @@ authorize an operational A+ claim.
 ## Adopt once, without rewriting legacy grades
 
 1. Preserve the original baseline, finding cohort and every dated assessment.
-   `sealHistory(ledger)` creates a separate hash lock; do not edit historical
-   records to add hashes. Store and independently retain the lock before updates.
-   `verifyHistory(lock, updatedLedger)` permits append-only assessments.
+   Create a disk history lock with `sealHistory(ledger)` only when adopting a
+   ledger that has no lock. An existing lock is an immutable input: never
+   reseal, append to, reformat or overwrite it. New assessments go in the ledger.
+   `verifyHistory(originalLock, updatedLedger)` permits those appended records
+   without changing the lock. An in-memory seal of the pre-update ledger can
+   additionally check every prior assessment; it is not a replacement disk lock.
 2. Write a private contract proposal with stable scope/cell/criterion IDs. A cell
    names a component, dimension and scope; every cell has positive cumulative
    acceptance tests for D, C, B and A. F is the fallback when known evidence fails
@@ -110,6 +113,26 @@ without claiming they are committed, implemented or deployed.
 
 ## Verify before publishing
 
+**Before the first update write**, run the verifier on the existing manifest and
+retain its `historyLockSha256` outside the files being updated (for example, in
+the run's tool output or a caller variable). This initial inspection reports
+`historyLockPreservation: "not-checked"`: no earlier bytes have been compared.
+After the update, pass that same original digest:
+
+```sh
+node scripts/verify-artifact.mjs /path/publication-manifest.json --history-lock-sha256 ORIGINAL_HASH
+```
+
+For imports use `verifyArtifact(manifestPath, { expectedHistoryLockSha256 })`.
+Success must report `historyLockPreservation: "verified"`. A new manifest and a
+resealed lock can agree with each other while destroying the original evidence;
+the retained digest rejects that case. Never take the expected hash from the
+updated manifest or replace it with a new digest to make verification pass.
+Restore an accidentally changed lock from its retained original; if no trusted
+original or prior digest is available, report preservation as unverified and ask
+for that source before claiming a completed update. The pin detects drift, not
+malicious replacement of both the caller's trusted digest and the artifact.
+
 Maintainers changing the shared executable helpers run
 `node --test scripts/*.test.mjs` with Node available. Skill users do not need
 to run the repository regression suite or install browser-testing dependencies
@@ -125,7 +148,9 @@ manifest in its own file list. Embed the same ledger in a JSON script with ID
 `roadmap-history`, escaping `<` as `\u003c`.
 
 `node scripts/verify-artifact.mjs /private/path/publication-manifest.json` verifies
-file integrity, append-only history, audience and embedded/saved ledger agreement.
+internal file integrity, history consistency, audience and embedded/saved ledger
+agreement. Updates also require the original hash flag described above; an
+unpinned pass does not establish that the original history lock was preserved.
 Do not add `--private-bundle` to ordinary refresh, grade or score runs. Use it
 only for an explicitly requested export or when an authorized publication needs
 packaging: `--private-bundle NEW_DIRECTORY` creates an allowlisted owner-only

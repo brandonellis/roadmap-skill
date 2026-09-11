@@ -54,6 +54,9 @@ update to the canonical local artifact. Keep publication outside the run unless
 separately authorized. Commit the synthetic scenario and fixtures so the result
 can be reproduced. Scenario 03's missing-baseline clarification is a separate
 test and cannot stand in for this completed assessment.
+Compare the history lock with the retained pre-run bytes, and inspect that the
+agent verified with the original `--history-lock-sha256` (or API option). A
+rewritten lock and manifest agreeing with each other is not preservation.
 
 Record in `RESULTS.md`: skill revision or candidate diff, exact model identifier
 (or explicitly unavailable), reasoning settings when exposed, tools and auditor

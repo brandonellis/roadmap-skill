@@ -1,0 +1,124 @@
+{
+  "version": "2.1.1",
+  "date": "2026-09-11",
+  "baseCommit": "2879e57becd913606e983f3eb317baf8e6dee9b6",
+  "requiredChecksPassed": true,
+  "intendedAssessmentLead": "claude-opus-5",
+  "comparisonModel": "claude-sonnet-5",
+  "automatedTests": {
+    "passed": 118,
+    "failed": 0
+  },
+  "harness": {
+    "freshSessions": true,
+    "exactScenario15Query": true,
+    "unchangedProjectFixture": true,
+    "reasoningEffort": "high",
+    "projectSettingsOnly": true,
+    "hooksDisabled": true,
+    "externalMcpServers": false,
+    "tools": [
+      "Read",
+      "Glob",
+      "Grep",
+      "Write",
+      "Edit",
+      "Skill",
+      "Bash with local Node allowlist"
+    ],
+    "maxBudgetUsdPerRun": 5,
+    "timeoutSecondsPerRun": 900,
+    "userReplies": []
+  },
+  "regressions": [
+    "Resealed history lock and regenerated manifest rejected using the original hash, including the prior failed Sonnet artifact.",
+    "Unpinned consistency verification explicitly reports history-lock preservation not checked.",
+    "Correct append-only update and optional private export pass with the original lock hash.",
+    "Byte-level lock changes, malformed hashes and invalid CLI arguments rejected."
+  ],
+  "limitations": [
+    "The tests cover the scoped synthetic invitations/testing case, not all projects or all earlier evaluation scenarios.",
+    "The approved review method is single-agent; independent panels, live runtime, browser rendering and hosted artifact publication were not exercised.",
+    "The hash is a caller-held drift check, not authentication against an actor who can replace both the original digest and the artifact.",
+    "Earlier failed runs remain recorded in 2026-09-11-v2.1.1-results.json."
+  ],
+  "runs": [
+    {
+      "modelRequested": "claude-opus-5",
+      "scenario": "complete-lead-grading",
+      "status": 0,
+      "seconds": 398,
+      "effort": "high",
+      "maxBudgetUsd": "5.00",
+      "timeoutSeconds": 900,
+      "changed": [
+        "complete-grade/index.html",
+        "complete-grade/publication-manifest.json",
+        "complete-grade/assessment-2.json",
+        "complete-grade/grade.mjs",
+        "complete-grade/verdict-2.json",
+        "complete-grade/ledger.json"
+      ],
+      "removed": [],
+      "outcome": "met",
+      "modelsReported": [
+        "claude-opus-5"
+      ],
+      "costUsd": 3.186473,
+      "candidateSkillSha256": "3e6b036191230f4cb49fcf98dac8b6a15bbcd53a59c636c159ffa29a2a8203bc",
+      "executionContractBeforeProjectEvidence": true,
+      "originalHashUsedForFinalVerification": true,
+      "historyLockPreservation": "verified",
+      "browserLimitDisclosed": true,
+      "runtimeUnknownKeptSeparateFromObservedFailure": true,
+      "artifactChecks": {
+        "verifiedFiles": 12,
+        "assessmentId": "assessment-2",
+        "code": "C",
+        "production": "incomplete",
+        "history": "unchanged original plus one appended assessment",
+        "readOnlyInputs": "unchanged",
+        "horizon": "Now"
+      },
+      "userReplies": []
+    },
+    {
+      "modelRequested": "claude-sonnet-5",
+      "scenario": "complete-lead-grading",
+      "status": 0,
+      "seconds": 355,
+      "effort": "high",
+      "maxBudgetUsd": "5.00",
+      "timeoutSeconds": 900,
+      "changed": [
+        "complete-grade/index.html",
+        "complete-grade/publication-manifest.json",
+        "complete-grade/assessment-2.json",
+        "complete-grade/verdict-2.json",
+        "complete-grade/ledger.json"
+      ],
+      "removed": [],
+      "outcome": "met",
+      "modelsReported": [
+        "claude-sonnet-5"
+      ],
+      "costUsd": 2.3209976999999995,
+      "candidateSkillSha256": "3e6b036191230f4cb49fcf98dac8b6a15bbcd53a59c636c159ffa29a2a8203bc",
+      "executionContractBeforeProjectEvidence": true,
+      "originalHashUsedForFinalVerification": true,
+      "historyLockPreservation": "verified",
+      "browserLimitDisclosed": true,
+      "runtimeUnknownKeptSeparateFromObservedFailure": true,
+      "artifactChecks": {
+        "verifiedFiles": 12,
+        "assessmentId": "assessment-2",
+        "code": "C",
+        "production": "incomplete",
+        "history": "unchanged original plus one appended assessment",
+        "readOnlyInputs": "unchanged",
+        "horizon": "Now"
+      },
+      "userReplies": []
+    }
+  ]
+}

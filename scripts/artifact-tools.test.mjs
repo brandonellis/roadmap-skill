@@ -4,6 +4,9 @@ import { mkdtemp, writeFile, readFile, rm, symlink, stat } from 'node:fs/promise
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
+import { fileURLToPath } from 'node:url';
 import { sealHistory } from './assessment-engine.mjs';
 import { verifyArtifact, stagePrivateBundle } from './verify-artifact.mjs';
 import { renderOutcomeStory, renderNextChecks, renderDeliveryMilestones } from './render-progress.mjs';
@@ -81,6 +84,62 @@ test('a reassessment appends history and updates both ledger and embedded curren
 test('creation-time audience cannot change silently', async context => {
   const data = await fixture(context); data.manifest.audience = 'Public investors'; await data.save();
   await assert.rejects(verifyArtifact(data.path), /audience changed/);
+});
+
+test('a retained lock hash rejects resealing even when the rewritten manifest and history agree', async context => {
+  const data = await fixture(context);
+  const original = await verifyArtifact(data.path);
+  assert.equal(original.historyLockPreservation, 'not-checked');
+  const options = { expectedHistoryLockSha256: original.historyLockSha256 };
+  data.ledger.assessments.push({ id: 'second', grade: 'A' });
+  data.ledger.currentAssessmentId = 'second';
+  data.manifest.assessmentId = 'second';
+  const update = async (file, content) => {
+    await writeFile(join(data.root, file), content);
+    data.manifest.files.find(entry => entry.path === file).sha256 = createHash('sha256').update(content).digest('hex');
+  };
+  await update('ledger.json', JSON.stringify(data.ledger));
+  await update('index.html', `<html><script type="application/json" id="roadmap-history">${JSON.stringify(data.ledger)}</script></html>`);
+  await data.save();
+  assert.equal((await verifyArtifact(data.path, options)).historyLockPreservation, 'verified');
+  // This was the observed failure: the model extended the lock and rehashed the
+  // manifest, allowing a self-consistency check to claim history was preserved.
+  await update('history.json', JSON.stringify(sealHistory(data.ledger)));
+  await data.save();
+  assert.equal((await verifyArtifact(data.path)).historyLockPreservation, 'not-checked');
+  await assert.rejects(verifyArtifact(data.path, options), /Original history lock changed/);
+  await assert.rejects(stagePrivateBundle(data.path, join(data.root, 'export'), options), /Original history lock changed/);
+  await assert.rejects(stat(join(data.root, 'export')), /ENOENT/);
+});
+
+test('lock preservation compares bytes, and refuses malformed expected hashes', async context => {
+  const data = await fixture(context);
+  const options = { expectedHistoryLockSha256: (await verifyArtifact(data.path)).historyLockSha256 };
+  const content = `${data.files['history.json']}\n`;
+  await writeFile(join(data.root, 'history.json'), content);
+  data.manifest.files.find(file => file.path === 'history.json').sha256 = createHash('sha256').update(content).digest('hex');
+  await data.save();
+  await assert.rejects(verifyArtifact(data.path, options), /Original history lock changed/);
+  for (const value of ['', null, 'abc', 'A'.repeat(64), 123]) {
+    await assert.rejects(verifyArtifact(data.path, { expectedHistoryLockSha256: value }), /64 lowercase hexadecimal/);
+  }
+});
+
+test('CLI carries the original lock pin through verification and optional export', async context => {
+  const data = await fixture(context);
+  const script = fileURLToPath(new URL('./verify-artifact.mjs', import.meta.url));
+  const run = promisify(execFile);
+  const initial = JSON.parse((await run(process.execPath, [script, data.path])).stdout);
+  assert.equal(initial.historyLockPreservation, 'not-checked');
+  const verified = JSON.parse((await run(process.execPath, [script, data.path, '--history-lock-sha256', initial.historyLockSha256])).stdout);
+  assert.equal(verified.historyLockPreservation, 'verified');
+  const exported = JSON.parse((await run(process.execPath, [script, data.path, '--private-bundle', join(data.root, 'export'), '--history-lock-sha256', initial.historyLockSha256])).stdout);
+  assert.equal(exported.historyLockPreservation, 'verified');
+  assert.equal(exported.uploaded, false);
+  await assert.rejects(run(process.execPath, [script, data.path, '--history-lock-sha256', '0'.repeat(64)]), /Original history lock changed/);
+  for (const args of [['--history-lock-sha256'], ['--private-bundle'], ['--unknown', 'x'], ['--history-lock-sha256', initial.historyLockSha256, '--history-lock-sha256', initial.historyLockSha256]]) {
+    await assert.rejects(run(process.execPath, [script, data.path, ...args]), /Usage:/);
+  }
 });
 
 test('a registered scale lens cannot disappear during component-only regeneration', async context => {

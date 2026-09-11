@@ -285,10 +285,11 @@ Read [the behavioral results](evals/RESULTS.md) before relying on unattended
 execution. The release evaluations include unresolved model failures, including
 Haiku changing horizons during a delivery-only refresh. Passing helper tests
 does not prove an agent respects scope, clarification or artifact ownership.
-The 2.1.1 candidate is blocked: Opus passed the complete scoped grading check,
-but Sonnet's final comparison changed an immutable history lock and missed
-required reporting. A passing manifest check against a rewritten lock does not
-prove that the original lock was preserved; compare against the retained input.
+The 2.1.1 evaluations exposed a rewritten history lock that still passed a
+regenerated manifest. Update verification now compares against a hash retained
+before writes: `--history-lock-sha256 ORIGINAL_HASH` (or the API option
+`expectedHistoryLockSha256`). Without it, the verifier reports history-lock
+preservation as `not-checked`. See the [update verification procedure](references/executable-grading.md#verify-before-publishing).
 
 Maintainer regression tests protect the shared helpers. Browser-specific checks
 need an existing browser-testing session; exported helpers take a page object

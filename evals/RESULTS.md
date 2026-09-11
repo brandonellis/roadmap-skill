@@ -3,14 +3,51 @@
 One section per run. A run is a date, a model, a scenario and what happened —
 never a summary that outlives the evidence.
 
-## 2026-09-11 · v2.1.1 candidate · release blocked
+## 2026-09-11 · v2.1.1 final verification · passed
 
-**Not released.** The intended assessment lead, `claude-opus-5`, passed the
+The failures in the earlier candidate below are fixed in these fresh runs.
+Scenario 15 used the same query and unchanged synthetic project on
+`claude-opus-5` and `claude-sonnet-5`, high effort, with 15-minute/$5 limits each.
+Both completed the full scoped grading workflow and passed independent checks.
+No user reply, expected outcome or prior conversation was supplied. Exact model,
+time, cost, candidate fingerprint and verification data are in
+[the fix results JSON](2026-09-11-v2.1.1-fix-results.json).
+
+| Check | Opus 5 | Sonnet 5 |
+|---|---|---|
+| Execution contract before project evidence | Passed | Passed |
+| Original history-lock digest retained before writes and used for final verification | Passed | Passed |
+| Original baseline, prior assessment and all read-only inputs unchanged; exactly one assessment appended | Passed | Passed |
+| Code C; production incomplete/null; finding open in code and unknown in production | Passed | Passed |
+| Same canonical artifact, Now placement and verified embedded ledger/manifest | Passed (12 files) | Passed (12 files) |
+| Ticket Done distinct from acceptance; missing runtime proof stays unverified in prose | Passed | Passed |
+| Browser and live-probe limitations explicit in final handoff | Passed | Passed |
+
+The verifier now accepts an independently retained original history-lock hash.
+It rejects resealing even when the regenerated manifest agrees with the changed
+lock; the prior failed Sonnet artifact was rejected with this check. Without a
+pin, consistency verification explicitly reports preservation as `not-checked`.
+The instructions distinguish creating the first disk lock from appending ledger
+assessments, and use a Result / Evidence / Verification handoff to preserve the
+scope of evidence and disclose missing checks.
+
+All **118 helper/structure tests pass**, including new regressions for resealing,
+byte changes, invalid hashes/CLI options and carrying the pin through an optional
+private export. Both model runs were single-agent, local-only and read the
+supplied runtime snapshots. No independent auditor panel, live runtime probe,
+browser rendering or hosted artifact publication was exercised. These targeted
+passes resolve the named release blockers; they do not certify every model or
+project, clear earlier unrelated scenarios, or turn instructions into technical
+containment. The caller must retain the original digest outside updated files.
+
+## 2026-09-11 · v2.1.1 candidate · release blocked (historical)
+
+**This earlier stage was not released.** The intended assessment lead, `claude-opus-5`, passed the
 complete scoped grading check. The comparison model, `claude-sonnet-5`, still
 failed mandatory checks after two corrections. Its final run rewrote the
 explicitly immutable history lock, omitted browser-test limitations from the
 handoff, and described absent runtime proof as contradicting an operating claim.
-The release remains blocked under the maintainer rule to resolve failed checks.
+The release was held at this stage under the maintainer rule to resolve failed checks.
 
 Eight fresh Claude Code sessions: scenarios 14 and 15 on both models, then two
 rechecks of scenario 15 on both. Exact queries and synthetic fixtures are committed.
@@ -60,7 +97,7 @@ prerequisite before project evidence and repeat the handoff requirements at the
 entrypoint's completion step. Final entrypoint reflow changed whitespace only to
 retain the existing line limit. All 115 helper/structure tests pass. Earlier
 v2.1.0 failures and scenarios outside this targeted pass are not retroactively
-cleared. Sonnet is not qualified as the sole grading lead by these results.
+cleared. Those earlier results did not qualify Sonnet as the sole grading lead.
 
 ## 2026-09-11 · v2.1.0 release evaluation · Haiku 4.5 and Sonnet 5
 

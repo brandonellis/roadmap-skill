@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 2.1.1 - 2026-09-11
 
 - Keep model and provider selection under the user and host's control. Define
   reasoning-lead and supporting extraction roles without prescribing model
@@ -15,9 +15,12 @@
   scoped grading, with an approved contract, runtime snapshots and a sealed
   assessment history. Record Opus and Sonnet release evaluations separately
   from helper-test results.
-- Release candidate 2.1.1 is blocked: Opus completed the lead-model grading
-  check, but Sonnet's comparison runs missed required reporting and the final
-  run rewrote an explicitly immutable history lock. See `evals/RESULTS.md`.
+- Verify updates against a history-lock SHA-256 retained before writes. Reject
+  resealed or reformatted locks even when a regenerated manifest agrees, and
+  explicitly report preservation as not checked when no original hash is given.
+- Distinguish creating a first history lock from appending new assessments;
+  existing disk locks stay immutable. Require a Result / Evidence / Verification
+  handoff so missing runtime proof and browser-check limitations stay explicit.
 
 ## 2.1.0 - 2026-09-11
 

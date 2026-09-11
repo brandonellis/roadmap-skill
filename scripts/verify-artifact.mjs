@@ -12,7 +12,8 @@ async function safeFile(root, file) {
   return target;
 }
 
-export async function verifyArtifact(manifestPath) {
+export async function verifyArtifact(manifestPath, { expectedHistoryLockSha256 } = {}) {
+  if (expectedHistoryLockSha256 !== undefined && (typeof expectedHistoryLockSha256 !== 'string' || !/^[a-f\d]{64}$/.test(expectedHistoryLockSha256))) throw new Error('Expected history lock SHA-256 must be 64 lowercase hexadecimal characters');
   const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
   const root = await realpath(dirname(resolve(manifestPath)));
   if (manifest.schemaVersion !== 1 || manifest.visibility !== 'private') throw new Error('This verifier only handles explicitly private artifact bundles');
@@ -28,7 +29,10 @@ export async function verifyArtifact(manifestPath) {
     if (!manifest.files.some(entry => entry.path === file)) throw new Error('Artifact, ledger and history lock must be allowlisted');
   }
   const ledger = JSON.parse(await read(manifest.ledgerFile));
-  const history = JSON.parse(await read(manifest.historyLockFile));
+  const historyBytes = await readFile(await safeFile(root, manifest.historyLockFile));
+  const historyLockSha256 = createHash('sha256').update(historyBytes).digest('hex');
+  if (expectedHistoryLockSha256 !== undefined && historyLockSha256 !== expectedHistoryLockSha256) throw new Error('Original history lock changed: restore the retained original; do not reseal it or replace the expected hash');
+  const history = JSON.parse(historyBytes.toString('utf8'));
   verifyHistory(history, ledger);
   if (manifest.assessmentId !== ledger.currentAssessmentId) throw new Error('Manifest and ledger disagree on current assessment');
   if (!ledger.assessments.some(assessment => assessment.id === manifest.assessmentId)) throw new Error('Current assessment is missing from history');
@@ -44,11 +48,12 @@ export async function verifyArtifact(manifestPath) {
     if (!section.test(html)) throw new Error(`Standing assessment lens missing from artifact: ${lens.id}`);
   }
   if (ledger.presentation?.artifactBrief?.audience !== manifest.audience) throw new Error('Creation-time audience changed during publication');
-  return { root, manifest, verifiedFiles: manifest.files.length };
+  return { root, manifest, verifiedFiles: manifest.files.length, historyLockSha256,
+    historyLockPreservation: expectedHistoryLockSha256 === undefined ? 'not-checked' : 'verified' };
 }
 
-export async function stagePrivateBundle(manifestPath, destination) {
-  const result = await verifyArtifact(manifestPath);
+export async function stagePrivateBundle(manifestPath, destination, options = {}) {
+  const result = await verifyArtifact(manifestPath, options);
   if (result.manifest.files.some(file => file.path === 'publication-manifest.json')) throw new Error('Publication manifest cannot include itself');
   const output = resolve(destination);
   await mkdir(output, { mode: 0o700 });
@@ -60,16 +65,24 @@ export async function stagePrivateBundle(manifestPath, destination) {
   }
   const targetManifest = resolve(output, 'publication-manifest.json');
   await writeFile(targetManifest, JSON.stringify(result.manifest, null, 2) + '\n', { mode: 0o600, flag: 'wx' });
-  await verifyArtifact(targetManifest);
-  return { directory: output, assessmentId: result.manifest.assessmentId, uploaded: false, visibility: 'private' };
+  await verifyArtifact(targetManifest, options);
+  return { directory: output, assessmentId: result.manifest.assessmentId, uploaded: false, visibility: 'private', historyLockSha256: result.historyLockSha256, historyLockPreservation: result.historyLockPreservation };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   try {
-    const [manifestPath, option, destination] = process.argv.slice(2);
-    if (!manifestPath || (option && (option !== '--private-bundle' || !destination)) || process.argv.length > 5) throw new Error('Usage: node verify-artifact.mjs MANIFEST [--private-bundle NEW_DIRECTORY]');
-    const result = option ? await stagePrivateBundle(manifestPath, destination) : await verifyArtifact(manifestPath);
-    console.log(JSON.stringify(option ? result : { verifiedFiles: result.verifiedFiles, assessmentId: result.manifest.assessmentId }, null, 2));
+    const [manifestPath, ...args] = process.argv.slice(2);
+    const usage = 'Usage: node verify-artifact.mjs MANIFEST [--history-lock-sha256 ORIGINAL_HASH] [--private-bundle NEW_DIRECTORY]';
+    if (!manifestPath || manifestPath.startsWith('--')) throw new Error(usage);
+    const flags = new Map();
+    for (let i = 0; i < args.length; i += 2) {
+      if (!['--private-bundle', '--history-lock-sha256'].includes(args[i]) || !args[i + 1] || args[i + 1].startsWith('--') || flags.has(args[i])) throw new Error(usage);
+      flags.set(args[i], args[i + 1]);
+    }
+    const options = { expectedHistoryLockSha256: flags.get('--history-lock-sha256') };
+    const destination = flags.get('--private-bundle');
+    const result = destination ? await stagePrivateBundle(manifestPath, destination, options) : await verifyArtifact(manifestPath, options);
+    console.log(JSON.stringify(destination ? result : { verifiedFiles: result.verifiedFiles, assessmentId: result.manifest.assessmentId, historyLockSha256: result.historyLockSha256, historyLockPreservation: result.historyLockPreservation }, null, 2));
   } catch (error) {
     console.error(error.message);
     process.exitCode = 1;
